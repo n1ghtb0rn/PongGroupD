@@ -7,7 +7,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     val radius : Int = 20
 
-    fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas?) {
         canvas?.drawCircle(this.posX.toFloat(), this.posY.toFloat(), this.radius.toFloat(), this.paint)
     }
 }

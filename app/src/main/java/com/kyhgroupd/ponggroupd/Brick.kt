@@ -12,7 +12,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         //Sound effect?
     }
 
-    fun draw(canvas: Canvas?){
+    override fun draw(canvas: Canvas?){
         canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), this.width.toFloat(), this.height.toFloat(), this.paint)
     }
 

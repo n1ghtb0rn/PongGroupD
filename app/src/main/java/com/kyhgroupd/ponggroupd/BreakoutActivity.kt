@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.SurfaceHolder
+import android.view.SurfaceView
 import android.view.View
 import com.kyhgroupd.ponggroupd.databinding.ActivityBreakoutBinding
 
@@ -20,9 +21,16 @@ class BreakoutActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTou
         setContentView(binder.root)
 
         binder.surfaceView.holder.addCallback(this)
+
+        binder.surfaceView.setOnTouchListener(this)
+        init()
+
     }
 
     override fun onTouch(view: View?, motionEvent: MotionEvent?): Boolean {
+        if (view !is SurfaceView) {
+            return false
+        }
         draw()
         return true
     }
@@ -39,12 +47,23 @@ class BreakoutActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTou
 
     }
 
+    private fun init() {
+        var ball : Ball = Ball(100,100, Color.WHITE)
+        GameManager.gameObjects.add(ball)
+    }
+
     private fun draw(){
         val canvas: Canvas? = binder.surfaceView.holder.lockCanvas()
         val surfaceBackground = Paint()
-        surfaceBackground.color = Color.BLACK
+        surfaceBackground.color = Color.RED
 
         canvas?.drawRect(0f, 0f, binder.surfaceView.width.toFloat(), binder.surfaceView.height.toFloat(), surfaceBackground)
+
+        for (gameObject in GameManager.gameObjects) {
+            gameObject.draw(canvas)
+            println("$gameObject.posX / $gameObject.posY")
+        }
+
         binder.surfaceView.holder.unlockCanvasAndPost(canvas)
         binder.surfaceView.setZOrderOnTop(true)
     }
