@@ -1,4 +1,9 @@
 package com.kyhgroupd.ponggroupd
 
-class GameManager {
+object GameManager {
+
+    val gameObjects = mutableListOf<GameObject>()
+
+    var highScore: Int = 0
+
 }
