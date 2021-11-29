@@ -16,12 +16,7 @@ open class GameObject(var startX: Int, var startY: Int, color: Int ) {
         this.paint.color = color
     }
 
-    fun move(){
-        //Override this!
-    }
+    open fun draw(canvas: Canvas?) {
 
-    fun draw(){
-        //Override this!
     }
-
 }
