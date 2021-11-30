@@ -48,14 +48,24 @@ class BreakoutActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTou
     }
 
     private fun init() {
-        var ball : Ball = Ball(100,100, Color.WHITE)
+        var ball = Ball(475, 1000, Color.WHITE)
+        var paddle : Paddle = Paddle(500,1600, Color.WHITE)
+        var brick1 : Brick = Brick(100, 300, Color.WHITE)
+        var brick2 : Brick = Brick(200, 300, Color.WHITE)
+        var brick3 : Brick = Brick(300, 300, Color.WHITE)
+        var brick4 : Brick = Brick(400, 300, Color.WHITE)
         GameManager.gameObjects.add(ball)
+        GameManager.gameObjects.add(paddle)
+        GameManager.gameObjects.add(brick1)
+        GameManager.gameObjects.add(brick2)
+        GameManager.gameObjects.add(brick3)
+        GameManager.gameObjects.add(brick4)
     }
 
     private fun draw(){
         val canvas: Canvas? = binder.surfaceView.holder.lockCanvas()
         val surfaceBackground = Paint()
-        surfaceBackground.color = Color.RED
+        surfaceBackground.color = Color.BLACK
 
         canvas?.drawRect(0f, 0f, binder.surfaceView.width.toFloat(), binder.surfaceView.height.toFloat(), surfaceBackground)
 
