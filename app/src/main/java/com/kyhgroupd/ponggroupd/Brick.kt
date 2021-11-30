@@ -4,8 +4,8 @@ import android.graphics.Canvas
 
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
-    val width: Int = 20
-    val height: Int = 10
+    val width: Int = 80
+    val height: Int = 30
 
     fun destroy(){
         //TODO...
@@ -13,7 +13,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
     }
 
     override fun draw(canvas: Canvas?){
-        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), this.width.toFloat(), this.height.toFloat(), this.paint)
+        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
     }
 
 }
