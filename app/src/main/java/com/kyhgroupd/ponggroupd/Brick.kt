@@ -4,8 +4,13 @@ import android.graphics.Canvas
 
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
-    val width: Int = 80
-    val height: Int = 30
+    var width: Int = 0
+    var height: Int = 0
+
+    init {
+        width = DataManager.screenSizeX/15
+        height = width/3
+    }
 
     fun destroy(){
         //TODO...
