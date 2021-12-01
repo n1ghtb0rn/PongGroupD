@@ -23,6 +23,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         var activity: AppCompatActivity = context as AppCompatActivity
         var displayMetrics: DisplayMetrics = activity.resources.displayMetrics
         DataManager.screenSizeX = displayMetrics.widthPixels
+        DataManager.screenSizeY = displayMetrics.heightPixels
 
         setup()
     }
