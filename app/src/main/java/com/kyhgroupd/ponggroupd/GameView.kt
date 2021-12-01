@@ -100,14 +100,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event != null){
-            val paddleY = DataManager.paddle?.posY
-            if (paddleY != null) {
-                val touchY = event.y.toInt()
-                val offset = 100
-                if(touchY > paddleY-offset && touchY < paddleY+offset){
-                    DataManager.paddle!!.posX = event.x.toInt() - (DataManager.paddle!!.width/2)
-                }
-            }
+            DataManager.event = event
         }
         return true
     }
