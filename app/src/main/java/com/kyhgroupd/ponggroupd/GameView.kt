@@ -30,18 +30,22 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     private fun setup() {
         var ball = Ball(475, 1000, Color.WHITE)
+        val numberOfBricks = 30
+        var testBrick : Brick = Brick(100, 300, Color.WHITE)
+
+        for (y in testBrick.height..testBrick.height*3 step testBrick.height) {
+            for (x in 0..DataManager.screenSizeX step testBrick.width) {
+                var brick = Brick(x, y, Color.WHITE)
+                DataManager.gameObjects.add(brick)
+                println("x: $x y: $y")
+            }
+        }
         var paddle : Paddle = Paddle(500,1600, Color.WHITE)
-        var brick1 : Brick = Brick(100, 300, Color.WHITE)
-        var brick2 : Brick = Brick(200, 300, Color.WHITE)
-        var brick3 : Brick = Brick(300, 300, Color.WHITE)
-        var brick4 : Brick = Brick(400, 300, Color.WHITE)
+
         DataManager.paddle = paddle
         DataManager.gameObjects.add(ball)
         DataManager.gameObjects.add(paddle)
-        DataManager.gameObjects.add(brick1)
-        DataManager.gameObjects.add(brick2)
-        DataManager.gameObjects.add(brick3)
-        DataManager.gameObjects.add(brick4)
+
     }
 
     fun start() {
