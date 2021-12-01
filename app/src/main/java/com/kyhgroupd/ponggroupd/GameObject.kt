@@ -19,4 +19,8 @@ open class GameObject(var startX: Int, var startY: Int, color: Int ) {
     open fun draw(canvas: Canvas?) {
 
     }
+
+    open fun update() {
+
+    }
 }

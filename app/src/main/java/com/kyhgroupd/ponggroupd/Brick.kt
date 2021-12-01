@@ -16,4 +16,8 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
     }
 
+    override fun update(){
+
+    }
+
 }

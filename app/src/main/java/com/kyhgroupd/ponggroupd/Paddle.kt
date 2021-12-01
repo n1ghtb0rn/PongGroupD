@@ -11,4 +11,8 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
         canvas?.drawRect(posX.toFloat(), posY.toFloat(),posX + width.toFloat(), posY + height.toFloat(), this.paint)
     }
 
+    override fun update(){
+
+    }
+
 }

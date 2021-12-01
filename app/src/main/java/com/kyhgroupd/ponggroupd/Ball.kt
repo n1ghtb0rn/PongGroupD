@@ -10,4 +10,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     override fun draw(canvas: Canvas?) {
         canvas?.drawCircle(this.posX.toFloat(), this.posY.toFloat(), this.radius.toFloat(), this.paint)
     }
+
+    override fun update(){
+
+    }
 }
