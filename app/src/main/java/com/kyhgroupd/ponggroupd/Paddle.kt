@@ -22,8 +22,14 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
         if (DataManager.event != null) {
             val paddleY = DataManager.paddle?.posY
             if (paddleY != null) {
-                DataManager.paddle!!.posX =
-                    DataManager.event!!.x.toInt() - (DataManager.paddle!!.width / 2)
+                posX = DataManager.event!!.x.toInt() - (width / 2)
+
+                if(posX < 0){
+                    posX = 0
+                }
+                if(posX > DataManager.screenSizeX - width){
+                    posX = DataManager.screenSizeX - width
+                }
             }
             DataManager.event = null
         }
