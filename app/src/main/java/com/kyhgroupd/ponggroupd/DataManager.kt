@@ -8,6 +8,6 @@ object DataManager {
     var highScore: Int = 0
 
     var screenSizeX = 0
-
+    var screenSizeY = 0
 
 }
