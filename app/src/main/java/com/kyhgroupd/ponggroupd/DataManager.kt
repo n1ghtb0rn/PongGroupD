@@ -1,5 +1,7 @@
 package com.kyhgroupd.ponggroupd
 
+import android.view.MotionEvent
+
 object DataManager {
 
     val gameObjects = mutableListOf<GameObject>()
@@ -9,5 +11,7 @@ object DataManager {
 
     var screenSizeX = 0
     var screenSizeY = 0
+
+    var event: MotionEvent? = null
 
 }
