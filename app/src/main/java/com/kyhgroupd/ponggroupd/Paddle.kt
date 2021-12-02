@@ -20,13 +20,14 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
 
     override fun update() {
         if (DataManager.event != null) {
-            val paddleY = DataManager.paddle?.posY?.plus(300)
+            val paddleY = DataManager.paddle?.posY
             if (paddleY != null) {
 
-                val touchY = DataManager.event!!.y.toInt()
+                var touchY = DataManager.event!!.y.toInt()
                 val offset = 200
-
-                //Check if touch is close to paddle
+                //Subtract top bar and and half paddle height
+                touchY -= 170 + height/2
+                //Check if touch is in range of paddle
                 if(touchY > paddleY - offset && touchY < paddleY + offset){
                     posX = DataManager.event!!.x.toInt() - (width / 2)
                 }
