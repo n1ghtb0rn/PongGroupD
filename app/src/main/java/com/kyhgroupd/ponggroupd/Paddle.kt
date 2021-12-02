@@ -20,10 +20,17 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
 
     override fun update() {
         if (DataManager.event != null) {
-            val paddleY = DataManager.paddle?.posY
+            val paddleY = DataManager.paddle?.posY?.plus(300)
             if (paddleY != null) {
-                posX = DataManager.event!!.x.toInt() - (width / 2)
 
+                val touchY = DataManager.event!!.y.toInt()
+                val offset = 200
+
+                //Check if touch is close to paddle
+                if(touchY > paddleY - offset && touchY < paddleY + offset){
+                    posX = DataManager.event!!.x.toInt() - (width / 2)
+                }
+                //Check if paddle is out of bounds
                 if(posX < 0){
                     posX = 0
                 }
