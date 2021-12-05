@@ -12,6 +12,7 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
     init {
         width = DataManager.screenSizeX/5
         height = width/3
+        posX -= width/2
     }
 
     override fun draw(canvas: Canvas?){
