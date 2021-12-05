@@ -4,7 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 
-open class GameObject(var startX: Int, var startY: Int, color: Int ) {
+abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
 
     var posX: Int = 0
     var posY: Int = 0
@@ -16,11 +16,7 @@ open class GameObject(var startX: Int, var startY: Int, color: Int ) {
         this.paint.color = color
     }
 
-    open fun draw(canvas: Canvas?) {
+    abstract fun draw(canvas: Canvas?)
 
-    }
-
-    open fun update() {
-
-    }
+    abstract fun update()
 }
