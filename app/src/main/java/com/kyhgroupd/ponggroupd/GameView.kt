@@ -40,7 +40,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 println("x: $x y: $y")
             }
         }
-        var paddle : Paddle = Paddle(500,1600, Color.WHITE)
+        var paddle : Paddle = Paddle(DataManager.screenSizeX/2,DataManager.screenSizeY - DataManager.screenSizeY/10, Color.WHITE)
 
         DataManager.paddle = paddle
         DataManager.gameObjects.add(ball)
