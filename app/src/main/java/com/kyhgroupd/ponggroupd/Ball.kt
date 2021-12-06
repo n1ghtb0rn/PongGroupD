@@ -41,10 +41,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             this.speedY = DataManager.ballSpeed
         }
         if(this.posY+this.height > DataManager.screenSizeY+(DataManager.screenSizeY/6)){
-            this.posX = DataManager.ballStartX
-            this.posY = DataManager.ballStartY
-            this.speedX = DataManager.ballSpeed
-            this.speedY = DataManager.ballSpeed
+            this.resetBall()
         }
         if(this.posX < 0){
             this.speedX = DataManager.ballSpeed
@@ -75,5 +72,16 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 }
             }
         }
+    }
+
+    fun resetBall(){
+        //Reset ball position and speed
+        this.posX = DataManager.ballStartX
+        this.posY = DataManager.ballStartY
+        this.speedX = DataManager.ballSpeed
+        this.speedY = DataManager.ballSpeed
+
+        //Decrement number of lifes
+        DataManager.lifes--
     }
 }
