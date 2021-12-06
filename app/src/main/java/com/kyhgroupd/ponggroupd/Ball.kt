@@ -1,6 +1,8 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Canvas
+import android.graphics.LinearGradient
+import android.graphics.Shader
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -17,6 +19,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     override fun draw(canvas: Canvas?) {
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), DataManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
             this.radius.toFloat(), this.paint)
     }

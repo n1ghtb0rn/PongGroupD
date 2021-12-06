@@ -10,7 +10,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         width = DataManager.screenSizeX/DataManager.bricksPerColumn
         height = width/DataManager.brickWidthRatio
 
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), Color.WHITE, this.paint.color, Shader.TileMode.CLAMP)
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), DataManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
 
         borderPaint.color = Color.BLACK
         borderPaint.style = Paint.Style.STROKE

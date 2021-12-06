@@ -11,7 +11,8 @@ object DataManager {
     val pieceObjects = mutableListOf<BrickPiece>()
 
     val gameObjectColor = Color.GRAY
-    val gameTextColor = Color.WHITE
+    val gradientColor = Color.WHITE
+    val gameTextColor = Color.GREEN
 
     //Ball
     var ball: Ball? = null
@@ -30,8 +31,8 @@ object DataManager {
 
     //Pieces
     val piecesPerBrick = 8
-    val pieceSpeed = 15
-    val pieceLifetime = 15
+    val pieceSpeed = 25
+    val pieceLifetime = 10
 
     //Player data
     var score: Int = 0
