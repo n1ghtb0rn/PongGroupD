@@ -15,4 +15,6 @@ object DataManager {
 
     var event: MotionEvent? = null
 
+    val ballSpeed: Int = 15
+
 }

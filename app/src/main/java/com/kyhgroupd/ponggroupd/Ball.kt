@@ -7,13 +7,15 @@ import android.graphics.Rect
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     var radius : Int = 0
-    var speedX: Int = -5
-    var speedY: Int = -5
+    var speedX: Int = 0
+    var speedY: Int = 0
 
     init {
         radius = DataManager.screenSizeX / 50
         width = radius*2
         height = radius*2
+        speedX = DataManager.ballSpeed
+        speedY = DataManager.ballSpeed
     }
 
     override fun draw(canvas: Canvas?) {
@@ -38,20 +40,23 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Screen border check
         if(this.posY < 0){
-            this.speedY = 5
+            this.speedY *= -1
         }
         if(this.posY+this.height > DataManager.screenSizeY){
-            this.speedY = -5
+            this.speedY *= -1
         }
         if(this.posX < 0){
-            this.speedX = 5
+            this.speedX *= -1
         }
         if(this.posX+this.width > DataManager.screenSizeX){
-            this.speedX = -5
+            this.speedX *= -1
         }
         var gameObject: GameObject? = this.collidingWith()
         if (gameObject != null) {
             speedY *= -1
+            if(gameObject is Brick){
+                DataManager.gameObjects.remove(gameObject)
+            }
         }
     }
 }
