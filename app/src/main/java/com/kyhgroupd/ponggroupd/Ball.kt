@@ -1,8 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -39,7 +37,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         posY += speedY
 
         //Screen border check
-        if(this.posY < 0){
+        if(this.posY < DataManager.uiHeight){
             this.speedY = DataManager.ballSpeed
         }
         if(this.posY+this.height > DataManager.screenSizeY){
