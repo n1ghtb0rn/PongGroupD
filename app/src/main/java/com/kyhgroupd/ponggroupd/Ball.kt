@@ -61,6 +61,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 } else {
                     speedY *= -1
                 }
+                gameObject.destroy()
                 DataManager.gameObjects.remove(gameObject)
                 DataManager.score += DataManager.scorePerBrick
                 if(DataManager.highScore < DataManager.score){

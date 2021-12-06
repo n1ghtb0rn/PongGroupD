@@ -47,6 +47,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         for (gameObject in DataManager.gameObjects) {
             gameObject.update()
         }
+        for (pieceObject in DataManager.pieceObjects) {
+            pieceObject.update()
+        }
         DataManager.highScoreText?.textString = "HIGH SCORE: "+DataManager.highScore.toString()
         DataManager.scoreText?.textString = "SCORE: "+DataManager.score.toString()
         DataManager.livesText?.textString = "LIVES: "+DataManager.lives.toString()
@@ -64,6 +67,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
         for (gameObject in DataManager.gameObjects) {
             gameObject.draw(canvas)
+        }
+        for (pieceObject in DataManager.pieceObjects) {
+            pieceObject.draw(canvas)
         }
         for (gameObject in DataManager.uiObjects) {
             gameObject.draw(canvas)

@@ -8,6 +8,7 @@ object DataManager {
     //GameObjects
     val gameObjects = mutableListOf<GameObject>()
     val uiObjects = mutableListOf<GameObject>()
+    val pieceObjects = mutableListOf<GameObject>()
 
     //Game+UI border size
     var screenSizeX = 0
@@ -25,7 +26,14 @@ object DataManager {
     var event: MotionEvent? = null
 
     //Bricks
-    private val brickRows: Int = 8
+    val brickRows: Int = 8
+    val bricksPerColumn: Int = 8
+    val brickWidthRatio = 3
+
+    //Pieces
+    val piecesPerBrick = 8
+    val pieceSpeed = 15
+    val pieceLifetime = 15
 
     //Player data
     var score: Int = 0
