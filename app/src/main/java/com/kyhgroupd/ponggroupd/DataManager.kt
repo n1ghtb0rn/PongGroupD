@@ -24,8 +24,13 @@ object DataManager {
     var event: MotionEvent? = null
 
     //Player data
-    var highScore: Int = 0
     var score: Int = 0
-    var lifes: Int = 3
+    var highScore: Int = 0
+    var lives: Int = 3
+
+    //UI Text
+    var scoreText: GameText? = null
+    var highScoreText: GameText? = null
+    var livesText: GameText? = null
 
 }

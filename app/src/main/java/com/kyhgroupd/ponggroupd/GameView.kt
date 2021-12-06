@@ -57,12 +57,15 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         DataManager.paddle = paddle
         DataManager.gameObjects.add(paddle)
 
-        var score = GameText(50, DataManager.screenSizeY/20, Color.WHITE, "SCORE: "+DataManager.score.toString())
-        DataManager.uiObjects.add(score)
-        var highScore = GameText(DataManager.screenSizeX/2, DataManager.screenSizeY/20, Color.WHITE, "HIGH SCORE: "+DataManager.highScore.toString())
-        DataManager.uiObjects.add(highScore)
-        var lives = GameText(50, 200, Color.WHITE, "LIVES: ")
-        DataManager.uiObjects.add(lives)
+        var scoreText = GameText(50, DataManager.screenSizeY/20, Color.WHITE)
+        DataManager.scoreText = scoreText
+        DataManager.uiObjects.add(scoreText)
+        var highScoreText = GameText(DataManager.screenSizeX/2, DataManager.screenSizeY/20, Color.WHITE)
+        DataManager.highScoreText = highScoreText
+        DataManager.uiObjects.add(highScoreText)
+        var livesText = GameText(50, 200, Color.WHITE)
+        DataManager.livesText = livesText
+        DataManager.uiObjects.add(livesText)
     }
 
     fun start() {
@@ -84,9 +87,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         for (gameObject in DataManager.gameObjects) {
             gameObject.update()
         }
-        for (gameObject in DataManager.uiObjects) {
-            gameObject.update()
-        }
+        DataManager.highScoreText?.textString = "HIGH SCORE: "+DataManager.highScore.toString()
+        DataManager.scoreText?.textString = "SCORE: "+DataManager.score.toString()
+        DataManager.livesText?.textString = "LIVES: "+DataManager.lives.toString()
         DataManager.ball?.update()
     }
 
