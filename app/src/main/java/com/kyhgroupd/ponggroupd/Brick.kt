@@ -17,6 +17,18 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         borderPaint.strokeWidth = (height/5).toFloat()
     }
 
+    override fun draw(canvas: Canvas?){
+        //Base
+        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
+        //Border
+        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), borderPaint)
+    }
+
+    override fun update(){
+
+    }
+
+    //Shatter this brick into small pieces when destroyed
     fun destroy(){
         val piece1 = BrickPiece(this.posX+(this.width/2), this.posY+(this.height/2), this.borderPaint.color)
         piece1.speedX = 0
@@ -46,17 +58,6 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         DataManager.pieceObjects.add(piece7)
         val piece8 = BrickPiece(this.posX+(this.width/2), this.posY+(this.height/2), this.borderPaint.color)
         DataManager.pieceObjects.add(piece8)
-    }
-
-    override fun draw(canvas: Canvas?){
-        //Base
-        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
-        //Border
-        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), borderPaint)
-    }
-
-    override fun update(){
-
     }
 
 }

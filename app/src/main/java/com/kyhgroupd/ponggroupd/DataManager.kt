@@ -64,7 +64,7 @@ object DataManager {
         //Bricks
         val referenceBrick = Brick(100, 300, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
-            for (x in 0..screenSizeX step referenceBrick.width) {
+            for (x in 0..screenSizeX-1 step referenceBrick.width) {
                 val brick = Brick(x, y, Color.WHITE)
                 gameObjects.add(brick)
             }
@@ -89,6 +89,9 @@ object DataManager {
         //UI Data
         score = 0
         lives = 3
+
+        //Music
+        SoundManager.playMusic()
     }
 
 }
