@@ -12,7 +12,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     init {
         radius = DataManager.screenSizeX / 50
-        rect = Rect(startX, startY, startX+(radius*2), startY+(radius*2))
+        width = radius*2
+        height = radius*2
     }
 
     override fun draw(canvas: Canvas?) {
@@ -21,11 +22,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     fun collidingWith(): GameObject? {
-        print("12345")
         for (gameObject in DataManager.gameObjects) {
-            if (this.rect.intersect(gameObject.rect)) {
-                print(gameObject)
-                return gameObject
+            if (this.posX < gameObject.posX+gameObject.width && this.posX+this.width > gameObject.posX) {
+                if (this.posY < gameObject.posY+gameObject.height && this.posY+this.height > gameObject.posY) {
+                    return gameObject
+                }
             }
         }
         return null
@@ -36,16 +37,16 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         posY += speedY
 
         //Screen border check
-        if(this.posY < 0+this.radius){
+        if(this.posY < 0){
             this.speedY = 5
         }
-        if(this.posY > DataManager.screenSizeY-this.radius){
+        if(this.posY+this.height > DataManager.screenSizeY){
             this.speedY = -5
         }
-        if(this.posX < 0+this.radius){
+        if(this.posX < 0){
             this.speedX = 5
         }
-        if(this.posX > DataManager.screenSizeX-this.radius){
+        if(this.posX+this.width > DataManager.screenSizeX){
             this.speedX = -5
         }
         var gameObject: GameObject? = this.collidingWith()
