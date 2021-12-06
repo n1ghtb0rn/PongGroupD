@@ -65,7 +65,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
             //Paddle collision
             else if(gameObject is Paddle){
-                //TODO: Code for paddle collision
+                if(this.posY+this.height > gameObject.posY && this.posY + this.height < gameObject.posY + DataManager.ballSpeed){
+                    speedY *= -1
+                } else {
+                    speedX *= -1
+                }
             }
         }
     }
