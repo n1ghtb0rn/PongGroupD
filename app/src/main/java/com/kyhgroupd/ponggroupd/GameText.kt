@@ -1,13 +1,15 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Canvas
+import android.graphics.Typeface
 
 class GameText(startX: Int, startY: Int, color: Int, textString: String) : GameObject(startX, startY, color) {
     var textString: String = ""
 
     init {
         this.textString = textString
-        this.paint.textSize = 20f
+        this.paint.textSize = 80f
+        this.paint.setTypeface(Typeface.MONOSPACE)
     }
 
     override fun draw(canvas: Canvas?) {

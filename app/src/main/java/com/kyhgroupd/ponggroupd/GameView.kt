@@ -3,6 +3,8 @@ package com.kyhgroupd.ponggroupd
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.provider.ContactsContract
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -31,7 +33,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     private fun setup() {
-        DataManager.uiHeight = DataManager.screenSizeY/7
+        DataManager.uiHeight = DataManager.screenSizeY/12
         DataManager.ball = Ball(475, 1000, Color.WHITE)
         var testBrick : Brick = Brick(100, 300, Color.WHITE)
 
@@ -47,8 +49,12 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         DataManager.paddle = paddle
         DataManager.gameObjects.add(paddle)
 
-        var highScore = GameText(50, 50, Color.WHITE, DataManager.highScore.toString())
+        var score = GameText(50, DataManager.screenSizeY/20, Color.WHITE, "SCORE: "+DataManager.score.toString())
+        DataManager.uiObjects.add(score)
+        var highScore = GameText(DataManager.screenSizeX/2, DataManager.screenSizeY/20, Color.WHITE, "HIGH SCORE: "+DataManager.highScore.toString())
         DataManager.uiObjects.add(highScore)
+        var lives = GameText(50, 200, Color.WHITE, "LIVES: ")
+        DataManager.uiObjects.add(lives)
     }
 
     fun start() {
@@ -79,6 +85,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     private fun draw(){
         canvas = mHolder!!.lockCanvas()
         canvas.drawColor(Color.BLACK)
+        val uiPaint = Paint()
+        uiPaint.style = Paint.Style.STROKE
+        uiPaint.color = Color.WHITE
+        uiPaint.strokeWidth = 3f
+        canvas?.drawRect(0f, 0f, DataManager.screenSizeX.toFloat(), DataManager.uiHeight.toFloat(), uiPaint)
 
         for (gameObject in DataManager.gameObjects) {
             gameObject.draw(canvas)
