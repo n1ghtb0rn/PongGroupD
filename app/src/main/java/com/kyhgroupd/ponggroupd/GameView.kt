@@ -33,10 +33,18 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     private fun setup() {
+
         DataManager.uiHeight = DataManager.screenSizeY/12
         DataManager.ball = Ball(475, 1000, Color.WHITE)
         var testBrick : Brick = Brick(100, 300, Color.WHITE)
 
+        //Ball
+        DataManager.ballStartX = DataManager.screenSizeX - (DataManager.screenSizeX/3)
+        DataManager.ballStartY = DataManager.screenSizeY/3
+        DataManager.ball = Ball(DataManager.ballStartX, DataManager.ballStartY, Color.WHITE)
+
+        //Bricks
+        var testBrick : Brick = Brick(100, 300, Color.WHITE)
         for (y in testBrick.height+DataManager.uiHeight..testBrick.height*numOfBrickRows step testBrick.height) {
             for (x in 0..DataManager.screenSizeX step testBrick.width) {
                 var brick = Brick(x, y, Color.WHITE)
@@ -44,8 +52,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 println("x: $x y: $y")
             }
         }
-        var paddle : Paddle = Paddle(DataManager.screenSizeX/2,DataManager.screenSizeY - DataManager.screenSizeY/7, Color.WHITE)
 
+        //Paddle
+        var paddle : Paddle = Paddle(DataManager.screenSizeX/2,DataManager.screenSizeY - DataManager.screenSizeY/7, Color.WHITE)
         DataManager.paddle = paddle
         DataManager.gameObjects.add(paddle)
 
