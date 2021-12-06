@@ -53,7 +53,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
         var gameObject: GameObject? = this.collidingWith()
         if (gameObject != null) {
-            speedY *= -1
+            if (this.posY < gameObject.posY+gameObject.height-(DataManager.ballSpeed*2) &&
+                this.posY+this.height > gameObject.posY+(DataManager.ballSpeed*2)) {
+                speedX *= -1
+            } else {
+                speedY *= -1
+            }
             if(gameObject is Brick){
                 DataManager.gameObjects.remove(gameObject)
             }
