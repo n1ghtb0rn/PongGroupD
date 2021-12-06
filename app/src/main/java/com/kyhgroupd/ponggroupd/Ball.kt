@@ -82,6 +82,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         this.speedY = DataManager.ballSpeed
 
         //Decrement number of lifes
-        DataManager.lifes--
+        DataManager.lives--
     }
 }
