@@ -67,6 +67,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 if(DataManager.highScore < DataManager.score){
                     DataManager.highScore = DataManager.score
                 }
+                SoundManager.playDestroyBrickSFX()
             }
             //Paddle collision
             else if(gameObject is Paddle){

@@ -26,6 +26,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         DataManager.screenSizeY = displayMetrics.heightPixels
 
         DataManager.resetGame()
+
+        //SoundManager
+        SoundManager.context = context
     }
 
     fun start() {
