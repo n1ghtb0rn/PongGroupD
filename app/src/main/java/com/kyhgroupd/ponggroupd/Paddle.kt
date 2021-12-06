@@ -6,15 +6,10 @@ import android.view.MotionEvent
 
 class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
-    var width: Int = 0
-    var height: Int = 0
-
-
     init {
         width = DataManager.screenSizeX/5
         height = width/3
         posX -= width/2
-        rect = Rect(startX, startY, startX+width, startY+height)
     }
 
     override fun draw(canvas: Canvas?){
