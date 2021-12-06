@@ -6,6 +6,7 @@ object DataManager {
 
     val gameObjects = mutableListOf<GameObject>()
     var paddle: Paddle? = null
+    var ball: Ball? = null
 
     var highScore: Int = 0
 

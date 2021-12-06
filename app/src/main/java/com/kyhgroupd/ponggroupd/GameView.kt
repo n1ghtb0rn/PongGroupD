@@ -29,7 +29,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     private fun setup() {
-        var ball = Ball(475, 1000, Color.WHITE)
+        DataManager.ball = Ball(475, 1000, Color.WHITE)
         val numberOfBricks = 30
         var testBrick : Brick = Brick(100, 300, Color.WHITE)
 
@@ -43,7 +43,6 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         var paddle : Paddle = Paddle(DataManager.screenSizeX/2,DataManager.screenSizeY - DataManager.screenSizeY/10, Color.WHITE)
 
         DataManager.paddle = paddle
-        DataManager.gameObjects.add(ball)
         DataManager.gameObjects.add(paddle)
 
     }
@@ -67,6 +66,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         for (gameObject in DataManager.gameObjects) {
             gameObject.update()
         }
+        DataManager.ball?.update()
     }
 
     private fun draw(){
@@ -76,6 +76,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         for (gameObject in DataManager.gameObjects) {
             gameObject.draw(canvas)
         }
+        DataManager.ball?.draw(canvas)
 
         mHolder!!.unlockCanvasAndPost(canvas)
     }

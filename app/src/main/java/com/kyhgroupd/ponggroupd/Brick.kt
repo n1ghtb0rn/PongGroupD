@@ -1,6 +1,7 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Canvas
+import android.graphics.Rect
 
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
@@ -10,6 +11,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
     init {
         width = DataManager.screenSizeX/15
         height = width/3
+        rect = Rect(startX, startY, startX+width, startY+height)
     }
 
     fun destroy(){

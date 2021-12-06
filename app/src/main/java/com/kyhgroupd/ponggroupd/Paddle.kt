@@ -1,6 +1,7 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.view.MotionEvent
 
 class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
@@ -13,6 +14,7 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
         width = DataManager.screenSizeX/5
         height = width/3
         posX -= width/2
+        rect = Rect(startX, startY, startX+width, startY+height)
     }
 
     override fun draw(canvas: Canvas?){
