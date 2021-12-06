@@ -16,19 +16,13 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     }
 
     override fun draw(canvas: Canvas?){
-        if(lifetime > 0){
-            canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
-        }
+        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
     }
 
     override fun update(){
         this.posX += this.speedX
         this.posY += this.speedY
         lifetime--
-        if(lifetime <= 0){
-            //TODO: Fix remove crash (urgent)
-            //DataManager.pieceObjects.remove(this)
-        }
     }
 
 }

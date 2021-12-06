@@ -50,6 +50,13 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         for (pieceObject in DataManager.pieceObjects) {
             pieceObject.update()
         }
+        val pieceObjects = DataManager.pieceObjects.toMutableList()
+        for (pieceObject in pieceObjects) {
+            if(pieceObject.lifetime <= 0){
+                DataManager.pieceObjects.remove(pieceObject)
+            }
+        }
+
         DataManager.highScoreText?.textString = "HIGH SCORE: "+DataManager.highScore.toString()
         DataManager.scoreText?.textString = "SCORE: "+DataManager.score.toString()
         DataManager.livesText?.textString = "LIVES: "+DataManager.lives.toString()
