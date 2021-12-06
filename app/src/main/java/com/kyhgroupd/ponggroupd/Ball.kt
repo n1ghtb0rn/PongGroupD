@@ -40,16 +40,16 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Screen border check
         if(this.posY < 0){
-            this.speedY *= -1
+            this.speedY = DataManager.ballSpeed
         }
         if(this.posY+this.height > DataManager.screenSizeY){
-            this.speedY *= -1
+            this.speedY = -DataManager.ballSpeed
         }
         if(this.posX < 0){
-            this.speedX *= -1
+            this.speedX = DataManager.ballSpeed
         }
         if(this.posX+this.width > DataManager.screenSizeX){
-            this.speedX *= -1
+            this.speedX = -DataManager.ballSpeed
         }
         var gameObject: GameObject? = this.collidingWith()
         if (gameObject != null) {
