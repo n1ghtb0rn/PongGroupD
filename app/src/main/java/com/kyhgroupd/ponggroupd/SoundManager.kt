@@ -11,6 +11,8 @@ object SoundManager {
 
     var destroyBrickPlayer: MediaPlayer? = null
     var ballBouncePlayer: MediaPlayer? = null
+    var loseLifePlayer: MediaPlayer? = null
+    var gameOverPlayer: MediaPlayer? = null
 
     fun init(context: AppCompatActivity){
         this.context = context
@@ -18,6 +20,8 @@ object SoundManager {
 
         this.destroyBrickPlayer = MediaPlayer.create(SoundManager.context, R.raw.destroy_brick)
         this.ballBouncePlayer = MediaPlayer.create(SoundManager.context, R.raw.ball_bounce)
+        this.loseLifePlayer = MediaPlayer.create(SoundManager.context, R.raw.lose_life)
+        this.gameOverPlayer = MediaPlayer.create(SoundManager.context, R.raw.game_over)
     }
 
     fun playDestroyBrickSFX(){
@@ -28,9 +32,23 @@ object SoundManager {
         this.ballBouncePlayer!!.start()
     }
 
+    fun playLoseLifeSFX(){
+        this.loseLifePlayer!!.start()
+    }
+
+    fun playGameOverSFX(){
+        this.gameOverPlayer!!.start()
+    }
+
     fun playMusic(){
-        musicPlayer?.start()
-        musicPlayer?.isLooping = true
+        this.musicPlayer!!.start()
+        this.musicPlayer!!.isLooping = true
+    }
+
+    fun resetMusic(){
+        this.musicPlayer!!.stop()
+        this.musicPlayer = MediaPlayer.create(context, R.raw.music)
+        this.playMusic()
     }
 
 }

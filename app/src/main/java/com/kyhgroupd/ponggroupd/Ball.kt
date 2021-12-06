@@ -44,8 +44,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
         if(this.posY+this.height > DataManager.screenSizeY+(DataManager.screenSizeY/6)){
             this.resetBall()
-            //SFX
-            SoundManager.playBallBounceSFX()
         }
         if(this.posX < 0){
             this.speedX = DataManager.ballSpeed
@@ -102,6 +100,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         DataManager.lives--
         if(DataManager.lives <= 0){
             DataManager.resetGame()
+            SoundManager.resetMusic()
+            SoundManager.playGameOverSFX()
+        }
+        else{
+            SoundManager.playLoseLifeSFX()
         }
     }
 }
