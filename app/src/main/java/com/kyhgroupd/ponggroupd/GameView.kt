@@ -16,6 +16,8 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     lateinit var canvas: Canvas
     var mHolder: SurfaceHolder? = holder
 
+    private val numOfBrickRows: Int = 10
+
 
     init {
         mHolder?.addCallback(this)
@@ -33,7 +35,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         val numberOfBricks = 30
         var testBrick : Brick = Brick(100, 300, Color.WHITE)
 
-        for (y in testBrick.height..testBrick.height*3 step testBrick.height) {
+        for (y in testBrick.height..testBrick.height*numOfBrickRows step testBrick.height) {
             for (x in 0..DataManager.screenSizeX step testBrick.width) {
                 var brick = Brick(x, y, Color.WHITE)
                 DataManager.gameObjects.add(brick)

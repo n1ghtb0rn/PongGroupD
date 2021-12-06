@@ -6,7 +6,7 @@ import android.graphics.Rect
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
     init {
-        width = DataManager.screenSizeX/15
+        width = DataManager.screenSizeX/8
         height = width/3
     }
 
