@@ -62,6 +62,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                     speedY *= -1
                 }
                 DataManager.gameObjects.remove(gameObject)
+                DataManager.score += DataManager.scorePerBrick
+                if(DataManager.highScore < DataManager.score){
+                    DataManager.highScore = DataManager.score
+                }
             }
             //Paddle collision
             else if(gameObject is Paddle){
@@ -83,5 +87,13 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Decrement number of lifes
         DataManager.lives--
+        if(DataManager.lives <= 0){
+            gameOver()
+        }
+    }
+
+    fun gameOver(){
+        DataManager.lives = 3
+        //TODO: RESET GAME!
     }
 }
