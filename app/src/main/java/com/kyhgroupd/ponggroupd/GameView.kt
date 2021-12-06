@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.media.MediaPlayer
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -25,10 +26,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         DataManager.screenSizeX = displayMetrics.widthPixels
         DataManager.screenSizeY = displayMetrics.heightPixels
 
-        DataManager.resetGame()
-
         //SoundManager
-        SoundManager.context = context
+        SoundManager.init(context)
+
+        //Reset game
+        DataManager.resetGame()
     }
 
     fun start() {

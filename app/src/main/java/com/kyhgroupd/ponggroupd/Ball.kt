@@ -39,15 +39,23 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Screen border check
         if(this.posY < DataManager.uiHeight){
             this.speedY = DataManager.ballSpeed
+            //SFX
+            SoundManager.playBallBounceSFX()
         }
         if(this.posY+this.height > DataManager.screenSizeY+(DataManager.screenSizeY/6)){
             this.resetBall()
+            //SFX
+            SoundManager.playBallBounceSFX()
         }
         if(this.posX < 0){
             this.speedX = DataManager.ballSpeed
+            //SFX
+            SoundManager.playBallBounceSFX()
         }
         if(this.posX+this.width > DataManager.screenSizeX){
             this.speedX = -DataManager.ballSpeed
+            //SFX
+            SoundManager.playBallBounceSFX()
         }
 
         //Collision check
@@ -67,6 +75,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 if(DataManager.highScore < DataManager.score){
                     DataManager.highScore = DataManager.score
                 }
+                //SFX
                 SoundManager.playDestroyBrickSFX()
             }
             //Paddle collision
@@ -76,6 +85,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 } else {
                     speedX *= -1
                 }
+                //SFX
+                SoundManager.playBallBounceSFX()
             }
         }
     }
