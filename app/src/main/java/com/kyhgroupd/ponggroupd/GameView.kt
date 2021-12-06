@@ -31,11 +31,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     private fun setup() {
+        DataManager.uiHeight = DataManager.screenSizeY/7
         DataManager.ball = Ball(475, 1000, Color.WHITE)
-        val numberOfBricks = 30
         var testBrick : Brick = Brick(100, 300, Color.WHITE)
 
-        for (y in testBrick.height..testBrick.height*numOfBrickRows step testBrick.height) {
+        for (y in testBrick.height+DataManager.uiHeight..testBrick.height*numOfBrickRows step testBrick.height) {
             for (x in 0..DataManager.screenSizeX step testBrick.width) {
                 var brick = Brick(x, y, Color.WHITE)
                 DataManager.gameObjects.add(brick)
@@ -47,6 +47,8 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         DataManager.paddle = paddle
         DataManager.gameObjects.add(paddle)
 
+        var highScore = GameText(50, 50, Color.WHITE, DataManager.highScore.toString())
+        DataManager.uiObjects.add(highScore)
     }
 
     fun start() {
@@ -68,6 +70,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         for (gameObject in DataManager.gameObjects) {
             gameObject.update()
         }
+        for (gameObject in DataManager.uiObjects) {
+            gameObject.update()
+        }
         DataManager.ball?.update()
     }
 
@@ -76,6 +81,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         canvas.drawColor(Color.BLACK)
 
         for (gameObject in DataManager.gameObjects) {
+            gameObject.draw(canvas)
+        }
+        for (gameObject in DataManager.uiObjects) {
             gameObject.draw(canvas)
         }
         DataManager.ball?.draw(canvas)

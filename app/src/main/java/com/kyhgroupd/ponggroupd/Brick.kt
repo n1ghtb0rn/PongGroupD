@@ -1,7 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Canvas
-import android.graphics.Rect
 
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
