@@ -62,6 +62,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                     speedY *= -1
                 }
                 DataManager.gameObjects.remove(gameObject)
+                DataManager.score += DataManager.scorePerBrick
+                if(DataManager.highScore < DataManager.score){
+                    DataManager.highScore = DataManager.score
+                }
             }
             //Paddle collision
             else if(gameObject is Paddle){

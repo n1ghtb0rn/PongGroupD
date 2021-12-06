@@ -27,6 +27,7 @@ object DataManager {
     var score: Int = 0
     var highScore: Int = 0
     var lives: Int = 3
+    var scorePerBrick = 100
 
     //UI Text
     var scoreText: GameText? = null
