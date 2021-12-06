@@ -11,12 +11,14 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     var lifetime: Int = DataManager.pieceLifetime
 
     init {
-        width = (DataManager.screenSizeX/DataManager.bricksPerColumn)/4
+        width = ((DataManager.screenSizeX/DataManager.bricksPerColumn)/2.5).toInt()
         height = (width/DataManager.brickWidthRatio)
     }
 
     override fun draw(canvas: Canvas?){
-        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
+        if(lifetime > 0){
+            canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
+        }
     }
 
     override fun update(){
