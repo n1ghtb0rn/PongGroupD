@@ -55,8 +55,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if (gameObject != null) {
             //Brick collision
             if(gameObject is Brick){
-                if (this.posY < gameObject.posY+gameObject.height-(DataManager.ballSpeed*2) &&
-                    this.posY+this.height > gameObject.posY+(DataManager.ballSpeed*2)) {
+                if (this.posY < gameObject.posY+gameObject.height-(DataManager.ballSpeed) &&
+                    this.posY+this.height > gameObject.posY+(DataManager.ballSpeed)) {
                     speedX *= -1
                 } else {
                     speedY *= -1
