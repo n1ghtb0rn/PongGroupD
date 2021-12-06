@@ -1,9 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 
 abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
 
@@ -16,6 +13,8 @@ abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
     init {
         this.posX = startX
         this.posY = startY
+
+        //Set color and gradient
         this.paint.color = color
     }
 

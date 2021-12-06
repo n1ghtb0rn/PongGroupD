@@ -36,7 +36,6 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
         DataManager.uiHeight = DataManager.screenSizeY/12
         DataManager.ball = Ball(475, 1000, Color.WHITE)
-        var testBrick : Brick = Brick(100, 300, Color.WHITE)
 
         //Ball
         DataManager.ballStartX = DataManager.screenSizeX - (DataManager.screenSizeX/3)

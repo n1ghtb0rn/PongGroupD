@@ -7,6 +7,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
     init {
         width = DataManager.screenSizeX/8
         height = width/3
+
     }
 
     fun destroy(){
