@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.provider.ContactsContract
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -18,9 +17,6 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     lateinit var canvas: Canvas
     var mHolder: SurfaceHolder? = holder
 
-    private val numOfBrickRows: Int = 10
-
-
     init {
         mHolder?.addCallback(this)
 
@@ -29,43 +25,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         DataManager.screenSizeX = displayMetrics.widthPixels
         DataManager.screenSizeY = displayMetrics.heightPixels
 
-        setup()
-    }
-
-    private fun setup() {
-
-        DataManager.uiHeight = DataManager.screenSizeY/12
-        DataManager.ball = Ball(475, 1000, Color.WHITE)
-
-        //Ball
-        DataManager.ballStartX = DataManager.screenSizeX - (DataManager.screenSizeX/3)
-        DataManager.ballStartY = DataManager.screenSizeY/3
-        DataManager.ball = Ball(DataManager.ballStartX, DataManager.ballStartY, Color.WHITE)
-
-        //Bricks
-        var testBrick : Brick = Brick(100, 300, Color.WHITE)
-        for (y in testBrick.height+DataManager.uiHeight..testBrick.height*numOfBrickRows step testBrick.height) {
-            for (x in 0..DataManager.screenSizeX step testBrick.width) {
-                var brick = Brick(x, y, Color.WHITE)
-                DataManager.gameObjects.add(brick)
-                println("x: $x y: $y")
-            }
-        }
-
-        //Paddle
-        var paddle : Paddle = Paddle(DataManager.screenSizeX/2,DataManager.screenSizeY - DataManager.screenSizeY/7, Color.WHITE)
-        DataManager.paddle = paddle
-        DataManager.gameObjects.add(paddle)
-
-        var scoreText = GameText(50, DataManager.screenSizeY/20, Color.WHITE)
-        DataManager.scoreText = scoreText
-        DataManager.uiObjects.add(scoreText)
-        var highScoreText = GameText(DataManager.screenSizeX/2, DataManager.screenSizeY/20, Color.WHITE)
-        DataManager.highScoreText = highScoreText
-        DataManager.uiObjects.add(highScoreText)
-        var livesText = GameText(50, 200, Color.WHITE)
-        DataManager.livesText = livesText
-        DataManager.uiObjects.add(livesText)
+        DataManager.resetGame()
     }
 
     fun start() {
