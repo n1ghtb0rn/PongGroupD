@@ -8,7 +8,7 @@ object DataManager {
     //GameObjects
     val gameObjects = mutableListOf<GameObject>()
     val uiObjects = mutableListOf<GameObject>()
-    val pieceObjects = mutableListOf<GameObject>()
+    val pieceObjects = mutableListOf<BrickPiece>()
 
     //Game+UI border size
     var screenSizeX = 0

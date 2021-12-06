@@ -11,7 +11,7 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     var lifetime: Int = DataManager.pieceLifetime
 
     init {
-        width = (DataManager.screenSizeX/DataManager.bricksPerColumn)/4
+        width = ((DataManager.screenSizeX/DataManager.bricksPerColumn)/2.5).toInt()
         height = (width/DataManager.brickWidthRatio)
     }
 
@@ -23,10 +23,6 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
         this.posX += this.speedX
         this.posY += this.speedY
         lifetime--
-        if(lifetime <= 0){
-            //TODO: Fix remove crash (urgent)
-            //DataManager.pieceObjects.remove(this)
-        }
     }
 
 }
