@@ -88,12 +88,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Decrement number of lifes
         DataManager.lives--
         if(DataManager.lives <= 0){
-            gameOver()
+            DataManager.resetGame()
         }
-    }
-
-    fun gameOver(){
-        DataManager.lives = 3
-        //TODO: RESET GAME!
     }
 }

@@ -8,7 +8,7 @@ class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, startY
 
     init {
         this.textString = ""
-        this.paint.textSize = 80f
+        this.paint.textSize = DataManager.textSize
         this.paint.setTypeface(Typeface.MONOSPACE)
     }
 
