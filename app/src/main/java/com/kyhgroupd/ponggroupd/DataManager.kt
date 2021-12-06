@@ -21,4 +21,7 @@ object DataManager {
 
     var uiHeight: Int = 0
 
+    var ballStartX: Int = 0
+    var ballStartY: Int = 0
+
 }

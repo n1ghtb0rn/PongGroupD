@@ -40,8 +40,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if(this.posY < DataManager.uiHeight){
             this.speedY = DataManager.ballSpeed
         }
-        if(this.posY+this.height > DataManager.screenSizeY){
-            this.speedY = -DataManager.ballSpeed
+        if(this.posY+this.height > DataManager.screenSizeY+(DataManager.screenSizeY/6)){
+            this.posX = DataManager.ballStartX
+            this.posY = DataManager.ballStartY
+            this.speedX = DataManager.ballSpeed
+            this.speedY = DataManager.ballSpeed
         }
         if(this.posX < 0){
             this.speedX = DataManager.ballSpeed
@@ -49,6 +52,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if(this.posX+this.width > DataManager.screenSizeX){
             this.speedX = -DataManager.ballSpeed
         }
+
+        //Collision check
         var gameObject: GameObject? = this.collidingWith()
         if (gameObject != null) {
             //Brick collision
