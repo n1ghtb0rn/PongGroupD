@@ -10,10 +10,9 @@ object DataManager {
     val uiObjects = mutableListOf<GameObject>()
     val pieceObjects = mutableListOf<BrickPiece>()
 
-    //Game+UI border size
-    var screenSizeX = 0
-    var screenSizeY = 0
-    var uiHeight: Int = 0
+    val gameObjectColor = Color.GRAY
+    val gradientColor = Color.WHITE
+    val gameTextColor = Color.GREEN
 
     //Ball
     var ball: Ball? = null
@@ -32,14 +31,19 @@ object DataManager {
 
     //Pieces
     val piecesPerBrick = 8
-    val pieceSpeed = 15
-    val pieceLifetime = 15
+    val pieceSpeed = 25
+    val pieceLifetime = 10
 
     //Player data
     var score: Int = 0
     var highScore: Int = 0
     var lives: Int = 3
     var scorePerBrick = 100
+
+    //Game+UI border size
+    var screenSizeX = 0
+    var screenSizeY = 0
+    var uiHeight: Int = 0
 
     //UI Text
     var scoreText: GameText? = null
@@ -59,30 +63,30 @@ object DataManager {
         //Ball
         ballStartX = screenSizeX - (screenSizeX/3)
         ballStartY = screenSizeY/3
-        ball = Ball(ballStartX, ballStartY, Color.WHITE)
+        ball = Ball(ballStartX, ballStartY, gameObjectColor)
 
         //Bricks
         val referenceBrick = Brick(100, 300, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
             for (x in 0..screenSizeX-1 step referenceBrick.width) {
-                val brick = Brick(x, y, Color.WHITE)
+                val brick = Brick(x, y, gameObjectColor)
                 gameObjects.add(brick)
             }
         }
 
         //Paddle
-        var paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, Color.WHITE)
+        var paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, gameObjectColor)
         DataManager.paddle = paddle
         gameObjects.add(paddle)
 
         //UI objects
-        var scoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), Color.WHITE)
+        var scoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
         DataManager.scoreText = scoreText
         uiObjects.add(scoreText)
-        var highScoreText = GameText(screenSizeX/2, (uiHeight/2.5).toInt(), Color.WHITE)
+        var highScoreText = GameText(screenSizeX/2, (uiHeight/2.5).toInt(), gameTextColor)
         DataManager.highScoreText = highScoreText
         uiObjects.add(highScoreText)
-        var livesText = GameText(screenSizeX/20, (uiHeight/1.25).toInt(), Color.WHITE)
+        var livesText = GameText(screenSizeX/20, (uiHeight/1.25).toInt(), gameTextColor)
         DataManager.livesText = livesText
         uiObjects.add(livesText)
 

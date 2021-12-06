@@ -14,7 +14,6 @@ abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
         this.posX = startX
         this.posY = startY
 
-        //Set color and gradient
         this.paint.color = color
     }
 

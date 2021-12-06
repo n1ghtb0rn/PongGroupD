@@ -1,8 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 
 open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
@@ -16,6 +14,7 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     }
 
     override fun draw(canvas: Canvas?){
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), DataManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
     }
 
