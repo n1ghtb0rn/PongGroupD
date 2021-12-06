@@ -16,15 +16,6 @@ abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
 
         //Set color and gradient
         this.paint.color = color
-        paint.shader = LinearGradient(
-            posX.toFloat(),
-            posY.toFloat(),
-            (posX + (this.width / 2)).toFloat(),
-            (posY + (this.height / 2)).toFloat(),
-            Color.GRAY,
-            color,
-            Shader.TileMode.CLAMP
-        )
     }
 
     abstract fun draw(canvas: Canvas?)
