@@ -8,6 +8,5 @@ class BreakoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(GameView(this))
-
     }
 }

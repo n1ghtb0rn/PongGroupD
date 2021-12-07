@@ -1,5 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -49,9 +50,12 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     fun update(){
+        //Bricks and paddle
         for (gameObject in DataManager.gameObjects) {
             gameObject.update()
         }
+
+        //Brick pieces
         for (pieceObject in DataManager.pieceObjects) {
             pieceObject.update()
         }
@@ -62,33 +66,40 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
         }
 
+        //Ball
+        DataManager.ball?.update()
+
+        //UI
         DataManager.highScoreText?.textString = "HIGH SCORE: "+DataManager.highScore.toString()
         DataManager.scoreText?.textString = "SCORE: "+DataManager.score.toString()
         DataManager.livesText?.textString = "LIVES: "+DataManager.lives.toString()
-        DataManager.ball?.update()
     }
 
     private fun draw(){
-        canvas = mHolder!!.lockCanvas()
-        canvas.drawColor(Color.BLACK)
-        val uiPaint = Paint()
-        uiPaint.style = Paint.Style.STROKE
-        uiPaint.color = Color.WHITE
-        uiPaint.strokeWidth = 3f
-        canvas?.drawRect(0f, 0f, DataManager.screenSizeX.toFloat(), DataManager.uiHeight.toFloat(), uiPaint)
+        try{
+            canvas = mHolder!!.lockCanvas()
+            canvas.drawColor(Color.BLACK)
+            val uiPaint = Paint()
+            uiPaint.style = Paint.Style.STROKE
+            uiPaint.color = Color.WHITE
+            uiPaint.strokeWidth = 3f
+            canvas.drawRect(0f, 0f, DataManager.screenSizeX.toFloat(), DataManager.uiHeight.toFloat(), uiPaint)
 
-        for (gameObject in DataManager.gameObjects) {
-            gameObject.draw(canvas)
-        }
-        for (pieceObject in DataManager.pieceObjects) {
-            pieceObject.draw(canvas)
-        }
-        for (gameObject in DataManager.uiObjects) {
-            gameObject.draw(canvas)
-        }
-        DataManager.ball?.draw(canvas)
+            for (gameObject in DataManager.gameObjects) {
+                gameObject.draw(canvas)
+            }
+            for (pieceObject in DataManager.pieceObjects) {
+                pieceObject.draw(canvas)
+            }
+            for (gameObject in DataManager.uiObjects) {
+                gameObject.draw(canvas)
+            }
+            DataManager.ball?.draw(canvas)
 
-        mHolder!!.unlockCanvasAndPost(canvas)
+            mHolder!!.unlockCanvasAndPost(canvas)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
@@ -109,6 +120,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event != null){
             DataManager.event = event
