@@ -19,20 +19,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     override fun draw(canvas: Canvas?) {
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), DataManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(), (posY+(radius)).toFloat(), DataManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
             this.radius.toFloat(), this.paint)
-    }
-
-    fun collidingWith(): GameObject? {
-        for (gameObject in DataManager.gameObjects) {
-            if (this.posX < gameObject.posX+gameObject.width && this.posX+this.width > gameObject.posX) {
-                if (this.posY < gameObject.posY+gameObject.height && this.posY+this.height > gameObject.posY) {
-                    return gameObject
-                }
-            }
-        }
-        return null
     }
 
     override fun update(){
@@ -60,12 +49,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
 
         //Collision check
-        var gameObject: GameObject? = this.collidingWith()
+        val gameObject: GameObject? = this.collidingWith()
         if (gameObject != null) {
             //Brick collision
             if(gameObject is Brick){
-                if (this.posY < gameObject.posY+gameObject.height-(DataManager.ballSpeed) &&
-                    this.posY+this.height > gameObject.posY+(DataManager.ballSpeed)) {
+                if (this.posY < gameObject.posY+gameObject.height-DataManager.ballSpeed &&
+                    this.posY+this.height > gameObject.posY+DataManager.ballSpeed) {
                     speedX *= -1
                 } else {
                     speedY *= -1
@@ -90,6 +79,20 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 SoundManager.playBallBounceSFX()
             }
         }
+    }
+
+    //Function to check if ball is colliding with another game object
+    fun collidingWith(): GameObject? {
+        for (gameObject in DataManager.gameObjects) {
+            if (this.posX < gameObject.posX+gameObject.width && this.posX+this.width > gameObject.posX) {
+                if (this.posY < gameObject.posY+gameObject.height && this.posY+this.height > gameObject.posY) {
+                    //Return the other game object if colliding
+                    return gameObject
+                }
+            }
+        }
+        //Return null if no colliding
+        return null
     }
 
     fun resetBall(){
