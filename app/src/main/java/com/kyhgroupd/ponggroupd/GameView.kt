@@ -21,7 +21,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     var frames: Int = 0
     var lastFpsCheck: Long = 0
-    val targetFPS: Int = 60
+    private val targetFPS: Int = 60
     var targetTime: Int = 1000000000/targetFPS
 
     init {

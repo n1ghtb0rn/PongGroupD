@@ -70,8 +70,15 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
             //Paddle collision
             else if(gameObject is Paddle){
-                if(this.posY+this.height > gameObject.posY && this.posY + this.height < gameObject.posY + DataManager.ballSpeed){
+                if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + DataManager.ballSpeed){
                     speedY *= -1
+
+                    //Change direction depending on side of paddle hit
+                    if(this.posX + radius < gameObject.posX + gameObject.width/2 && speedX > 0){
+                        speedX *= -1
+                    } else if(this.posX + radius > gameObject.posX + gameObject.width/2 && speedX < 0){
+                        speedX *= -1
+                    }
                 } else {
                     speedX *= -1
                 }
