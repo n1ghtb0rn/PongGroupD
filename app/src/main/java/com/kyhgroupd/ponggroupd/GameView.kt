@@ -19,6 +19,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     lateinit var canvas: Canvas
     var mHolder: SurfaceHolder? = holder
 
+    var frames: Int = 0
+    var lastFpsCheck: Long = 0
+    val targetFPS: Int = 60
+    var targetTime: Int = 1000000000/targetFPS
+
     init {
         mHolder?.addCallback(this)
 
@@ -115,8 +120,23 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     override fun run() {
         while (running){
+            val startTime = System.nanoTime()
+
+            //FPSCounter
+//            frames++
+//            if(System.nanoTime() > lastFpsCheck + 1000000000){
+//                lastFpsCheck = System.nanoTime()
+//                println(frames)
+//                frames = 0
+//            }
+
             update()
             draw()
+
+            val totalTime = System.nanoTime() - startTime
+            if(totalTime < targetTime){
+                Thread.sleep((targetTime - totalTime)/1000000)
+            }
         }
     }
 
