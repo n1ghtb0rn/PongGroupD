@@ -14,7 +14,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
 
         borderPaint.color = Color.BLACK
         borderPaint.style = Paint.Style.STROKE
-        borderPaint.strokeWidth = (height/5).toFloat()
+        borderPaint.strokeWidth = (height/GameManager.borderStrokeWidthFactor).toFloat()
     }
 
     override fun draw(canvas: Canvas?){

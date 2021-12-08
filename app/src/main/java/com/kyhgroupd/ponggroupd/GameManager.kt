@@ -5,13 +5,18 @@ import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 
 object GameManager {
-
+  
+    //Context
     var context: BreakoutActivity? = null
+  
+    //FPS
+    val targetFPS: Int = 60
 
     //Game+UI border size
     var screenSizeX = 0 //Is set in GameView-class
     var screenSizeY = 0 //Is set in GameView-class
     var uiHeight: Int = 0   //Is set in resetGame()-method
+    var uiBorderWidth = 3f
 
     //UI Text
     var scoreText: GameText? = null
@@ -35,19 +40,24 @@ object GameManager {
     var ballStartX: Int = 0 //Is set in resetGame()-method
     var ballStartY: Int = 0 //Is set in resetGame()-method
     var ballSpeed: Int = 0  //Is set in resetGame()-method
+    var ballRadiusFactor: Int = 50
 
     //Paddle
     var paddle: Paddle? = null
     var event: MotionEvent? = null
+    var topBarHeight: Int = 170
+    val paddleTouchOffsetY: Int = 200
 
     //Bricks
     val brickRows: Int = 8
     val bricksPerColumn: Int = 8
     val brickWidthRatio = 3
+    val borderStrokeWidthFactor = 5
 
     //Pieces
     val pieceSpeed = 25
     val pieceLifetime = 10
+    val pieceWidthFactor = 2.5
 
     //Player data
     var score: Int = 0
