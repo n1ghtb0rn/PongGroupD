@@ -82,7 +82,7 @@ object GameManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
         //Background
-        background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1_1).scale(
+        background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1b).scale(
             Resources.getSystem().displayMetrics.widthPixels, Resources.getSystem().displayMetrics.heightPixels, true)
 
         //UI
