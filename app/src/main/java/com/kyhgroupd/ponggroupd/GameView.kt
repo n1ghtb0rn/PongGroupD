@@ -5,12 +5,15 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.os.Build
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
+@RequiresApi(Build.VERSION_CODES.O)
 class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, Runnable {
 
     private var thread: Thread? = null
@@ -82,12 +85,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     private fun draw(){
         try{
             canvas = mHolder!!.lockCanvas()
+
+            //GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
             canvas.drawColor(Color.BLACK)
-            val uiPaint = Paint()
-            uiPaint.style = Paint.Style.STROKE
-            uiPaint.color = Color.WHITE
-            uiPaint.strokeWidth = GameManager.uiBorderWidth
-            canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), uiPaint)
+
+            canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), GameManager.uiPaint)
 
             for (gameObject in GameManager.gameObjects) {
                 gameObject.draw(canvas)

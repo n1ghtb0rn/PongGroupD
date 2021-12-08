@@ -1,8 +1,14 @@
 package com.kyhgroupd.ponggroupd
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Paint
+import android.os.Build
 import android.view.MotionEvent
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.scale
 
 object GameManager {
   
@@ -11,6 +17,10 @@ object GameManager {
   
     //FPS
     val targetFPS: Int = 60
+
+    //Background
+    var background1: Bitmap? = null
+    val uiPaint = Paint()
 
     //Game+UI border size
     var screenSizeX = 0 //Is set in GameView-class
@@ -30,9 +40,10 @@ object GameManager {
     val pieceObjects = mutableListOf<BrickPiece>()
 
     //Color data
-    val gameObjectColor = Color.GRAY
+    val ballColor = Color.GRAY
+    val paddleColor = Color.DKGRAY
     val gradientColor = Color.WHITE
-    val gameTextColor = Color.WHITE
+    val gameTextColor = Color.LTGRAY
     val brickColors = mutableListOf<Int>()
 
     //Ball
@@ -67,10 +78,18 @@ object GameManager {
     var lives: Int = 3
     var scorePerBrick = 100
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
+        //Background
+        background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1_1)
+        //background1?.scale(screenSizeX, screenSizeY, true)
+
         //UI
         uiHeight = screenSizeY/12
         textSize = (screenSizeX / 25).toFloat()
+        uiPaint.style = Paint.Style.STROKE
+        uiPaint.color = Color.WHITE
+        uiPaint.strokeWidth = uiBorderWidth
 
         //Clear GameObject-lists
         gameObjects.clear()
@@ -80,14 +99,14 @@ object GameManager {
         ballStartX = screenSizeX - (screenSizeX/3)
         ballStartY = screenSizeY/3
         ballSpeed = (screenSizeX * 0.015).toInt()
-        ball = Ball(ballStartX, ballStartY, gameObjectColor)
+        ball = Ball(ballStartX, ballStartY, ballColor)
 
         //Bricks
         addBrickColors()
         addBricks()
 
         //Paddle
-        val paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, gameObjectColor)
+        val paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, paddleColor)
         GameManager.paddle = paddle
         gameObjects.add(paddle)
 
