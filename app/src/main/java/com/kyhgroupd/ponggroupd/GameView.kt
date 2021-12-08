@@ -86,8 +86,8 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         try{
             canvas = mHolder!!.lockCanvas()
 
-            //GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
-            canvas.drawColor(Color.BLACK)
+            GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
+            //canvas.drawColor(Color.BLACK) //Draws a black background
 
             canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), GameManager.uiPaint)
 

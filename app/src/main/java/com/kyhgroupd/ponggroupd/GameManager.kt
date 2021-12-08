@@ -1,5 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -40,7 +41,7 @@ object GameManager {
     val pieceObjects = mutableListOf<BrickPiece>()
 
     //Color data
-    val ballColor = Color.GRAY
+    val ballColor = Color.DKGRAY
     val paddleColor = Color.DKGRAY
     val gradientColor = Color.WHITE
     val gameTextColor = Color.LTGRAY
@@ -81,8 +82,8 @@ object GameManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
         //Background
-        background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1_1)
-        //background1?.scale(screenSizeX, screenSizeY, true)
+        background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1_1).scale(
+            Resources.getSystem().displayMetrics.widthPixels, Resources.getSystem().displayMetrics.heightPixels, true)
 
         //UI
         uiHeight = screenSizeY/12
