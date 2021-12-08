@@ -47,6 +47,8 @@ object GameManager {
     var event: MotionEvent? = null
     var topBarHeight: Int = 170
     val paddleTouchOffsetY: Int = 200
+    var paddleWidthFactor: Int = 5
+    var paddleHeightFactor: Int = 5
 
     //Bricks
     val brickRows: Int = 8

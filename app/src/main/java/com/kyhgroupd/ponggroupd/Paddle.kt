@@ -7,8 +7,8 @@ import android.graphics.Shader
 class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     init {
-        width = GameManager.screenSizeX/5
-        height = width/5
+        width = GameManager.screenSizeX/GameManager.paddleWidthFactor
+        height = width/GameManager.paddleHeightFactor
         posX -= width/2
     }
 
