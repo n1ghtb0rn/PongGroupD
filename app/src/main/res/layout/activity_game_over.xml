@@ -18,7 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="200dp"/>
+        app:layout_constraintBottom_toTopOf="@id/tvScore"
+        android:layout_marginTop="80dp"/>
 
     <TextView
         android:id="@+id/tvScore"
@@ -29,6 +30,7 @@
         android:textColor="@color/white"
         android:textSize="16dp"
         app:layout_constraintTop_toBottomOf="@id/tvGameOver"
+        app:layout_constraintBottom_toTopOf="@id/tvSavePrompt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>
@@ -64,7 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="enter username" />
+            android:hint="ENTER USERNAME"
+            android:fontFamily="@font/aldrich" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,8 +76,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="save"
+        android:fontFamily="@font/aldrich"
         app:layout_constraintTop_toBottomOf="@id/tilUsername"
         app:layout_constraintEnd_toEndOf="@id/tilUsername"
         android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/btnPlayAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PLAY AGAIN"
+        android:fontFamily="@font/aldrich"
+        app:layout_constraintTop_toBottomOf="@id/btnSave"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnMainMenu"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAIN MENU"
+        android:fontFamily="@font/aldrich"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnPlayAgain"
+        app:layout_constraintBottom_toBottomOf="@id/btnPlayAgain"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

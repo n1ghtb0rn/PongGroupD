@@ -9,7 +9,7 @@ class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, startY
     init {
         this.textString = ""
         this.paint.textSize = GameManager.textSize
-        this.paint.setTypeface(Typeface.MONOSPACE)
+        this.paint.setTypeface(Typeface.create("aldrich",Typeface.NORMAL))
     }
 
     override fun draw(canvas: Canvas?) {
