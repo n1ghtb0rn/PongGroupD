@@ -113,7 +113,6 @@ object GameManager {
     }
 
     fun addBricks(){
-        /*
         var colorIndex: Int = 0
         val referenceBrick = Brick(100, 300, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
@@ -127,11 +126,6 @@ object GameManager {
                 colorIndex = 0
             }
         }
-
-         */
-
-        val brick = Brick(100, 500, Color.GRAY)
-        gameObjects.add(brick)
     }
 
     fun bricksCleared(): Boolean{
