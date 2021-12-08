@@ -23,15 +23,4 @@ class MainActivity : AppCompatActivity() {
         intent = Intent(this, BreakoutActivity::class.java)
         startActivity(intent)
     }
-
-    //Function to update XML-views (call from SurfaceView/Draw-thread)
-    //Not used at the moment because UI is drawn from canvas
-    fun updateUI(){
-        this@MainActivity.runOnUiThread(Runnable {
-
-            //Example
-            //myTextView.text = "HEJ!"
-
-        })
-    }
 }
