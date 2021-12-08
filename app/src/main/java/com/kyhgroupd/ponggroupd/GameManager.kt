@@ -28,12 +28,14 @@ object GameManager {
     var screenSizeY = 0 //Is set in GameView-class
     var uiHeight: Int = 0   //Is set in resetGame()-method
     var uiBorderWidth = 3f
+    val uiHeightFactor = 12
 
     //UI Text
     var scoreText: GameText? = null
     var highScoreText: GameText? = null
     var livesText: GameText? = null
     var textSize: Float = 0f    //Is set in GameView
+    val textSizeFactor: Int = 25
 
     //GameObjects
     val gameObjects = mutableListOf<GameObject>()
@@ -53,6 +55,7 @@ object GameManager {
     var ballStartY: Int = 0 //Is set in resetGame()-method
     var ballRadiusFactor: Int = 50
     var ballSpeed: Int = 0  //Is set in resetGame()-method
+    val ballSpeedFactor = 0.015
 
     //Paddle
     var paddle: Paddle? = null
@@ -86,8 +89,8 @@ object GameManager {
             Resources.getSystem().displayMetrics.widthPixels, Resources.getSystem().displayMetrics.heightPixels, true)
 
         //UI
-        uiHeight = screenSizeY/12
-        textSize = (screenSizeX / 25).toFloat()
+        uiHeight = screenSizeY/uiHeightFactor
+        textSize = (screenSizeX / textSizeFactor).toFloat()
         uiPaint.style = Paint.Style.STROKE
         uiPaint.color = Color.WHITE
         uiPaint.strokeWidth = uiBorderWidth
@@ -99,7 +102,7 @@ object GameManager {
         //Ball
         ballStartX = screenSizeX - (screenSizeX/3)
         ballStartY = screenSizeY/3
-        ballSpeed = (screenSizeX * 0.015).toInt()
+        ballSpeed = (screenSizeX * ballSpeedFactor).toInt()
         ball = Ball(ballStartX, ballStartY, ballColor)
 
         //Bricks
