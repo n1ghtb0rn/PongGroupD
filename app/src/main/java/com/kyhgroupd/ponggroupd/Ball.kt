@@ -150,12 +150,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         this.speedX = GameManager.ballSpeed
         this.speedY = GameManager.ballSpeed
 
-        //Decrement number of lifes
+        //Decrement number of lives
         GameManager.lives--
         if(GameManager.lives <= 0){
-            GameManager.resetGame()
-            SoundManager.resetMusic()
             SoundManager.playGameOverSFX()
+            GameManager.context?.gameOver()
         }
         else{
             SoundManager.playLoseLifeSFX()

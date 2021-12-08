@@ -2,9 +2,13 @@ package com.kyhgroupd.ponggroupd
 
 import android.graphics.Color
 import android.view.MotionEvent
+import androidx.appcompat.app.AppCompatActivity
 
 object GameManager {
-
+  
+    //Context
+    var context: BreakoutActivity? = null
+  
     //FPS
     val targetFPS: Int = 60
 
