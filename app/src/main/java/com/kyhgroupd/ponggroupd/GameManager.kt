@@ -3,22 +3,34 @@ package com.kyhgroupd.ponggroupd
 import android.graphics.Color
 import android.view.MotionEvent
 
-object DataManager {
+object GameManager {
+
+    //Game+UI border size
+    var screenSizeX = 0 //Is set in GameView-class
+    var screenSizeY = 0 //Is set in GameView-class
+    var uiHeight: Int = 0   //Is set in resetGame()-method
+
+    //UI Text
+    var scoreText: GameText? = null
+    var highScoreText: GameText? = null
+    var livesText: GameText? = null
+    var textSize: Float = 0f    //Is set in GameView
 
     //GameObjects
     val gameObjects = mutableListOf<GameObject>()
     val uiObjects = mutableListOf<GameObject>()
     val pieceObjects = mutableListOf<BrickPiece>()
 
+    //Color data
     val gameObjectColor = Color.GRAY
     val gradientColor = Color.WHITE
     val gameTextColor = Color.GREEN
 
     //Ball
     var ball: Ball? = null
-    var ballStartX: Int = 0
-    var ballStartY: Int = 0
-    val ballSpeed: Int = 15
+    var ballStartX: Int = 0 //Is set in resetGame()-method
+    var ballStartY: Int = 0 //Is set in resetGame()-method
+    var ballSpeed: Int = 0  //Is set in resetGame()-method
 
     //Paddle
     var paddle: Paddle? = null
@@ -30,7 +42,6 @@ object DataManager {
     val brickWidthRatio = 3
 
     //Pieces
-    val piecesPerBrick = 8
     val pieceSpeed = 25
     val pieceLifetime = 10
 
@@ -39,17 +50,6 @@ object DataManager {
     var highScore: Int = 0
     var lives: Int = 3
     var scorePerBrick = 100
-
-    //Game+UI border size
-    var screenSizeX = 0
-    var screenSizeY = 0
-    var uiHeight: Int = 0
-
-    //UI Text
-    var scoreText: GameText? = null
-    var highScoreText: GameText? = null
-    var livesText: GameText? = null
-    var textSize: Float = 0f
 
     fun resetGame(){
         //UI
@@ -63,6 +63,7 @@ object DataManager {
         //Ball
         ballStartX = screenSizeX - (screenSizeX/3)
         ballStartY = screenSizeY/3
+        ballSpeed = (screenSizeX * 0.015).toInt()
         ball = Ball(ballStartX, ballStartY, gameObjectColor)
 
         //Bricks
@@ -75,19 +76,19 @@ object DataManager {
         }
 
         //Paddle
-        var paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, gameObjectColor)
-        DataManager.paddle = paddle
+        val paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, gameObjectColor)
+        GameManager.paddle = paddle
         gameObjects.add(paddle)
 
         //UI objects
-        var scoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
-        DataManager.scoreText = scoreText
+        val scoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
+        GameManager.scoreText = scoreText
         uiObjects.add(scoreText)
-        var highScoreText = GameText(screenSizeX/2, (uiHeight/2.5).toInt(), gameTextColor)
-        DataManager.highScoreText = highScoreText
+        val highScoreText = GameText(screenSizeX/2, (uiHeight/2.5).toInt(), gameTextColor)
+        GameManager.highScoreText = highScoreText
         uiObjects.add(highScoreText)
-        var livesText = GameText(screenSizeX/20, (uiHeight/1.25).toInt(), gameTextColor)
-        DataManager.livesText = livesText
+        val livesText = GameText(screenSizeX/20, (uiHeight/1.25).toInt(), gameTextColor)
+        GameManager.livesText = livesText
         uiObjects.add(livesText)
 
         //UI Data

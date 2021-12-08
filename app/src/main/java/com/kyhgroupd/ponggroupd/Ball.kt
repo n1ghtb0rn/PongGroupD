@@ -11,15 +11,15 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     var speedY: Int = 0
 
     init {
-        radius = DataManager.screenSizeX / 50
+        radius = GameManager.screenSizeX / 50
         width = radius*2
         height = radius*2
-        speedX = DataManager.ballSpeed
-        speedY = DataManager.ballSpeed
+        speedX = GameManager.ballSpeed
+        speedY = GameManager.ballSpeed
     }
 
     override fun draw(canvas: Canvas?) {
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(), (posY+(radius)).toFloat(), DataManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(), (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
             this.radius.toFloat(), this.paint)
     }
@@ -29,21 +29,21 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         posY += speedY
 
         //Screen border check
-        if(this.posY < DataManager.uiHeight){
-            this.speedY = DataManager.ballSpeed
+        if(this.posY < GameManager.uiHeight){
+            this.speedY = GameManager.ballSpeed
             //SFX
             SoundManager.playBallBounceSFX()
         }
-        if(this.posY+this.height > DataManager.screenSizeY+(DataManager.screenSizeY/6)){
+        if(this.posY+this.height > GameManager.screenSizeY+(GameManager.screenSizeY/6)){
             this.resetBall()
         }
         if(this.posX < 0){
-            this.speedX = DataManager.ballSpeed
+            this.speedX = GameManager.ballSpeed
             //SFX
             SoundManager.playBallBounceSFX()
         }
-        if(this.posX+this.width > DataManager.screenSizeX){
-            this.speedX = -DataManager.ballSpeed
+        if(this.posX+this.width > GameManager.screenSizeX){
+            this.speedX = -GameManager.ballSpeed
             //SFX
             SoundManager.playBallBounceSFX()
         }
@@ -53,24 +53,24 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if (gameObject != null) {
             //Brick collision
             if(gameObject is Brick){
-                if (this.posY < gameObject.posY+gameObject.height-DataManager.ballSpeed &&
-                    this.posY+this.height > gameObject.posY+DataManager.ballSpeed) {
+                if (this.posY < gameObject.posY+gameObject.height-GameManager.ballSpeed &&
+                    this.posY+this.height > gameObject.posY+GameManager.ballSpeed) {
                     speedX *= -1
                 } else {
                     speedY *= -1
                 }
                 gameObject.destroy()
-                DataManager.gameObjects.remove(gameObject)
-                DataManager.score += DataManager.scorePerBrick
-                if(DataManager.highScore < DataManager.score){
-                    DataManager.highScore = DataManager.score
+                GameManager.gameObjects.remove(gameObject)
+                GameManager.score += GameManager.scorePerBrick
+                if(GameManager.highScore < GameManager.score){
+                    GameManager.highScore = GameManager.score
                 }
                 //SFX
                 SoundManager.playDestroyBrickSFX()
             }
             //Paddle collision
             else if(gameObject is Paddle){
-                if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + DataManager.ballSpeed){
+                if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + GameManager.ballSpeed){
                     speedY *= -1
 
                     //Change direction depending on side of paddle hit
@@ -90,7 +90,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     //Function to check if ball is colliding with another game object
     fun collidingWith(): GameObject? {
-        for (gameObject in DataManager.gameObjects) {
+        for (gameObject in GameManager.gameObjects) {
             if (this.posX < gameObject.posX+gameObject.width && this.posX+this.width > gameObject.posX) {
                 if (this.posY < gameObject.posY+gameObject.height && this.posY+this.height > gameObject.posY) {
                     //Return the other game object if colliding
@@ -104,15 +104,15 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     fun resetBall(){
         //Reset ball position and speed
-        this.posX = DataManager.ballStartX
-        this.posY = DataManager.ballStartY
-        this.speedX = DataManager.ballSpeed
-        this.speedY = DataManager.ballSpeed
+        this.posX = GameManager.ballStartX
+        this.posY = GameManager.ballStartY
+        this.speedX = GameManager.ballSpeed
+        this.speedY = GameManager.ballSpeed
 
         //Decrement number of lifes
-        DataManager.lives--
-        if(DataManager.lives <= 0){
-            DataManager.resetGame()
+        GameManager.lives--
+        if(GameManager.lives <= 0){
+            GameManager.resetGame()
             SoundManager.resetMusic()
             SoundManager.playGameOverSFX()
         }
