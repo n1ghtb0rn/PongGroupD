@@ -121,10 +121,14 @@ object GameManager {
     }
 
     fun addBrickColors(){
-        brickColors.add(Color.RED)
-        brickColors.add(Color.YELLOW)
-        brickColors.add(Color.GREEN)
-        brickColors.add(Color.BLUE)
+        brickColors.add(Color.rgb(150, 0, 0))
+        brickColors.add(Color.rgb(150, 0, 75))
+        brickColors.add(Color.rgb(150, 0, 150))
+        brickColors.add(Color.rgb(0, 0, 200))
+        brickColors.add(Color.rgb(0, 150, 150))
+        brickColors.add(Color.rgb(0, 150, 0))
+        brickColors.add(Color.rgb(150, 150, 0))
+        brickColors.add(Color.rgb(150, 75, 0))
     }
 
 }
