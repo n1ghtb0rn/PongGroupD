@@ -24,7 +24,8 @@ object GameManager {
     //Color data
     val gameObjectColor = Color.GRAY
     val gradientColor = Color.WHITE
-    val gameTextColor = Color.GREEN
+    val gameTextColor = Color.WHITE
+    val brickColors = mutableListOf<Int>()
 
     //Ball
     var ball: Ball? = null
@@ -67,11 +68,18 @@ object GameManager {
         ball = Ball(ballStartX, ballStartY, gameObjectColor)
 
         //Bricks
+        addBrickColors()
+        var colorIndex: Int = 0
         val referenceBrick = Brick(100, 300, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
             for (x in 0..screenSizeX-1 step referenceBrick.width) {
-                val brick = Brick(x, y, gameObjectColor)
+                val brick = Brick(x, y, brickColors[colorIndex])
                 gameObjects.add(brick)
+            }
+            colorIndex++
+            //Reset color index
+            if(colorIndex >= brickColors.size){
+                colorIndex = 0
             }
         }
 
@@ -97,6 +105,13 @@ object GameManager {
 
         //Music
         SoundManager.playMusic()
+    }
+
+    fun addBrickColors(){
+        brickColors.add(Color.RED)
+        brickColors.add(Color.YELLOW)
+        brickColors.add(Color.GREEN)
+        brickColors.add(Color.BLUE)
     }
 
 }
