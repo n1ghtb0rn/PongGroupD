@@ -68,20 +68,7 @@ object GameManager {
         ball = Ball(ballStartX, ballStartY, gameObjectColor)
 
         //Bricks
-        addBrickColors()
-        var colorIndex: Int = 0
-        val referenceBrick = Brick(100, 300, Color.WHITE)
-        for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
-            for (x in 0..screenSizeX-1 step referenceBrick.width) {
-                val brick = Brick(x, y, brickColors[colorIndex])
-                gameObjects.add(brick)
-            }
-            colorIndex++
-            //Reset color index
-            if(colorIndex >= brickColors.size){
-                colorIndex = 0
-            }
-        }
+        addBricks()
 
         //Paddle
         val paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, gameObjectColor)
@@ -105,6 +92,38 @@ object GameManager {
 
         //Music
         SoundManager.playMusic()
+    }
+
+    fun addBricks(){
+        addBrickColors()
+        var colorIndex: Int = 0
+        val referenceBrick = Brick(100, 300, Color.WHITE)
+        for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
+            for (x in 0..screenSizeX-1 step referenceBrick.width) {
+                val brick = Brick(x, y, brickColors[colorIndex])
+                gameObjects.add(brick)
+            }
+            colorIndex++
+            //Reset color index
+            if(colorIndex >= brickColors.size){
+                colorIndex = 0
+            }
+        }
+    }
+
+    fun bricksCleared(): Boolean{
+        for (obj in gameObjects){
+            if(obj is Brick){
+                return false
+            }
+        }
+        return true
+    }
+
+    fun nextLevel(){
+        addBricks()
+        ballSpeed  = (ballSpeed * 1.2).toInt()
+        ball?.resetPos()
     }
 
     fun addBrickColors(){
