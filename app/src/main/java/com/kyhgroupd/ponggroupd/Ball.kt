@@ -28,7 +28,96 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         posX += speedX
         posY += speedY
 
-        //Screen border check
+        //Border collision check
+        checkBorderCollision()
+
+        //Object collision check (return if other game object is null)
+        val gameObject: GameObject = this.collidingWith() ?: return
+
+        //Brick collision
+        if(gameObject is Brick){
+            brickCollision(gameObject)
+        }
+        //Paddle collision
+        else if(gameObject is Paddle){
+            paddleCollision(gameObject)
+        }
+    }
+
+    fun paddleCollision(gameObject: Paddle) {
+        if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + GameManager.ballSpeed){
+
+            //100% of ball speed to be shared by a percentage over y/x-axis
+            val totalBallSpeed = GameManager.ballSpeed*2
+
+            //Change ball angle depending on paddle collision zone
+            val paddleZones = 6
+            val widthPerZone = gameObject.width/paddleZones
+            //Zone 1 (far left side)
+            if(this.posX < gameObject.posX+widthPerZone && this.posX+this.width > gameObject.posX){
+                speedY = -(totalBallSpeed*0.2).toInt()
+                speedX = -(totalBallSpeed*0.8).toInt()
+            }
+            //Zone 2
+            else if(this.posX < gameObject.posX+(widthPerZone*2) && this.posX+this.width > gameObject.posX+widthPerZone){
+                speedY = -(totalBallSpeed*0.4).toInt()
+                speedX = -(totalBallSpeed*0.6).toInt()
+            }
+            //Zone 3
+            else if(this.posX < gameObject.posX+(widthPerZone*3) && this.posX+this.width > gameObject.posX+(widthPerZone*2)){
+                speedY = -(totalBallSpeed*0.6).toInt()
+                speedX = -(totalBallSpeed*0.4).toInt()
+            }
+            //Zone 4
+            else if(this.posX < gameObject.posX+(widthPerZone*4) && this.posX+this.width > gameObject.posX+(widthPerZone*3)){
+                speedY = -(totalBallSpeed*0.6).toInt()
+                speedX = (totalBallSpeed*0.4).toInt()
+            }
+            //Zone 5
+            else if(this.posX < gameObject.posX+(widthPerZone*5) && this.posX+this.width > gameObject.posX+(widthPerZone*4)){
+                speedY = -(totalBallSpeed*0.4).toInt()
+                speedX = (totalBallSpeed*0.6).toInt()
+            }
+            //Zone 6 (far right side)
+            else {
+                speedY = -(totalBallSpeed*0.2).toInt()
+                speedX = (totalBallSpeed*0.8).toInt()
+            }
+
+            /* PREVIOUS CODE:
+            //Change direction depending on side of paddle hit
+            if(this.posX + radius < gameObject.posX + gameObject.width/2 && speedX > 0){
+                speedX *= -1
+            } else if(this.posX + radius > gameObject.posX + gameObject.width/2 && speedX < 0){
+                speedX *= -1
+            }
+
+             */
+        } else {
+            speedX *= -1
+        }
+        //SFX
+        SoundManager.playBallBounceSFX()
+    }
+
+    fun brickCollision(gameObject: Brick) {
+        if (this.posY < gameObject.posY+gameObject.height-GameManager.ballSpeed &&
+            this.posY+this.height > gameObject.posY+GameManager.ballSpeed) {
+            speedX *= -1
+        } else {
+            speedY *= -1
+        }
+        gameObject.destroy()
+        GameManager.gameObjects.remove(gameObject)
+        GameManager.score += GameManager.scorePerBrick
+        if(GameManager.highScore < GameManager.score){
+            GameManager.highScore = GameManager.score
+        }
+        //SFX
+        SoundManager.playDestroyBrickSFX()
+    }
+
+    fun checkBorderCollision() {
         if(this.posY < GameManager.uiHeight){
             this.speedY = GameManager.ballSpeed
             //SFX
@@ -46,45 +135,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             this.speedX = -GameManager.ballSpeed
             //SFX
             SoundManager.playBallBounceSFX()
-        }
-
-        //Collision check
-        val gameObject: GameObject? = this.collidingWith()
-        if (gameObject != null) {
-            //Brick collision
-            if(gameObject is Brick){
-                if (this.posY < gameObject.posY+gameObject.height-GameManager.ballSpeed &&
-                    this.posY+this.height > gameObject.posY+GameManager.ballSpeed) {
-                    speedX *= -1
-                } else {
-                    speedY *= -1
-                }
-                gameObject.destroy()
-                GameManager.gameObjects.remove(gameObject)
-                GameManager.score += GameManager.scorePerBrick
-                if(GameManager.highScore < GameManager.score){
-                    GameManager.highScore = GameManager.score
-                }
-                //SFX
-                SoundManager.playDestroyBrickSFX()
-            }
-            //Paddle collision
-            else if(gameObject is Paddle){
-                if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + GameManager.ballSpeed){
-                    speedY *= -1
-
-                    //Change direction depending on side of paddle hit
-                    if(this.posX + radius < gameObject.posX + gameObject.width/2 && speedX > 0){
-                        speedX *= -1
-                    } else if(this.posX + radius > gameObject.posX + gameObject.width/2 && speedX < 0){
-                        speedX *= -1
-                    }
-                } else {
-                    speedX *= -1
-                }
-                //SFX
-                SoundManager.playBallBounceSFX()
-            }
         }
     }
 
