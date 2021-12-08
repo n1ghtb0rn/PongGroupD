@@ -39,8 +39,10 @@ object GameManager {
     var ball: Ball? = null
     var ballStartX: Int = 0 //Is set in resetGame()-method
     var ballStartY: Int = 0 //Is set in resetGame()-method
-    var ballSpeed: Int = 0  //Is set in resetGame()-method
     var ballRadiusFactor: Int = 50
+    var ballSpeed: Int = 0  //Is set in resetGame()-method
+    var currentBallSpeedX: Int = 0
+    var currentBallSpeedY: Int = 0
 
     //Paddle
     var paddle: Paddle? = null
@@ -83,6 +85,7 @@ object GameManager {
         ball = Ball(ballStartX, ballStartY, gameObjectColor)
 
         //Bricks
+        addBrickColors()
         addBricks()
 
         //Paddle
@@ -110,7 +113,7 @@ object GameManager {
     }
 
     fun addBricks(){
-        addBrickColors()
+        /*
         var colorIndex: Int = 0
         val referenceBrick = Brick(100, 300, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
@@ -124,6 +127,11 @@ object GameManager {
                 colorIndex = 0
             }
         }
+
+         */
+
+        val brick = Brick(100, 500, Color.GRAY)
+        gameObjects.add(brick)
     }
 
     fun bricksCleared(): Boolean{
@@ -142,6 +150,7 @@ object GameManager {
     }
 
     fun addBrickColors(){
+        brickColors.clear()
         brickColors.add(Color.rgb(150, 0, 0))
         brickColors.add(Color.rgb(150, 0, 75))
         brickColors.add(Color.rgb(150, 0, 150))

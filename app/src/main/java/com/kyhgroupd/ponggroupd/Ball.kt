@@ -110,7 +110,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     fun checkBorderCollision() {
         if(this.posY < GameManager.uiHeight){
-            this.speedY = -Math.abs(this.speedY)
+            this.speedY = Math.abs(this.speedY)
             //SFX
             SoundManager.playBallBounceSFX()
         }
