@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.media.MediaPlayer
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -27,16 +26,16 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     init {
         mHolder?.addCallback(this)
 
-        var activity: AppCompatActivity = context as AppCompatActivity
-        var displayMetrics: DisplayMetrics = activity.resources.displayMetrics
-        DataManager.screenSizeX = displayMetrics.widthPixels
-        DataManager.screenSizeY = displayMetrics.heightPixels
+        val activity: AppCompatActivity = context as AppCompatActivity
+        val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
+        GameManager.screenSizeX = displayMetrics.widthPixels
+        GameManager.screenSizeY = displayMetrics.heightPixels
 
         //SoundManager
         SoundManager.init(context)
 
         //Reset game
-        DataManager.resetGame()
+        GameManager.resetGame()
     }
 
     fun start() {
@@ -56,28 +55,28 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     fun update(){
         //Bricks and paddle
-        for (gameObject in DataManager.gameObjects) {
+        for (gameObject in GameManager.gameObjects) {
             gameObject.update()
         }
 
         //Brick pieces
-        for (pieceObject in DataManager.pieceObjects) {
+        for (pieceObject in GameManager.pieceObjects) {
             pieceObject.update()
         }
-        val pieceObjects = DataManager.pieceObjects.toMutableList()
+        val pieceObjects = GameManager.pieceObjects.toMutableList()
         for (pieceObject in pieceObjects) {
             if(pieceObject.lifetime <= 0){
-                DataManager.pieceObjects.remove(pieceObject)
+                GameManager.pieceObjects.remove(pieceObject)
             }
         }
 
         //Ball
-        DataManager.ball?.update()
+        GameManager.ball?.update()
 
         //UI
-        DataManager.highScoreText?.textString = "HIGH SCORE: "+DataManager.highScore.toString()
-        DataManager.scoreText?.textString = "SCORE: "+DataManager.score.toString()
-        DataManager.livesText?.textString = "LIVES: "+DataManager.lives.toString()
+        GameManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
+        GameManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
+        GameManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
     }
 
     private fun draw(){
@@ -88,18 +87,18 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             uiPaint.style = Paint.Style.STROKE
             uiPaint.color = Color.WHITE
             uiPaint.strokeWidth = 3f
-            canvas.drawRect(0f, 0f, DataManager.screenSizeX.toFloat(), DataManager.uiHeight.toFloat(), uiPaint)
+            canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), uiPaint)
 
-            for (gameObject in DataManager.gameObjects) {
+            for (gameObject in GameManager.gameObjects) {
                 gameObject.draw(canvas)
             }
-            for (pieceObject in DataManager.pieceObjects) {
+            for (pieceObject in GameManager.pieceObjects) {
                 pieceObject.draw(canvas)
             }
-            for (gameObject in DataManager.uiObjects) {
+            for (gameObject in GameManager.uiObjects) {
                 gameObject.draw(canvas)
             }
-            DataManager.ball?.draw(canvas)
+            GameManager.ball?.draw(canvas)
 
             mHolder!!.unlockCanvasAndPost(canvas)
         } catch (e: Exception) {
@@ -143,7 +142,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event != null){
-            DataManager.event = event
+            GameManager.event = event
         }
         return true
     }
