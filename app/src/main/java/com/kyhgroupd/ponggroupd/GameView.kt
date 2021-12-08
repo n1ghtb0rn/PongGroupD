@@ -20,8 +20,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     var frames: Int = 0
     var lastFpsCheck: Long = 0
-    private val targetFPS: Int = 60
-    var targetTime: Int = 1000000000/targetFPS
+    var targetTime: Int = 1000000000/GameManager.targetFPS
 
     init {
         mHolder?.addCallback(this)
@@ -30,6 +29,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
         GameManager.screenSizeX = displayMetrics.widthPixels
         GameManager.screenSizeY = displayMetrics.heightPixels
+        GameManager.context = context as BreakoutActivity
 
         //SoundManager
         SoundManager.init(context)
@@ -86,7 +86,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             val uiPaint = Paint()
             uiPaint.style = Paint.Style.STROKE
             uiPaint.color = Color.WHITE
-            uiPaint.strokeWidth = 3f
+            uiPaint.strokeWidth = GameManager.uiBorderWidth
             canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), uiPaint)
 
             for (gameObject in GameManager.gameObjects) {

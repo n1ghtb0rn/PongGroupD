@@ -51,4 +51,11 @@ object SoundManager {
         this.playMusic()
     }
 
+    fun pauseMusic(){
+        this.musicPlayer!!.pause()
+    }
+
+    fun resumeMusic(){
+        this.musicPlayer!!.start()
+    }
 }

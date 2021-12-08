@@ -7,8 +7,8 @@ import android.graphics.Shader
 class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     init {
-        width = GameManager.screenSizeX/5
-        height = width/5
+        width = GameManager.screenSizeX/GameManager.paddleWidthFactor
+        height = width/GameManager.paddleHeightFactor
         posX -= width/2
     }
 
@@ -23,9 +23,9 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
             if (paddleY != null) {
 
                 var touchY = GameManager.event!!.y.toInt()
-                val offset = 200
+                val offset = GameManager.paddleTouchOffsetY
                 //Subtract top bar and and half paddle height
-                touchY -= 170 + height/2
+                touchY -= GameManager.topBarHeight + height/2
                 //Check if touch is in range of paddle
                 if(touchY > paddleY - offset && touchY < paddleY + offset){
                     posX = GameManager.event!!.x.toInt() - (width / 2)

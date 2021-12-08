@@ -9,7 +9,7 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     var lifetime: Int = GameManager.pieceLifetime
 
     init {
-        width = ((GameManager.screenSizeX/GameManager.bricksPerColumn)/2.5).toInt()
+        width = ((GameManager.screenSizeX/GameManager.bricksPerColumn)/GameManager.pieceWidthFactor).toInt()
         height = (width/GameManager.brickWidthRatio)
     }
 
