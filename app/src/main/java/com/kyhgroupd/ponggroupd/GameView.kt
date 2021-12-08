@@ -30,6 +30,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
         GameManager.screenSizeX = displayMetrics.widthPixels
         GameManager.screenSizeY = displayMetrics.heightPixels
+        GameManager.context = context as BreakoutActivity
 
         //SoundManager
         SoundManager.init(context)

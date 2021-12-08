@@ -2,8 +2,11 @@ package com.kyhgroupd.ponggroupd
 
 import android.graphics.Color
 import android.view.MotionEvent
+import androidx.appcompat.app.AppCompatActivity
 
 object GameManager {
+
+    var context: BreakoutActivity? = null
 
     //Game+UI border size
     var screenSizeX = 0 //Is set in GameView-class
