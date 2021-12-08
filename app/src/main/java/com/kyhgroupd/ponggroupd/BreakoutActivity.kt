@@ -16,4 +16,13 @@ class BreakoutActivity : AppCompatActivity() {
             .apply { startActivity(this) }
     }
 
+    override fun onPause() {
+        super.onPause()
+        SoundManager.pauseMusic()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SoundManager.resumeMusic()
+    }
 }
