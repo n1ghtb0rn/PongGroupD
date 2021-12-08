@@ -132,6 +132,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             update()
             draw()
 
+            if(GameManager.bricksCleared()){
+                GameManager.nextLevel()
+            }
+
             val totalTime = System.nanoTime() - startTime
             if(totalTime < targetTime){
                 Thread.sleep((targetTime - totalTime)/1000000)

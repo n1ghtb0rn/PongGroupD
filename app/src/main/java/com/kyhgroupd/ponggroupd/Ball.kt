@@ -143,14 +143,18 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         return null
     }
 
-    fun resetBall(){
+    fun resetPos(){
         //Reset ball position and speed
         this.posX = GameManager.ballStartX
         this.posY = GameManager.ballStartY
         this.speedX = GameManager.ballSpeed
         this.speedY = GameManager.ballSpeed
+    }
 
-        //Decrement number of lives
+
+    fun resetBall(){
+        resetPos()
+        //Decrement number of lifes
         GameManager.lives--
         if(GameManager.lives <= 0){
             SoundManager.playGameOverSFX()
