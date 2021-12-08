@@ -36,8 +36,6 @@ object GameManager {
     var ballStartX: Int = 0 //Is set in resetGame()-method
     var ballStartY: Int = 0 //Is set in resetGame()-method
     var ballSpeed: Int = 0  //Is set in resetGame()-method
-    var currentBallSpeedX: Int = 0
-    var currentBallSpeedY: Int = 0
     var ballRadiusFactor: Int = 50
 
     //Paddle

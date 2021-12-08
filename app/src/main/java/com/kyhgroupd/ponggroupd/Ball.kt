@@ -84,19 +84,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 speedX = (totalBallSpeed*0.7).toInt()
             }
 
-            //This is needed for border collision
-            GameManager.currentBallSpeedX = speedX
-            GameManager.currentBallSpeedY = speedY
-
-            /* PREVIOUS CODE:
-            //Change direction depending on side of paddle hit
-            if(this.posX + radius < gameObject.posX + gameObject.width/2 && speedX > 0){
-                speedX *= -1
-            } else if(this.posX + radius > gameObject.posX + gameObject.width/2 && speedX < 0){
-                speedX *= -1
-            }
-
-             */
         } else {
             speedX *= -1
         }
