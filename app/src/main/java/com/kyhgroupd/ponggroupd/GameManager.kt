@@ -129,6 +129,7 @@ object GameManager {
 
         //UI Data
         score = 0
+        highScore = DataManager.loadHighScore()
         lives = 3
 
         //Music

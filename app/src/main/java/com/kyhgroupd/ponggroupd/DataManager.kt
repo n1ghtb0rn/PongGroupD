@@ -1,5 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 import java.io.IOException
@@ -22,6 +23,14 @@ object DataManager {
         this.path = context.filesDir.toString()
         this.fullPath = this.path + "/" + this.subDirName
         this.createSubDir()
+    }
+
+    fun loadHighScore(): Int {
+        val scoreList = this.loadScoreList()
+        if(scoreList.size > 0){
+            return scoreList[0].score
+        }
+        return 0
     }
 
     fun loadScoreList(): MutableList<PlayerScore> {
@@ -52,6 +61,7 @@ object DataManager {
         val scoreList = this.loadScoreList()
         scoreList.add(newPlayerScore)
         scoreList.sortBy { it.score }
+        scoreList.reverse()
 
         try{
             val file = File(this.fullPath, this.fileName+this.fileExt)

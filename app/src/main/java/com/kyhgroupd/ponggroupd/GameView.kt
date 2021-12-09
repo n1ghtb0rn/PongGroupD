@@ -29,15 +29,18 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         mHolder?.addCallback(this)
 
         val activity: AppCompatActivity = context as AppCompatActivity
-        val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
-        GameManager.screenSizeX = displayMetrics.widthPixels
-        GameManager.screenSizeY = displayMetrics.heightPixels
-        GameManager.context = context as BreakoutActivity
+
+        //Initiate DataManager
+        DataManager.initiate(context)
 
         //SoundManager
         SoundManager.init(context)
 
         //Reset game
+        val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
+        GameManager.screenSizeX = displayMetrics.widthPixels
+        GameManager.screenSizeY = displayMetrics.heightPixels
+        GameManager.context = context as BreakoutActivity
         GameManager.resetGame()
     }
 
