@@ -44,8 +44,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
     }
 
-    fun paddleCollision(gameObject: Paddle) {
-        if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + GameManager.ballSpeed){
+    private fun paddleCollision(gameObject: Paddle) {
+        if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + radius){
 
             //100% of ball speed to be shared by a percentage over y/x-axis
             val totalBallSpeed = GameManager.ballSpeed*2
@@ -91,12 +91,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         SoundManager.playBallBounceSFX()
     }
 
-    fun brickCollision(gameObject: Brick) {
-        if (this.posY < gameObject.posY+gameObject.height-GameManager.ballSpeed &&
-            this.posY+this.height > gameObject.posY+GameManager.ballSpeed) {
-            speedX *= -1
-        } else {
+    private fun brickCollision(gameObject: Brick) {
+        if (this.posX < gameObject.posX+gameObject.width-radius &&
+            this.posX+this.width > gameObject.posX+radius) {
             speedY *= -1
+        } else {
+            speedX *= -1
         }
         gameObject.destroy()
         GameManager.gameObjects.remove(gameObject)
@@ -108,7 +108,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         SoundManager.playDestroyBrickSFX()
     }
 
-    fun checkBorderCollision() {
+    private fun checkBorderCollision() {
         if(this.posY < GameManager.uiHeight){
             this.speedY = Math.abs(this.speedY)
             //SFX
@@ -130,7 +130,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     //Function to check if ball is colliding with another game object
-    fun collidingWith(): GameObject? {
+    private fun collidingWith(): GameObject? {
         for (gameObject in GameManager.gameObjects) {
             if (this.posX < gameObject.posX+gameObject.width && this.posX+this.width > gameObject.posX) {
                 if (this.posY < gameObject.posY+gameObject.height && this.posY+this.height > gameObject.posY) {
