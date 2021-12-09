@@ -9,7 +9,6 @@ import java.util.*
 
 object DataManager {
 
-    var context: AppCompatActivity? = null
     var path: String? = null
     var fullPath: String? = null
 
@@ -18,9 +17,8 @@ object DataManager {
     const val fileExt = ".txt"
     const val separator = "###"
 
-    fun initiate(context: AppCompatActivity){
-        this.context = context
-        this.path = context.filesDir.toString()
+    fun initiate(path: String){
+        this.path = path
         this.fullPath = this.path + "/" + this.subDirName
         this.createSubDir()
     }

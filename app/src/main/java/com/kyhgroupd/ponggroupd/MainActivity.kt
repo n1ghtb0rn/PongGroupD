@@ -23,5 +23,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HighScoreActivity::class.java)
             startActivity(intent)
         }
+
+        //Initiate DataManager
+        DataManager.initiate(filesDir.toString())
     }
 }

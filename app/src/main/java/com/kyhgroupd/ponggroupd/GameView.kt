@@ -30,9 +30,6 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
         val activity: AppCompatActivity = context as AppCompatActivity
 
-        //Initiate DataManager
-        DataManager.initiate(context)
-
         //SoundManager
         SoundManager.init(context)
 
