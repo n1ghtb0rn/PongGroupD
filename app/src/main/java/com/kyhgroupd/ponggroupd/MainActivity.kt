@@ -15,12 +15,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binder.root)
 
         binder.btnPlayBreakout.setOnClickListener {
-            onButtonClicked()
+            val intent = Intent(this, BreakoutActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-    fun onButtonClicked() {
-        intent = Intent(this, BreakoutActivity::class.java)
-        startActivity(intent)
+        binder.btnHighScore.setOnClickListener{
+            val intent = Intent(this, HighScoreActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -14,8 +14,8 @@ class BreakoutActivity : AppCompatActivity() {
         setContentView(GameView(this))
     }
 
-    public fun gameOver() {
-        Intent(this, GameOverActivity :: class.java)
+    fun gameOver() {
+        Intent(this, GameOverActivity :: class.java )
             .apply { startActivity(this) }
     }
 
