@@ -23,7 +23,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     var frames: Int = 0
     var lastFpsCheck: Long = 0
-    var targetTime: Int = 1000000000/GameManager.targetFPS
+    var timeToUpdate  = System.currentTimeMillis()
 
     init {
         mHolder?.addCallback(this)
@@ -121,26 +121,23 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     override fun run() {
         while (running){
-            val startTime = System.nanoTime()
+            if(System.currentTimeMillis() >= timeToUpdate) {
+                timeToUpdate += 1000/GameManager.targetFPS
 
-            //FPSCounter
-//            frames++
-//            if(System.nanoTime() > lastFpsCheck + 1000000000){
-//                lastFpsCheck = System.nanoTime()
-//                println(frames)
-//                frames = 0
-//            }
+                //FPSCounter
+//                frames++
+//                if (System.currentTimeMillis() > lastFpsCheck + 1000) {
+//                    lastFpsCheck = System.currentTimeMillis()
+//                    println(frames)
+//                    frames = 0
+//                }
 
-            update()
-            draw()
+                update()
+                draw()
 
-            if(GameManager.bricksCleared()){
-                GameManager.nextLevel()
-            }
-
-            val totalTime = System.nanoTime() - startTime
-            if(totalTime < targetTime){
-                Thread.sleep((targetTime - totalTime)/1000000)
+                if (GameManager.bricksCleared()) {
+                    GameManager.nextLevel()
+                }
             }
         }
     }
