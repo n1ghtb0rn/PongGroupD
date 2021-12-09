@@ -1,9 +1,12 @@
 package com.kyhgroupd.ponggroupd
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyhgroupd.ponggroupd.databinding.ActivityHighScoreBinding
 import com.kyhgroupd.ponggroupd.databinding.ActivityMainBinding
 
@@ -16,17 +19,23 @@ class HighScoreActivity : AppCompatActivity() {
         binder = ActivityHighScoreBinding.inflate(layoutInflater)
         setContentView(binder.root)
 
-        val scoreList = DataManager.loadScoreList()
-        val listItems = mutableListOf<Int>()
-        for(playerScore in scoreList){
-            listItems.add(playerScore.score)
-        }
-
-        binder.lvScoreList.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
-
         binder.btnBack.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        this.updateRecyclerView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateRecyclerView(){
+        val scoreList = DataManager.loadScoreList()
+
+        this.binder.rvScoreList.layoutManager = LinearLayoutManager(applicationContext)
+        this.binder.rvScoreList.itemAnimator = DefaultItemAnimator()
+
+        val adapter = CustomAdapter(scoreList)
+        this.binder.rvScoreList.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 }

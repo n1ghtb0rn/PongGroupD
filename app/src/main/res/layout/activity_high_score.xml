@@ -18,17 +18,20 @@
         android:textColor="@color/white"
         android:textSize="60sp" />
 
-    <ListView
-        android:id="@+id/lvScoreList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvScoreList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="0.5"/>
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Back"
         android:fontFamily="@font/aldrich"
         android:layout_marginTop="10dp" />
