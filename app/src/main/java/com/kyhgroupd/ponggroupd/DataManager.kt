@@ -34,8 +34,10 @@ object DataManager {
             val scanner = Scanner(file)
             while(scanner.hasNext()){
                 val line = scanner.nextLine()
-                val splitLine = line.split(this.separator)
-                scoreList.add(PlayerScore(splitLine[0], splitLine[1].toInt()))
+                if(line.contains(this.separator)){
+                    val splitLine = line.split(this.separator)
+                    scoreList.add(PlayerScore(splitLine[0], splitLine[1].toInt()))
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()

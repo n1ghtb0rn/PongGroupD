@@ -19,6 +19,8 @@ object GameManager {
     //FPS
     val targetFPS: Int = 60
 
+    var playerName: String = ""
+
     //Background
     var background1: Bitmap? = null
     val uiPaint = Paint()
