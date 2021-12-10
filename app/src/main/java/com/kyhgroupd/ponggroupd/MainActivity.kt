@@ -16,7 +16,16 @@ class MainActivity : AppCompatActivity() {
 
         binder.btnPlayBreakout.setOnClickListener {
             val intent = Intent(this, BreakoutActivity::class.java)
+            GameManager.shouldReset = true
             startActivity(intent)
+        }
+
+        binder.btnContinue.setOnClickListener{
+            if(GameManager.context != null){
+                val intent = Intent(this, BreakoutActivity::class.java)
+                GameManager.shouldReset = false
+                startActivity(intent)
+            }
         }
 
         binder.btnHighScore.setOnClickListener{
@@ -27,4 +36,14 @@ class MainActivity : AppCompatActivity() {
         //Initiate DataManager
         DataManager.initiate(filesDir.toString())
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(GameManager.context == null){
+            binder.btnContinue.isEnabled = false
+            return
+        }
+        binder.btnContinue.isEnabled = true
+    }
+
 }
