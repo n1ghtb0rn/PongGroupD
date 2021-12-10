@@ -67,7 +67,9 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:hint="ENTER USERNAME"
-            android:fontFamily="@font/aldrich" />
+            android:fontFamily="@font/aldrich"
+            android:maxLines="1"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

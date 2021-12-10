@@ -23,6 +23,7 @@ class GameOverActivity : AppCompatActivity() {
                 val playerScore = PlayerScore(playerName, GameManager.score)
                 DataManager.saveScore(playerScore)
                 binding.btnSave.isEnabled = false
+                binding.etUsername.isEnabled = false
             }
         }
 

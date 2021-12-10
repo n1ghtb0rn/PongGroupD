@@ -41,6 +41,7 @@ object GameManager {
     var highScoreText: GameText? = null
     var livesText: GameText? = null
     var levelText: GameText? = null
+    var comboText: ComboText? = null
     var textSize: Float = 0f    //Is set in GameView
     val textSizeFactor: Int = 25
 
@@ -96,7 +97,6 @@ object GameManager {
     var bonusScorePerLevel = 25
     val comboBonusScore = 25
     var currentCombo = 0
-    var currentComboValue = 0
 
     //Player Settings
     val numberOfSettings = 3    //Change this when adding new settings
