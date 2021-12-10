@@ -3,6 +3,8 @@ package com.kyhgroupd.ponggroupd
 import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
+import android.os.Build
+import androidx.annotation.RequiresApi
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -24,6 +26,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             this.radius.toFloat(), this.paint)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun update(){
         posX += speedX
         posY += speedY
@@ -95,6 +98,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         SoundManager.playBallBounceSFX()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun brickCollision(gameObject: Brick) {
         if (this.posX < gameObject.posX+gameObject.width-radius &&
             this.posX+this.width > gameObject.posX+radius) {
@@ -107,7 +111,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Add scored based on level
         GameManager.score += GameManager.scorePerBrick + ((GameManager.level-1) * GameManager.bonusScorePerLevel)
         //Add score based on combo
-        GameManager.score += GameManager.currentCombo * GameManager.comboBonusScore
+        if(GameManager.currentCombo > 0){
+            val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
+            GameManager.score += comboValue
+            GameManager.uiObjects.add(ComboText(GameManager.screenSizeX/2, GameManager.screenSizeY/2, GameManager.gameTextColor, comboValue))
+            SoundManager.playComboSFX()
+        }
         GameManager.currentCombo++
         //SFX
         SoundManager.playDestroyBrickSFX()

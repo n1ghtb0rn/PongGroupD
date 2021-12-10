@@ -77,6 +77,19 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
         }
 
+        //UI objects
+        for (uiObject in GameManager.uiObjects) {
+            uiObject.update()
+        }
+        val uiObjects = GameManager.uiObjects.toMutableList()
+        for (uiObject in uiObjects) {
+            if(uiObject is ComboText){
+                if(uiObject.lifetime <= 0){
+                    GameManager.uiObjects.remove(uiObject)
+                }
+            }
+        }
+
         //Ball
         GameManager.ball?.update()
 

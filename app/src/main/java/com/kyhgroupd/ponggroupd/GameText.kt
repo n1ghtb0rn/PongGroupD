@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 
 @RequiresApi(Build.VERSION_CODES.O)
-class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
+open class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
     var textString: String = ""
 
     init {
