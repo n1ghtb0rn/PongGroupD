@@ -98,6 +98,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         GameManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
         GameManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
         GameManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
+        GameManager.comboText?.update()
     }
 
     private fun draw(){
@@ -115,9 +116,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             for (pieceObject in GameManager.pieceObjects) {
                 pieceObject.draw(canvas)
             }
-            for (gameObject in GameManager.uiObjects) {
-                gameObject.draw(canvas)
+            for (uiObject in GameManager.uiObjects) {
+                uiObject.draw(canvas)
             }
+            GameManager.comboText?.draw(canvas)
             GameManager.ball?.draw(canvas)
 
             mHolder!!.unlockCanvasAndPost(canvas)

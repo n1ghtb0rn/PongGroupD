@@ -93,6 +93,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Reset combo
         GameManager.currentCombo = 0
+        GameManager.comboText = null
 
         //SFX
         SoundManager.playBallBounceSFX()
@@ -114,7 +115,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if(GameManager.currentCombo > 0){
             val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
             GameManager.score += comboValue
-            GameManager.uiObjects.add(ComboText(GameManager.screenSizeX/2, GameManager.screenSizeY/2, GameManager.gameTextColor, comboValue))
+            val comboText = ComboText(GameManager.screenSizeX/2, GameManager.screenSizeY/2, GameManager.gameTextColor, comboValue)
+            GameManager.comboText = comboText
             SoundManager.playComboSFX()
         }
         GameManager.currentCombo++
