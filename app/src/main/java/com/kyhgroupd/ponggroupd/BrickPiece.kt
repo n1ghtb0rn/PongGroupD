@@ -28,7 +28,7 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     override fun update(){
         this.posX += this.speedX
         this.posY += this.speedY
-        lifetime--
+        this.lifetime--
     }
 
 }

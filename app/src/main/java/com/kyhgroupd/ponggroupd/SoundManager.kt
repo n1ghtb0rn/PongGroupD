@@ -10,6 +10,7 @@ object SoundManager {
     var musicPlayer: MediaPlayer? = null
 
     var destroyBrickPlayer: MediaPlayer? = null
+    var comboPlayer: MediaPlayer? = null
     var ballBouncePlayer: MediaPlayer? = null
     var loseLifePlayer: MediaPlayer? = null
     var gameOverPlayer: MediaPlayer? = null
@@ -19,6 +20,7 @@ object SoundManager {
         this.musicPlayer = MediaPlayer.create(context, R.raw.music)
 
         this.destroyBrickPlayer = MediaPlayer.create(SoundManager.context, R.raw.destroy_brick)
+        this.comboPlayer = MediaPlayer.create(SoundManager.context, R.raw.combo)
         this.ballBouncePlayer = MediaPlayer.create(SoundManager.context, R.raw.ball_bounce)
         this.loseLifePlayer = MediaPlayer.create(SoundManager.context, R.raw.lose_life)
         this.gameOverPlayer = MediaPlayer.create(SoundManager.context, R.raw.game_over)
@@ -26,6 +28,10 @@ object SoundManager {
 
     fun playDestroyBrickSFX(){
         this.playSFX("DESTROY_BRICK")
+    }
+
+    fun playComboSFX(){
+        this.playSFX("COMBO")
     }
 
     fun playBallBounceSFX(){
@@ -46,6 +52,7 @@ object SoundManager {
         }
         when (sfx) {
             "DESTROY_BRICK" -> this.destroyBrickPlayer!!.start()
+            "COMBO" -> this.comboPlayer!!.start()
             "BALL_BOUNCE" -> this.ballBouncePlayer!!.start()
             "LOSE_LIFE" -> this.loseLifePlayer!!.start()
             "GAME_OVER" -> this.gameOverPlayer!!.start()

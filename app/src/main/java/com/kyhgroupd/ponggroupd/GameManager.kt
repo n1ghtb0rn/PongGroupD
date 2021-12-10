@@ -89,11 +89,16 @@ object GameManager {
     var score: Int = 0
     var highScore: Int = 0
     var lives: Int = 3
-    var scorePerBrick = 100
-    var bonusScorePerLevel = 25
     var level = 1
 
-    //Settings
+    //Score data
+    var scorePerBrick = 100
+    var bonusScorePerLevel = 25
+    val comboBonusScore = 25
+    var currentCombo = 0
+    var currentComboValue = 0
+
+    //Player Settings
     val numberOfSettings = 3    //Change this when adding new settings
     var useSFX: Boolean = true
     var useMusic: Boolean = true
