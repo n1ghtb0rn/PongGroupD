@@ -84,6 +84,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         GameManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
         GameManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
         GameManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
+        GameManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
     }
 
     private fun draw(){

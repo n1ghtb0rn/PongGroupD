@@ -37,12 +37,13 @@ object GameManager {
     var scoreText: GameText? = null
     var highScoreText: GameText? = null
     var livesText: GameText? = null
+    var levelText: GameText? = null
     var textSize: Float = 0f    //Is set in GameView
     val textSizeFactor: Int = 25
 
     //GameObjects
-    val gameObjects = mutableListOf<GameObject>()
     val uiObjects = mutableListOf<GameObject>()
+    val gameObjects = mutableListOf<GameObject>()
     val pieceObjects = mutableListOf<BrickPiece>()
 
     //Color data
@@ -85,6 +86,7 @@ object GameManager {
     var highScore: Int = 0
     var lives: Int = 3
     var scorePerBrick = 100
+    var level = 1
 
     //Settings
     val numberOfSettings = 3    //Change this when adding new settings
@@ -125,6 +127,20 @@ object GameManager {
         gameObjects.add(paddle)
 
         //UI objects
+        addUiText()
+
+        //UI Data
+        score = 0
+        highScore = DataManager.loadHighScore()
+        lives = 3
+        level = 1
+
+        //Music
+        SoundManager.playMusic()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun addUiText(){
         val scoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
         GameManager.scoreText = scoreText
         uiObjects.add(scoreText)
@@ -134,17 +150,12 @@ object GameManager {
         val livesText = GameText(screenSizeX/20, (uiHeight/1.25).toInt(), gameTextColor)
         GameManager.livesText = livesText
         uiObjects.add(livesText)
-
-        //UI Data
-        score = 0
-        highScore = DataManager.loadHighScore()
-        lives = 3
-
-        //Music
-        SoundManager.playMusic()
+        val levelText = GameText(screenSizeX/2, (uiHeight/1.25).toInt(), gameTextColor)
+        GameManager.levelText = levelText
+        uiObjects.add(levelText)
     }
 
-    fun addBricks(){
+    private fun addBricks(){
         var colorIndex: Int = 0
         val referenceBrick = Brick(100, 300, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
@@ -173,6 +184,7 @@ object GameManager {
         addBricks()
         ballSpeed  = (ballSpeed * 1.2).toInt()
         ball?.resetPos()
+        level++
     }
 
     fun addBrickColors(){
