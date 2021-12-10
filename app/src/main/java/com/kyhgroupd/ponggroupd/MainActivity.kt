@@ -48,10 +48,12 @@ class MainActivity : AppCompatActivity() {
         this.loadSettings()
 
         if(GameManager.context == null){
-            binder.btnContinue.isEnabled = false
+            binder.btnContinue.alpha = 0.5f
+            binder.btnContinue.isClickable = false
             return
         }
-        binder.btnContinue.isEnabled = true
+        binder.btnContinue.alpha = 1f
+        binder.btnContinue.isClickable = true
     }
 
     private fun loadSettings(){
