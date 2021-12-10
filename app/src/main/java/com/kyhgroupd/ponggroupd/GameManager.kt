@@ -68,6 +68,7 @@ object GameManager {
     val paddleTouchOffsetY: Int = 200
     var paddleWidthFactor: Int = 5
     var paddleHeightFactor: Int = 5
+    val paddleWidthPctPerLevel = 0.8
 
     //Bricks
     val brickRows: Int = 8
@@ -86,6 +87,7 @@ object GameManager {
     var highScore: Int = 0
     var lives: Int = 3
     var scorePerBrick = 100
+    var bonusScorePerLevel = 25
     var level = 1
 
     //Settings
@@ -157,11 +159,11 @@ object GameManager {
 
     private fun addBricks(){
         var colorIndex: Int = 0
-        val referenceBrick = Brick(100, 300, Color.WHITE)
+        val referenceBrick = Brick(200, 2500, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
             for (x in 0..screenSizeX-1 step referenceBrick.width) {
-                val brick = Brick(x, y, brickColors[colorIndex])
-                gameObjects.add(brick)
+                //val brick = Brick(x, y, brickColors[colorIndex])
+                //gameObjects.add(brick)
             }
             colorIndex++
             //Reset color index
@@ -169,6 +171,7 @@ object GameManager {
                 colorIndex = 0
             }
         }
+        gameObjects.add(referenceBrick) //TEMP
     }
 
     fun bricksCleared(): Boolean{
@@ -182,7 +185,13 @@ object GameManager {
 
     fun nextLevel(){
         addBricks()
-        ballSpeed  = (ballSpeed * 1.2).toInt()
+        if(paddle != null){
+            var newPaddleWidth: Int = (paddle!!.width * paddleWidthPctPerLevel).toInt()
+            if(newPaddleWidth < paddle!!.height){
+                newPaddleWidth = paddle!!.height
+            }
+            paddle!!.width = newPaddleWidth
+        }
         ball?.resetPos()
         level++
     }

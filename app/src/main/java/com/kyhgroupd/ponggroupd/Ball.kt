@@ -100,7 +100,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
         gameObject.destroy()
         GameManager.gameObjects.remove(gameObject)
-        GameManager.score += GameManager.scorePerBrick
+        GameManager.score += GameManager.scorePerBrick + ((GameManager.level-1) * GameManager.bonusScorePerLevel)
         //SFX
         SoundManager.playDestroyBrickSFX()
     }
