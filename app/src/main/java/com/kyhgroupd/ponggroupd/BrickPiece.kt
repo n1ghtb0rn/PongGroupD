@@ -14,8 +14,15 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     }
 
     override fun draw(canvas: Canvas?){
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
-        canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
+        if(GameManager.useColors){
+            canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
+        }
+        else{
+            val grayPaint = Paint()
+            grayPaint.color = GameManager.paddleColor
+            grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
+            canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), grayPaint)
+        }
     }
 
     override fun update(){
