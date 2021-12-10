@@ -19,7 +19,8 @@ object GameManager {
     //FPS
     val targetFPS: Int = 60
 
-    var playerName: String = ""
+    //Continue?
+    var shouldReset: Boolean = true
 
     //Background
     var background1: Bitmap? = null
@@ -79,6 +80,7 @@ object GameManager {
     val pieceWidthFactor = 2.5
 
     //Player data
+    var playerName: String = ""
     var score: Int = 0
     var highScore: Int = 0
     var lives: Int = 3

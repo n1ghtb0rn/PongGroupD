@@ -38,7 +38,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         GameManager.screenSizeX = displayMetrics.widthPixels
         GameManager.screenSizeY = displayMetrics.heightPixels
         GameManager.context = context as BreakoutActivity
-        GameManager.resetGame()
+
+        //Reset game (or continue from "paused" game)?
+        if(GameManager.shouldReset){
+            GameManager.resetGame()
+        }
     }
 
     fun start() {
