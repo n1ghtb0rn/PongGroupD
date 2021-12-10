@@ -126,6 +126,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     override fun run() {
         while (running){
+            if(GameManager.isPaused){
+                return
+            }
+
             if(System.currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000/GameManager.targetFPS
 
