@@ -19,6 +19,9 @@ object GameManager {
     //FPS
     val targetFPS: Int = 60
 
+    //Paused?
+    var isPaused: Boolean = false
+
     //Continue?
     var shouldReset: Boolean = true
 

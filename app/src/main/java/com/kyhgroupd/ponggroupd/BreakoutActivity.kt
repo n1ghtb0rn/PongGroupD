@@ -21,11 +21,13 @@ class BreakoutActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        GameManager.isPaused = true
         SoundManager.pauseMusic()
     }
 
     override fun onResume() {
         super.onResume()
+        GameManager.isPaused = false
         SoundManager.resumeMusic()
     }
 
