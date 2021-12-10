@@ -1,7 +1,5 @@
 package com.kyhgroupd.ponggroupd
 
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 import java.io.IOException
 import java.io.PrintWriter
@@ -13,7 +11,8 @@ object DataManager {
     var fullPath: String? = null
 
     const val subDirName = "data"
-    const val fileName = "score_data"
+    const val scoreFileName = "score_data"
+    const val settingsFileName = "settings"
     const val fileExt = ".txt"
     const val separator = "###"
 
@@ -37,7 +36,7 @@ object DataManager {
         val scoreList = mutableListOf<PlayerScore>()
 
         try{
-            val file = File(this.fullPath, this.fileName+this.fileExt)
+            val file = File(this.fullPath, this.scoreFileName+this.fileExt)
             val scanner = Scanner(file)
             while(scanner.hasNext()){
                 val line = scanner.nextLine()
@@ -62,7 +61,7 @@ object DataManager {
         scoreList.reverse()
 
         try{
-            val file = File(this.fullPath, this.fileName+this.fileExt)
+            val file = File(this.fullPath, this.scoreFileName+this.fileExt)
             val writer = PrintWriter(file)
             for(playerScore in scoreList){
                 writer.append(playerScore.username + this.separator + playerScore.score + "\n")
@@ -72,6 +71,38 @@ object DataManager {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun saveSettings(){
+        try{
+            val file = File(this.fullPath, this.settingsFileName+this.fileExt)
+            val writer = PrintWriter(file)
+            writer.append(GameManager.useSFX.toString() + "\n")
+            writer.append(GameManager.useMusic.toString() + "\n")
+            writer.append(GameManager.useColors.toString())
+            writer.flush()
+            writer.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun loadSettings(): MutableList<Boolean>{
+        this.createSubDir()
+
+        val settingsList = mutableListOf<Boolean>()
+
+        try{
+            val file = File(this.fullPath, this.settingsFileName+this.fileExt)
+            val scanner = Scanner(file)
+            while(scanner.hasNext()){
+                settingsList.add(scanner.nextLine().toBoolean())
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return settingsList
     }
 
     private fun createSubDir(){

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/black"
+    android:gravity="end"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textAlignment="center"
+        android:fontFamily="@font/aldrich"
+        android:textColor="@color/white"
+        android:textSize="60sp" />
+
+    <!-- Settings -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:stretchColumns="1"
+        android:layout_weight="0.5">
+
+        <!-- SFX on/off -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sound effects"
+                android:textColor="@color/white"
+                android:fontFamily="@font/aldrich"
+                android:layout_column="1" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchSFX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <!-- Music on/off -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Music"
+                android:textColor="@color/white"
+                android:fontFamily="@font/aldrich"
+                android:layout_column="1" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <!-- Colors on/off -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colors"
+                android:textColor="@color/white"
+                android:fontFamily="@font/aldrich"
+                android:layout_column="1" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchColors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <!-- Back-button -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Back"
+        android:fontFamily="@font/aldrich" />
+
+</LinearLayout>

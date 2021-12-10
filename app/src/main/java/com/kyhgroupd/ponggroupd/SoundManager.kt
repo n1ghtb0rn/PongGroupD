@@ -25,22 +25,37 @@ object SoundManager {
     }
 
     fun playDestroyBrickSFX(){
-        this.destroyBrickPlayer!!.start()
+        this.playSFX("DESTROY_BRICK")
     }
 
     fun playBallBounceSFX(){
-        this.ballBouncePlayer!!.start()
+        this.playSFX("BALL_BOUNCE")
     }
 
     fun playLoseLifeSFX(){
-        this.loseLifePlayer!!.start()
+        this.playSFX("LOSE_LIFE")
     }
 
     fun playGameOverSFX(){
-        this.gameOverPlayer!!.start()
+        this.playSFX("GAME_OVER")
+    }
+
+    private fun playSFX(sfx: String){
+        if(!GameManager.useSFX){
+            return
+        }
+        when (sfx) {
+            "DESTROY_BRICK" -> this.destroyBrickPlayer!!.start()
+            "BALL_BOUNCE" -> this.ballBouncePlayer!!.start()
+            "LOSE_LIFE" -> this.loseLifePlayer!!.start()
+            "GAME_OVER" -> this.gameOverPlayer!!.start()
+        }
     }
 
     fun playMusic(){
+        if(!GameManager.useMusic){
+            return
+        }
         this.musicPlayer!!.start()
         this.musicPlayer!!.isLooping = true
     }
@@ -56,6 +71,9 @@ object SoundManager {
     }
 
     fun resumeMusic(){
+        if(!GameManager.useMusic){
+            return
+        }
         this.musicPlayer!!.start()
     }
 }

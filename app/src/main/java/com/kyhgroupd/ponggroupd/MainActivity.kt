@@ -28,6 +28,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binder.btnSettings.setOnClickListener{
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
         binder.btnHighScore.setOnClickListener{
             val intent = Intent(this, HighScoreActivity::class.java)
             startActivity(intent)
@@ -39,11 +44,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        this.loadSettings()
+
         if(GameManager.context == null){
             binder.btnContinue.isEnabled = false
             return
         }
         binder.btnContinue.isEnabled = true
+    }
+
+    private fun loadSettings(){
+        val settingsList = DataManager.loadSettings()
+        if(settingsList.size < GameManager.numberOfSettings){
+            return
+        }
+        GameManager.useSFX = settingsList[0]
+        GameManager.useMusic = settingsList[1]
+        GameManager.useColors = settingsList[2]
     }
 
 }

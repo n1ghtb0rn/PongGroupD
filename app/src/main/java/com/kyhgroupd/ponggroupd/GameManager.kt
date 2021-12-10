@@ -86,6 +86,12 @@ object GameManager {
     var lives: Int = 3
     var scorePerBrick = 100
 
+    //Settings
+    val numberOfSettings = 3    //Change this when adding new settings
+    var useSFX: Boolean = true
+    var useMusic: Boolean = true
+    var useColors: Boolean = true
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
         //Background
