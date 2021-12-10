@@ -131,7 +131,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             SoundManager.playBallBounceSFX()
         }
         if(this.posY+this.height > GameManager.screenSizeY+(GameManager.screenSizeY/6)){
-            this.resetBall()
+            this.loseLife()
         }
         if(this.posX < 0){
             this.speedX = Math.abs(this.speedX)
@@ -168,7 +168,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
 
-    fun resetBall(){
+    fun loseLife(){
         resetPos()
         //Decrement number of lifes
         GameManager.lives--

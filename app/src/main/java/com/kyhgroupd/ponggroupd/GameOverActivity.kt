@@ -42,6 +42,7 @@ class GameOverActivity : AppCompatActivity() {
         super.onResume()
         binding.btnSave.isEnabled = true
         binding.etUsername.setText(GameManager.playerName)
+        GameManager.context = null
     }
 
     //Override built-in back button to return to main activity
