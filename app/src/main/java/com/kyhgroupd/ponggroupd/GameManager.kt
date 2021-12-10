@@ -162,8 +162,8 @@ object GameManager {
         val referenceBrick = Brick(200, 2500, Color.WHITE)
         for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
             for (x in 0..screenSizeX-1 step referenceBrick.width) {
-                //val brick = Brick(x, y, brickColors[colorIndex])
-                //gameObjects.add(brick)
+                val brick = Brick(x, y, brickColors[colorIndex])
+                gameObjects.add(brick)
             }
             colorIndex++
             //Reset color index
@@ -171,7 +171,7 @@ object GameManager {
                 colorIndex = 0
             }
         }
-        gameObjects.add(referenceBrick) //TEMP
+        //gameObjects.add(referenceBrick) //Use this line for testing only!
     }
 
     fun bricksCleared(): Boolean{
