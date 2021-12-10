@@ -87,6 +87,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         } else {
             speedX *= -1
         }
+
+        //Reset combo
+        GameManager.currentCombo = 0
+
         //SFX
         SoundManager.playBallBounceSFX()
     }
@@ -100,7 +104,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
         gameObject.destroy()
         GameManager.gameObjects.remove(gameObject)
+        //Add scored based on level
         GameManager.score += GameManager.scorePerBrick + ((GameManager.level-1) * GameManager.bonusScorePerLevel)
+        //Add score based on combo
+        GameManager.score += GameManager.currentCombo * GameManager.comboBonusScore
+        GameManager.currentCombo++
         //SFX
         SoundManager.playDestroyBrickSFX()
     }
