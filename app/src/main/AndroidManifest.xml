@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PongGroupD">
         <activity
+            android:name=".activitys.GolfActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.PongActivity"
             android:exported="true" />
         <activity

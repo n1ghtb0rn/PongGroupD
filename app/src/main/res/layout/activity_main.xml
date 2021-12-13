@@ -36,11 +36,23 @@
         android:id="@+id/btnPlayPong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/aldrich"
         android:text="PLAY PONG"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@id/btnPlayBreakout" />
+
+    <Button
+        android:id="@+id/btnPlayGolf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Play Golf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayPong" />
 
     <Button
         android:id="@+id/btnContinue"
@@ -51,7 +63,7 @@
         android:text="Continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayBreakout" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayGolf" />
 
     <Button
         android:id="@+id/btnSettings"

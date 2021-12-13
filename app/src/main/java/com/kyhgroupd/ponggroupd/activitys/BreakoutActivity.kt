@@ -14,8 +14,8 @@ class BreakoutActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(GameView(this))
         GameManager.context = this
+        setContentView(GameView(this))
     }
 
     fun gameOver() {

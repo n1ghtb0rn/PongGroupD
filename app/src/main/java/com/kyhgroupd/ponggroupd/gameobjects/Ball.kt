@@ -173,14 +173,14 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
 
     fun loseLife(){
+        GameManager.currentCombo = 0
+        GameManager.comboText = null
         resetPos()
         //Decrement number of lifes
         GameManager.lives--
         if(GameManager.lives <= 0){
             SoundManager.playGameOverSFX()
-            if (GameManager.gameMode == "breakout") {
-                GameManager.gameOver()
-            }
+            GameManager.gameOver()
         }
         else{
             SoundManager.playLoseLifeSFX()

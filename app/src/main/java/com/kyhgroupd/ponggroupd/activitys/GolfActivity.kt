@@ -9,7 +9,7 @@ import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.GameView
 import com.kyhgroupd.ponggroupd.SoundManager
 
-class PongActivity : AppCompatActivity() {
+class GolfActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
