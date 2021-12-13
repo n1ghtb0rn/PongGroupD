@@ -27,8 +27,6 @@ object GameManager {
 
     //Context
     var context: Activity? = null
-    var contextBreakout: Activity? = null
-    var contextPong: Activity? = null
 
     //FPS
     val targetFPS: Int = 60
@@ -159,6 +157,8 @@ object GameManager {
         highScore = DataManager.loadHighScore()
         lives = 3
         level = 1
+        currentCombo = 0
+        comboText = null
 
         //Music
         SoundManager.playMusic()

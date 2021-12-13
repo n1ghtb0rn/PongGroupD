@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binder.btnPlayGolf.setOnClickListener{
+            GameManager.gameMode = "golf"
+            val intent = Intent(this, GolfActivity::class.java)
+            GameManager.shouldReset = true
+            startActivity(intent)
+        }
+
         binder.btnContinue.setOnClickListener{
             if(GameManager.context != null){
                 val intent = Intent(this, BreakoutActivity::class.java)
