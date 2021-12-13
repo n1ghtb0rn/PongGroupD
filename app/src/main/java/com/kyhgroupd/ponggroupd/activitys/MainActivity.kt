@@ -17,7 +17,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binder.root)
 
         binder.btnPlayBreakout.setOnClickListener {
+            GameManager.gameMode = "breakout"
             val intent = Intent(this, BreakoutActivity::class.java)
+            GameManager.shouldReset = true
+            startActivity(intent)
+        }
+
+        binder.btnPlayPong.setOnClickListener{
+            GameManager.gameMode = "pong"
+            val intent = Intent(this, PongActivity::class.java)
             GameManager.shouldReset = true
             startActivity(intent)
         }

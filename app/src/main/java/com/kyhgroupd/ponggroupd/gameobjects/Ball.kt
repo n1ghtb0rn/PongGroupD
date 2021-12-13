@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.SoundManager
+import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -177,7 +178,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         GameManager.lives--
         if(GameManager.lives <= 0){
             SoundManager.playGameOverSFX()
-            GameManager.context?.gameOver()
+            if (GameManager.gameMode == "breakout") {
+                GameManager.gameOver()
+            }
         }
         else{
             SoundManager.playLoseLifeSFX()
