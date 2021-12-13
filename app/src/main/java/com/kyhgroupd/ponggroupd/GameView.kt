@@ -34,10 +34,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         SoundManager.init(context)
 
         //Reset game
+        GameManager.context = context as BreakoutActivity
         val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
         GameManager.screenSizeX = displayMetrics.widthPixels
         GameManager.screenSizeY = displayMetrics.heightPixels
-        GameManager.context = context as BreakoutActivity
 
         //Reset game (or continue from "paused" game)?
         if(GameManager.shouldReset){

@@ -121,20 +121,21 @@ object GameManager {
         gameObjects.clear()
         uiObjects.clear()
 
+        //Paddle
+        val paddle = Paddle(screenSizeX/2,screenSizeY - (screenSizeY/6), paddleColor)
+        GameManager.paddle = paddle
+        gameObjects.add(paddle)
+
         //Ball
-        ballStartX = screenSizeX - (screenSizeX/3)
-        ballStartY = screenSizeY/3
+        ballStartX = screenSizeX/2
+        ballStartY = paddle.posY-(paddle.height*2)
         ballSpeed = (screenSizeX * ballSpeedFactor).toInt()
-        ball = Ball(ballStartX, ballStartY, ballColor)
+        ball = Ball(0, 0, ballColor)
+        ball!!.resetPos()
 
         //Bricks
         addBrickColors()
         addBricks()
-
-        //Paddle
-        val paddle = Paddle(screenSizeX/2,screenSizeY - screenSizeY/7, paddleColor)
-        GameManager.paddle = paddle
-        gameObjects.add(paddle)
 
         //UI objects
         addUiText()
