@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/background1b"
-    tools:context=".MainActivity" >
+    tools:context=".activitys.MainActivity" >
 
     <TextView
         android:id="@+id/tvTitle"

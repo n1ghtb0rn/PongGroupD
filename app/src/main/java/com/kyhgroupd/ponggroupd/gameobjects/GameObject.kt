@@ -1,4 +1,4 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
 

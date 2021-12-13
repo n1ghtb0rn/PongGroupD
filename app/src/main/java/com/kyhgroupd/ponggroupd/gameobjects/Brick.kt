@@ -1,20 +1,22 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
+import com.kyhgroupd.ponggroupd.GameManager
 
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
     val borderPaint = Paint()
 
     init {
-        width = GameManager.screenSizeX/GameManager.bricksPerColumn
-        height = width/GameManager.brickWidthRatio
+        width = GameManager.screenSizeX / GameManager.bricksPerColumn
+        height = width/ GameManager.brickWidthRatio
 
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+            GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
 
         borderPaint.color = Color.BLACK
         borderPaint.style = Paint.Style.STROKE
-        borderPaint.strokeWidth = (height/GameManager.borderStrokeWidthFactor).toFloat()
+        borderPaint.strokeWidth = (height/ GameManager.borderStrokeWidthFactor).toFloat()
     }
 
     override fun draw(canvas: Canvas?){
@@ -25,7 +27,8 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         else{
             val grayPaint = Paint()
             grayPaint.color = GameManager.paddleColor
-            grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
+            grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+                GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), grayPaint)
         }
         //Border

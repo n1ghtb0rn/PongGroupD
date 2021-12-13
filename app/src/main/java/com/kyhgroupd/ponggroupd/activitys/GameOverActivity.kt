@@ -1,8 +1,11 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kyhgroupd.ponggroupd.DataManager
+import com.kyhgroupd.ponggroupd.GameManager
+import com.kyhgroupd.ponggroupd.PlayerScore
 import com.kyhgroupd.ponggroupd.databinding.ActivityGameOverBinding
 
 class GameOverActivity : AppCompatActivity() {

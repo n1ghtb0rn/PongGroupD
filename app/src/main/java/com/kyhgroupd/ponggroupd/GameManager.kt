@@ -8,8 +8,9 @@ import android.graphics.Paint
 import android.os.Build
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.scale
+import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
+import com.kyhgroupd.ponggroupd.gameobjects.*
 
 object GameManager {
   

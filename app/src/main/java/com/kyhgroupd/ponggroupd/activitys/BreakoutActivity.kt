@@ -1,10 +1,13 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.activitys
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import com.kyhgroupd.ponggroupd.GameManager
+import com.kyhgroupd.ponggroupd.GameView
+import com.kyhgroupd.ponggroupd.SoundManager
 
 class BreakoutActivity : AppCompatActivity() {
 

@@ -8,7 +8,7 @@
     android:background="@color/black"
     android:gravity="end"
     android:orientation="vertical"
-    tools:context=".SettingsActivity">
+    tools:context=".activitys.SettingsActivity">
 
     <!-- Header -->
     <TextView
