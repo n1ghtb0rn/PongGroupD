@@ -1,10 +1,12 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.kyhgroupd.ponggroupd.GameManager
+import com.kyhgroupd.ponggroupd.SoundManager
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -52,7 +54,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + radius){
 
             //100% of ball speed to be shared by a percentage over y/x-axis
-            val totalBallSpeed = GameManager.ballSpeed*2
+            val totalBallSpeed = GameManager.ballSpeed *2
 
             //Change ball angle depending on paddle collision zone
             val paddleZones = 6
@@ -111,12 +113,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         gameObject.destroy()
         GameManager.gameObjects.remove(gameObject)
         //Add scored based on level
-        GameManager.score += GameManager.scorePerBrick + ((GameManager.level-1) * GameManager.bonusScorePerLevel)
+        GameManager.score += GameManager.scorePerBrick + ((GameManager.level -1) * GameManager.bonusScorePerLevel)
         //Add score based on combo
         if(GameManager.currentCombo > 0){
             val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
             GameManager.score += comboValue
-            val comboText = ComboText(GameManager.screenSizeX/2, GameManager.screenSizeY/2, GameManager.gameTextColor, comboValue)
+            val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
             GameManager.comboText = comboText
             SoundManager.playComboSFX()
         }
@@ -131,7 +133,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             //SFX
             SoundManager.playBallBounceSFX()
         }
-        if(this.posY+this.height > GameManager.screenSizeY+(GameManager.screenSizeY/6)){
+        if(this.posY+this.height > GameManager.screenSizeY +(GameManager.screenSizeY /6)){
             this.loseLife()
         }
         if(this.posX < 0){

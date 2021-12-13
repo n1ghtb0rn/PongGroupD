@@ -8,7 +8,7 @@
     android:background="@drawable/background1b"
     android:gravity="end"
     android:orientation="vertical"
-    tools:context=".HighScoreActivity">
+    tools:context=".activitys.HighScoreActivity">
 
     <TextView
         android:layout_width="match_parent"

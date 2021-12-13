@@ -12,19 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PongGroupD">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activitys.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".HighScoreActivity"
+            android:name=".activitys.HighScoreActivity"
             android:exported="true" />
         <activity
-            android:name=".GameOverActivity"
+            android:name=".activitys.GameOverActivity"
             android:exported="true" />
         <activity
-            android:name=".BreakoutActivity"
+            android:name=".activitys.BreakoutActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activitys.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

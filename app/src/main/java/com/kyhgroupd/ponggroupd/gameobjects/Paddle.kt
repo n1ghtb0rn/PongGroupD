@@ -1,19 +1,21 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
+import com.kyhgroupd.ponggroupd.GameManager
 
 class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     init {
-        width = GameManager.screenSizeX/GameManager.paddleWidthFactor
-        height = width/GameManager.paddleHeightFactor
+        width = GameManager.screenSizeX / GameManager.paddleWidthFactor
+        height = width/ GameManager.paddleHeightFactor
         posX -= width/2
     }
 
     override fun draw(canvas: Canvas?){
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+            GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         canvas?.drawRect(posX.toFloat(), posY.toFloat(),posX + width.toFloat(), posY + height.toFloat(), this.paint)
     }
 

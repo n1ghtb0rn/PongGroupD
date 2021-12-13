@@ -1,6 +1,7 @@
-package com.kyhgroupd.ponggroupd
+package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
+import com.kyhgroupd.ponggroupd.GameManager
 
 open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
@@ -9,8 +10,8 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     var lifetime: Int = GameManager.pieceLifetime
 
     init {
-        width = ((GameManager.screenSizeX/GameManager.bricksPerColumn)/GameManager.pieceWidthFactor).toInt()
-        height = (width/GameManager.brickWidthRatio)
+        width = ((GameManager.screenSizeX / GameManager.bricksPerColumn)/ GameManager.pieceWidthFactor).toInt()
+        height = (width/ GameManager.brickWidthRatio)
     }
 
     override fun draw(canvas: Canvas?){
@@ -20,7 +21,8 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
         else{
             val grayPaint = Paint()
             grayPaint.color = GameManager.paddleColor
-            grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(), GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
+            grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+                GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), grayPaint)
         }
     }
