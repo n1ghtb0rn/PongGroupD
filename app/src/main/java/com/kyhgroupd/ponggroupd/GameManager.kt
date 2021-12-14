@@ -80,6 +80,7 @@ object GameManager {
 
     //Paddle
     var paddle: Paddle? = null
+    var paddle2: Paddle? = null
     var event: MotionEvent? = null
     var topBarHeight: Int = 170
     val paddleTouchOffsetY: Int = 200
@@ -139,6 +140,10 @@ object GameManager {
         GameManager.paddle = paddle
         gameObjects.add(paddle)
 
+        val paddle2 = Paddle(screenSizeX/2, screenSizeY - (screenSizeY/6), paddleColor)
+        GameManager.paddle2 = paddle2
+        gameObjects.add(paddle2)
+
         //Ball
         ballStartX = screenSizeX/2
         ballStartY = paddle.posY-(paddle.height*2)
@@ -163,7 +168,11 @@ object GameManager {
 
 
         //UI objects
-        addUiText()
+        if (gameMode != "pong") {
+            addUiText()
+        } else  //{
+           // addPongUiText()
+        //}
 
         //UI Data
         score = 0
@@ -192,6 +201,13 @@ object GameManager {
         GameManager.levelText = levelText
         uiObjects.add(levelText)
     }
+
+  //  @RequiresApi(Build.VERSION_CODES.O)
+   // private fun addPongUiText(){
+     //   val pongScoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
+     //   GameManager.scoreText = pongScoreText
+      //  uiObjects.add(pongScoreText)
+   // }
 
     private fun addBricks(){
         var colorIndex: Int = 0
