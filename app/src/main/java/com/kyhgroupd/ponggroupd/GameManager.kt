@@ -68,6 +68,7 @@ object GameManager {
     val gradientColor = Color.WHITE
     val gameTextColor = Color.LTGRAY
     val brickColors = mutableListOf<Int>()
+    val goalColor = Color.WHITE
 
     //Ball
     var ball: Ball? = null
@@ -155,7 +156,8 @@ object GameManager {
 
             }
             "golf" -> {
-
+                val goal = Goal(screenSizeX/2, (screenSizeY*0.2).toInt(), goalColor)
+                gameObjects.add(goal)
             }
         }
 
