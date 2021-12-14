@@ -146,8 +146,19 @@ object GameManager {
         ball!!.resetPos()
 
         //Bricks
-        addBrickColors()
-        addBricks()
+        when(gameMode){
+            "breakout" -> {
+                addBrickColors()
+                addBricks()
+            }
+            "pong" -> {
+
+            }
+            "golf" -> {
+
+            }
+        }
+
 
         //UI objects
         addUiText()

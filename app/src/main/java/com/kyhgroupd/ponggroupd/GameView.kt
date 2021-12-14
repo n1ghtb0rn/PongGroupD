@@ -11,6 +11,7 @@ import android.view.SurfaceView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
+import com.kyhgroupd.ponggroupd.activitys.GolfActivity
 import com.kyhgroupd.ponggroupd.activitys.PongActivity
 import com.kyhgroupd.ponggroupd.gameobjects.ComboText
 
@@ -35,11 +36,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         SoundManager.init(context)
 
         //Reset game
-        if (GameManager.gameMode == "breakout") {
-            GameManager.context = context as BreakoutActivity
-        }
-        if (GameManager.gameMode == "pong") {
-            GameManager.context = context as PongActivity
+        when(GameManager.gameMode){
+            "breakout" -> GameManager.context = context as BreakoutActivity
+            "pong" -> GameManager.context = context as PongActivity
+            "golf" -> GameManager.context = context as GolfActivity
         }
 
         val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
@@ -166,8 +166,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 update()
                 draw()
 
-                if (GameManager.bricksCleared()) {
-                    GameManager.nextLevel()
+                when(GameManager.gameMode){
+                    "breakout" -> if (GameManager.bricksCleared()) {
+                        GameManager.nextLevel()
+                    }
                 }
             }
         }
