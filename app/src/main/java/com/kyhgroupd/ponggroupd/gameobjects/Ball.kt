@@ -42,13 +42,15 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         val gameObject: GameObject = this.collidingWith() ?: return
 
         //Brick collision
-        if(gameObject is Brick){
-            brickCollision(gameObject)
+        when(gameObject){
+            is Brick -> brickCollision(gameObject)
+            is Paddle -> paddleCollision(gameObject)
+            is Goal -> goalCollision()
         }
-        //Paddle collision
-        else if(gameObject is Paddle){
-            paddleCollision(gameObject)
-        }
+    }
+
+    private fun goalCollision(){
+        println("WIN")
     }
 
     private fun paddleCollision(gameObject: Paddle) {
