@@ -98,7 +98,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         //UI
         UIManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
         UIManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
-        UIManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
+        if(GameManager.gameMode == "breakout"){
+            UIManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
+        } else if(GameManager.gameMode == "golf"){
+            UIManager.livesText?.textString = "MISSES: "+GameManager.lives.toString()
+        }
         UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
         UIManager.comboText?.update()
     }
