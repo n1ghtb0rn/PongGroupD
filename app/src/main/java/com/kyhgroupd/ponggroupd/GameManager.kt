@@ -218,7 +218,7 @@ object GameManager {
         brickColors.add(Color.rgb(150, 0, 150))
         brickColors.add(Color.rgb(0, 0, 200))
         brickColors.add(Color.rgb(0, 150, 150))
-        brickColors.add(Color.rgb(0, 150, 0))
+        brickColors.add(Color.rgb(0, 150, 0))   //green
         brickColors.add(Color.rgb(150, 150, 0)) //yellow
         brickColors.add(Color.rgb(150, 75, 0))  //orange
     }
