@@ -1,6 +1,5 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
-import android.app.UiModeManager
 import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
@@ -9,7 +8,6 @@ import androidx.annotation.RequiresApi
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.SoundManager
 import com.kyhgroupd.ponggroupd.UIManager
-import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -56,48 +54,69 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         GameManager.nextLevel()
     }
 
-    private fun paddleCollision(gameObject: Paddle) {
-        if(this.posY + this.height > gameObject.posY && this.posY + this.height < gameObject.posY + radius){
+    private fun paddleCollision(paddle: Paddle) {
+        //100% of ball speed to be shared by a percentage over y/x-axis
+        val totalBallSpeed = GameManager.ballSpeed *2
 
-            //100% of ball speed to be shared by a percentage over y/x-axis
-            val totalBallSpeed = GameManager.ballSpeed *2
+        //Change ball angle depending on paddle collision zone
+        val paddleZones = 6
+        val widthPerZone = paddle.width/paddleZones
 
-            //Change ball angle depending on paddle collision zone
-            val paddleZones = 6
-            val widthPerZone = gameObject.width/paddleZones
-            //Zone 1 (far left side)
-            if(this.posX < gameObject.posX+widthPerZone && this.posX+this.width > gameObject.posX){
-                speedY = -(totalBallSpeed*0.3).toInt()
-                speedX = -(totalBallSpeed*0.7).toInt()
-            }
-            //Zone 2
-            else if(this.posX < gameObject.posX+(widthPerZone*2) && this.posX+this.width > gameObject.posX+widthPerZone){
-                speedY = -(totalBallSpeed*0.5).toInt()
-                speedX = -(totalBallSpeed*0.5).toInt()
-            }
-            //Zone 3
-            else if(this.posX < gameObject.posX+(widthPerZone*3) && this.posX+this.width > gameObject.posX+(widthPerZone*2)){
-                speedY = -(totalBallSpeed*0.7).toInt()
-                speedX = -(totalBallSpeed*0.3).toInt()
-            }
-            //Zone 4
-            else if(this.posX < gameObject.posX+(widthPerZone*4) && this.posX+this.width > gameObject.posX+(widthPerZone*3)){
-                speedY = -(totalBallSpeed*0.7).toInt()
-                speedX = (totalBallSpeed*0.3).toInt()
-            }
-            //Zone 5
-            else if(this.posX < gameObject.posX+(widthPerZone*5) && this.posX+this.width > gameObject.posX+(widthPerZone*4)){
-                speedY = -(totalBallSpeed*0.5).toInt()
-                speedX = (totalBallSpeed*0.5).toInt()
-            }
-            //Zone 6 (far right side)
-            else {
-                speedY = -(totalBallSpeed*0.3).toInt()
-                speedX = (totalBallSpeed*0.7).toInt()
-            }
+        var speedY: Int = 0
+        var speedX: Int = 0
 
-        } else {
-            speedX *= -1
+        //Zone 1 (far left side)
+        if(this.posX < paddle.posX+widthPerZone && this.posX+this.width > paddle.posX){
+            speedY = -(totalBallSpeed*0.3).toInt()
+            speedX = -(totalBallSpeed*0.7).toInt()
+        }
+        //Zone 2
+        else if(this.posX < paddle.posX+(widthPerZone*2) && this.posX+this.width > paddle.posX+widthPerZone){
+            speedY = -(totalBallSpeed*0.5).toInt()
+            speedX = -(totalBallSpeed*0.5).toInt()
+        }
+        //Zone 3
+        else if(this.posX < paddle.posX+(widthPerZone*3) && this.posX+this.width > paddle.posX+(widthPerZone*2)){
+            speedY = -(totalBallSpeed*0.7).toInt()
+            speedX = -(totalBallSpeed*0.3).toInt()
+        }
+        //Zone 4
+        else if(this.posX < paddle.posX+(widthPerZone*4) && this.posX+this.width > paddle.posX+(widthPerZone*3)){
+            speedY = -(totalBallSpeed*0.7).toInt()
+            speedX = (totalBallSpeed*0.3).toInt()
+        }
+        //Zone 5
+        else if(this.posX < paddle.posX+(widthPerZone*5) && this.posX+this.width > paddle.posX+(widthPerZone*4)){
+            speedY = -(totalBallSpeed*0.5).toInt()
+            speedX = (totalBallSpeed*0.5).toInt()
+        }
+        //Zone 6 (far right side)
+        else {
+            speedY = -(totalBallSpeed*0.3).toInt()
+            speedX = (totalBallSpeed*0.7).toInt()
+        }
+
+        //Player 1
+        if(paddle.player == 1){
+            if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + radius){
+
+                this.speedY = speedY
+                this.speedX = speedX
+
+            } else {
+                speedX *= -1
+            }
+        }
+        //Player 2
+        else{
+            if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + radius){
+
+                this.speedY = -speedY
+                this.speedX = speedX
+
+            } else {
+                speedX *= -1
+            }
         }
 
         //Reset combo
@@ -109,37 +128,37 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun brickCollision(gameObject: Brick) {
-        if (this.posX < gameObject.posX+gameObject.width-radius &&
-            this.posX+this.width > gameObject.posX+radius) {
+    private fun brickCollision(brick: Brick) {
+        if (this.posX < brick.posX+brick.width-radius &&
+            this.posX+this.width > brick.posX+radius) {
             speedY *= -1
         } else {
             speedX *= -1
         }
 
         //Unbreakable brick?
-        if(gameObject.unbreakable){
+        if(brick.unbreakable){
             //SFX
             SoundManager.playBallBounceSFX()
             return
         }
 
         //Non-unbreakable brick?
-        gameObject.health--
+        brick.health--
         if(GameManager.gameMode == "golf"){
-            gameObject.changeColor()
+            brick.changeColor()
         }
 
         //Check brick health
-        if(gameObject.health > 0){
+        if(brick.health > 0){
             //SFX
             SoundManager.playBallBounceSFX()
             return
         }
 
         //Finally
-        gameObject.destroy()
-        GameManager.gameObjects.remove(gameObject)
+        brick.destroy()
+        GameManager.gameObjects.remove(brick)
 
         //Score
         if(GameManager.gameMode == "breakout"){
