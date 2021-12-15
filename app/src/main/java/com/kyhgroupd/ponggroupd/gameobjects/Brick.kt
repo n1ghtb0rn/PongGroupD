@@ -76,13 +76,13 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
     fun changeColor(){
         when {
             this.health >= 3 -> {
-                this.paint.color = Color.rgb(150, 0, 0)
+                this.paint.color = Color.rgb(150, 0, 0)     //red
             }
             this.health == 2 -> {
-                this.paint.color = Color.rgb(150, 75, 0)
+                this.paint.color = Color.rgb(150, 150, 0)   //yellow
             }
             else -> {
-                this.paint.color = Color.rgb(150, 150, 0)
+                this.paint.color = Color.rgb(0, 150, 0)     //green
             }
         }
         this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
