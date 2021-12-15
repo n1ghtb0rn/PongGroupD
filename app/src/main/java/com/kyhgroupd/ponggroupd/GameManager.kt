@@ -113,7 +113,8 @@ object GameManager {
         referenceBrick = Brick(200, 2500, Color.WHITE)
 
         //Paddle
-        val paddle = Paddle(screenSizeX/2,screenSizeY - (screenSizeY/6), paddleColor)
+        val player1 = 1
+        val paddle = Paddle(screenSizeX/2,screenSizeY - (screenSizeY/6), paddleColor, player1)
         GameManager.paddle = paddle
         gameObjects.add(paddle)
 
@@ -134,7 +135,8 @@ object GameManager {
                 addBricks()
             }
             "pong" -> {
-                val paddle2 = Paddle(screenSizeX/2, screenSizeY/12, paddleColor)
+                val player2 = 2
+                val paddle2 = Paddle(screenSizeX/2, screenSizeY/12, paddleColor, player2)
                 GameManager.paddle2 = paddle2
                 gameObjects.add(paddle2)
             }

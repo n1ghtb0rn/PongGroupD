@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 
-class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
+class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject(startX, startY, color) {
 
     init {
         width = GameManager.screenSizeX / GameManager.paddleWidthFactor
