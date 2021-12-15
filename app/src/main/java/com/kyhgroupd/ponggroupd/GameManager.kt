@@ -98,6 +98,9 @@ object GameManager {
     var highScore: Int = 0
     var lives: Int = 3
     var level = 1
+    var player2Name: String = ""
+    var player2Score: Int = 0
+    var player2Lives: Int = 3
 
     //Score data
     var scorePerBrick = 100

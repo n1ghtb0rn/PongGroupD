@@ -109,7 +109,13 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
             //canvas.drawColor(Color.BLACK) //Draws a black background
 
-            canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), GameManager.uiPaint)
+            if(GameManager.gameMode != "pong") {
+                canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), GameManager.uiPaint)
+
+                for (uiObject in GameManager.uiObjects) {
+                    uiObject.draw(canvas)
+                }
+            }
 
             for (gameObject in GameManager.gameObjects) {
                 gameObject.draw(canvas)
@@ -117,9 +123,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             for (pieceObject in GameManager.pieceObjects) {
                 pieceObject.draw(canvas)
             }
-            for (uiObject in GameManager.uiObjects) {
-                uiObject.draw(canvas)
-            }
+
             GameManager.comboText?.draw(canvas)
             GameManager.ball?.draw(canvas)
 
