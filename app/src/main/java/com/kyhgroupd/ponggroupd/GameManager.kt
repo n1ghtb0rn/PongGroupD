@@ -2,7 +2,6 @@ package com.kyhgroupd.ponggroupd
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -12,11 +11,8 @@ import android.graphics.Paint
 import android.os.Build
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.graphics.scale
-import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 import com.kyhgroupd.ponggroupd.activitys.GameOverActivity
-import com.kyhgroupd.ponggroupd.activitys.PongActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
 @SuppressLint("StaticFieldLeak")
