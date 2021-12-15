@@ -10,8 +10,8 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
     var unbreakable = false //Default brick value
 
     init {
-        width = GameManager.screenSizeX / GameManager.bricksPerColumn
-        height = width/ GameManager.brickWidthRatio
+        width = GameManager.screenSizeX / GameManager.bricksPerRow
+        height = width/ GameManager.brickHeightRatio
 
         this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
             GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)

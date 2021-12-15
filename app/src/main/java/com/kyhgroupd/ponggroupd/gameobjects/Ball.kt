@@ -18,7 +18,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     var speedY: Int = 0
 
     init {
-        radius = GameManager.screenSizeX / GameManager.ballRadiusFactor
+        radius = GameManager.referenceBrick!!.height/2
         width = radius*2
         height = radius*2
         speedX = GameManager.ballSpeed
