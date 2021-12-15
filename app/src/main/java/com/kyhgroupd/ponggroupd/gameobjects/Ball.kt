@@ -158,13 +158,15 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     private fun checkBorderCollision() {
         if(GameManager.gameMode == "pong") {
             var player = 0
-            if (this.posY < 0) {
+            if (this.posY < -GameManager.screenSizeY /6) {
                 player = 2
             }
             if (this.posY+this.height > GameManager.screenSizeY +(GameManager.screenSizeY /6)){
                 player = 1
             }
-            this.loseLifePong(player)
+            if(player != 0) {
+                this.loseLifePong(player)
+            }
         } else {
             if (this.posY < UIManager.uiHeight) {
                 this.speedY = Math.abs(this.speedY)
@@ -227,6 +229,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     fun loseLifePong(player: Int){
+        GameManager.currentCombo = 0
+        UIManager.comboText = null
         resetPos()
         //Decrement number of lives
         when(player) {

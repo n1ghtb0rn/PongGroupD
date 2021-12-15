@@ -53,6 +53,7 @@ object UIManager {
             GameManager.score = 0
         GameManager.highScore = DataManager.loadHighScore()
         GameManager.lives = 3
+        GameManager.player2Lives = 3
         GameManager.level = 1
         GameManager.currentCombo = 0
         comboText = null
