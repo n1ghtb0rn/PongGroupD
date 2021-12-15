@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.R
+import com.kyhgroupd.ponggroupd.UIManager
 
 @RequiresApi(Build.VERSION_CODES.O)
 open class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
@@ -14,7 +15,7 @@ open class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, s
 
     init {
         this.textString = ""
-        this.paint.textSize = GameManager.textSize
+        this.paint.textSize = UIManager.textSize
         this.paint.typeface = ResourcesCompat.getFont(
             GameManager.context as AppCompatActivity,
             R.font.aldrich

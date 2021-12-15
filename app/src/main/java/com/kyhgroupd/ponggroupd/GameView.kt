@@ -42,6 +42,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
         //Reset game (or continue from "paused" game)?
         if(GameManager.shouldReset){
+            UIManager.resetUI()
             GameManager.resetGame()
         }
     }
@@ -79,14 +80,14 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
 
         //UI objects
-        for (uiObject in GameManager.uiObjects) {
+        for (uiObject in UIManager.uiObjects) {
             uiObject.update()
         }
-        val uiObjects = GameManager.uiObjects.toMutableList()
+        val uiObjects = UIManager.uiObjects.toMutableList()
         for (uiObject in uiObjects) {
             if(uiObject is ComboText){
                 if(uiObject.lifetime <= 0){
-                    GameManager.uiObjects.remove(uiObject)
+                    UIManager.uiObjects.remove(uiObject)
                 }
             }
         }
@@ -95,11 +96,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         GameManager.ball?.update()
 
         //UI
-        GameManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
-        GameManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
-        GameManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
-        GameManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
-        GameManager.comboText?.update()
+        UIManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
+        UIManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
+        UIManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
+        UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
+        UIManager.comboText?.update()
     }
 
     private fun draw(){
@@ -110,9 +111,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             //canvas.drawColor(Color.BLACK) //Draws a black background
 
             if(GameManager.gameMode != "pong") {
-                canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), GameManager.uiHeight.toFloat(), GameManager.uiPaint)
+                canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), UIManager.uiHeight.toFloat(), UIManager.uiPaint)
 
-                for (uiObject in GameManager.uiObjects) {
+                for (uiObject in UIManager.uiObjects) {
                     uiObject.draw(canvas)
                 }
             }
@@ -124,7 +125,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 pieceObject.draw(canvas)
             }
 
-            GameManager.comboText?.draw(canvas)
+            UIManager.comboText?.draw(canvas)
             GameManager.ball?.draw(canvas)
 
             mHolder!!.unlockCanvasAndPost(canvas)

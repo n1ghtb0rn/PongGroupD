@@ -32,26 +32,11 @@ object GameManager {
 
     //Background
     var background1: Bitmap? = null
-    val uiPaint = Paint()
 
-    //Game+UI border size
     var screenSizeX = 0 //Is set in GameView-class
     var screenSizeY = 0 //Is set in GameView-class
-    var uiHeight: Int = 0   //Is set in resetGame()-method
-    var uiBorderWidth = 3f
-    val uiHeightFactor = 12
-
-    //UI Text
-    var scoreText: GameText? = null
-    var highScoreText: GameText? = null
-    var livesText: GameText? = null
-    var levelText: GameText? = null
-    var comboText: ComboText? = null
-    var textSize: Float = 0f    //Is set in GameView
-    val textSizeFactor: Int = 25
 
     //GameObjects
-    val uiObjects = mutableListOf<GameObject>()
     val gameObjects = mutableListOf<GameObject>()
     val pieceObjects = mutableListOf<BrickPiece>()
 
@@ -120,16 +105,8 @@ object GameManager {
         background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1b).scale(
             Resources.getSystem().displayMetrics.widthPixels, Resources.getSystem().displayMetrics.heightPixels, true)
 
-        //UI
-        uiHeight = screenSizeY/uiHeightFactor
-        textSize = (screenSizeX / textSizeFactor).toFloat()
-        uiPaint.style = Paint.Style.STROKE
-        uiPaint.color = Color.WHITE
-        uiPaint.strokeWidth = uiBorderWidth
-
         //Clear GameObject-lists
         gameObjects.clear()
-        uiObjects.clear()
 
         //Paddle
         val paddle = Paddle(screenSizeX/2,screenSizeY - (screenSizeY/6), paddleColor)
@@ -160,40 +137,8 @@ object GameManager {
             }
         }
 
-
-        //UI objects
-        if (gameMode != "pong") {
-            addUiText()
-        } //else  {
-           // addPongUiText()
-        //}
-
-        //UI Data
-        score = 0
-        highScore = DataManager.loadHighScore()
-        lives = 3
-        level = 1
-        currentCombo = 0
-        comboText = null
-
         //Music
         SoundManager.playMusic()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun addUiText(){
-        val scoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
-        GameManager.scoreText = scoreText
-        uiObjects.add(scoreText)
-        val highScoreText = GameText(screenSizeX/2, (uiHeight/2.5).toInt(), gameTextColor)
-        GameManager.highScoreText = highScoreText
-        uiObjects.add(highScoreText)
-        val livesText = GameText(screenSizeX/20, (uiHeight/1.25).toInt(), gameTextColor)
-        GameManager.livesText = livesText
-        uiObjects.add(livesText)
-        val levelText = GameText(screenSizeX/2, (uiHeight/1.25).toInt(), gameTextColor)
-        GameManager.levelText = levelText
-        uiObjects.add(levelText)
     }
 
   //  @RequiresApi(Build.VERSION_CODES.O)
@@ -206,7 +151,9 @@ object GameManager {
     private fun addBricks(){
         var colorIndex: Int = 0
         val referenceBrick = Brick(200, 2500, Color.WHITE)
-        for (y in referenceBrick.height+uiHeight..uiHeight+(referenceBrick.height*brickRows) step referenceBrick.height) {
+        val brickRowStart = referenceBrick.height+UIManager.uiHeight
+        val brickRowEnd = UIManager.uiHeight+(referenceBrick.height*brickRows)
+        for (y in brickRowStart..brickRowEnd step referenceBrick.height) {
             for (x in 0..screenSizeX-1 step referenceBrick.width) {
                 val brick = Brick(x, y, brickColors[colorIndex])
                 gameObjects.add(brick)
