@@ -52,7 +52,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     private fun goalCollision(){
-        println("WIN")
+        GameManager.score++
+        resetPos()
     }
 
     private fun paddleCollision(gameObject: Paddle) {
@@ -134,19 +135,23 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     private fun checkBorderCollision() {
         if(GameManager.gameMode == "pong") {
+            var player = 0
             if (this.posY < 0) {
-                this.loseLife()
+                player = 2
             }
-
+            if (this.posY+this.height > GameManager.screenSizeY +(GameManager.screenSizeY /6)){
+                player = 1
+            }
+            this.loseLifePong(player)
         } else {
             if (this.posY < UIManager.uiHeight) {
                 this.speedY = Math.abs(this.speedY)
                 //SFX
                 SoundManager.playBallBounceSFX()
             }
-        }
-        if(this.posY+this.height > GameManager.screenSizeY +(GameManager.screenSizeY /6)){
-            this.loseLife()
+            if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
+                this.loseLife()
+            }
         }
         if(this.posX < 0){
             this.speedX = Math.abs(this.speedX)
@@ -189,6 +194,23 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         resetPos()
         //Decrement number of lives
         GameManager.lives--
+
+        if(GameManager.lives <= 0 || GameManager.player2Lives <= 0){
+            SoundManager.playGameOverSFX()
+            GameManager.context?.gameOver()
+        }
+        else{
+            SoundManager.playLoseLifeSFX()
+        }
+    }
+
+    fun loseLifePong(player: Int){
+        resetPos()
+        //Decrement number of lives
+        when(player) {
+            1 -> GameManager.lives--
+            2 -> GameManager.player2Lives--
+        }
 
         if(GameManager.lives <= 0 || GameManager.player2Lives <= 0){
             SoundManager.playGameOverSFX()
