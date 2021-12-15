@@ -140,17 +140,22 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Finally
         gameObject.destroy()
         GameManager.gameObjects.remove(gameObject)
-        //Add scored based on level
-        GameManager.score += GameManager.scorePerBrick + ((GameManager.level -1) * GameManager.bonusScorePerLevel)
-        //Add score based on combo
-        if(GameManager.currentCombo > 0){
-            val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
-            GameManager.score += comboValue
-            val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
-            UIManager.comboText = comboText
-            SoundManager.playComboSFX()
+
+        //Score
+        if(GameManager.gameMode == "breakout"){
+            //Add scored based on level
+            GameManager.score += GameManager.scorePerBrick + ((GameManager.level -1) * GameManager.bonusScorePerLevel)
+            //Add score based on combo
+            if(GameManager.currentCombo > 0){
+                val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
+                GameManager.score += comboValue
+                val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
+                UIManager.comboText = comboText
+                SoundManager.playComboSFX()
+            }
+            GameManager.currentCombo++
         }
-        GameManager.currentCombo++
+
         //SFX
         SoundManager.playDestroyBrickSFX()
     }
