@@ -1,5 +1,6 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
+import android.app.UiModeManager
 import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
@@ -7,6 +8,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.SoundManager
+import com.kyhgroupd.ponggroupd.UIManager
 import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
@@ -99,7 +101,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Reset combo
         GameManager.currentCombo = 0
-        GameManager.comboText = null
+        UIManager.comboText = null
 
         //SFX
         SoundManager.playBallBounceSFX()
@@ -122,7 +124,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
             GameManager.score += comboValue
             val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
-            GameManager.comboText = comboText
+            UIManager.comboText = comboText
             SoundManager.playComboSFX()
         }
         GameManager.currentCombo++
@@ -137,7 +139,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
 
         } else {
-            if (this.posY < GameManager.uiHeight) {
+            if (this.posY < UIManager.uiHeight) {
                 this.speedY = Math.abs(this.speedY)
                 //SFX
                 SoundManager.playBallBounceSFX()
@@ -183,7 +185,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     fun loseLife(){
         GameManager.currentCombo = 0
-        GameManager.comboText = null
+        UIManager.comboText = null
         resetPos()
         //Decrement number of lives
         GameManager.lives--
