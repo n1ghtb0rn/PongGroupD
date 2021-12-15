@@ -6,6 +6,8 @@ import com.kyhgroupd.ponggroupd.GameManager
 open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
     val borderPaint = Paint()
+    var health: Int = 1 //Default brick value
+    var unbreakable = false //Default brick value
 
     init {
         width = GameManager.screenSizeX / GameManager.bricksPerColumn
