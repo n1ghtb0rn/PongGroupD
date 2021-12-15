@@ -54,7 +54,7 @@ object GameManager {
     var ballStartY: Int = 0 //Is set in resetGame()-method
     var ballRadiusFactor: Int = 50
     var ballSpeed: Int = 0  //Is set in resetGame()-method
-    val ballSpeedFactor = 0.015
+    val ballSpeedFactor = 0.012
 
     //Paddle
     var paddle: Paddle? = null
@@ -192,6 +192,12 @@ object GameManager {
             val brick = Brick(x, screenSizeY/2, Color.WHITE)
             brick.health = (1..3).random()
             brick.changeColor()
+            gameObjects.add(brick)
+        }
+
+        //Testing unbreakable bricks
+        for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
+            val brick = Brick(x, screenSizeY/6, Color.DKGRAY, true)
             gameObjects.add(brick)
         }
     }

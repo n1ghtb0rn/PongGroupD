@@ -3,22 +3,44 @@ package com.kyhgroupd.ponggroupd.gameobjects
 import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
-open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
+open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable: Boolean ): GameObject(startX, startY, color) {
+
+    //Breakout brick
+    constructor(startX: Int, startY: Int, color: Int) : this(startX, startY, color, 1, false)
+
+    //Golf-brick
+    constructor(startX: Int, startY: Int, color: Int, health: Int) : this(startX, startY, color, health, false)
+
+    //Unbreakable-brick
+    constructor(startX: Int, startY: Int, color: Int, unbreakable: Boolean) : this(startX, startY, color, 1, unbreakable)
 
     val borderPaint = Paint()
     var health: Int = 1 //Default brick value
     var unbreakable = false //Default brick value
 
+    //Base
     init {
         width = GameManager.screenSizeX / GameManager.bricksPerRow
         height = width/ GameManager.brickHeightRatio
+    }
 
+    //Colors
+    init {
+        if(unbreakable){
+            this.paint.color = Color.GRAY
+        }
         this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
             GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
 
         borderPaint.color = Color.BLACK
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = (height/ GameManager.borderStrokeWidthFactor).toFloat()
+    }
+
+    //Extra
+    init {
+        this.health = health
+        this.unbreakable = unbreakable
     }
 
     override fun draw(canvas: Canvas?){
@@ -28,7 +50,7 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         }
         else{
             val grayPaint = Paint()
-            grayPaint.color = GameManager.paddleColor
+            grayPaint.color = Color.GRAY
             grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
                 GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), grayPaint)
