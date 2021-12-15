@@ -20,27 +20,58 @@ class Paddle(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, 
     }
 
     override fun update() {
-        if (GameManager.event != null) {
-            val paddleY = GameManager.paddle?.posY
-            if (paddleY != null) {
+        if (GameManager.gameMode != "pong") {
+            if (GameManager.event != null) {
+                val paddleY = GameManager.paddle?.posY
+                if (paddleY != null) {
 
-                var touchY = GameManager.event!!.y.toInt()
-                val offset = GameManager.paddleTouchOffsetY
-                //Subtract top bar and and half paddle height
-                touchY -= GameManager.topBarHeight + height/2
-                //Check if touch is in range of paddle
-                if(touchY > paddleY - offset && touchY < paddleY + offset){
-                    posX = GameManager.event!!.x.toInt() - (width / 2)
+                    var touchY = GameManager.event!!.y.toInt()
+                    val offset = GameManager.paddleTouchOffsetY
+                    //Subtract top bar and and half paddle height
+                    touchY -= GameManager.topBarHeight + height / 2
+                    //Check if touch is in range of paddle
+                    if (touchY > paddleY - offset && touchY < paddleY + offset) {
+                        posX = GameManager.event!!.x.toInt() - (width / 2)
+                    }
+                    //Check if paddle is out of bounds
+                    if (posX < 0) {
+                        posX = 0
+                    }
+                    if (posX > GameManager.screenSizeX - width) {
+                        posX = GameManager.screenSizeX - width
+                    }
                 }
-                //Check if paddle is out of bounds
-                if(posX < 0){
-                    posX = 0
-                }
-                if(posX > GameManager.screenSizeX - width){
-                    posX = GameManager.screenSizeX - width
-                }
+                GameManager.event = null
             }
-            GameManager.event = null
+        } else {
+            if (GameManager.event != null) {
+                val paddleY = GameManager.paddle?.posY
+                val paddle2Y = GameManager.paddle2?.posY
+                if (paddleY != null || paddle2Y != null) {
+                    var touchY = GameManager.event!!.y.toInt()
+                    if (touchY > GameManager.screenSizeY/2) {
+                        GameManager.paddle?.posX = GameManager.event!!.x.toInt() - (width / 2)
+                    } else {
+                        GameManager.paddle2?.posX = GameManager.event!!.x.toInt() - (width / 2)
+                    }
+                    // Check if paddle is out of bounds
+                    if (posX < 0) {
+                        posX = 0
+                    }
+                    if (posX > GameManager.screenSizeX - width) {
+                        posX = GameManager.screenSizeX - width
+                    }
+                    // Check if paddle2 is out of bounds
+                    if (GameManager.paddle2!!.posX < 0) {
+                        GameManager.paddle2!!.posX = 0
+                    }
+                    if (GameManager.paddle2!!.posX > GameManager.screenSizeX - width) {
+                        GameManager.paddle2!!.posX = GameManager.screenSizeX - width
+                    }
+                }
+                GameManager.event = null
+            }
         }
+
     }
 }
