@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.scale
@@ -160,6 +161,7 @@ object GameManager {
         if(referenceBrick == null){
             return
         }
+
         var colorIndex: Int = 0
         val brickRowStart = referenceBrick!!.height+UIManager.uiHeight
         val brickRowEnd = UIManager.uiHeight+(referenceBrick!!.height*brickRows)
@@ -180,8 +182,13 @@ object GameManager {
     }
 
     private fun addBricksGolf(){
-        val referenceBrick = Brick(200, 2500, Color.WHITE)
-        for (x in 0..screenSizeX-1 step referenceBrick.width) {
+        if(referenceBrick == null){
+            return
+        }
+
+        val brickColumnStart = 0
+        val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
+        for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
             val brick = Brick(x, screenSizeY/2, Color.WHITE)
             brick.health = (1..3).random()
             brick.changeColor()
