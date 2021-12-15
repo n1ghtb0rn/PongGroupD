@@ -138,6 +138,7 @@ object GameManager {
                 gameObjects.add(paddle2)
             }
             "golf" -> {
+                lives = 0
                 val goal = Goal(screenSizeX/2, screenSizeY/3, goalColor)
                 gameObjects.add(goal)
                 addBricksGolf()
