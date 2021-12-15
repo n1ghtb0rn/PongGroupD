@@ -11,8 +11,6 @@ import android.view.SurfaceView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
-import com.kyhgroupd.ponggroupd.activitys.GolfActivity
-import com.kyhgroupd.ponggroupd.activitys.PongActivity
 import com.kyhgroupd.ponggroupd.gameobjects.ComboText
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -36,11 +34,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         SoundManager.init(context)
 
         //Reset game
-        when(GameManager.gameMode){
-            "breakout" -> GameManager.context = context as BreakoutActivity
-            "pong" -> GameManager.context = context as PongActivity
-            "golf" -> GameManager.context = context as GolfActivity
-        }
+        GameManager.context = context as BreakoutActivity
 
         val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
         GameManager.screenSizeX = displayMetrics.widthPixels
