@@ -73,4 +73,20 @@ open class Brick(startX: Int, startY: Int, color: Int ): GameObject(startX, star
         GameManager.pieceObjects.add(piece8)
     }
 
+    fun changeColor(){
+        when {
+            this.health >= 3 -> {
+                this.paint.color = Color.rgb(150, 0, 0)
+            }
+            this.health == 2 -> {
+                this.paint.color = Color.rgb(150, 75, 0)
+            }
+            else -> {
+                this.paint.color = Color.rgb(150, 150, 0)
+            }
+        }
+        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+            GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+    }
+
 }

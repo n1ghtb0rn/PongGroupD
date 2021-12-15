@@ -126,27 +126,33 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Non-unbreakable brick?
         gameObject.health--
-        if(gameObject.health <= 0){
-            gameObject.destroy()
-            GameManager.gameObjects.remove(gameObject)
-            //Add scored based on level
-            GameManager.score += GameManager.scorePerBrick + ((GameManager.level -1) * GameManager.bonusScorePerLevel)
-            //Add score based on combo
-            if(GameManager.currentCombo > 0){
-                val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
-                GameManager.score += comboValue
-                val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
-                UIManager.comboText = comboText
-                SoundManager.playComboSFX()
-            }
-            GameManager.currentCombo++
-            //SFX
-            SoundManager.playDestroyBrickSFX()
+        if(GameManager.gameMode == "golf"){
+            gameObject.changeColor()
         }
-        else{
+
+        //Check brick health
+        if(gameObject.health > 0){
             //SFX
             SoundManager.playBallBounceSFX()
+            return
         }
+
+        //Finally
+        gameObject.destroy()
+        GameManager.gameObjects.remove(gameObject)
+        //Add scored based on level
+        GameManager.score += GameManager.scorePerBrick + ((GameManager.level -1) * GameManager.bonusScorePerLevel)
+        //Add score based on combo
+        if(GameManager.currentCombo > 0){
+            val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
+            GameManager.score += comboValue
+            val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
+            UIManager.comboText = comboText
+            SoundManager.playComboSFX()
+        }
+        GameManager.currentCombo++
+        //SFX
+        SoundManager.playDestroyBrickSFX()
     }
 
     private fun checkBorderCollision() {
