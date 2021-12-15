@@ -182,7 +182,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         GameManager.lives--
         if(GameManager.lives <= 0){
             SoundManager.playGameOverSFX()
-            GameManager.gameOver()
+            GameManager.context?.gameOver()
         }
         else{
             SoundManager.playLoseLifeSFX()

@@ -1,8 +1,6 @@
 package com.kyhgroupd.ponggroupd
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
+
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -12,17 +10,16 @@ import android.os.Build
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.scale
-import com.kyhgroupd.ponggroupd.activitys.GameOverActivity
+import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
-@SuppressLint("StaticFieldLeak")
 object GameManager {
 
     //Game mode
     var gameMode: String = ""
 
     //Context
-    var context: Activity? = null
+    var context: BreakoutActivity? = null
 
     //FPS
     val targetFPS: Int = 60
@@ -255,11 +252,4 @@ object GameManager {
         brickColors.add(Color.rgb(150, 150, 0))
         brickColors.add(Color.rgb(150, 75, 0))
     }
-
-    fun gameOver() {
-        val intent = Intent(context, GameOverActivity :: class.java )
-        context?.startActivity(intent)
-
-    }
-
 }
