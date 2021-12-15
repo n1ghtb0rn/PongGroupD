@@ -52,7 +52,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     private fun goalCollision(){
-        GameManager.score++
+        GameManager.score += 100 + (GameManager.level -1) * GameManager.bonusScorePerLevel
         GameManager.nextLevel()
     }
 
@@ -177,7 +177,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 SoundManager.playBallBounceSFX()
             }
             if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
-                this.loseLife()
+                if(GameManager.gameMode == "breakout"){
+                    this.loseLife()
+                } else if(GameManager.gameMode == "golf"){
+                    addLife()
+                }
+
             }
         }
         if(this.posX < 0){
@@ -246,5 +251,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         else{
             SoundManager.playLoseLifeSFX()
         }
+    }
+
+    fun addLife(){
+        resetPos()
+        GameManager.lives++
+        SoundManager.playLoseLifeSFX()
     }
 }
