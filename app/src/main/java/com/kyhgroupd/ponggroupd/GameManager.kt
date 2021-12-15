@@ -198,6 +198,12 @@ object GameManager {
             ball?.resetPos()
 
         } else if(gameMode == "golf"){
+            val iterator = gameObjects.iterator()
+            for (obj in iterator){
+                if(obj is Brick){
+                    iterator.remove()
+                }
+            }
             addBricksGolf()
             ball?.resetPos()
         }
