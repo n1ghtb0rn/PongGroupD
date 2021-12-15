@@ -136,10 +136,6 @@ object GameManager {
         GameManager.paddle = paddle
         gameObjects.add(paddle)
 
-        val paddle2 = Paddle(screenSizeX/2, screenSizeY - (screenSizeY/6), paddleColor)
-        GameManager.paddle2 = paddle2
-        gameObjects.add(paddle2)
-
         //Ball
         ballStartX = screenSizeX/2
         ballStartY = paddle.posY-(paddle.height*2)
@@ -154,7 +150,9 @@ object GameManager {
                 addBricks()
             }
             "pong" -> {
-
+                val paddle2 = Paddle(screenSizeX/2, screenSizeY - (screenSizeY/6), paddleColor)
+                GameManager.paddle2 = paddle2
+                gameObjects.add(paddle2)
             }
             "golf" -> {
                 val goal = Goal(screenSizeX/2, (screenSizeY*0.2).toInt(), goalColor)
