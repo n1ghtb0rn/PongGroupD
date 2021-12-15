@@ -61,7 +61,7 @@ object GameManager {
     var paddle2: Paddle? = null
     var event: MotionEvent? = null
     var topBarHeight: Int = 170
-    val paddleTouchOffsetY: Int = 200
+    val paddleTouchOffsetY: Int = 300
     var paddleWidthFactor: Int = 5
     var paddleHeightFactor: Int = 5
     val paddleWidthPctPerLevel = 0.8

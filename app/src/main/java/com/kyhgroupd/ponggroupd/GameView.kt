@@ -105,6 +105,8 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
         UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
         UIManager.comboText?.update()
+
+        GameManager.event = null
     }
 
     private fun draw(){
