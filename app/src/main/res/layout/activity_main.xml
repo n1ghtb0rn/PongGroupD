@@ -25,12 +25,13 @@
         android:id="@+id/btnPlayBreakout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/aldrich"
         android:text="Play breakout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintBottom_toTopOf="@id/btnPlayPong"/>
 
     <Button
         android:id="@+id/btnPlayPong"
@@ -41,7 +42,8 @@
         android:text="PLAY PONG"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnPlayBreakout" />
+        app:layout_constraintTop_toBottomOf="@id/btnPlayBreakout"
+        app:layout_constraintBottom_toTopOf="@id/btnPlayGolf"/>
 
     <Button
         android:id="@+id/btnPlayGolf"
@@ -52,7 +54,8 @@
         android:text="Play Golf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayPong" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayPong"
+        app:layout_constraintBottom_toTopOf="@id/btnContinue"/>
 
     <Button
         android:id="@+id/btnContinue"
@@ -63,18 +66,20 @@
         android:text="Continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayGolf" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayGolf"
+        app:layout_constraintBottom_toTopOf="@id/btnSettings"/>
 
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/aldrich"
         android:text="Settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnContinue" />
+        app:layout_constraintTop_toBottomOf="@+id/btnContinue"
+        app:layout_constraintBottom_toTopOf="@id/btnHighScore"/>
 
     <Button
         android:id="@+id/btnHighScore"
@@ -85,6 +90,7 @@
         android:text="High Score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSettings"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
