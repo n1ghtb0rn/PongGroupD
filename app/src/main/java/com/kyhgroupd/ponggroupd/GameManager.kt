@@ -155,7 +155,7 @@ object GameManager {
                 gameObjects.add(paddle2)
             }
             "golf" -> {
-                val goal = Goal(screenSizeX/2, (screenSizeY*0.2).toInt(), goalColor)
+                val goal = Goal(screenSizeX/2, screenSizeY/3, goalColor)
                 gameObjects.add(goal)
             }
         }
