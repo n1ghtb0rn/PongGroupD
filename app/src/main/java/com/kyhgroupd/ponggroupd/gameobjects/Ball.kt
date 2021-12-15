@@ -51,7 +51,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     private fun goalCollision(){
         GameManager.score++
-        resetPos()
+        GameManager.nextLevel()
     }
 
     private fun paddleCollision(gameObject: Paddle) {

@@ -157,6 +157,7 @@ object GameManager {
             "golf" -> {
                 val goal = Goal(screenSizeX/2, screenSizeY/3, goalColor)
                 gameObjects.add(goal)
+                addBricksGolf()
             }
         }
 
@@ -220,6 +221,14 @@ object GameManager {
         //gameObjects.add(referenceBrick) //Use this line for testing only!
     }
 
+    private fun addBricksGolf(){
+        val referenceBrick = Brick(200, 2500, Color.WHITE)
+        for (x in 0..screenSizeX-1 step referenceBrick.width) {
+            val brick = Brick(x, screenSizeY/2, Color.WHITE)
+            gameObjects.add(brick)
+        }
+    }
+
     fun bricksCleared(): Boolean{
         for (obj in gameObjects){
             if(obj is Brick){
@@ -230,15 +239,21 @@ object GameManager {
     }
 
     fun nextLevel(){
-        addBricks()
-        if(paddle != null){
-            var newPaddleWidth: Int = (paddle!!.width * paddleWidthPctPerLevel).toInt()
-            if(newPaddleWidth < paddle!!.height){
-                newPaddleWidth = paddle!!.height
+        if(gameMode == "breakout"){
+            addBricks()
+            if(paddle != null){
+                var newPaddleWidth: Int = (paddle!!.width * paddleWidthPctPerLevel).toInt()
+                if(newPaddleWidth < paddle!!.height){
+                    newPaddleWidth = paddle!!.height
+                }
+                paddle!!.width = newPaddleWidth
             }
-            paddle!!.width = newPaddleWidth
+            ball?.resetPos()
+
+        } else if(gameMode == "golf"){
+            addBricksGolf()
+            ball?.resetPos()
         }
-        ball?.resetPos()
         level++
     }
 
