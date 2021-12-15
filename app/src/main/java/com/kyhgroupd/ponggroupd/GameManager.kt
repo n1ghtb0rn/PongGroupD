@@ -164,7 +164,7 @@ object GameManager {
         //UI objects
         if (gameMode != "pong") {
             addUiText()
-        } else  //{
+        } //else  {
            // addPongUiText()
         //}
 
