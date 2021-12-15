@@ -55,53 +55,17 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     private fun paddleCollision(paddle: Paddle) {
-        //100% of ball speed to be shared by a percentage over y/x-axis
-        val totalBallSpeed = GameManager.ballSpeed *2
 
-        //Change ball angle depending on paddle collision zone
-        val paddleZones = 6
-        val widthPerZone = paddle.width/paddleZones
-
-        var speedY: Int = 0
-        var speedX: Int = 0
-
-        //Zone 1 (far left side)
-        if(this.posX < paddle.posX+widthPerZone && this.posX+this.width > paddle.posX){
-            speedY = -(totalBallSpeed*0.3).toInt()
-            speedX = -(totalBallSpeed*0.7).toInt()
-        }
-        //Zone 2
-        else if(this.posX < paddle.posX+(widthPerZone*2) && this.posX+this.width > paddle.posX+widthPerZone){
-            speedY = -(totalBallSpeed*0.5).toInt()
-            speedX = -(totalBallSpeed*0.5).toInt()
-        }
-        //Zone 3
-        else if(this.posX < paddle.posX+(widthPerZone*3) && this.posX+this.width > paddle.posX+(widthPerZone*2)){
-            speedY = -(totalBallSpeed*0.7).toInt()
-            speedX = -(totalBallSpeed*0.3).toInt()
-        }
-        //Zone 4
-        else if(this.posX < paddle.posX+(widthPerZone*4) && this.posX+this.width > paddle.posX+(widthPerZone*3)){
-            speedY = -(totalBallSpeed*0.7).toInt()
-            speedX = (totalBallSpeed*0.3).toInt()
-        }
-        //Zone 5
-        else if(this.posX < paddle.posX+(widthPerZone*5) && this.posX+this.width > paddle.posX+(widthPerZone*4)){
-            speedY = -(totalBallSpeed*0.5).toInt()
-            speedX = (totalBallSpeed*0.5).toInt()
-        }
-        //Zone 6 (far right side)
-        else {
-            speedY = -(totalBallSpeed*0.3).toInt()
-            speedX = (totalBallSpeed*0.7).toInt()
-        }
+        val speedXY = this.getSpeedXY(paddle)
+        val xIndex = 0
+        val yIndex = 1
 
         //Player 1
         if(paddle.player == 1){
-            if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + radius){
+            if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + (paddle.height/2)){
 
-                this.speedY = speedY
-                this.speedX = speedX
+                this.speedY = speedXY[yIndex]
+                this.speedX = speedXY[xIndex]
 
             } else {
                 speedX *= -1
@@ -109,10 +73,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
         //Player 2
         else{
-            if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + radius){
+            if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + (paddle.height/2)){
 
-                this.speedY = -speedY
-                this.speedX = speedX
+                this.speedY = -speedXY[yIndex]
+                this.speedX = speedXY[xIndex]
 
             } else {
                 speedX *= -1
@@ -177,6 +141,51 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //SFX
         SoundManager.playDestroyBrickSFX()
+    }
+
+    private fun getSpeedXY(paddle: Paddle): Array<Int> {
+        //100% of ball speed to be shared by a percentage over y/x-axis
+        val totalBallSpeed = GameManager.ballSpeed *2
+
+        //Change ball angle depending on paddle collision zone
+        val paddleZones = 6
+        val widthPerZone = paddle.width/paddleZones
+
+        var speedY: Int = 0
+        var speedX: Int = 0
+
+        //Zone 1 (far left side)
+        if(this.posX < paddle.posX+widthPerZone && this.posX+this.width > paddle.posX){
+            speedY = -(totalBallSpeed*0.3).toInt()
+            speedX = -(totalBallSpeed*0.7).toInt()
+        }
+        //Zone 2
+        else if(this.posX < paddle.posX+(widthPerZone*2) && this.posX+this.width > paddle.posX+widthPerZone){
+            speedY = -(totalBallSpeed*0.5).toInt()
+            speedX = -(totalBallSpeed*0.5).toInt()
+        }
+        //Zone 3
+        else if(this.posX < paddle.posX+(widthPerZone*3) && this.posX+this.width > paddle.posX+(widthPerZone*2)){
+            speedY = -(totalBallSpeed*0.7).toInt()
+            speedX = -(totalBallSpeed*0.3).toInt()
+        }
+        //Zone 4
+        else if(this.posX < paddle.posX+(widthPerZone*4) && this.posX+this.width > paddle.posX+(widthPerZone*3)){
+            speedY = -(totalBallSpeed*0.7).toInt()
+            speedX = (totalBallSpeed*0.3).toInt()
+        }
+        //Zone 5
+        else if(this.posX < paddle.posX+(widthPerZone*5) && this.posX+this.width > paddle.posX+(widthPerZone*4)){
+            speedY = -(totalBallSpeed*0.5).toInt()
+            speedX = (totalBallSpeed*0.5).toInt()
+        }
+        //Zone 6 (far right side)
+        else {
+            speedY = -(totalBallSpeed*0.3).toInt()
+            speedX = (totalBallSpeed*0.7).toInt()
+        }
+
+        return arrayOf(speedX, speedY)
     }
 
     private fun checkBorderCollision() {
