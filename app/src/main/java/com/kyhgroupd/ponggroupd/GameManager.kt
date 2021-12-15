@@ -40,8 +40,8 @@ object GameManager {
     val pieceObjects = mutableListOf<BrickPiece>()
 
     //Color data
-    val ballColor = Color.DKGRAY
-    val paddleColor = Color.DKGRAY
+    val ballColor = Color.rgb(150, 0, 0)
+    val paddleColor = Color.rgb(0, 150, 0)
     val gradientColor = Color.WHITE
     val gameTextColor = Color.LTGRAY
     val brickColors = mutableListOf<Int>()
@@ -66,9 +66,10 @@ object GameManager {
     val paddleWidthPctPerLevel = 0.8
 
     //Bricks
+    var referenceBrick: Brick? = null
     val brickRows: Int = 8
-    val bricksPerColumn: Int = 8
-    val brickWidthRatio = 3
+    val bricksPerRow: Int = 11
+    val brickHeightRatio = 3
     val borderStrokeWidthFactor = 5
 
     //Pieces
@@ -106,6 +107,9 @@ object GameManager {
 
         //Clear GameObject-lists
         gameObjects.clear()
+
+        //Reference brick
+        referenceBrick = Brick(200, 2500, Color.WHITE)
 
         //Paddle
         val paddle = Paddle(screenSizeX/2,screenSizeY - (screenSizeY/6), paddleColor)
@@ -152,12 +156,16 @@ object GameManager {
    // }
 
     private fun addBricks(){
+        if(referenceBrick == null){
+            return
+        }
         var colorIndex: Int = 0
-        val referenceBrick = Brick(200, 2500, Color.WHITE)
-        val brickRowStart = referenceBrick.height+UIManager.uiHeight
-        val brickRowEnd = UIManager.uiHeight+(referenceBrick.height*brickRows)
-        for (y in brickRowStart..brickRowEnd step referenceBrick.height) {
-            for (x in 0..screenSizeX-1 step referenceBrick.width) {
+        val brickRowStart = referenceBrick!!.height+UIManager.uiHeight
+        val brickRowEnd = UIManager.uiHeight+(referenceBrick!!.height*brickRows)
+        val brickColumnStart = 0
+        val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
+        for (y in brickRowStart..brickRowEnd step referenceBrick!!.height) {
+            for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
                 val brick = Brick(x, y, brickColors[colorIndex])
                 gameObjects.add(brick)
             }

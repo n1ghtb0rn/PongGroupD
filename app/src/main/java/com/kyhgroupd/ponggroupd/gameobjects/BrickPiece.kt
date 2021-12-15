@@ -10,8 +10,8 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
     var lifetime: Int = GameManager.pieceLifetime
 
     init {
-        width = ((GameManager.screenSizeX / GameManager.bricksPerColumn)/ GameManager.pieceWidthFactor).toInt()
-        height = (width/ GameManager.brickWidthRatio)
+        width = ((GameManager.screenSizeX / GameManager.bricksPerRow)/ GameManager.pieceWidthFactor).toInt()
+        height = (width/ GameManager.brickHeightRatio)
     }
 
     override fun draw(canvas: Canvas?){
