@@ -1,13 +1,13 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
-import android.graphics.Canvas
-import android.graphics.LinearGradient
-import android.graphics.Shader
+import android.graphics.*
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.contains
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.SoundManager
 import com.kyhgroupd.ponggroupd.UIManager
+import java.lang.Math.abs
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -93,13 +93,42 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun brickCollision(brick: Brick) {
-        if (this.posX < brick.posX+brick.width-radius &&
-            this.posX+this.width > brick.posX+radius) {
-            speedY *= -1
-        } else {
-            speedX *= -1
-        }
 
+        var pointLeft = Point(posX, posY + radius)
+        var pointTop= Point(posX + radius, posY)
+        var pointRight = Point(posX + width, posY + radius)
+        var pointBottom = Point(posX + radius, posY + height)
+
+        var brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
+
+        if (brickRect.contains(pointBottom)){
+            println("Bottom side of ball")
+            posY = brick.posY - height
+            speedY *= -1
+            destroyBrick(brick)
+            addScore()
+        }
+        if (brickRect.contains(pointTop)){
+            println("Top side of ball")
+            posY = brick.posY + brick.height
+            speedY *= -1
+            destroyBrick(brick)
+        }
+        if (brickRect.contains(pointRight)){
+            println("Right side of ball")
+            posX = brick.posX - width
+            speedX *= -1
+            destroyBrick(brick)
+        }
+        if(brickRect.contains(pointLeft)){
+            println("Left side of ball")
+            posX = brick.posX + brick.width
+            speedX *= -1
+            destroyBrick(brick)
+        }
+    }
+
+    private fun destroyBrick(brick: Brick){
         //Unbreakable brick?
         if(brick.unbreakable){
             //SFX
@@ -124,6 +153,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         brick.destroy()
         GameManager.gameObjects.remove(brick)
 
+        //SFX
+        SoundManager.playDestroyBrickSFX()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun addScore(){
         //Score
         if(GameManager.gameMode == "breakout"){
             //Add scored based on level
@@ -138,9 +173,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
             GameManager.currentCombo++
         }
-
-        //SFX
-        SoundManager.playDestroyBrickSFX()
     }
 
     private fun getSpeedXY(paddle: Paddle): Array<Int> {
