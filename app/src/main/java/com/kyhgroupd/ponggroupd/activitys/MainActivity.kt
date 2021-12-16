@@ -18,28 +18,28 @@ class MainActivity : AppCompatActivity() {
 
         binder.btnPlayBreakout.setOnClickListener {
             GameManager.gameMode = "breakout"
-            val intent = Intent(this, BreakoutActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             GameManager.shouldReset = true
             startActivity(intent)
         }
 
         binder.btnPlayPong.setOnClickListener{
             GameManager.gameMode = "pong"
-            val intent = Intent(this, BreakoutActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             GameManager.shouldReset = true
             startActivity(intent)
         }
 
         binder.btnPlayGolf.setOnClickListener{
             GameManager.gameMode = "golf"
-            val intent = Intent(this, BreakoutActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             GameManager.shouldReset = true
             startActivity(intent)
         }
 
         binder.btnContinue.setOnClickListener{
             if(GameManager.context != null){
-                val intent = Intent(this, BreakoutActivity::class.java)
+                val intent = Intent(this, GameActivity::class.java)
                 GameManager.shouldReset = false
                 startActivity(intent)
             }

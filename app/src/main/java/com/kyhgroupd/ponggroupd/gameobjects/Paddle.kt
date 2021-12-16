@@ -2,14 +2,8 @@ package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.Canvas
 import android.graphics.LinearGradient
-import android.graphics.PointF
 import android.graphics.Shader
-import android.util.Log
-import android.view.MotionEvent
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet
 import com.kyhgroupd.ponggroupd.GameManager
-import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
 
 class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject(startX, startY, color) {
 

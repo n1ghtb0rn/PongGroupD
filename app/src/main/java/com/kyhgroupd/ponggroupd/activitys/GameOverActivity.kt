@@ -36,7 +36,7 @@ class GameOverActivity : AppCompatActivity() {
         }
 
         binding.btnPlayAgain.setOnClickListener{
-            Intent(this, BreakoutActivity :: class.java)
+            Intent(this, GameActivity :: class.java)
                 .apply { startActivity(this) }
         }
     }

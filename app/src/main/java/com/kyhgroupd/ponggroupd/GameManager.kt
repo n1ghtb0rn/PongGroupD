@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.scale
-import com.kyhgroupd.ponggroupd.activitys.BreakoutActivity
+import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
 object GameManager {
@@ -19,7 +19,7 @@ object GameManager {
     var gameMode: String = ""
 
     //Context
-    var context: BreakoutActivity? = null
+    var context: GameActivity? = null
 
     //FPS
     val targetFPS: Int = 60
@@ -142,8 +142,6 @@ object GameManager {
             }
             "golf" -> {
                 lives = 0
-                val goal = Goal(screenSizeX/2, screenSizeY/3, goalColor)
-                gameObjects.add(goal)
                 addBricksGolf()
             }
         }
@@ -165,8 +163,8 @@ object GameManager {
         }
 
         var colorIndex: Int = 0
-        val brickRowStart = referenceBrick!!.height+UIManager.uiHeight
-        val brickRowEnd = UIManager.uiHeight+(referenceBrick!!.height*brickRows)
+        val brickRowStart = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + referenceBrick!!.height).toInt()
+        val brickRowEnd = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + (referenceBrick!!.height*brickRows)).toInt()
         val brickColumnStart = 0
         val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
         for (y in brickRowStart..brickRowEnd step referenceBrick!!.height) {
@@ -180,7 +178,6 @@ object GameManager {
                 colorIndex = 0
             }
         }
-        //gameObjects.add(referenceBrick) //Use this line for testing only!
     }
 
     private fun addBricksGolf(){
@@ -188,19 +185,53 @@ object GameManager {
             return
         }
 
-        val brickColumnStart = 0
-        val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
-        for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
-            val brick = Brick(x, screenSizeY/2, Color.WHITE)
-            brick.health = (1..3).random()
-            brick.changeColor()
-            gameObjects.add(brick)
+        val golfLevels = GolfLevels().levels
+        if(golfLevels.size < level){
+            //return if level doesn't exist
+            return
+        }
+        val level = golfLevels[level-1]
+        val rows = level.split(',')
+        for(row in rows){
+            if(row.length > 11){
+                //return if a brick-row count is more than 11
+                return
+            }
         }
 
-        //Testing unbreakable bricks
-        for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
-            val brick = Brick(x, screenSizeY/6, Color.DKGRAY, true)
-            gameObjects.add(brick)
+        Log.d("Danne", "Rows = " + rows.size) // = 5
+        Log.d("Danne", "Columns = " + rows[0].length) // = 11
+
+        for(y in 0..rows.size-1){
+            for(x in 0..rows[0].length-1){
+                val objectType: Char = rows[y][x]
+                val startX = x * referenceBrick!!.width
+                val startY = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + (y * referenceBrick!!.height)).toInt()
+
+                var gameObject: GameObject? = null
+                if(objectType == 'O'){
+                    gameObject = Goal(startX, startY, goalColor)
+                }
+                if(objectType == 'L'){
+                    gameObject = Brick(startX, startY, Color.WHITE, 1)
+                }
+                if(objectType == 'M'){
+                    gameObject = Brick(startX, startY, Color.WHITE, 2)
+                }
+                if(objectType == 'S'){
+                    gameObject = Brick(startX, startY, Color.WHITE, 3)
+                }
+                if(objectType == 'U'){
+                    gameObject = Brick(startX, startY, Color.DKGRAY, true)
+                }
+
+                if(gameObject != null){
+                    if(gameObject is Brick){
+                        gameObject.changeColor()
+                    }
+                    gameObjects.add(gameObject)
+                }
+            }
         }
     }
 
@@ -214,6 +245,9 @@ object GameManager {
     }
 
     fun nextLevel(){
+        //Increment current level
+        level++
+
         if(gameMode == "breakout"){
             addBricks()
             if(paddle != null){
@@ -223,7 +257,7 @@ object GameManager {
                 }
                 paddle!!.width = newPaddleWidth
             }
-            ball?.resetPos()
+
 
         } else if(gameMode == "golf"){
             val iterator = gameObjects.iterator()
@@ -233,9 +267,14 @@ object GameManager {
                 }
             }
             addBricksGolf()
-            ball?.resetPos()
+            val golfLevels = GolfLevels().levels
+            if(level > golfLevels.size){
+                level = golfLevels.size
+            }
         }
-        level++
+
+        //Finally
+        ball?.resetPos()
     }
 
     fun addBrickColors(){

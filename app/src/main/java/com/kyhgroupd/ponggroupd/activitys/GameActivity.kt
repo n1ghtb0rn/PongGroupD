@@ -9,7 +9,7 @@ import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.GameView
 import com.kyhgroupd.ponggroupd.SoundManager
 
-class BreakoutActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class BreakoutActivity : AppCompatActivity() {
     //Not used at the moment because UI is drawn from canvas
     fun updateUI(){
         // "this@BreakoutActivity" only needed when called from Fragment
-        this@BreakoutActivity.runOnUiThread(Runnable {
+        this@GameActivity.runOnUiThread(Runnable {
 
             //Example:
             //myTextView.text = "Hello, World!"
