@@ -21,7 +21,7 @@
             android:name=".activitys.GameOverActivity"
             android:exported="true" />
         <activity
-            android:name=".activitys.BreakoutActivity"
+            android:name=".activitys.GameActivity"
             android:exported="true" />
         <activity
             android:name=".activitys.MainActivity"

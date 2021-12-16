@@ -26,9 +26,6 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
 
     //Colors
     init {
-        if(unbreakable){
-            this.paint.color = Color.GRAY
-        }
         this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
             GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
 
@@ -97,13 +94,16 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
 
     fun changeColor(){
         when {
+            this.unbreakable -> {
+                this.paint.color = Color.DKGRAY
+            }
             this.health >= 3 -> {
                 this.paint.color = Color.rgb(150, 0, 0)     //red
             }
             this.health == 2 -> {
                 this.paint.color = Color.rgb(150, 150, 0)   //yellow
             }
-            else -> {
+            this.health <= 1 -> {
                 this.paint.color = Color.rgb(0, 150, 0)     //green
             }
         }
