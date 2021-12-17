@@ -2,6 +2,7 @@ package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.contains
 import com.kyhgroupd.ponggroupd.GameManager
@@ -105,27 +106,25 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             println("Bottom side of ball")
             posY = brick.posY - height
             speedY *= -1
-            destroyBrick(brick)
-            addScore()
         }
         if (brickRect.contains(pointTop)){
             println("Top side of ball")
             posY = brick.posY + brick.height
             speedY *= -1
-            destroyBrick(brick)
         }
         if (brickRect.contains(pointRight)){
             println("Right side of ball")
             posX = brick.posX - width
             speedX *= -1
-            destroyBrick(brick)
         }
         if(brickRect.contains(pointLeft)){
             println("Left side of ball")
             posX = brick.posX + brick.width
             speedX *= -1
-            destroyBrick(brick)
         }
+
+        destroyBrick(brick)
+        addScore()
     }
 
     private fun destroyBrick(brick: Brick){
