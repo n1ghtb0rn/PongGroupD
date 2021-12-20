@@ -8,10 +8,10 @@
     android:background="@color/black">
 
     <TextView
-        android:id="@+id/tvGameOver"
+        android:id="@+id/tvPongWin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PLAYER 1 WINS"
+        android:text="PLAYER 0 WINS"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
         android:textSize="@dimen/default_header_text_size"
@@ -29,7 +29,7 @@
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
         android:textSize="@dimen/default_text_size"
-        app:layout_constraintTop_toBottomOf="@id/tvGameOver"
+        app:layout_constraintTop_toBottomOf="@id/tvPongWin"
         app:layout_constraintBottom_toTopOf="@id/tvScorePlayer2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

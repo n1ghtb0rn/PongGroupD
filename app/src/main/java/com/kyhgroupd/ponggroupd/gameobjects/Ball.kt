@@ -220,10 +220,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if(GameManager.gameMode == "pong") {
             var player = 0
             if (this.posY < -GameManager.screenSizeY /6) {
-                player = 2
+                player = 1
             }
             if (this.posY+this.height > GameManager.screenSizeY +(GameManager.screenSizeY /6)){
-                player = 1
+                player = 2
             }
             if(player != 0) {
                 this.ScorePointPong(player)
@@ -269,7 +269,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         return null
     }
 
-    fun resetPos(){
+    fun resetPos() {
         //Reset ball position and speed
         this.posX = GameManager.ballStartX
         this.posY = GameManager.ballStartY
@@ -277,6 +277,15 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         this.speedY = -GameManager.ballSpeed
     }
 
+    fun resetPosPong(player: Int) {
+        this.posX = GameManager.ballStartX
+        this.posY = GameManager.ballStartY
+        this.speedX = GameManager.ballSpeed
+        when (player) {
+            1 -> this.speedY = GameManager.ballSpeed
+            2 -> this.speedY = -GameManager.ballSpeed
+        }
+    }
 
     fun loseLife(){
         GameManager.currentCombo = 0
@@ -297,18 +306,20 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     fun ScorePointPong(player: Int){
         GameManager.currentCombo = 0
         UIManager.comboText = null
-        resetPos()
+        resetPosPong(player)
         //Increment score
         when(player) {
             1 -> GameManager.score++
             2 -> GameManager.player2Score++
         }
 
-        if(GameManager.score >= 11 || GameManager.player2Score >= 11){
+        if(GameManager.score >= 11) {
             SoundManager.playGameOverSFX()
-            GameManager.context?.pongWin()
-        }
-        else{
+            GameManager.context?.pongWin(1)
+        } else if (GameManager.player2Score >= 11) {
+            SoundManager.playGameOverSFX()
+            GameManager.context?.pongWin(2)
+        } else {
             SoundManager.playLoseLifeSFX()
         }
     }
