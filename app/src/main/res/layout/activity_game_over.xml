@@ -14,12 +14,12 @@
         android:text="GAME OVER"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
-        android:textSize="60sp"
+        android:textSize="@dimen/default_header_text_size"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvScore"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="@dimen/first_game_btn_top_margin"/>
 
     <TextView
         android:id="@+id/tvScore"
@@ -28,12 +28,12 @@
         android:text="YOUR SCORE: 0"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="@dimen/default_text_size"
         app:layout_constraintTop_toBottomOf="@id/tvGameOver"
         app:layout_constraintBottom_toTopOf="@id/tvSavePrompt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="@dimen/default_margin"/>
 
     <TextView
         android:id="@+id/tvSavePrompt"
@@ -42,11 +42,11 @@
         android:text="SAVE SCORE"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="@dimen/default_text_size"
         app:layout_constraintTop_toBottomOf="@id/tvScore"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/first_game_btn_top_margin"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,9 +57,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tvSavePrompt"
         app:layout_constraintStart_toStartOf="@id/tvGameOver"
         app:layout_constraintEnd_toEndOf="@id/tvGameOver"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
@@ -81,7 +81,7 @@
         android:fontFamily="@font/aldrich"
         app:layout_constraintTop_toBottomOf="@id/tilUsername"
         app:layout_constraintEnd_toEndOf="@id/tilUsername"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="@dimen/default_margin" />
 
     <Button
         android:id="@+id/btnPlayAgain"
@@ -93,7 +93,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnMainMenu"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="@dimen/default_margin"/>
 
     <Button
         android:id="@+id/btnMainMenu"
