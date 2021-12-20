@@ -103,31 +103,21 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         var brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
 
         if (brickRect.contains(pointBottom)){
-            //posY = brick.posY - height
-            //speedY *= -1
             speedY = kotlin.math.abs(speedY) * -1
             destroyBrick(brick)
             addScore()
         }
         if (brickRect.contains(pointTop)){
-            //posY = brick.posY + brick.height
-            //speedY *= -1
-
             speedY = kotlin.math.abs(speedY)
             destroyBrick(brick)
             addScore()
         }
         if (brickRect.contains(pointRight)){
-            //posX = brick.posX - width
-            //speedX *= -1
             speedX = kotlin.math.abs(speedX) * -1
-
             destroyBrick(brick)
             addScore()
         }
         if(brickRect.contains(pointLeft)){
-            //posX = brick.posX + brick.width
-            //speedX *= -1
             speedX = kotlin.math.abs(speedX)
             destroyBrick(brick)
             addScore()
