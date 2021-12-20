@@ -39,16 +39,15 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
 
         //Get all touch points and check if any of them is within range
         val pointerCount = GameManager.event!!.pointerCount
-        for(i in 0 until pointerCount){
-            val touchX: Int = GameManager.event!!.getX(i).toInt()
-            val touchY: Int = GameManager.event!!.getY(i).toInt()
 
+        for (i in 0 until pointerCount) {
+            val touchX = GameManager.event!!.getX(i).toInt()
+            val touchY = GameManager.event!!.getY(i).toInt()
             val offsetY = GameManager.paddleTouchOffsetY
 
-            if(touchY > (posY+(height/2)) - offsetY && touchY < (posY+(height/2)) + offsetY){
+            if (touchY > (posY+(height/2)) - offsetY && touchY < (posY+(height/2)) + offsetY) {
                 posX = touchX - (width/2)
             }
-
         }
 
         //Check if paddle is out of bounds
