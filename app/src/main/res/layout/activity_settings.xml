@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/default_padding"
     android:background="@color/black"
     android:gravity="end"
     android:orientation="vertical"
@@ -14,17 +14,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textAlignment="center"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
-        android:textSize="60sp" />
+        android:textSize="@dimen/default_header_text_size" />
 
     <!-- Settings -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/default_margin"
         android:stretchColumns="1"
         android:layout_weight="0.5">
 
@@ -36,7 +36,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sound effects"
+                android:text="@string/sound_effects"
+                android:textSize="@dimen/default_text_size"
                 android:textColor="@color/white"
                 android:fontFamily="@font/aldrich"
                 android:layout_column="1" />
@@ -57,7 +58,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Music"
+                android:text="@string/music"
+                android:textSize="@dimen/default_text_size"
                 android:textColor="@color/white"
                 android:fontFamily="@font/aldrich"
                 android:layout_column="1" />
@@ -78,7 +80,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Colors"
+                android:text="@string/colors"
+                android:textSize="@dimen/default_text_size"
                 android:textColor="@color/white"
                 android:fontFamily="@font/aldrich"
                 android:layout_column="1" />
@@ -98,8 +101,8 @@
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Back"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/back"
         android:fontFamily="@font/aldrich" />
 
 </LinearLayout>
