@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/default_padding"
     android:background="@drawable/background1b"
     android:gravity="end"
     android:orientation="vertical"
@@ -13,25 +13,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="High Score"
+        android:text="@string/high_score"
         android:textAlignment="center"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
-        android:textSize="60sp" />
+        android:textSize="@dimen/default_header_text_size" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvScoreList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/default_margin"
         android:layout_weight="0.5"/>
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Back"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/back"
         android:fontFamily="@font/aldrich" />
 
 </LinearLayout>
