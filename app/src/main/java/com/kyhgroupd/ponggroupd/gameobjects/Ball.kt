@@ -103,28 +103,35 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         var brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
 
         if (brickRect.contains(pointBottom)){
-            println("Bottom side of ball")
-            posY = brick.posY - height
-            speedY *= -1
+            //posY = brick.posY - height
+            //speedY *= -1
+            speedY = kotlin.math.abs(speedY) * -1
+            destroyBrick(brick)
+            addScore()
         }
         if (brickRect.contains(pointTop)){
-            println("Top side of ball")
-            posY = brick.posY + brick.height
-            speedY *= -1
+            //posY = brick.posY + brick.height
+            //speedY *= -1
+
+            speedY = kotlin.math.abs(speedY)
+            destroyBrick(brick)
+            addScore()
         }
         if (brickRect.contains(pointRight)){
-            println("Right side of ball")
-            posX = brick.posX - width
-            speedX *= -1
+            //posX = brick.posX - width
+            //speedX *= -1
+            speedX = kotlin.math.abs(speedX) * -1
+
+            destroyBrick(brick)
+            addScore()
         }
         if(brickRect.contains(pointLeft)){
-            println("Left side of ball")
-            posX = brick.posX + brick.width
-            speedX *= -1
+            //posX = brick.posX + brick.width
+            //speedX *= -1
+            speedX = kotlin.math.abs(speedX)
+            destroyBrick(brick)
+            addScore()
         }
-
-        destroyBrick(brick)
-        addScore()
     }
 
     private fun destroyBrick(brick: Brick){

@@ -13,14 +13,39 @@ class GolfLevels {
 
     val levels = arrayOf(
 
-        //level 1
+        //Level 1
+        "UU   O   UU,"+
+        "U         U,"+
+        "U         U,"+
+        "     L     ,"+
+        "     M     ,"+
+        "    LSL    ,"+
+        "    LSL    ,"+
+        "    MSM    ,"+
+        "   LSSSL   ,"+
+        "   MSSSM   ,"+
+        "  LSSSSSL  ,"+
+        "  LSMSMSL  ,"+
+        "  LSMSMSL  ,"+
+        "  LMLSLML  ,"+
+        "  LLLSLLL  ,"+
+        "    LSL    ,"+
+        "    LSL    ,"+
+        "    LSL    ,"+
+        "    LSL    ,"+
+        "    LSL    ,"+
+        "    LML    ,"+
+        "    LML    ,"+
+        "    LLL    ",
+
+        //level 2
         "S   LOL   S,"+
         "S   L L   S,"+
         "S   LLL   S,"+
         "S         S,"+
         "ULLLLLLLLLU",
 
-        //level 2
+        //level 3
         "S   LOL   S,"+
         "S   L L   S,"+
         "S   LUL   S,"+
