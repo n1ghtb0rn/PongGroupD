@@ -265,6 +265,9 @@ object GameManager {
                 if(obj is Brick){
                     iterator.remove()
                 }
+                if(obj is Goal){
+                    iterator.remove()
+                }
             }
             addBricksGolf()
             val golfLevels = GolfLevels().levels
