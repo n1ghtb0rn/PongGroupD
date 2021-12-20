@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.scale
+import com.kyhgroupd.ponggroupd.UIManager.uiHeight
+import com.kyhgroupd.ponggroupd.UIManager.uiObjects
 import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
@@ -102,6 +104,10 @@ object GameManager {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
+        //Score reset
+        score = 0
+        player2Score = 0
+
         //Background
         background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1b).scale(
             Resources.getSystem().displayMetrics.widthPixels, Resources.getSystem().displayMetrics.heightPixels, true)
@@ -149,13 +155,6 @@ object GameManager {
         //Music
         SoundManager.playMusic()
     }
-
-  //  @RequiresApi(Build.VERSION_CODES.O)
-   // private fun addPongUiText(){
-     //   val pongScoreText = GameText(screenSizeX/20, (uiHeight/2.5).toInt(), gameTextColor)
-     //   GameManager.scoreText = pongScoreText
-      //  uiObjects.add(pongScoreText)
-   // }
 
     private fun addBricks(){
         if(referenceBrick == null){
