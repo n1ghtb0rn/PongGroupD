@@ -93,9 +93,9 @@ object UIManager {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun addPongUiText(){
-        val pongScoreText = GameText((GameManager.screenSizeX*0.75).toInt(),GameManager.screenSizeY/4+10,
+        val pongScoreText2 = GameText((GameManager.screenSizeX*0.75).toInt(),GameManager.screenSizeX/2+10,
             GameManager.gameTextColor)
-        val pongScoreText2 = GameText((GameManager.screenSizeX*0.25).toInt(),GameManager.screenSizeY/4+10,
+        val pongScoreText = GameText((GameManager.screenSizeX*0.25).toInt(),GameManager.screenSizeX/2+10,
             GameManager.gameTextColor)
         this.scoreTextPlayer1 = pongScoreText
         this.scoreTextPlayer2 = pongScoreText2

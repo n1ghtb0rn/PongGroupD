@@ -22,8 +22,9 @@ class GameActivity : AppCompatActivity() {
             .apply { startActivity(this) }
     }
 
-    fun pongWin() {
+    fun pongWin(player: Int) {
         Intent(this, PongWinActivity :: class.java )
+            .putExtra("player", player)
             .apply { startActivity(this) }
     }
 
