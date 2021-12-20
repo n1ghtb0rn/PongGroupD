@@ -226,7 +226,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 player = 1
             }
             if(player != 0) {
-                this.loseLifePong(player)
+                this.ScorePointPong(player)
             }
         } else {
             if (this.posY < UIManager.uiHeight) {
@@ -294,17 +294,17 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
     }
 
-    fun loseLifePong(player: Int){
+    fun ScorePointPong(player: Int){
         GameManager.currentCombo = 0
         UIManager.comboText = null
         resetPos()
-        //Decrement number of lives
+        //Increment score
         when(player) {
-            1 -> GameManager.lives--
-            2 -> GameManager.player2Lives--
+            1 -> GameManager.score++
+            2 -> GameManager.player2Score++
         }
 
-        if(GameManager.lives <= 0 || GameManager.player2Lives <= 0){
+        if(GameManager.score >= 11 || GameManager.player2Score >= 11){
             SoundManager.playGameOverSFX()
             GameManager.context?.gameOver()
         }
