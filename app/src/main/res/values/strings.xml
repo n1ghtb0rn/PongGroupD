@@ -18,10 +18,10 @@
     <string name="colors">Colors</string>
 
     <!-- Game Over activity -->
-    <string name="game_over">Game Over</string>
+    <string name="game_over">GAME OVER</string>
     <string name="your_score">Your Score: 0</string>
-    <string name="save_score">Save Score</string>
-    <string name="enter_username">Enter Username</string>
+    <string name="save_score">SAVE SCORE</string>
+    <string name="enter_username">ENTER USERNAME</string>
     <string name="save">Save</string>
     <string name="play_again">Play Again</string>
     <string name="main_menu">Main Menu</string>

@@ -43,7 +43,7 @@ object GameManager {
     val pieceObjects = mutableListOf<BrickPiece>()
 
     //Color data
-    val ballColor = Color.rgb(150, 0, 0)
+    var ballColor = Color.rgb(150, 0, 0)
     val paddleColor = Color.rgb(0, 150, 0)
     val gradientColor = Color.WHITE
     val gameTextColor = Color.LTGRAY
@@ -120,15 +120,27 @@ object GameManager {
 
         //Paddle
         val player1 = 1
-        val paddle = Paddle(screenSizeX/2,screenSizeY - (screenSizeY/6), paddleColor, player1)
-        GameManager.paddle = paddle
-        gameObjects.add(paddle)
+        if(GameManager.gameMode == "pong"){
+            val paddle = Paddle(screenSizeX / 2, screenSizeY - (screenSizeY / 6), Color.WHITE, player1)
+            GameManager.paddle = paddle
+            gameObjects.add(paddle)
+            val player2 = 2
+            val paddle2 = Paddle(screenSizeX/2, screenSizeY/12, Color.WHITE, player2)
+            GameManager.paddle2 = paddle2
+            gameObjects.add(paddle2)
+            ballColor = Color.WHITE
+        } else {
+            val paddle = Paddle(screenSizeX / 2, screenSizeY - (screenSizeY / 6), paddleColor, player1)
+            GameManager.paddle = paddle
+            gameObjects.add(paddle)
+        }
+
 
         //Ball
         ballStartX = screenSizeX/2
         when(gameMode){
             "pong" -> ballStartY = screenSizeY/2
-            else -> ballStartY = paddle.posY-(paddle.height*2)
+            else -> ballStartY = paddle!!.posY-(paddle!!.height*2)
         }
         ballSpeed = (screenSizeX * ballSpeedFactor).toInt()
         ball = Ball(0, 0, ballColor)
@@ -141,10 +153,7 @@ object GameManager {
                 addBricks()
             }
             "pong" -> {
-                val player2 = 2
-                val paddle2 = Paddle(screenSizeX/2, screenSizeY/12, paddleColor, player2)
-                GameManager.paddle2 = paddle2
-                gameObjects.add(paddle2)
+
             }
             "golf" -> {
                 lives = 0

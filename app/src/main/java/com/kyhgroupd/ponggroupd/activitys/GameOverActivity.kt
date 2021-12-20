@@ -3,6 +3,7 @@ package com.kyhgroupd.ponggroupd.activitys
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PlayerScore
@@ -18,6 +19,12 @@ class GameOverActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.tvScore.text = "SCORE: " + GameManager.score
+
+        if(GameManager.gameMode == "pong") {
+            binding.tvScorePlayer2.visibility = View.VISIBLE
+            binding.tvScore.text = "PLAYER 1 SCORE: " + GameManager.score
+            binding.tvScorePlayer2.text = "PLAYER 2 SCORE: " + GameManager.player2Score
+        }
 
         binding.btnSave.setOnClickListener{
             val playerName = binding.etUsername.text.toString()
