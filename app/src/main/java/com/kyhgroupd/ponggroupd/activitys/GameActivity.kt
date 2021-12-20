@@ -22,6 +22,11 @@ class GameActivity : AppCompatActivity() {
             .apply { startActivity(this) }
     }
 
+    fun pongWin() {
+        Intent(this, PongWinActivity :: class.java )
+            .apply { startActivity(this) }
+    }
+
     override fun onPause() {
         super.onPause()
         GameManager.isPaused = true
