@@ -133,6 +133,7 @@ object GameManager {
             val paddle = Paddle(screenSizeX / 2, screenSizeY - (screenSizeY / 6), paddleColor, player1)
             GameManager.paddle = paddle
             gameObjects.add(paddle)
+            ballColor = Color.rgb(150, 0, 0)
         }
 
 

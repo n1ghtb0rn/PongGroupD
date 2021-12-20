@@ -36,7 +36,7 @@ object UIManager {
 
         //UI
         uiHeight = GameManager.screenSizeY /uiHeightFactor
-        textSize = (GameManager.screenSizeX / textSizeFactor).toFloat()
+        textSize = when(GameManager.gameMode){"pong" -> (GameManager.screenSizeX / textSizeFactor * 2).toFloat() else -> (GameManager.screenSizeX / textSizeFactor).toFloat()}
         uiPaint.style = Paint.Style.STROKE
         uiPaint.color = Color.WHITE
         uiPaint.strokeWidth = uiBorderWidth
@@ -93,9 +93,9 @@ object UIManager {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun addPongUiText(){
-        val pongScoreText = GameText((GameManager.screenSizeX*0.75).toInt(),GameManager.screenSizeY/4,
+        val pongScoreText = GameText((GameManager.screenSizeX*0.75).toInt(),GameManager.screenSizeY/4+10,
             GameManager.gameTextColor)
-        val pongScoreText2 = GameText((GameManager.screenSizeX*0.25).toInt(),GameManager.screenSizeY/4,
+        val pongScoreText2 = GameText((GameManager.screenSizeX*0.25).toInt(),GameManager.screenSizeY/4+10,
             GameManager.gameTextColor)
         this.scoreTextPlayer1 = pongScoreText
         this.scoreTextPlayer2 = pongScoreText2
