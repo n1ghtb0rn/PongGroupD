@@ -22,6 +22,8 @@ object UIManager {
 
     //UI Text
     var scoreText: GameText? = null
+    var scoreTextPlayer1: GameText? = null
+    var scoreTextPlayer2: GameText? = null
     var highScoreText: GameText? = null
     var livesText: GameText? = null
     var levelText: GameText? = null
@@ -45,12 +47,13 @@ object UIManager {
         //UI objects
         if (GameManager.gameMode != "pong") {
             this.addUiText()
-        } else  //{
-        // addPongUiText()
-        //}
+        } else  {
+         addPongUiText()
+        }
 
         //UI Data
-            GameManager.score = 0
+        GameManager.score = 0
+        GameManager.player2Score = 0
         GameManager.highScore = DataManager.loadHighScore()
         GameManager.lives = 3
         GameManager.player2Lives = 3
@@ -88,4 +91,15 @@ object UIManager {
         uiObjects.add(levelText)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun addPongUiText(){
+        val pongScoreText = GameText((GameManager.screenSizeX*0.75).toInt(),GameManager.screenSizeY/4,
+            GameManager.gameTextColor)
+        val pongScoreText2 = GameText((GameManager.screenSizeX*0.25).toInt(),GameManager.screenSizeY/4,
+            GameManager.gameTextColor)
+        this.scoreTextPlayer1 = pongScoreText
+        this.scoreTextPlayer2 = pongScoreText2
+        uiObjects.add(pongScoreText)
+        uiObjects.add(pongScoreText2)
+    }
 }

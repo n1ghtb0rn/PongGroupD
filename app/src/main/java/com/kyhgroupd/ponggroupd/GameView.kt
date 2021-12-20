@@ -3,6 +3,7 @@ package com.kyhgroupd.ponggroupd
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.MotionEvent
@@ -102,6 +103,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             UIManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
         } else if(GameManager.gameMode == "golf"){
             UIManager.livesText?.textString = "MISSES: "+GameManager.lives.toString()
+        } else if(GameManager.gameMode == "pong"){
+            UIManager.scoreTextPlayer1?.textString = GameManager.score.toString()
+            UIManager.scoreTextPlayer2?.textString = GameManager.player2Score.toString()
         }
         UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
         UIManager.comboText?.update()
@@ -112,16 +116,26 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     private fun draw(){
         try{
             canvas = mHolder!!.lockCanvas()
-
             GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
-            //canvas.drawColor(Color.BLACK) //Draws a black background
+
+            if(GameManager.gameMode == "pong") {
+                canvas.drawColor(Color.BLACK) //Draws a black background
+            }
 
             if(GameManager.gameMode != "pong") {
-                canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(), UIManager.uiHeight.toFloat(), UIManager.uiPaint)
-
+                canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(),
+                    UIManager.uiHeight.toFloat(), UIManager.uiPaint)
                 for (uiObject in UIManager.uiObjects) {
                     uiObject.draw(canvas)
                 }
+            } else {
+                canvas.save()
+                canvas.rotate(270F,(GameManager.screenSizeX/2).toFloat(),(GameManager.screenSizeY/2).toFloat())
+                for (uiObject in UIManager.uiObjects) {
+                    uiObject.draw(canvas)
+                }
+                canvas.restore()
+                canvas.save()
             }
 
             for (gameObject in GameManager.gameObjects) {
