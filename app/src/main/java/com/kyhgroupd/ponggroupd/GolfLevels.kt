@@ -73,5 +73,38 @@ class GolfLevels {
         "SMMMMMMMMMS,"+
         "SLLLLLLLLLS",
 
+        //level 5
+        "S    O    S,"+
+        "S         S,"+
+        "SLLLLLLLLLS,"+
+        "S         S,"+
+        "SMMMMMMMMMS,"+
+        "S         S,"+
+        "UUUU   UUUU,"+
+        "SSSSSSSSSSS",
+
+        //level 6
+        "SSSSSSSSSSS,"+
+        "SML     LMS,"+
+        "SL       LS,"+
+        "S         S,"+
+        "S  U O U  S,"+
+        "S  U   U  S,"+
+        "S  UUUUU  S,"+
+        "S         S,"+
+        "SMMMMMMMMMS",
+
+        //level 7
+        "LLLLLLLLLLL,"+
+        "LLLLLLLLLLL,"+
+        "LLLMMMMMLLL,"+
+        "LLLMSSSMLLL,"+
+        "LLLMSOSMLLL,"+
+        "LLLMS SMLLL,"+
+        "LLLMSSSMLLL,"+
+        "LLLMMMMMLLL,"+
+        "LLLLLLLLLLL,"+
+        "LLLLLLLLLLL",
+
     )
 }
