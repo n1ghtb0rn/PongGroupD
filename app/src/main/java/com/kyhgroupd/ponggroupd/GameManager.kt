@@ -41,6 +41,7 @@ object GameManager {
     //GameObjects
     val gameObjects = mutableListOf<GameObject>()
     val pieceObjects = mutableListOf<BrickPiece>()
+    val trailObjects = mutableListOf<BallTrail>()
 
     //Color data
     var ballColor = Color.rgb(150, 0, 0)
