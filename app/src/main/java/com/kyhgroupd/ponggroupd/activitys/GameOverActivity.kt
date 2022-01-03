@@ -18,6 +18,12 @@ class GameOverActivity : AppCompatActivity() {
         binding = ActivityGameOverBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if(GameManager.gameMode == "golf"){
+            binding.tvGameOver.text = "WIN"
+        } else if (GameManager.gameMode == "breakout"){
+            binding.tvGameOver.text = "GAME OVER"
+        }
+
         binding.tvScore.text = "SCORE: " + GameManager.score
 
         binding.btnSave.setOnClickListener{
@@ -25,7 +31,9 @@ class GameOverActivity : AppCompatActivity() {
             if(playerName.trim().length > 0){
                 GameManager.playerName = playerName
                 val playerScore = PlayerScore(playerName, GameManager.score)
-                DataManager.saveScore(playerScore)
+                if(GameManager.gameMode == "breakout") {
+                    DataManager.saveScore(playerScore)
+                }
                 binding.btnSave.isEnabled = false
                 binding.etUsername.isEnabled = false
             }
