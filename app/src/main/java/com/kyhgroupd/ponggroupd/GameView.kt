@@ -80,6 +80,17 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
         }
 
+        //Trail objects
+        for(trailObject in GameManager.trailObjects){
+            trailObject.update()
+        }
+        val trailObjects = GameManager.trailObjects.toMutableList()
+        for(trailObject in trailObjects){
+            if(trailObject.radius <= 0){
+                GameManager.trailObjects.remove(trailObject)
+            }
+        }
+
         //UI objects
         for (uiObject in UIManager.uiObjects) {
             uiObject.update()
@@ -146,6 +157,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
 
             UIManager.comboText?.draw(canvas)
+
+            for(trailObject in GameManager.trailObjects){
+                trailObject.draw(canvas)
+            }
             GameManager.ball?.draw(canvas)
 
             mHolder!!.unlockCanvasAndPost(canvas)
