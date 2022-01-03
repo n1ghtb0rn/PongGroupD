@@ -80,6 +80,17 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
         }
 
+        //Power Up objects
+        for(powerUpObject in GameManager.powerUpObjects){
+            powerUpObject.update()
+        }
+        val powerUpObjects = GameManager.powerUpObjects.toMutableList()
+        for(powerUpObject in powerUpObjects){
+            if(powerUpObject.posY > GameManager.screenSizeY){
+                GameManager.powerUpObjects.remove(powerUpObject)
+            }
+        }
+
         //Trail objects
         for(trailObject in GameManager.trailObjects){
             trailObject.update()
@@ -90,6 +101,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 GameManager.trailObjects.remove(trailObject)
             }
         }
+
+        //Ball
+        GameManager.ball?.update()
 
         //UI objects
         for (uiObject in UIManager.uiObjects) {
@@ -103,9 +117,6 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 }
             }
         }
-
-        //Ball
-        GameManager.ball?.update()
 
         //UI
         UIManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
@@ -157,6 +168,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
 
             UIManager.comboText?.draw(canvas)
+
+            for(powerUpObject in GameManager.powerUpObjects){
+                powerUpObject.draw(canvas)
+            }
 
             for(trailObject in GameManager.trailObjects){
                 trailObject.draw(canvas)

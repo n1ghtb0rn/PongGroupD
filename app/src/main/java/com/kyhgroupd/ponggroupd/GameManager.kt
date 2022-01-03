@@ -42,6 +42,7 @@ object GameManager {
     val gameObjects = mutableListOf<GameObject>()
     val pieceObjects = mutableListOf<BrickPiece>()
     val trailObjects = mutableListOf<BallTrail>()
+    val powerUpObjects = mutableListOf<PowerUp>()
 
     //Color data
     var ballColor = Color.rgb(150, 0, 0)
@@ -80,6 +81,11 @@ object GameManager {
     val pieceSpeed = 25
     val pieceLifetime = 10
     val pieceWidthFactor = 2.5
+
+    //Power Ups
+    val powerUpFallSpeed = 15
+    val powerUpChance = 50 //1-100
+    val powerUpColor = Color.WHITE
 
     //Player data
     var playerName: String = ""

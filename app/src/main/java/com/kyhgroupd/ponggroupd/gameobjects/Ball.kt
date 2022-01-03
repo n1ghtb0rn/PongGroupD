@@ -148,6 +148,14 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             return
         }
 
+        //Spawn Power Up?
+        if(GameManager.gameMode == "breakout"){
+            val random = (1..100).random()
+            if(random > (100-GameManager.powerUpChance)){
+                GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, GameManager.powerUpColor))
+            }
+        }
+
         //Finally
         brick.destroy()
         GameManager.gameObjects.remove(brick)
