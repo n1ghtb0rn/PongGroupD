@@ -91,6 +91,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
         }
 
+        if(GameManager.gameMode == "breakout"){
+            PowerUpManager.updatePowerUps()
+        }
+
         //Trail objects
         for(trailObject in GameManager.trailObjects){
             trailObject.update()
