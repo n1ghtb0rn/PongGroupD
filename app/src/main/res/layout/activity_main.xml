@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
         android:fontFamily="@font/aldrich"
-        android:text="@string/high_score"
+        android:text="@string/high_score_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSettings"

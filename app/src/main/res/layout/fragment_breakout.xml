@@ -3,39 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.BreakoutFragment">
+    tools:context=".activitys.BreakoutFragment"
+    android:background="@android:color/transparent">
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_padding"
-    android:background="@drawable/background1b"
     android:gravity="end"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/high_score"
+        android:text="@string/breakout_high_score"
         android:textAlignment="center"
         android:fontFamily="@font/aldrich"
         android:textColor="@color/white"
         android:textSize="@dimen/default_header_text_size" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvScoreList"
+        android:id="@+id/rvScoreListBreakout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_weight="0.5"/>
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:text="@string/back"
-        android:fontFamily="@font/aldrich" />
 
 </LinearLayout>
 
