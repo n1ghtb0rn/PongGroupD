@@ -13,6 +13,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
         radius = GameManager.referenceBrick!!.height/2
         width = radius*2
         height = radius*2
+        this.paint.alpha = 150
     }
 
     override fun draw(canvas: Canvas?) {
@@ -23,7 +24,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
     }
 
     override fun update() {
-        this.radius -= 1
+        this.radius -= 2
     }
 
 }
