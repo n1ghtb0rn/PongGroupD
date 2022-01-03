@@ -1,5 +1,6 @@
 package com.kyhgroupd.ponggroupd.activitys
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -17,24 +18,12 @@ class HighScoreActivity : AppCompatActivity() {
         setContentView(binder.root)
         setUpTabBar()
 
-        //  binder.btnBack.setOnClickListener{
-        //     val intent = Intent(this, MainActivity::class.java)
-        //     startActivity(intent)
-        //  }
-       // this.updateRecyclerView()
+        binder.btnBack.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-   /* @SuppressLint("NotifyDataSetChanged")
-    private fun updateRecyclerView(){
-        val scoreList = DataManager.loadScoreList()
-
-        this.binder.rvScoreList.layoutManager = LinearLayoutManager(applicationContext)
-        this.binder.rvScoreList.itemAnimator = DefaultItemAnimator()
-
-        val adapter = CustomAdapter(scoreList)
-        this.binder.rvScoreList.adapter = adapter
-        adapter.notifyDataSetChanged()
-    } */
 
     private fun setUpTabBar() {
         val adapter = TabPageAdapter(this, binder.tabLayout.tabCount)

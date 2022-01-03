@@ -9,11 +9,12 @@
         <entry key="app/src/main/res/layout/activity_breakout.xml" value="0.11481481481481481" />
         <entry key="app/src/main/res/layout/activity_game_over.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_golf.xml" value="0.1375" />
-        <entry key="app/src/main/res/layout/activity_high_score.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_high_score.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_pong.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/activity_pong_win.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_breakout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_golf.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_pong.xml" value="0.25104166666666666" />
       </map>
     </option>

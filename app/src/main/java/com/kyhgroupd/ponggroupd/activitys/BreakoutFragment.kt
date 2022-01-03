@@ -15,25 +15,16 @@ import com.kyhgroupd.ponggroupd.R
 
 class BreakoutFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_breakout, container, false)
-        val rv = view.findViewById<RecyclerView>(R.id.rvScoreList)
+        val rv = view.findViewById<RecyclerView>(R.id.rvScoreListBreakout)
 
         this.updateRecyclerView(rv)
 
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
