@@ -83,6 +83,19 @@
         app:layout_constraintEnd_toEndOf="@id/tilUsername"
         android:layout_marginTop="@dimen/default_margin" />
 
+    <TextView
+        android:id="@+id/tvScoreSaved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="SCORE SAVED"
+        android:fontFamily="@font/aldrich"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/btnSave"
+        app:layout_constraintBottom_toBottomOf="@id/btnSave"
+        app:layout_constraintEnd_toEndOf="@id/btnSave"
+        />
+
     <Button
         android:id="@+id/btnPlayAgain"
         android:layout_width="wrap_content"
