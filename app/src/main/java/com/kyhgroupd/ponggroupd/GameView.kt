@@ -86,7 +86,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
         val powerUpObjects = GameManager.powerUpObjects.toMutableList()
         for(powerUpObject in powerUpObjects){
-            if(powerUpObject.posY > GameManager.screenSizeY){
+            if(powerUpObject.posY > GameManager.screenSizeY || powerUpObject.collidedWithPaddle){
                 GameManager.powerUpObjects.remove(powerUpObject)
             }
         }

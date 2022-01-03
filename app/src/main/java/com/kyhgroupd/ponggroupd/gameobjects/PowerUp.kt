@@ -8,6 +8,7 @@ import com.kyhgroupd.ponggroupd.GameManager
 class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     var radius : Int = 0
+    var collidedWithPaddle = false
 
     init {
         radius = GameManager.referenceBrick!!.height
@@ -24,6 +25,11 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
 
     override fun update() {
         this.posY += GameManager.powerUpFallSpeed
+        if(this.posX < (GameManager.paddle!!.posX+GameManager.paddle!!.width) && (this.posX+this.width > GameManager.paddle!!.posX)){
+            if(this.posY < (GameManager.paddle!!.posY+GameManager.paddle!!.height) && (this.posY+this.height > GameManager.paddle!!.posY)){
+                this.collidedWithPaddle = true
+            }
+        }
     }
 
 
