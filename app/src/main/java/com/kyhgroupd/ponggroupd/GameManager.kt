@@ -82,11 +82,6 @@ object GameManager {
     val pieceLifetime = 10
     val pieceWidthFactor = 2.5
 
-    //Power Ups
-    val powerUpFallSpeed = 15
-    val powerUpChance = 50 //1-100
-    val powerUpColor = Color.WHITE
-
     //Player data
     var playerName: String = ""
     var score: Int = 0

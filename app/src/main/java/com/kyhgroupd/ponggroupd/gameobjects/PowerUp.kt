@@ -4,11 +4,15 @@ import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
+import com.kyhgroupd.ponggroupd.PowerUpManager
 
 class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     var radius : Int = 0
+
+    //Power Up info
     var collidedWithPaddle = false
+    val powerUpType = "POWER_BALL"
 
     init {
         radius = GameManager.referenceBrick!!.height
@@ -24,10 +28,11 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
     }
 
     override fun update() {
-        this.posY += GameManager.powerUpFallSpeed
+        this.posY += PowerUpManager.powerUpFallSpeed
         if(this.posX < (GameManager.paddle!!.posX+GameManager.paddle!!.width) && (this.posX+this.width > GameManager.paddle!!.posX)){
             if(this.posY < (GameManager.paddle!!.posY+GameManager.paddle!!.height) && (this.posY+this.height > GameManager.paddle!!.posY)){
                 this.collidedWithPaddle = true
+                PowerUpManager.activatePowerUp(this.powerUpType)
             }
         }
     }

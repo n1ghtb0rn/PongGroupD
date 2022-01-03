@@ -5,10 +5,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.contains
-import com.kyhgroupd.ponggroupd.GameManager
-import com.kyhgroupd.ponggroupd.GolfLevels
-import com.kyhgroupd.ponggroupd.SoundManager
-import com.kyhgroupd.ponggroupd.UIManager
+import com.kyhgroupd.ponggroupd.*
 import java.lang.Math.abs
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
@@ -110,6 +107,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         var brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
 
+        //Store previous speed
+        val oldSpeedY = speedY
+        val oldSpeedX = speedX
+
         if (brickRect.contains(pointBottom)){
             speedY = kotlin.math.abs(speedY) * -1
             destroyBrick(brick)
@@ -129,6 +130,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             speedX = kotlin.math.abs(speedX)
             destroyBrick(brick)
             addScore()
+        }
+
+        if(PowerUpManager.powerBallActive){
+            speedY = oldSpeedY
+            speedX = oldSpeedX
         }
     }
 
@@ -156,8 +162,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Spawn Power Up?
         if(GameManager.gameMode == "breakout"){
             val random = (1..100).random()
-            if(random > (100-GameManager.powerUpChance)){
-                GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, GameManager.powerUpColor))
+            if(random > (100-PowerUpManager.powerUpChance)){
+                GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, PowerUpManager.powerUpColor))
             }
         }
 
