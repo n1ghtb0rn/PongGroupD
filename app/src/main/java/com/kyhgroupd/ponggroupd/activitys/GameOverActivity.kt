@@ -1,9 +1,9 @@
 package com.kyhgroupd.ponggroupd.activitys
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PlayerScore
@@ -36,6 +36,7 @@ class GameOverActivity : AppCompatActivity() {
                 }
                 binding.btnSave.isEnabled = false
                 binding.etUsername.isEnabled = false
+                binding.tvScoreSaved.isVisible = true
             }
         }
 
@@ -53,6 +54,7 @@ class GameOverActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         binding.btnSave.isEnabled = true
+        binding.tvScoreSaved.isVisible = false
         binding.etUsername.setText(GameManager.playerName)
         GameManager.context = null
     }
