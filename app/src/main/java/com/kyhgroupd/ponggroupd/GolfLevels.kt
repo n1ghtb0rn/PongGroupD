@@ -56,24 +56,9 @@ class GolfLevels {
         "    MSM    ,"+
         "   MSSSM   ,"+
         "  MSSSSSM  ,"+
-        " MUUUUUUUM " ,
-
+        " MMUUUUUMM " ,
 
         //level 3
-        "S   LOL   S,"+
-        "S   L L   S,"+
-        "S   LLL   S,"+
-        "S         S,"+
-        "ULLLLLLLLLU",
-
-        //level 4
-        "S   LOL   S,"+
-        "S   L L   S,"+
-        "S   LUL   S,"+
-        "SMMMMMMMMMS,"+
-        "SLLLLLLLLLS",
-
-        //level 5
         "S    O    S,"+
         "S         S,"+
         "SLLLLLLLLLS,"+
@@ -83,7 +68,7 @@ class GolfLevels {
         "UUUU   UUUU,"+
         "SSSSSSSSSSS",
 
-        //level 6
+        //level 4
         "SSSSSSSSSSS,"+
         "SML     LMS,"+
         "SL       LS,"+
@@ -94,7 +79,7 @@ class GolfLevels {
         "S         S,"+
         "SMMMMMMMMMS",
 
-        //level 7
+        //level 5
         "LLLLLLLLLLL,"+
         "LLLLLLLLLLL,"+
         "LLLMMMMMLLL,"+

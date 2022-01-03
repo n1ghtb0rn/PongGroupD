@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.contains
 import com.kyhgroupd.ponggroupd.GameManager
+import com.kyhgroupd.ponggroupd.GolfLevels
 import com.kyhgroupd.ponggroupd.SoundManager
 import com.kyhgroupd.ponggroupd.UIManager
 import java.lang.Math.abs
@@ -52,6 +53,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     private fun goalCollision(){
         GameManager.score += 100 + (GameManager.level -1) * GameManager.bonusScorePerLevel
+        val golfLevels = GolfLevels().levels
+        if(golfLevels.size <= GameManager.level) {
+            GameManager.context?.gameOver()
+        }
         GameManager.nextLevel()
     }
 
