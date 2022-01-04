@@ -5,9 +5,10 @@ import android.graphics.Color
 object PowerUpManager {
 
     //Power Up Data
-    val powerUpFallSpeed = 15
-    val powerUpChance = 50 //1-100
-    val powerUpColor = Color.WHITE
+    val powerUpFallSpeed = 13
+    val powerUpChance = 20 //1-100
+    val powerUpColor = Color.DKGRAY
+    val labelColor = Color.WHITE
 
     //"Power Ball" (ball does not bounce on bricks)
     var powerBallActive = false
