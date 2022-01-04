@@ -8,7 +8,7 @@ import com.kyhgroupd.ponggroupd.PowerUpManager
 import com.kyhgroupd.ponggroupd.R
 import com.kyhgroupd.ponggroupd.UIManager
 
-class PowerUp(startX: Int, startY: Int, color: Int, powerUpType: String) : GameObject(startX, startY, color) {
+class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     var radius : Int = 0
 
@@ -22,7 +22,7 @@ class PowerUp(startX: Int, startY: Int, color: Int, powerUpType: String) : GameO
         width = radius*2
         height = radius*2
 
-        this.powerUpType = powerUpType
+        this.powerUpType = PowerUpManager.generatePowerUpType()
         this.labelPaint.color = PowerUpManager.labelColor
         this.labelPaint.textSize = (this.radius*1.5).toFloat()
         this.paint.textAlign = Paint.Align.CENTER
