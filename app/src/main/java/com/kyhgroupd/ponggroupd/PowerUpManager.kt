@@ -5,7 +5,7 @@ import android.graphics.Color
 object PowerUpManager {
 
     //Power Up Data
-    val powerUpFallSpeed = 13
+    val powerUpFallSpeed = 17
     val powerUpChance = 20 //1-100
     val powerUpColor = Color.DKGRAY
     val labelColor = Color.WHITE
@@ -20,6 +20,9 @@ object PowerUpManager {
             this.powerBallActive = true
             this.powerBallTimer = this.powerBallDuration
         }
+
+        //SFX
+        SoundManager.playPowerUpSFX(powerUpType)
     }
 
     fun updatePowerBall(){

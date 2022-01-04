@@ -15,15 +15,24 @@ object SoundManager {
     var loseLifePlayer: MediaPlayer? = null
     var gameOverPlayer: MediaPlayer? = null
 
+    //Power ups
+    var powerBallPlayer: MediaPlayer? = null
+
     fun init(context: AppCompatActivity){
         this.context = context
+
+        //music player
         this.musicPlayer = MediaPlayer.create(context, R.raw.music)
 
+        //generic sfx
         this.destroyBrickPlayer = MediaPlayer.create(SoundManager.context, R.raw.destroy_brick)
         this.comboPlayer = MediaPlayer.create(SoundManager.context, R.raw.combo)
         this.ballBouncePlayer = MediaPlayer.create(SoundManager.context, R.raw.ball_bounce)
         this.loseLifePlayer = MediaPlayer.create(SoundManager.context, R.raw.lose_life)
         this.gameOverPlayer = MediaPlayer.create(SoundManager.context, R.raw.game_over)
+
+        //power ups sfx
+        this.powerBallPlayer = MediaPlayer.create(SoundManager.context, R.raw.power_ball)
     }
 
     fun playDestroyBrickSFX(){
@@ -46,6 +55,10 @@ object SoundManager {
         this.playSFX("GAME_OVER")
     }
 
+    fun playPowerUpSFX(powerUpType: String){
+        this.playSFX(powerUpType)
+    }
+
     private fun playSFX(sfx: String){
         if(!GameManager.useSFX){
             return
@@ -56,6 +69,9 @@ object SoundManager {
             "BALL_BOUNCE" -> this.ballBouncePlayer!!.start()
             "LOSE_LIFE" -> this.loseLifePlayer!!.start()
             "GAME_OVER" -> this.gameOverPlayer!!.start()
+
+            //power ups
+            "POWER_BALL" -> this.powerBallPlayer!!.start()
         }
     }
 
