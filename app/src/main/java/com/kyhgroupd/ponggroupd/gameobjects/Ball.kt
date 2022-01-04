@@ -163,7 +163,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if(GameManager.gameMode == "breakout"){
             val random = (1..100).random()
             if(random > (100-PowerUpManager.powerUpChance)){
-                GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, PowerUpManager.powerUpColor))
+                GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, PowerUpManager.powerUpColor, "POWER_BALL"))
             }
         }
 

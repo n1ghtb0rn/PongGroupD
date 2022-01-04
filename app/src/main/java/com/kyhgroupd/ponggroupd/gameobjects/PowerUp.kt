@@ -1,23 +1,35 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
-import android.graphics.Canvas
-import android.graphics.LinearGradient
-import android.graphics.Shader
+import android.graphics.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PowerUpManager
+import com.kyhgroupd.ponggroupd.R
+import com.kyhgroupd.ponggroupd.UIManager
 
-class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
+class PowerUp(startX: Int, startY: Int, color: Int, powerUpType: String) : GameObject(startX, startY, color) {
 
     var radius : Int = 0
 
     //Power Up info
     var collidedWithPaddle = false
-    val powerUpType = "POWER_BALL"
+    var powerUpType = "POWER_BALL"
+    val labelPaint = Paint()
 
     init {
         radius = GameManager.referenceBrick!!.height
         width = radius*2
         height = radius*2
+
+        this.powerUpType = powerUpType
+        this.labelPaint.color = PowerUpManager.labelColor
+        this.labelPaint.textSize = (this.radius*1.5).toFloat()
+        this.paint.textAlign = Paint.Align.CENTER
+        this.labelPaint.typeface = ResourcesCompat.getFont(
+            GameManager.context as AppCompatActivity,
+            R.font.aldrich
+        )
     }
 
     override fun draw(canvas: Canvas?) {
@@ -25,6 +37,8 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
             (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
             this.radius.toFloat(), this.paint)
+        //Label draw
+        canvas?.drawText(powerUpType.first().toString(), ((posX+(this.radius*0.4)).toFloat()), ((posY+(this.radius*1.4)).toFloat()), this.labelPaint)
     }
 
     override fun update() {
