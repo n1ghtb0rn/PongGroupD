@@ -6,30 +6,30 @@
     tools:context=".activitys.BreakoutFragment"
     android:background="@android:color/transparent">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/default_padding"
-    android:gravity="end"
-    android:orientation="vertical">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/breakout_high_score"
-        android:textAlignment="center"
-        android:fontFamily="@font/aldrich"
-        android:textColor="@color/white"
-        android:textSize="@dimen/default_header_text_size" />
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_padding"
+        android:gravity="end"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvScoreListBreakout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_weight="0.5"
-        android:background="#80000000" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/breakout_high_score"
+            android:textAlignment="center"
+            android:fontFamily="@font/aldrich"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_header_text_size" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvScoreListBreakout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_weight="0.5"
+            android:background="#80000000" />
+
+    </LinearLayout>
 
 </FrameLayout>
