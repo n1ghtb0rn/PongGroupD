@@ -2,6 +2,7 @@ package com.kyhgroupd.ponggroupd.activitys
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.kyhgroupd.ponggroupd.DataManager
@@ -18,13 +19,27 @@ class GameOverActivity : AppCompatActivity() {
         binding = ActivityGameOverBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(GameManager.gameMode == "golf"){
-            binding.tvGameOver.text = "WIN"
-        } else if (GameManager.gameMode == "breakout"){
-            binding.tvGameOver.text = "GAME OVER"
+        when(GameManager.gameMode){
+            "golf" -> {
+                binding.tvGameOver.text = "WIN"
+                binding.tvScore.text = "SCORE: " + GameManager.score
+            }
+            "breakout" -> {
+                binding.tvGameOver.text = "GAME OVER"
+                binding.tvScore.text = "SCORE: " + GameManager.score
+            }
+            "pong" -> {
+                binding.tvScore.text = "Player 1 Score: " + GameManager.score
+                binding.tvScorePlayer2.text = "Player 2 Score: " + GameManager.player2Score
+                binding.tvScorePlayer2.visibility = View.VISIBLE
+                binding.saveGroup.visibility = View.INVISIBLE
+                if(GameManager.score > GameManager.player2Score){
+                    binding.tvGameOver.text = "PLAYER 1 WINS"
+                } else {
+                    binding.tvGameOver.text = "PLAYER 2 WINS"
+                }
+            }
         }
-
-        binding.tvScore.text = "SCORE: " + GameManager.score
 
         binding.btnSave.setOnClickListener{
             val playerName = binding.etUsername.text.toString()
