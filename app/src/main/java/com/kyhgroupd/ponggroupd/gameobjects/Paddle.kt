@@ -36,11 +36,12 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         if (GameManager.pongPlayerMode == 1) {
             moveSinglePlayerPaddles()
         }
-        if(GameManager.event == null){
-            return
-        }
+
         if (GameManager.gameMode == "breakout" || GameManager.gameMode == "golf"
             || GameManager.pongPlayerMode == 2) {
+            if (GameManager.event == null) {
+                return
+            }
             moveTwoPlayerPaddles()
         }
 
