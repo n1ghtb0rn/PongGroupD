@@ -83,7 +83,12 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
             && touchY < (GameManager.paddle!!.posY+(height/2)) + offsetY) {
             posX = touchX - (width/2)
         }
-        GameManager.paddle2!!.posX = GameManager.ball!!.posX
+       // GameManager.paddle2!!.posX = GameManager.ball!!.posX
+        if (GameManager.ball!!.posX > GameManager.paddle2!!.posX + width/2) {
+            GameManager.paddle2!!.posX += ((GameManager.ballSpeed).toInt())
+        } else if (GameManager.ball!!.posX < GameManager.paddle2!!.posX + width/2) {
+            GameManager.paddle2!!.posX -= ((GameManager.ballSpeed).toInt())
+        }
     }
 }
 
