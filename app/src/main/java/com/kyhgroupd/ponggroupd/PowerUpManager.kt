@@ -14,6 +14,7 @@ object PowerUpManager {
     var powerBallActive = false
     val powerBallDuration = 300 //60 = 1 second
     var powerBallTimer = 0
+    val powerBallColor = Color.rgb(255, 215, 0)
 
     //Power up types
     val powerUpTypes = arrayOf("POWER_BALL")
@@ -28,6 +29,7 @@ object PowerUpManager {
         if(powerUpType == "POWER_BALL"){
             this.powerBallActive = true
             this.powerBallTimer = this.powerBallDuration
+            GameManager.ball!!.paint.color = this.powerBallColor
         }
 
         //SFX
@@ -38,6 +40,7 @@ object PowerUpManager {
         this.powerBallTimer -= 1
         if(this.powerBallTimer <= 0){
             this.powerBallActive = false
+            GameManager.ball!!.paint.color = GameManager.ballColor
         }
     }
 
