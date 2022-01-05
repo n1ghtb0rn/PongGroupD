@@ -33,10 +33,27 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
     }
 
     override fun update() {
+        if (GameManager.pongPlayerMode == 1) {
+            moveSinglePlayerPaddles()
+        }
         if(GameManager.event == null){
             return
         }
+        if (GameManager.gameMode == "breakout" || GameManager.gameMode == "golf"
+            || GameManager.pongPlayerMode == 2) {
+            moveTwoPlayerPaddles()
+        }
 
+        //Check if paddle is out of bounds
+        if (posX < 0) {
+            posX = 0
+        }
+        if (posX > GameManager.screenSizeX - width) {
+            posX = GameManager.screenSizeX - width
+        }
+    }
+
+    fun moveTwoPlayerPaddles() {
         //Get all touch points and check if any of them is within range
         val pointerCount = GameManager.event!!.pointerCount
 
@@ -49,14 +66,23 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
                 posX = touchX - (width/2)
             }
         }
+    }
 
-        //Check if paddle is out of bounds
-        if (posX < 0) {
-            posX = 0
+    fun moveSinglePlayerPaddles() {
+        var touchX = 0
+        var touchY = 0
+
+        if(GameManager.event != null){
+            touchX = GameManager.event!!.x.toInt()
+            touchY = GameManager.event!!.y.toInt()
         }
-        if (posX > GameManager.screenSizeX - width) {
-            posX = GameManager.screenSizeX - width
+        val offsetY = GameManager.paddleTouchOffsetY
+
+        if (touchY > (GameManager.paddle!!.posY+(height/2)) - offsetY
+            && touchY < (GameManager.paddle!!.posY+(height/2)) + offsetY) {
+            GameManager.paddle!!.posX = touchX - (width/2)
         }
+        GameManager.paddle2!!.posX = GameManager.ball!!.posX
     }
 }
 

@@ -10,8 +10,6 @@ import android.util.Log
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.scale
-import com.kyhgroupd.ponggroupd.UIManager.uiHeight
-import com.kyhgroupd.ponggroupd.UIManager.uiObjects
 import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
@@ -19,6 +17,7 @@ object GameManager {
 
     //Game mode
     var gameMode: String = ""
+    var pongPlayerMode: Int = 0
 
     //Context
     var context: GameActivity? = null
@@ -35,8 +34,8 @@ object GameManager {
     //Background
     var background1: Bitmap? = null
 
-    var screenSizeX = 0 //Is set in GameView-class
-    var screenSizeY = 0 //Is set in GameView-class
+    var screenSizeX = 0 //Is set in GameView class
+    var screenSizeY = 0 //Is set in GameView class
 
     //GameObjects
     val gameObjects = mutableListOf<GameObject>()
@@ -54,10 +53,10 @@ object GameManager {
 
     //Ball
     var ball: Ball? = null
-    var ballStartX: Int = 0 //Is set in resetGame()-method
-    var ballStartY: Int = 0 //Is set in resetGame()-method
+    var ballStartX: Int = 0 //Is set in resetGame() method
+    var ballStartY: Int = 0 //Is set in resetGame() method
     var ballRadiusFactor: Int = 50
-    var ballSpeed: Int = 0  //Is set in resetGame()-method
+    var ballSpeed: Int = 0  //Is set in resetGame() method
     val ballSpeedFactor = 0.012
 
     //Paddle
@@ -122,7 +121,7 @@ object GameManager {
 
         //Paddle
         val player1 = 1
-        if(GameManager.gameMode == "pong"){
+        if(gameMode == "pong"){
             val paddle = Paddle(screenSizeX / 2, screenSizeY - (screenSizeY / 6), Color.WHITE, player1)
             GameManager.paddle = paddle
             gameObjects.add(paddle)

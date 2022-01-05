@@ -136,6 +136,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
         UIManager.comboText?.update()
 
+        // Touch events
         GameManager.event = null
     }
 
@@ -146,22 +147,28 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
             if(GameManager.gameMode == "pong") {
                 canvas.drawColor(Color.BLACK) //Draws a black background
+
+                if(GameManager.pongPlayerMode == 2) {
+                    canvas.save()
+                    canvas.rotate(270F,(GameManager.screenSizeX/2).toFloat(),(GameManager.screenSizeY/2).toFloat())
+                    for (uiObject in UIManager.uiObjects) {
+                        uiObject.draw(canvas)
+                    }
+                    canvas.restore()
+                    canvas.save()
+                } else if(GameManager.pongPlayerMode == 1) {
+                    for (uiObject in UIManager.uiObjects) {
+                        uiObject.draw(canvas)
+                    }
+                }
             }
 
-            if(GameManager.gameMode != "pong") {
+            if(GameManager.gameMode == "breakout" || GameManager.gameMode == "golf") {
                 canvas.drawRect(0f, 0f, GameManager.screenSizeX.toFloat(),
                     UIManager.uiHeight.toFloat(), UIManager.uiPaint)
                 for (uiObject in UIManager.uiObjects) {
                     uiObject.draw(canvas)
                 }
-            } else {
-                canvas.save()
-                canvas.rotate(270F,(GameManager.screenSizeX/2).toFloat(),(GameManager.screenSizeY/2).toFloat())
-                for (uiObject in UIManager.uiObjects) {
-                    uiObject.draw(canvas)
-                }
-                canvas.restore()
-                canvas.save()
             }
 
             for (gameObject in GameManager.gameObjects) {

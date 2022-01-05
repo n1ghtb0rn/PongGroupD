@@ -1,8 +1,8 @@
 package com.kyhgroupd.ponggroupd.activitys
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.databinding.ActivityMainBinding
@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         binder.btnPlayPong.setOnClickListener{
             GameManager.gameMode = "pong"
-            val intent = Intent(this, GameActivity::class.java)
-            GameManager.shouldReset = true
+            val intent = Intent(this, PongModeChooserActivity::class.java)
             startActivity(intent)
         }
 

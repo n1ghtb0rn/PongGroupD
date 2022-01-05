@@ -30,5 +30,6 @@
     <string name="save">Save</string>
     <string name="play_again">Play Again</string>
     <string name="main_menu">Main Menu</string>
+    <string name="choose_game_mode">CHOOSE GAME MODE</string>
 
 </resources>
