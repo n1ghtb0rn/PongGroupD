@@ -11,7 +11,7 @@ object DataManager {
     var fullPath: String? = null
 
     const val subDirName = "data"
-    const val scoreFileName = "score_data"
+    var scoreFileName = "score_"
     const val settingsFileName = "settings"
     const val fileExt = ".txt"
     const val separator = "###"
@@ -22,21 +22,21 @@ object DataManager {
         this.createSubDir()
     }
 
-    fun loadHighScore(): Int {
-        val scoreList = this.loadScoreList()
+    fun loadHighScore(gameMode: String): Int {
+        val scoreList = this.loadScoreList(gameMode)
         if(scoreList.size > 0){
             return scoreList[0].score
         }
         return 0
     }
 
-    fun loadScoreList(): MutableList<PlayerScore> {
+    fun loadScoreList(gameMode: String): MutableList<PlayerScore> {
         this.createSubDir()
 
         val scoreList = mutableListOf<PlayerScore>()
 
         try{
-            val file = File(this.fullPath, this.scoreFileName+this.fileExt)
+            val file = File(this.fullPath, this.scoreFileName+gameMode+this.fileExt)
             val scanner = Scanner(file)
             while(scanner.hasNext()){
                 val line = scanner.nextLine()
@@ -52,16 +52,16 @@ object DataManager {
         return scoreList
     }
 
-    fun saveScore(newPlayerScore: PlayerScore){
+    fun saveScore(newPlayerScore: PlayerScore, gameMode: String){
         this.createSubDir()
 
-        val scoreList = this.loadScoreList()
+        val scoreList = this.loadScoreList(gameMode)
         scoreList.add(newPlayerScore)
         scoreList.sortBy { it.score }
         scoreList.reverse()
 
         try{
-            val file = File(this.fullPath, this.scoreFileName+this.fileExt)
+            val file = File(this.fullPath, this.scoreFileName+gameMode+this.fileExt)
             val writer = PrintWriter(file)
             for(playerScore in scoreList){
                 writer.append(playerScore.username + this.separator + playerScore.score + "\n")
