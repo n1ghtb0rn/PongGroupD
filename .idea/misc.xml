@@ -8,11 +8,13 @@
         <entry key="..\:/Users/danie/AndroidStudio/PongGroupD/app/src/main/res/layout/activity_main.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/drawable/semi_transparent_black_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_breakout.xml" value="0.11481481481481481" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_game_over.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_golf.xml" value="0.1375" />
         <entry key="app/src/main/res/layout/activity_high_score.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_pong.xml" value="0.265625" />
+        <entry key="app/src/main/res/layout/activity_pong_mode_chooser.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/activity_pong_win.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_breakout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_golf.xml" value="0.265625" />
