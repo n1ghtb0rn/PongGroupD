@@ -36,6 +36,19 @@
         android:layout_marginTop="@dimen/default_margin"/>
 
     <TextView
+        android:id="@+id/tvScorePlayer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 2 Score: 0"
+        android:fontFamily="@font/aldrich"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/tvScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/tvSavePrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,6 +96,13 @@
         app:layout_constraintTop_toBottomOf="@id/tilUsername"
         app:layout_constraintEnd_toEndOf="@id/tilUsername"
         android:layout_marginTop="@dimen/default_margin" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/save_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tvSavePrompt, tilUsername, btnSave" />
 
     <TextView
         android:id="@+id/tvScoreSaved"

@@ -337,10 +337,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         if(GameManager.score >= 11) {
             SoundManager.playGameOverSFX()
-            GameManager.context?.pongWin(1)
+            GameManager.context?.gameOver()
         } else if (GameManager.player2Score >= 11) {
             SoundManager.playGameOverSFX()
-            GameManager.context?.pongWin(2)
+            GameManager.context?.gameOver()
         } else {
             SoundManager.playLoseLifeSFX()
         }
