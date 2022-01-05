@@ -29,7 +29,7 @@ class BreakoutFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(rv: RecyclerView) {
-        val scoreList = DataManager.loadScoreList()
+        val scoreList = DataManager.loadScoreList("breakout")
 
         rv.layoutManager = LinearLayoutManager(activity)
         rv.itemAnimator = DefaultItemAnimator()

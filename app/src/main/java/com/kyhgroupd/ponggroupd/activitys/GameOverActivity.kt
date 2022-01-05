@@ -46,9 +46,7 @@ class GameOverActivity : AppCompatActivity() {
             if(playerName.trim().length > 0){
                 GameManager.playerName = playerName
                 val playerScore = PlayerScore(playerName, GameManager.score)
-                if(GameManager.gameMode == "breakout") {
-                    DataManager.saveScore(playerScore)
-                }
+                DataManager.saveScore(playerScore, GameManager.gameMode)
                 binding.btnSave.isEnabled = false
                 binding.etUsername.isEnabled = false
                 binding.tvScoreSaved.isVisible = true

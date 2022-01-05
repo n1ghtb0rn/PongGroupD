@@ -54,7 +54,7 @@ object UIManager {
         //UI Data
         GameManager.score = 0
         GameManager.player2Score = 0
-        GameManager.highScore = DataManager.loadHighScore()
+        GameManager.highScore = DataManager.loadHighScore(GameManager.gameMode)
         GameManager.lives = 3
         GameManager.player2Lives = 3
         GameManager.level = 1

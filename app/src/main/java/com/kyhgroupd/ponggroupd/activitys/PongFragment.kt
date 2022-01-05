@@ -27,7 +27,7 @@ class PongFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(rv: RecyclerView) {
-        val scoreList = DataManager.loadScoreList()
+        val scoreList = DataManager.loadScoreList("pong")
 
         rv.layoutManager = LinearLayoutManager(activity)
         rv.itemAnimator = DefaultItemAnimator()
