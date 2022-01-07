@@ -18,10 +18,7 @@ object PowerUpManager {
     var powerBallTimer = 0
     val powerBallColor = Color.rgb(255, 215, 0)
 
-    //"Multi Ball" creates two extra balls
-    var multiBallActive = false
-    val multiBallDuration = 300 //60 = 1 second
-    var multiBallTimer = 0
+    //"Multi Ball" (creates two extra balls)
     val multiBallColor = Color.rgb(50, 215, 100)
     val multiBallGrayColor = Color.WHITE
 
@@ -59,16 +56,13 @@ object PowerUpManager {
         }
 
         //Multi Ball
-        if(this.multiBallActive){
-            this.updateMultiBall()
-        }
+        //This power up does not need an update-method
 
         //Power up nr 3 etc...
     }
 
     fun clearActivePowerUps(){
         this.powerBallActive = false
-        this.multiBallActive = false
     }
 
     /* "Power Ball" methods*/
@@ -90,8 +84,6 @@ object PowerUpManager {
     /* "Multi Ball" methods */
 
     fun activateMultiBall(){
-        this.multiBallActive = true
-        this.multiBallTimer = this.multiBallDuration
 
         val multiBall1 = Ball(GameManager.ball!!.posX, GameManager.ball!!.posY, multiBallColor)
         multiBall1.grayPaint.color = multiBallGrayColor
@@ -148,14 +140,6 @@ object PowerUpManager {
             }
         }
 
-    }
-
-    fun updateMultiBall(){
-        this.multiBallTimer -= 1
-        if(this.multiBallTimer <= 0){
-            this.multiBallActive = false
-            GameManager.multiBallObjects.clear()
-        }
     }
 
 }

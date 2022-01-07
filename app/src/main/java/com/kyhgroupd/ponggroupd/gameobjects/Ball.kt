@@ -15,6 +15,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     var speedY: Int = 0
 
     var mainBall = true
+    var shouldDeleteThis = false
 
     init {
         radius = GameManager.referenceBrick!!.height/2
@@ -269,8 +270,13 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 SoundManager.playBallBounceSFX()
             }
             if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
-                if(GameManager.gameMode == "breakout" && this.mainBall){
-                    loseLife()
+                if(GameManager.gameMode == "breakout"){
+                    if(this.mainBall){
+                        loseLife()
+                    }
+                    else{
+                        this.shouldDeleteThis = true
+                    }
                 } else if(GameManager.gameMode == "golf"){
                     addLife()
                 }
