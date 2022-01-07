@@ -22,6 +22,10 @@
     <!-- Pong Mode Chooser activity -->
     <string name="single_player">Single player</string>
     <string name="two_player">Two player</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="start_game">Start Game</string>
 
     <!-- Settings activity -->
     <string name="settings">Settings</string>
