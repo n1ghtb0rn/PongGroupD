@@ -165,6 +165,10 @@ object GameManager {
             }
         }
 
+        //Clear all active powerups
+        powerUpObjects.clear()
+        PowerUpManager.clearActivePowerUps()
+
         //Music
         SoundManager.playMusic()
     }

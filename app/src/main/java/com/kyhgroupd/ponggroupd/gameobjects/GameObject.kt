@@ -9,12 +9,16 @@ abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
     var width: Int = 0
     var height: Int = 0
     var paint = Paint()
+    var grayPaint = Paint()
 
     init {
         this.posX = startX
         this.posY = startY
 
+        //Default color
         this.paint.color = color
+        //Grayscale color (if colors is turned off in settings)
+        this.grayPaint.color = Color.GRAY
     }
 
     abstract fun draw(canvas: Canvas?)

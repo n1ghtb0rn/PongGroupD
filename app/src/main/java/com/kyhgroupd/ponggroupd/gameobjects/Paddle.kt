@@ -1,6 +1,7 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
@@ -14,22 +15,44 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
     }
 
     override fun draw(canvas: Canvas?) {
-        this.paint.shader = LinearGradient(
-            posX.toFloat(),
-            posY.toFloat(),
-            (posX + (height / 2)).toFloat(),
-            (posY + (height / 2)).toFloat(),
-            GameManager.gradientColor,
-            this.paint.color,
-            Shader.TileMode.CLAMP
-        )
-        canvas?.drawRect(
-            posX.toFloat(),
-            posY.toFloat(),
-            posX + width.toFloat(),
-            posY + height.toFloat(),
-            this.paint
-        )
+        if(GameManager.useColors){
+            this.paint.shader = LinearGradient(
+                posX.toFloat(),
+                posY.toFloat(),
+                (posX + (height / 2)).toFloat(),
+                (posY + (height / 2)).toFloat(),
+                GameManager.gradientColor,
+                this.paint.color,
+                Shader.TileMode.CLAMP
+            )
+
+            canvas?.drawRect(
+                posX.toFloat(),
+                posY.toFloat(),
+                posX + width.toFloat(),
+                posY + height.toFloat(),
+                this.paint
+            )
+        }
+        else{
+            this.grayPaint.shader = LinearGradient(
+                posX.toFloat(),
+                posY.toFloat(),
+                (posX + (height / 2)).toFloat(),
+                (posY + (height / 2)).toFloat(),
+                GameManager.gradientColor,
+                this.grayPaint.color,
+                Shader.TileMode.CLAMP
+            )
+
+            canvas?.drawRect(
+                posX.toFloat(),
+                posY.toFloat(),
+                posX + width.toFloat(),
+                posY + height.toFloat(),
+                this.grayPaint
+            )
+        }
     }
 
     override fun update() {
