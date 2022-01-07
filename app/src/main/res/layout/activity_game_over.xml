@@ -81,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
+        android:textColorHint="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/tvSavePrompt"
         app:layout_constraintStart_toStartOf="@id/tvGameOver"
         app:layout_constraintEnd_toEndOf="@id/tvGameOver"
