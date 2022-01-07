@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PlayerScore
+import com.kyhgroupd.ponggroupd.R
 import com.kyhgroupd.ponggroupd.databinding.ActivityGameOverBinding
 
 class GameOverActivity : AppCompatActivity() {
@@ -21,27 +22,27 @@ class GameOverActivity : AppCompatActivity() {
 
         when(GameManager.gameMode){
             "golf" -> {
-                binding.tvGameOver.text = "WIN"
-                binding.tvScore.text = "SCORE: " + GameManager.score
+                binding.tvGameOver.text = getString(R.string.win)
+                binding.tvScore.text = getString(R.string.your_score, GameManager.score)
             }
             "breakout" -> {
-                binding.tvGameOver.text = "GAME OVER"
-                binding.tvScore.text = "SCORE: " + GameManager.score
+                binding.tvGameOver.text = getString(R.string.game_over)
+                binding.tvScore.text = getString(R.string.your_score, GameManager.score)
             }
             "pong" -> {
                 if(GameManager.score > GameManager.player2Score){
-                    binding.tvGameOver.text = "PLAYER 1 WINS"
+                    binding.tvGameOver.text = getString(R.string.player1_win)
                 } else {
-                    binding.tvGameOver.text = "PLAYER 2 WINS"
+                    binding.tvGameOver.text = getString(R.string.player2_win)
                 }
-                binding.tvScore.text = "Player 1 Score: " + GameManager.score
-                binding.tvScorePlayer2.text = "Player 2 Score: " + GameManager.player2Score
+                binding.tvScore.text = getString(R.string.player1_score, GameManager.score)
+                binding.tvScorePlayer2.text = getString(R.string.player2_score, GameManager.player2Score)
                 binding.tvScorePlayer2.visibility = View.VISIBLE
 
                 if(GameManager.pongPlayerMode == 2){
                     binding.saveGroup.visibility = View.INVISIBLE
                 } else {
-                    binding.tvGamesWon.text = "Games Won: " + GameManager.gamesWon
+                    binding.tvGamesWon.text = getString(R.string.games_won,GameManager.gamesWon)
                     binding.tvGamesWon.visibility = View.VISIBLE
                 }
             }
