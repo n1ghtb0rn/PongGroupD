@@ -17,6 +17,7 @@ object SoundManager {
 
     //Power ups
     var powerBallPlayer: MediaPlayer? = null
+    var multiBallPlayer: MediaPlayer? = null
 
     fun init(context: AppCompatActivity){
         this.context = context
@@ -33,6 +34,7 @@ object SoundManager {
 
         //power ups sfx
         this.powerBallPlayer = MediaPlayer.create(SoundManager.context, R.raw.power_ball)
+        this.multiBallPlayer = MediaPlayer.create(SoundManager.context, R.raw.multi_ball)
     }
 
     fun playDestroyBrickSFX(){
@@ -72,6 +74,7 @@ object SoundManager {
 
             //power ups
             "POWER_BALL" -> this.powerBallPlayer!!.start()
+            "MULTI_BALL" -> this.multiBallPlayer!!.start()
         }
     }
 
