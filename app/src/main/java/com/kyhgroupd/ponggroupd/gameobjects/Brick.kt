@@ -26,8 +26,11 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
 
     //Colors
     init {
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
-            GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+        paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+            GameManager.gradientColor, paint.color, Shader.TileMode.CLAMP)
+
+        grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+            GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
 
         borderPaint.color = Color.BLACK
         borderPaint.style = Paint.Style.STROKE
@@ -42,16 +45,13 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
 
     override fun draw(canvas: Canvas?){
         //Base
-        if(GameManager.useColors){
+        if(GameManager.useColors || this.unbreakable){
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
         }
         else{
-            val grayPaint = Paint()
-            grayPaint.color = Color.GRAY
-            grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
-                GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
-            canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), grayPaint)
+            canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.grayPaint)
         }
+
         //Border
         canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), borderPaint)
     }

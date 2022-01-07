@@ -53,4 +53,8 @@ object PowerUpManager {
         //Power up nr 2 etc...
     }
 
+    fun clearActivePowerUps(){
+        this.powerBallActive = false
+    }
+
 }

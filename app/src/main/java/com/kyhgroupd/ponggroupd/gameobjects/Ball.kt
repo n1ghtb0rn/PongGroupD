@@ -20,13 +20,23 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         height = radius*2
         speedX = GameManager.ballSpeed
         speedY = -GameManager.ballSpeed
+
+        this.grayPaint.color = Color.LTGRAY
     }
 
     override fun draw(canvas: Canvas?) {
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
-            (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
-        canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
-            this.radius.toFloat(), this.paint)
+        if(GameManager.useColors){
+            this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
+                (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+            canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
+                this.radius.toFloat(), this.paint)
+        }
+        else{
+            this.grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
+                (posY+(radius)).toFloat(), GameManager.gradientColor, this.grayPaint.color, Shader.TileMode.CLAMP)
+            canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
+                this.radius.toFloat(), this.grayPaint)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
