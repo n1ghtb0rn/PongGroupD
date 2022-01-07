@@ -76,8 +76,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     private fun paddleCollision(paddle: Paddle) {
 
         val speedXY = this.getSpeedXY(paddle)
-        val xIndex = 0
-        val yIndex = 1
 
         //Player 1
         if(paddle.player == 1){
