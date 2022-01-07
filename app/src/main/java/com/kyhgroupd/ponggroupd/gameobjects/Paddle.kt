@@ -73,22 +73,29 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         var touchX = 0
         var touchY = 0
 
-        if(GameManager.event != null){
+        if (GameManager.event != null){
             touchX = GameManager.event!!.x.toInt()
             touchY = GameManager.event!!.y.toInt()
         }
         val offsetY = GameManager.paddleTouchOffsetY
 
-        if(this == GameManager.paddle){
+        if (this == GameManager.paddle){
             if (touchY > (posY+(height/2)) - offsetY
                 && touchY < (posY+(height/2)) + offsetY) {
                 posX = touchX - (width/2)
             }
         }
+
+        var AiPaddleSpeed = when (GameManager.pongDifficultyLevel) {
+            "easy" -> (GameManager.ballSpeed*0.22).toInt()
+            "medium" -> (GameManager.ballSpeed*0.45).toInt()
+            "hard" -> (GameManager.ballSpeed*0.6).toInt()
+            else -> GameManager.ballSpeed
+        }
         if (GameManager.ball!!.posX > GameManager.paddle2!!.posX + width/2) {
-            GameManager.paddle2!!.posX += ((GameManager.ballSpeed*0.5).toInt())
+            GameManager.paddle2!!.posX += (AiPaddleSpeed)
         } else if (GameManager.ball!!.posX < GameManager.paddle2!!.posX + width/2) {
-            GameManager.paddle2!!.posX -= ((GameManager.ballSpeed*0.5).toInt())
+            GameManager.paddle2!!.posX -= (AiPaddleSpeed)
         }
     }
 }

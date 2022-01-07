@@ -142,11 +142,18 @@ object GameManager {
 
         //Ball
         ballStartX = screenSizeX/2
-        when(gameMode){
-            "pong" -> ballStartY = screenSizeY/2
-            else -> ballStartY = paddle!!.posY-(paddle!!.height*2)
+        ballStartY = when(gameMode) {
+            "pong" -> screenSizeY/2
+            else -> paddle!!.posY-(paddle!!.height*2)
         }
+
         ballSpeed = (screenSizeX * ballSpeedFactor).toInt()
+
+        ballSpeed = when (pongDifficultyLevel) {
+            "medium" -> (ballSpeed*1.2).toInt()
+            "hard" -> (ballSpeed*1.5).toInt()
+            else -> ballSpeed
+        }
         ball = Ball(0, 0, ballColor)
         ball!!.resetPos()
 
