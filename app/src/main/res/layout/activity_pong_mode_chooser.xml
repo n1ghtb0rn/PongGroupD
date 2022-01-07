@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         app:singleSelection="true"
         app:selectionRequired="true"
+        app:checkedButton="@+id/btnSinglePlayer"
         app:layout_constraintTop_toBottomOf="@id/tvPongModeTitle"
         app:layout_constraintBottom_toTopOf="@id/tgDifficultyLevel"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +39,9 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/single_player"
-            android:textColor="@color/white"/>
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/aldrich"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTwoPlayer"
@@ -46,11 +49,11 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/two_player"
-            android:textColor="@color/white"/>
-
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/aldrich"/>
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
-
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/tgDifficultyLevel"
@@ -58,6 +61,7 @@
         android:layout_height="wrap_content"
         app:singleSelection="true"
         app:selectionRequired="true"
+        app:checkedButton="@+id/btnMedium"
         app:layout_constraintTop_toBottomOf="@id/tgPlayerMode"
         app:layout_constraintBottom_toTopOf="@id/btnStartGame"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +73,9 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/easy"
-            android:textColor="@color/white" />
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/aldrich"/>
 
         <Button
             android:id="@+id/btnMedium"
@@ -77,7 +83,9 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/medium"
-            android:textColor="@color/white" />
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/aldrich"/>
 
         <Button
             android:id="@+id/btnHard"
@@ -85,7 +93,9 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/hard"
-            android:textColor="@color/white" />
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/aldrich"/>
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
