@@ -8,7 +8,7 @@ object PowerUpManager {
 
     //Power Up Data
     val powerUpFallSpeed = 17
-    val powerUpChance = 100 //1-100
+    val powerUpChance = 25 //1-100
     val powerUpColor = Color.DKGRAY
     val labelColor = Color.WHITE
 
@@ -29,10 +29,7 @@ object PowerUpManager {
 
     fun generatePowerUpType(): String{
         //Get a random index position from power up types array
-        var index = (powerUpTypes.indices).random()
-
-        //TEST CODE:
-        index = 1
+        val index: Int = (powerUpTypes.indices).random()
 
         return this.powerUpTypes[index]
     }
