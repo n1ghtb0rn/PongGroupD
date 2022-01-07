@@ -14,6 +14,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     var speedX: Int = 0
     var speedY: Int = 0
 
+    var mainBall = true
+    var shouldDeleteThis = false
+
     init {
         radius = GameManager.referenceBrick!!.height/2
         width = radius*2
@@ -73,15 +76,13 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     private fun paddleCollision(paddle: Paddle) {
 
         val speedXY = this.getSpeedXY(paddle)
-        val xIndex = 0
-        val yIndex = 1
 
         //Player 1
         if(paddle.player == 1){
             if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + (paddle.height/2)){
 
-                this.speedY = speedXY[yIndex]
-                this.speedX = speedXY[xIndex]
+                this.speedY = speedXY.y
+                this.speedX = speedXY.x
 
             } else {
                 speedX *= -1
@@ -91,8 +92,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         else{
             if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + (paddle.height/2)){
 
-                this.speedY = -speedXY[yIndex]
-                this.speedX = speedXY[xIndex]
+                this.speedY = -speedXY.y
+                this.speedX = speedXY.x
 
             } else {
                 speedX *= -1
@@ -142,7 +143,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             addScore()
         }
 
-        if(PowerUpManager.powerBallActive){
+        if(PowerUpManager.powerBallActive && this.mainBall){
             speedY = oldSpeedY
             speedX = oldSpeedX
         }
@@ -203,7 +204,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
     }
 
-    private fun getSpeedXY(paddle: Paddle): Array<Int> {
+    private fun getSpeedXY(paddle: Paddle): Point {
         //100% of ball speed to be shared by a percentage over y/x-axis
         val totalBallSpeed = GameManager.ballSpeed *2
 
@@ -245,7 +246,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             speedX = (totalBallSpeed*0.7).toInt()
         }
 
-        return arrayOf(speedX, speedY)
+        return Point(speedX, speedY)
     }
 
     private fun checkBorderCollision() {
@@ -268,7 +269,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
             if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
                 if(GameManager.gameMode == "breakout"){
-                    this.loseLife()
+                    if(this.mainBall){
+                        loseLife()
+                    }
+                    else{
+                        this.shouldDeleteThis = true
+                    }
                 } else if(GameManager.gameMode == "golf"){
                     addLife()
                 }

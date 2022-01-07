@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -70,13 +71,20 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
 
         //Brick pieces
-        for (pieceObject in GameManager.pieceObjects) {
-            pieceObject.update()
-        }
         val pieceObjects = GameManager.pieceObjects.toMutableList()
         for (pieceObject in pieceObjects) {
+            pieceObject.update()
             if(pieceObject.lifetime <= 0){
                 GameManager.pieceObjects.remove(pieceObject)
+            }
+        }
+
+        //Trail objects
+        val trailObjects = GameManager.trailObjects.toMutableList()
+        for(trailObject in trailObjects){
+            trailObject.update()
+            if(trailObject.radius <= 0){
+                GameManager.trailObjects.remove(trailObject)
             }
         }
 
@@ -95,14 +103,12 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             PowerUpManager.updatePowerUps()
         }
 
-        //Trail objects
-        for(trailObject in GameManager.trailObjects){
-            trailObject.update()
-        }
-        val trailObjects = GameManager.trailObjects.toMutableList()
-        for(trailObject in trailObjects){
-            if(trailObject.radius <= 0){
-                GameManager.trailObjects.remove(trailObject)
+        //Multi Ball objects
+        val multiBallObjects = GameManager.multiBallObjects.toMutableList()
+        for(multiBall in multiBallObjects){
+            multiBall.update()
+            if(multiBall.shouldDeleteThis){
+                GameManager.multiBallObjects.remove(multiBall)
             }
         }
 
@@ -186,6 +192,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
             for(trailObject in GameManager.trailObjects){
                 trailObject.draw(canvas)
+            }
+            for(multiBall in GameManager.multiBallObjects){
+                multiBall.draw(canvas)
             }
             GameManager.ball?.draw(canvas)
 
