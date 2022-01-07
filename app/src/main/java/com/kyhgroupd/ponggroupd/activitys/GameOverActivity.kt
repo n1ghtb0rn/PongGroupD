@@ -29,14 +29,20 @@ class GameOverActivity : AppCompatActivity() {
                 binding.tvScore.text = "SCORE: " + GameManager.score
             }
             "pong" -> {
-                binding.tvScore.text = "Player 1 Score: " + GameManager.score
-                binding.tvScorePlayer2.text = "Player 2 Score: " + GameManager.player2Score
-                binding.tvScorePlayer2.visibility = View.VISIBLE
-                binding.saveGroup.visibility = View.INVISIBLE
                 if(GameManager.score > GameManager.player2Score){
                     binding.tvGameOver.text = "PLAYER 1 WINS"
                 } else {
                     binding.tvGameOver.text = "PLAYER 2 WINS"
+                }
+                binding.tvScore.text = "Player 1 Score: " + GameManager.score
+                binding.tvScorePlayer2.text = "Player 2 Score: " + GameManager.player2Score
+                binding.tvScorePlayer2.visibility = View.VISIBLE
+
+                if(GameManager.pongPlayerMode == 2){
+                    binding.saveGroup.visibility = View.INVISIBLE
+                } else {
+                    binding.tvGamesWon.text = "Games Won: " + GameManager.gamesWon
+                    binding.tvGamesWon.visibility = View.VISIBLE
                 }
             }
         }
@@ -45,7 +51,11 @@ class GameOverActivity : AppCompatActivity() {
             val playerName = binding.etUsername.text.toString()
             if(playerName.trim().length > 0){
                 GameManager.playerName = playerName
-                val playerScore = PlayerScore(playerName, GameManager.score)
+                val playerScore = if(GameManager.gameMode == "pong"){
+                    PlayerScore(playerName, GameManager.gamesWon)
+                } else {
+                    PlayerScore(playerName, GameManager.score)
+                }
                 DataManager.saveScore(playerScore, GameManager.gameMode)
                 binding.btnSave.isEnabled = false
                 binding.etUsername.isEnabled = false

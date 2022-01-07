@@ -262,7 +262,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 } else if(GameManager.gameMode == "golf"){
                     addLife()
                 }
-
             }
         }
         if(this.posX < 0){
@@ -336,6 +335,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
 
         if(GameManager.score >= 11) {
+            if(GameManager.pongPlayerMode == 1) {
+                GameManager.gamesWon++
+            }
             SoundManager.playGameOverSFX()
             GameManager.context?.gameOver()
         } else if (GameManager.player2Score >= 11) {
