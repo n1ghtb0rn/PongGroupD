@@ -14,7 +14,7 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
 
     //Power Up info
     var collidedWithPaddle = false
-    var powerUpType = "POWER_BALL"
+    var powerUpType = "POWER_BALL" //default power up type
     val labelPaint = Paint()
 
     init {

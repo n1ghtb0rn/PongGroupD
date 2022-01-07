@@ -14,10 +14,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
         width = radius*2
         height = radius*2
 
-        if(GameManager.useColors){
-            this.paint.color = GameManager.ball!!.paint.color
-        }
-        else{
+        if(!GameManager.useColors){
             this.paint.color = GameManager.ball!!.grayPaint.color
         }
         this.paint.alpha = 150

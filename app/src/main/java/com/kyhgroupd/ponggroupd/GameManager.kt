@@ -43,6 +43,7 @@ object GameManager {
     val pieceObjects = mutableListOf<BrickPiece>()
     val trailObjects = mutableListOf<BallTrail>()
     val powerUpObjects = mutableListOf<PowerUp>()
+    val multiBallObjects = mutableListOf<Ball>()
 
     //Color data
     var ballColor = Color.rgb(150, 0, 0)
@@ -167,6 +168,7 @@ object GameManager {
 
         //Clear all active powerups
         powerUpObjects.clear()
+        multiBallObjects.clear()
         PowerUpManager.clearActivePowerUps()
 
         //Music

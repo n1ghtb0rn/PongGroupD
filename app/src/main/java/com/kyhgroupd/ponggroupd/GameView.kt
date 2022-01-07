@@ -106,6 +106,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             }
         }
 
+        for(multiBall in GameManager.multiBallObjects){
+            multiBall.update()
+        }
+
         //Ball
         GameManager.ball?.update()
 
@@ -186,6 +190,9 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
             for(trailObject in GameManager.trailObjects){
                 trailObject.draw(canvas)
+            }
+            for(multiBall in GameManager.multiBallObjects){
+                multiBall.draw(canvas)
             }
             GameManager.ball?.draw(canvas)
 
