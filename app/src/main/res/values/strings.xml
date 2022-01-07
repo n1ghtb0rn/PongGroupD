@@ -24,10 +24,17 @@
 
     <!-- Game Over activity -->
     <string name="game_over">GAME OVER</string>
-    <string name="your_score">Your Score: 0</string>
+    <string name="win">WIN</string>
+    <string name="player1_win">PLAYER 1 WINS</string>
+    <string name="player2_win">PLAYER 2 WINS</string>
+    <string name="your_score">Your Score: %1$d</string>
+    <string name="player1_score">Player 1 Score: %1$d</string>
+    <string name="player2_score">Player 2 Score: %1$d</string>
+    <string name="games_won">Games Won: %1$d</string>
     <string name="save_score">SAVE SCORE</string>
     <string name="enter_username">ENTER USERNAME</string>
     <string name="save">Save</string>
+    <string name="score_saved">SCORE SAVED</string>
     <string name="play_again">Play Again</string>
     <string name="main_menu">Main Menu</string>
     <string name="choose_game_mode">CHOOSE GAME MODE</string>
