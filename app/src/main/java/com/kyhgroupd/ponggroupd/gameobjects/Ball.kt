@@ -143,7 +143,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             addScore()
         }
 
-        if(PowerUpManager.powerBallActive){
+        if(PowerUpManager.powerBallActive && this.mainBall){
             speedY = oldSpeedY
             speedX = oldSpeedX
         }
