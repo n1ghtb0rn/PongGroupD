@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/layout/activity_pong.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/activity_pong_mode_chooser.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/activity_pong_win.xml" value="0.265625" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_breakout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_golf.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_pong.xml" value="0.25104166666666666" />

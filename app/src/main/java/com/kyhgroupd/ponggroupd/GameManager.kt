@@ -18,6 +18,7 @@ object GameManager {
     //Game mode
     var gameMode: String = ""
     var pongPlayerMode: Int = 0
+    var pongDifficultyLevel: String = ""
 
     //Context
     var context: GameActivity? = null

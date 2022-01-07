@@ -21,25 +21,84 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/first_game_btn_top_margin" />
 
-    <Button
-        android:id="@+id/btnSinglePlayer"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/tgPlayerMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/single_player"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@id/tvPongModeTitle"
+        app:layout_constraintBottom_toTopOf="@id/tgDifficultyLevel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSinglePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="single player"
+            android:textColor="@color/white"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTwoPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="two player"
+            android:textColor="@color/white"/>
+
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/tgDifficultyLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@id/tgPlayerMode"
+        app:layout_constraintBottom_toTopOf="@id/btnStartGame"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnTwoPlayer"
-        />
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <Button
+            android:id="@+id/btnEasy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="easy"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="medium"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnHard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="hard"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <Button
-        android:id="@+id/btnTwoPlayer"
+        android:id="@+id/btnStartGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/two_player"
+        android:text="start game"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnSinglePlayer"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="50dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
