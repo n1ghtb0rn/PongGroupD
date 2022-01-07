@@ -3,9 +3,9 @@ package com.kyhgroupd.ponggroupd
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.kyhgroupd.ponggroupd.activitys.BreakoutFragment
-import com.kyhgroupd.ponggroupd.activitys.GolfFragment
-import com.kyhgroupd.ponggroupd.activitys.PongFragment
+import com.kyhgroupd.ponggroupd.highscorefragments.BreakoutFragment
+import com.kyhgroupd.ponggroupd.highscorefragments.GolfFragment
+import com.kyhgroupd.ponggroupd.highscorefragments.PongFragment
 
 class TabPageAdapter(activity: FragmentActivity, private val tabCount: Int) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = tabCount

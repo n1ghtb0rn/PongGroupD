@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_breakout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_golf.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_pong.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/list_items.xml" value="0.1375" />
       </map>
     </option>
   </component>

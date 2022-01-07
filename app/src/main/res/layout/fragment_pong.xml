@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.PongFragment">
+    tools:context=".highscorefragments.PongFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/default_margin"
-            android:layout_weight="0.5"
-            android:background="#80000000"/>
+            android:layout_weight="0.5" />
 
     </LinearLayout>
 

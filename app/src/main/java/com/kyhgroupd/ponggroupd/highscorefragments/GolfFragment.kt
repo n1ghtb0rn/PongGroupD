@@ -1,4 +1,4 @@
-package com.kyhgroupd.ponggroupd.activitys
+package com.kyhgroupd.ponggroupd.highscorefragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle

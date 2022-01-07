@@ -1,4 +1,4 @@
-package com.kyhgroupd.ponggroupd.activitys
+package com.kyhgroupd.ponggroupd.highscorefragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,21 +13,23 @@ import com.kyhgroupd.ponggroupd.CustomAdapter
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.R
 
-class PongFragment : Fragment() {
+class BreakoutFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_pong, container, false)
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_breakout, container, false)
         val rv = view.findViewById<RecyclerView>(R.id.rvScoreListBreakout)
 
         this.updateRecyclerView(rv)
+
         return view
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView(rv: RecyclerView) {
-        val scoreList = DataManager.loadScoreList("pong")
+        val scoreList = DataManager.loadScoreList("breakout")
 
         rv.layoutManager = LinearLayoutManager(activity)
         rv.itemAnimator = DefaultItemAnimator()
