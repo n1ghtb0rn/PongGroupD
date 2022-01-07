@@ -12,9 +12,16 @@
     <string name="continue_label">Continue</string>
 
     <!-- High Score activity -->
+    <string name="breakout">Breakout</string>
+    <string name="pong">Pong</string>
+    <string name="golf">Golf</string>
     <string name="breakout_high_score">BREAKOUT HIGH SCORE</string>
     <string name="pong_high_score">PONG HIGH SCORE</string>
     <string name="golf_high_score">GOLF HIGH SCORE</string>
+
+    <!-- Pong Mode Chooser activity -->
+    <string name="single_player">Single player</string>
+    <string name="two_player">Two player</string>
 
     <!-- Settings activity -->
     <string name="settings">Settings</string>
