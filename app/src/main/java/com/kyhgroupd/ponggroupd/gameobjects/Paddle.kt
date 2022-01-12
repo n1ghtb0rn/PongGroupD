@@ -86,8 +86,10 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
             val touchY = GameManager.event!!.getY(i).toInt()
             val offsetY = GameManager.paddleTouchOffsetY
 
-            if (touchY > (posY+(height/2)) - offsetY && touchY < (posY+(height/2)) + offsetY) {
-                posX = touchX - (width/2)
+            if (this == GameManager.paddle && touchY > GameManager.screenSizeY/2) {
+                this.posX = touchX - (width/2)
+            } else if(this == GameManager.paddle2 && touchY < GameManager.screenSizeY/2){
+                this.posX = touchX - (width/2)
             }
         }
     }
