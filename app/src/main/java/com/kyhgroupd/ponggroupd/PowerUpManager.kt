@@ -60,6 +60,7 @@ object PowerUpManager {
 
     fun clearActivePowerUps(){
         this.powerBallActive = false
+        GameManager.multiBallObjects.clear()
     }
 
     /* "Power Ball" methods*/
