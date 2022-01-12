@@ -104,11 +104,8 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         }
         val offsetY = GameManager.paddleTouchOffsetY
 
-        if (this == GameManager.paddle){
-            if (touchY > (posY+(height/2)) - offsetY
-                && touchY < (posY+(height/2)) + offsetY) {
-                posX = touchX - (width/2)
-            }
+        if (this == GameManager.paddle && touchY > GameManager.screenSizeY/2) {
+            this.posX = touchX - (width/2)
         }
 
         var AiPaddleSpeed = when (GameManager.pongDifficultyLevel) {
