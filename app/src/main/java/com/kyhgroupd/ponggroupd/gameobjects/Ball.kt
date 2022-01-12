@@ -330,6 +330,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         resetPos()
         //Decrement number of lives
         GameManager.lives--
+        PowerUpManager.clearActivePowerUps()
 
         if(GameManager.lives <= 0 || GameManager.player2Lives <= 0){
             SoundManager.playGameOverSFX()

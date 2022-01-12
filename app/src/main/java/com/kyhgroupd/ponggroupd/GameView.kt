@@ -144,6 +144,13 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
         // Touch events
         GameManager.event = null
+
+        //Check level clear in breakout-mode
+        when(GameManager.gameMode){
+            "breakout" -> if (GameManager.bricksCleared()) {
+                GameManager.nextLevel()
+            }
+        }
     }
 
     private fun draw(){
@@ -234,12 +241,6 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
                 update()
                 draw()
-
-                when(GameManager.gameMode){
-                    "breakout" -> if (GameManager.bricksCleared()) {
-                        GameManager.nextLevel()
-                    }
-                }
             }
         }
     }

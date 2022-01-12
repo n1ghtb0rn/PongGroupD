@@ -274,6 +274,7 @@ object GameManager {
         level++
 
         if(gameMode == "breakout"){
+            PowerUpManager.clearActivePowerUps()
             addBricks()
             if(paddle != null){
                 var newPaddleWidth: Int = (paddle!!.width * paddleWidthPctPerLevel).toInt()
