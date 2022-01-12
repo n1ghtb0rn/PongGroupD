@@ -7,6 +7,7 @@ object SoundManager {
 
     var context: AppCompatActivity? = null
 
+    //Media players
     var musicPlayer: MediaPlayer? = null
 
     var destroyBrickPlayer: MediaPlayer? = null
