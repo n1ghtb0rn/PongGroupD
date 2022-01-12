@@ -46,8 +46,8 @@ object GameManager {
     val multiBallObjects = mutableListOf<Ball>()
 
     //Color data
-    var ballColor = Color.WHITE
-    val paddleColor = Color.WHITE
+    var ballColor = Color.rgb(250, 231, 181)
+    val paddleColor = Color.rgb(204,255,255)
     val gradientColor = Color.WHITE
     val gameTextColor = Color.LTGRAY
     val brickColors = mutableListOf<Int>()
@@ -153,7 +153,14 @@ object GameManager {
             "hard" -> (ballSpeed*1.5).toInt()
             else -> ballSpeed
         }
+        ballColor = if (gameMode == "pong") {
+            Color.WHITE
+        } else {
+            ballColor
+        }
         ball = Ball(0, 0, ballColor)
+
+
         ball!!.resetPos()
 
         //Bricks

@@ -46,7 +46,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     @RequiresApi(Build.VERSION_CODES.O)
     override fun update(){
 
-        GameManager.trailObjects.add(BallTrail(this.posX, this.posY, this.paint.color))
+        if (PowerUpManager.powerBallActive && this.mainBall) {
+            GameManager.trailObjects.add(BallTrail(this.posX, this.posY, PowerUpManager.powerBallTrailColor))
+        } else {
+            GameManager.trailObjects.add(BallTrail(this.posX, this.posY, this.paint.color))
+        }
 
         posX += speedX
         posY += speedY

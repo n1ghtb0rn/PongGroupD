@@ -16,10 +16,10 @@ object PowerUpManager {
     var powerBallActive = false
     val powerBallDuration = 300 //60 = 1 second
     var powerBallTimer = 0
-    val powerBallColor = Color.rgb(255, 215, 0)
+    val powerBallTrailColor = Color.RED
 
     //"Multi Ball" (creates two extra balls)
-    val multiBallColor = Color.rgb(50, 215, 100)
+    val multiBallColor = Color.rgb(137,209,254)
     val multiBallGrayColor = Color.DKGRAY
 
     //Power up types
@@ -68,14 +68,12 @@ object PowerUpManager {
     fun activatePowerBall(){
         this.powerBallActive = true
         this.powerBallTimer = this.powerBallDuration
-        GameManager.ball!!.paint.color = this.powerBallColor
     }
 
     fun updatePowerBall(){
         this.powerBallTimer -= 1
         if(this.powerBallTimer <= 0){
             this.powerBallActive = false
-            GameManager.ball!!.paint.color = GameManager.ballColor
         }
     }
 
