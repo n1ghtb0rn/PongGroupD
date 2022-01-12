@@ -79,7 +79,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Player 1
         if(paddle.player == 1){
-            if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + (paddle.height/2)){
+            if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + (paddle.height/1.5)){
 
                 this.speedY = speedXY.y
                 this.speedX = speedXY.x
@@ -90,7 +90,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
         //Player 2
         else{
-            if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + (paddle.height/2)){
+            if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + (paddle.height/1.5)){
 
                 this.speedY = -speedXY.y
                 this.speedX = speedXY.x
