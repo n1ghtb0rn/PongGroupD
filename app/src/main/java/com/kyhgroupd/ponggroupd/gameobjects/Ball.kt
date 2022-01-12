@@ -130,22 +130,22 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if (brickRect.contains(pointBottom)){
             speedY = kotlin.math.abs(speedY) * -1
             destroyBrick(brick)
-            addScore()
+            GameManager.addScore()
         }
         if (brickRect.contains(pointTop)){
             speedY = kotlin.math.abs(speedY)
             destroyBrick(brick)
-            addScore()
+            GameManager.addScore()
         }
         if (brickRect.contains(pointRight)){
             speedX = kotlin.math.abs(speedX) * -1
             destroyBrick(brick)
-            addScore()
+            GameManager.addScore()
         }
         if(brickRect.contains(pointLeft)){
             speedX = kotlin.math.abs(speedX)
             destroyBrick(brick)
-            addScore()
+            GameManager.addScore()
         }
 
         if(PowerUpManager.powerBallActive && this.mainBall){
@@ -178,7 +178,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Spawn Power Up?
         if(GameManager.gameMode == "breakout"){
             val random = (1..100).random()
-            if(random > (100-PowerUpManager.powerUpChance)){
+            var powerUpChance = PowerUpManager.powerUpChance
+            if(PowerUpManager.powerBallActive){
+                powerUpChance += PowerUpManager.powerBallPowerUpChanceModifier
+            }
+            if(random > (100-powerUpChance)){
                 GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, PowerUpManager.powerUpColor))
             }
         }
@@ -189,24 +193,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //SFX
         SoundManager.playDestroyBrickSFX()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun addScore(){
-        //Score
-        if(GameManager.gameMode == "breakout"){
-            //Add scored based on level
-            GameManager.score += GameManager.scorePerBrick + ((GameManager.level -1) * GameManager.bonusScorePerLevel)
-            //Add score based on combo
-            if(GameManager.currentCombo > 0){
-                val comboValue = GameManager.currentCombo * GameManager.comboBonusScore
-                GameManager.score += comboValue
-                val comboText = ComboText(GameManager.screenSizeX /2, GameManager.screenSizeY /2, GameManager.gameTextColor, comboValue)
-                UIManager.comboText = comboText
-                SoundManager.playComboSFX()
-            }
-            GameManager.currentCombo++
-        }
     }
 
     private fun getSpeedXY(paddle: Paddle): Point {
