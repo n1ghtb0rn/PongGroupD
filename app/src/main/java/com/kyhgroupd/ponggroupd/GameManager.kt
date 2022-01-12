@@ -315,4 +315,22 @@ object GameManager {
         brickColors.add(Color.rgb(150, 150, 0)) //yellow
         brickColors.add(Color.rgb(150, 75, 0))  //orange
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun addScore(){
+        //Score
+        if(gameMode == "breakout"){
+            //Add scored based on level
+            score += scorePerBrick + ((level -1) * bonusScorePerLevel)
+            //Add score based on combo
+            if(currentCombo > 0){
+                val comboValue = currentCombo * comboBonusScore
+                score += comboValue
+                val comboText = ComboText(screenSizeX /2, screenSizeY /2, gameTextColor, comboValue)
+                UIManager.comboText = comboText
+                SoundManager.playComboSFX()
+            }
+            currentCombo++
+        }
+    }
 }
