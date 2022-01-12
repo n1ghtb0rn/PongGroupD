@@ -39,6 +39,39 @@ class GolfLevels {
         "    LML    ,"+
         "    LLL    ",
 
+        //level 5
+        "LLLLLLLLLLL,"+
+        "LLLLLLLLLLL,"+
+        "LLLMMMMMLLL,"+
+        "LLLMSSSMLLL,"+
+        "LLLMSOSMLLL,"+
+        "LLLMS SMLLL,"+
+        "LLLMSSSMLLL,"+
+        "LLLMMMMMLLL,"+
+        "LLLLLLLLLLL,"+
+        "LLLLLLLLLLL",
+
+        //level 4
+        "SSSSSSSSSSS,"+
+        "SML     LMS,"+
+        "SL       LS,"+
+        "S         S,"+
+        "S  U O U  S,"+
+        "S  U   U  S,"+
+        "S  UUUUU  S,"+
+        "S         S,"+
+        "SMMMMMMMMMS",
+
+        //level 3
+        "S    O    S,"+
+        "S         S,"+
+        "SLLLLLLLLLS,"+
+        "S         S,"+
+        "SMMMMMMMMMS,"+
+        "S         S,"+
+        "UUUU   UUUU,"+
+        "SSSSSSSSSSS",
+
         //Level 2
         "MSSSSSSSSSM,"+
         " MSSSSSSSM ,"+
@@ -57,39 +90,6 @@ class GolfLevels {
         "   MSSSM   ,"+
         "  MSSSSSM  ,"+
         " MMUUUUUMM " ,
-
-        //level 3
-        "S    O    S,"+
-        "S         S,"+
-        "SLLLLLLLLLS,"+
-        "S         S,"+
-        "SMMMMMMMMMS,"+
-        "S         S,"+
-        "UUUU   UUUU,"+
-        "SSSSSSSSSSS",
-
-        //level 4
-        "SSSSSSSSSSS,"+
-        "SML     LMS,"+
-        "SL       LS,"+
-        "S         S,"+
-        "S  U O U  S,"+
-        "S  U   U  S,"+
-        "S  UUUUU  S,"+
-        "S         S,"+
-        "SMMMMMMMMMS",
-
-        //level 5
-        "LLLLLLLLLLL,"+
-        "LLLLLLLLLLL,"+
-        "LLLMMMMMLLL,"+
-        "LLLMSSSMLLL,"+
-        "LLLMSOSMLLL,"+
-        "LLLMS SMLLL,"+
-        "LLLMSSSMLLL,"+
-        "LLLMMMMMLLL,"+
-        "LLLLLLLLLLL,"+
-        "LLLLLLLLLLL",
 
     )
 }
