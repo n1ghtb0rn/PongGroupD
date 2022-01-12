@@ -156,7 +156,13 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     private fun draw(){
         try{
             canvas = mHolder!!.lockCanvas()
-            GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
+
+            if(GameManager.useColors){
+                GameManager.background1?.let { canvas.drawBitmap(it, matrix, null) }
+            }
+            else{
+                canvas.drawColor(Color.BLACK)
+            }
 
             if(GameManager.gameMode == "pong") {
                 canvas.drawColor(Color.BLACK) //Draws a black background

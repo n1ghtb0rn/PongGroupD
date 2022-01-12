@@ -1,6 +1,7 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -15,15 +16,29 @@ open class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, s
 
     init {
         this.textString = ""
+
         this.paint.textSize = UIManager.textSize
         this.paint.typeface = ResourcesCompat.getFont(
+            GameManager.context as AppCompatActivity,
+            R.font.aldrich
+        )
+
+        this.grayPaint.color = Color.WHITE
+        this.grayPaint.textSize = UIManager.textSize
+        this.grayPaint.typeface = ResourcesCompat.getFont(
             GameManager.context as AppCompatActivity,
             R.font.aldrich
         )
     }
 
     override fun draw(canvas: Canvas?) {
-        canvas?.drawText(textString, startX.toFloat(), startY.toFloat(), this.paint)
+        if(GameManager.useColors){
+            canvas?.drawText(textString, startX.toFloat(), startY.toFloat(), this.paint)
+        }
+        else{
+            canvas?.drawText(textString, startX.toFloat(), startY.toFloat(), this.grayPaint)
+        }
+
     }
 
     override fun update() {

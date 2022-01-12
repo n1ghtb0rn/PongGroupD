@@ -40,6 +40,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
                 this.radius.toFloat(), this.grayPaint)
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -20,7 +20,7 @@ object PowerUpManager {
 
     //"Multi Ball" (creates two extra balls)
     val multiBallColor = Color.rgb(50, 215, 100)
-    val multiBallGrayColor = Color.WHITE
+    val multiBallGrayColor = Color.DKGRAY
 
     //Power up types
     val powerUpTypes = arrayOf("POWER_BALL", "MULTI_BALL")

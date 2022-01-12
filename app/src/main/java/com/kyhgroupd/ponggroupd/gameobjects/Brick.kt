@@ -96,19 +96,25 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
         when {
             this.unbreakable -> {
                 this.paint.color = Color.DKGRAY
+                this.grayPaint.color = Color.rgb(25, 25, 25)
             }
             this.health >= 3 -> {
                 this.paint.color = Color.rgb(150, 0, 0)     //red
+                this.grayPaint.color = Color.rgb(100, 100, 100)
             }
             this.health == 2 -> {
                 this.paint.color = Color.rgb(150, 150, 0)   //yellow
+                this.grayPaint.color = Color.rgb(140, 140, 140)
             }
             this.health <= 1 -> {
                 this.paint.color = Color.rgb(0, 150, 0)     //green
+                this.grayPaint.color = Color.rgb(180, 180, 180)
             }
         }
         this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
             GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
+        this.grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
+            GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
     }
 
 }
