@@ -13,12 +13,16 @@ class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText
 
     init{
         this.textString = "COMBO! +$comboValue"
+
         this.paint.color = Color.GREEN
-        this.paint.textAlign = Paint.Align.CENTER;
+        this.paint.textAlign = Paint.Align.CENTER
+
+        this.grayPaint.textAlign = Paint.Align.CENTER
     }
 
     override fun update(){
         this.paint.textSize += 2
+        this.grayPaint.textSize += 2
 
         this.lifetime--
     }
