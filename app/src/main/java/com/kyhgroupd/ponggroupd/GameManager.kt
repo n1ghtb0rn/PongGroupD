@@ -46,8 +46,8 @@ object GameManager {
     val multiBallObjects = mutableListOf<Ball>()
 
     //Color data
-    var ballColor = Color.rgb(150, 0, 0)
-    val paddleColor = Color.rgb(0, 150, 0)
+    var ballColor = Color.WHITE
+    val paddleColor = Color.WHITE
     val gradientColor = Color.WHITE
     val gameTextColor = Color.LTGRAY
     val brickColors = mutableListOf<Int>()
@@ -132,12 +132,10 @@ object GameManager {
             val paddle2 = Paddle(screenSizeX/2, screenSizeY/12, Color.WHITE, player2)
             GameManager.paddle2 = paddle2
             gameObjects.add(paddle2)
-            ballColor = Color.WHITE
         } else {
             val paddle = Paddle(screenSizeX / 2, screenSizeY - (screenSizeY / 6), paddleColor, player1)
             GameManager.paddle = paddle
             gameObjects.add(paddle)
-            ballColor = Color.rgb(150, 0, 0)
         }
 
 
