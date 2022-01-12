@@ -174,7 +174,11 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         //Spawn Power Up?
         if(GameManager.gameMode == "breakout"){
             val random = (1..100).random()
-            if(random > (100-PowerUpManager.powerUpChance)){
+            var powerUpChance = PowerUpManager.powerUpChance
+            if(PowerUpManager.powerBallActive){
+                powerUpChance += PowerUpManager.powerBallPowerUpChanceModifier
+            }
+            if(random > (100-powerUpChance)){
                 GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, PowerUpManager.powerUpColor))
             }
         }
