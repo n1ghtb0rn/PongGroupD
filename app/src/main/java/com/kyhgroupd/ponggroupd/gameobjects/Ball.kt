@@ -74,6 +74,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         GameManager.score += 100 + (GameManager.level -1) * GameManager.bonusScorePerLevel
         val golfLevels = GolfLevels().levels
         if(golfLevels.size <= GameManager.level) {
+            GameManager.win = true
             GameManager.context?.gameOver()
         }
         GameManager.nextLevel()
@@ -260,15 +261,10 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 SoundManager.playBallBounceSFX()
             }
             if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
-                if(GameManager.gameMode == "breakout"){
-                    if(this.mainBall){
-                        loseLife()
-                    }
-                    else{
-                        this.shouldDeleteThis = true
-                    }
-                } else if(GameManager.gameMode == "golf"){
-                    addLife()
+                if (this.mainBall) {
+                    loseLife()
+                } else {
+                    this.shouldDeleteThis = true
                 }
             }
         }
@@ -355,11 +351,5 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         } else {
             SoundManager.playLoseLifeSFX()
         }
-    }
-
-    fun addLife(){
-        resetPos()
-        GameManager.lives++
-        SoundManager.playLoseLifeSFX()
     }
 }
