@@ -10,7 +10,6 @@ object PowerUpManager {
     val powerUpFallSpeed = 17
     val powerUpChance = 25 //1-100
     val powerUpColor = Color.DKGRAY
-    val labelColor = Color.WHITE
 
     //"Power Ball" (ball does not bounce on bricks)
     var powerBallActive = false

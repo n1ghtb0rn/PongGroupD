@@ -154,13 +154,11 @@ object GameManager {
             "hard" -> (ballSpeed*1.5).toInt()
             else -> ballSpeed
         }
-        ballColor = if (gameMode == "pong") {
-            Color.WHITE
+        if (gameMode == "pong") {
+            ball = Ball(0, 0, Color.WHITE)
         } else {
-            ballColor
+            ball = Ball(0, 0, ballColor)
         }
-        ball = Ball(0, 0, ballColor)
-
 
         ball!!.resetPos()
 
