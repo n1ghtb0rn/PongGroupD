@@ -2,11 +2,9 @@ package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.contains
 import com.kyhgroupd.ponggroupd.*
-import java.lang.Math.abs
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -252,7 +250,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 player = 2
             }
             if(player != 0) {
-                this.ScorePointPong(player)
+                GameManager.scorePointPong(player)
+                resetPosPong(player)
             }
         } else {
             if (this.posY < UIManager.uiHeight) {
@@ -329,27 +328,5 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
     }
 
-    fun ScorePointPong(player: Int){
-        GameManager.currentCombo = 0
-        UIManager.comboText = null
-        resetPosPong(player)
-        //Increment score
-        when(player) {
-            1 -> GameManager.score++
-            2 -> GameManager.player2Score++
-        }
 
-        if(GameManager.score >= 11) {
-            if(GameManager.pongPlayerMode == 1) {
-                GameManager.gamesWon++
-            }
-            SoundManager.playGameOverSFX()
-            GameManager.context?.gameOver()
-        } else if (GameManager.player2Score >= 11) {
-            SoundManager.playGameOverSFX()
-            GameManager.context?.gameOver()
-        } else {
-            SoundManager.playLoseLifeSFX()
-        }
-    }
 }

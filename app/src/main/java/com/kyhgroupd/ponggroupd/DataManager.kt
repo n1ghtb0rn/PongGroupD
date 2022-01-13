@@ -36,7 +36,7 @@ object DataManager {
         val scoreList = mutableListOf<PlayerScore>()
 
         try{
-            val file = File(this.fullPath, this.scoreFileName+gameMode+this.fileExt)
+            val file = File(this.fullPath, this.scoreFileName + gameMode + this.fileExt)
             val scanner = Scanner(file)
             while(scanner.hasNext()){
                 val line = scanner.nextLine()
@@ -61,7 +61,7 @@ object DataManager {
         scoreList.reverse()
 
         try{
-            val file = File(this.fullPath, this.scoreFileName+gameMode+this.fileExt)
+            val file = File(this.fullPath, this.scoreFileName + gameMode + this.fileExt)
             val writer = PrintWriter(file)
             for(playerScore in scoreList){
                 writer.append(playerScore.username + this.separator + playerScore.score + "\n")
@@ -115,5 +115,4 @@ object DataManager {
             e.printStackTrace()
         }
     }
-
 }
