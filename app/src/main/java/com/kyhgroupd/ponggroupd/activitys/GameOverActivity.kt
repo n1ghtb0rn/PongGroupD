@@ -54,7 +54,7 @@ class GameOverActivity : AppCompatActivity() {
 
         binding.btnSave.setOnClickListener{
             val playerName = binding.etUsername.text.toString()
-            if(playerName.trim().length > 0){
+            if(playerName.trim().isNotEmpty()){
                 GameManager.playerName = playerName
                 val playerScore = if(GameManager.gameMode == "pong"){
                     PlayerScore(playerName, GameManager.gamesWon)
