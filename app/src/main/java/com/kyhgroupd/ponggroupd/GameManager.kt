@@ -359,4 +359,21 @@ object GameManager {
             SoundManager.playLoseLifeSFX()
         }
     }
+
+    fun loseLife(){
+        currentCombo = 0
+        UIManager.comboText = null
+
+        //Decrement number of lives
+        lives--
+        PowerUpManager.clearActivePowerUps()
+
+        if(lives <= 0 || player2Lives <= 0){
+            SoundManager.playGameOverSFX()
+            context?.gameOver()
+        }
+        else{
+            SoundManager.playLoseLifeSFX()
+        }
+    }
 }
