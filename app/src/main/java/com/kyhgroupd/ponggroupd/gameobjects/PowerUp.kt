@@ -23,20 +23,28 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
         height = radius*2
 
         this.powerUpType = PowerUpManager.generatePowerUpType()
-        this.labelPaint.color = PowerUpManager.labelColor
-        this.labelPaint.textSize = (this.radius*1.5).toFloat()
-        this.paint.textAlign = Paint.Align.CENTER
-        this.labelPaint.typeface = ResourcesCompat.getFont(
-            GameManager.context as AppCompatActivity,
-            R.font.aldrich
-        )
+        if (GameManager.useColors) {
+            if (this.powerUpType != "POWER_BALL") {
+                this.paint.color = Color.BLUE
+            } else {
+                this.paint.color = Color.RED
+            }
+        } else {
+            this.paint.color = Color.LTGRAY
+        }
     }
 
     override fun draw(canvas: Canvas?) {
         this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
             (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
-        canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
-            this.radius.toFloat(), this.paint)
+        if (powerUpType != "POWER_BALL") {
+            canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
+                this.radius.toFloat(), this.paint)
+        } else {
+            canvas?.drawRect((this.posX.toFloat()), (this.posY.toFloat()),
+                (this.posX + this.width.toFloat()), (this.posY + this.height.toFloat()), this.paint)
+        }
+
         //Label draw
         canvas?.drawText(powerUpType.first().toString(), ((posX+(this.radius*0.4)).toFloat()), ((posY+(this.radius*1.4)).toFloat()), this.labelPaint)
     }
