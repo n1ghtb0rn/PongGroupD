@@ -131,10 +131,8 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         //UI
         UIManager.highScoreText?.textString = "HIGH SCORE: "+GameManager.highScore.toString()
         UIManager.scoreText?.textString = "SCORE: "+GameManager.score.toString()
-        if(GameManager.gameMode == "breakout"){
+        if(GameManager.gameMode == "breakout" || GameManager.gameMode == "golf"){
             UIManager.livesText?.textString = "LIVES: "+GameManager.lives.toString()
-        } else if(GameManager.gameMode == "golf"){
-            UIManager.livesText?.textString = "MISSES: "+GameManager.lives.toString()
         } else if(GameManager.gameMode == "pong"){
             UIManager.scoreTextPlayer1?.textString = GameManager.score.toString()
             UIManager.scoreTextPlayer2?.textString = GameManager.player2Score.toString()
