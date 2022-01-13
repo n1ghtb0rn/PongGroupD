@@ -93,6 +93,7 @@ object GameManager {
     var player2Score: Int = 0
     var player2Lives: Int = 3
     var gamesWon: Int = 0
+    var win: Boolean = false
 
     //Score data
     var scorePerBrick = 100

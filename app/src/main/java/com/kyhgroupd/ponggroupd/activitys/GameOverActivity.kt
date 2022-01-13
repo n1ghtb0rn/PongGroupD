@@ -22,7 +22,11 @@ class GameOverActivity : AppCompatActivity() {
 
         when(GameManager.gameMode){
             "golf" -> {
-                binding.tvGameOver.text = getString(R.string.win)
+                if(GameManager.win){
+                    binding.tvGameOver.text = getString(R.string.win)
+                } else {
+                    binding.tvGameOver.text = getString(R.string.game_over)
+                }
                 binding.tvScore.text = getString(R.string.your_score, GameManager.score)
             }
             "breakout" -> {
