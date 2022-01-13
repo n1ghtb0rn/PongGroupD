@@ -15,7 +15,7 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
     }
 
     override fun draw(canvas: Canvas?) {
-        if(GameManager.useColors){
+        if(GameManager.useColors || GameManager.gameMode == "pong"){
             this.paint.shader = LinearGradient(
                 posX.toFloat(),
                 posY.toFloat(),
