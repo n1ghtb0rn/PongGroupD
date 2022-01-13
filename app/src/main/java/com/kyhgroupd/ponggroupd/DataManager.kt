@@ -33,7 +33,7 @@ object DataManager {
     fun loadScoreList(gameMode: String): MutableList<PlayerScore> {
         this.createSubDir()
 
-        val scoreList = mutableListOf<PlayerScore>()
+        var scoreList = mutableListOf<PlayerScore>()
 
         try{
             val file = File(this.fullPath, this.scoreFileName+gameMode+this.fileExt)
@@ -47,6 +47,11 @@ object DataManager {
             }
         } catch (e: IOException) {
             e.printStackTrace()
+        }
+
+        //Limit list to 10 items
+        if(scoreList.size > 10){
+            scoreList = scoreList.take(10) as MutableList<PlayerScore>
         }
 
         return scoreList
