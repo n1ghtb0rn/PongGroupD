@@ -261,7 +261,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
             if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
                 if (this.mainBall) {
-                    loseLife()
+                    resetPos()
+                    GameManager.loseLife()
                 } else {
                     this.shouldDeleteThis = true
                 }
@@ -308,23 +309,6 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         when (player) {
             1 -> this.speedY = GameManager.ballSpeed
             2 -> this.speedY = -GameManager.ballSpeed
-        }
-    }
-
-    fun loseLife(){
-        GameManager.currentCombo = 0
-        UIManager.comboText = null
-        resetPos()
-        //Decrement number of lives
-        GameManager.lives--
-        PowerUpManager.clearActivePowerUps()
-
-        if(GameManager.lives <= 0 || GameManager.player2Lives <= 0){
-            SoundManager.playGameOverSFX()
-            GameManager.context?.gameOver()
-        }
-        else{
-            SoundManager.playLoseLifeSFX()
         }
     }
 
