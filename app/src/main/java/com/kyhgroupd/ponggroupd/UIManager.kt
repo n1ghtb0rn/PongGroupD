@@ -96,9 +96,9 @@ object UIManager {
         var pongScoreText: GameObject
         var pongScoreText2: GameText
         if (GameManager.pongPlayerMode == 2) {
-            pongScoreText2 = GameText((GameManager.screenSizeX*0.75).toInt(),GameManager.screenSizeX/2+10,
+            pongScoreText2 = GameText((GameManager.screenSizeX*0.75).toInt(),(GameManager.screenSizeX*0.65).toInt(),
                 GameManager.gameTextColor)
-            pongScoreText = GameText((GameManager.screenSizeX*0.25).toInt(),GameManager.screenSizeX/2+10,
+            pongScoreText = GameText((GameManager.screenSizeX*0.25).toInt(),(GameManager.screenSizeX*0.65).toInt(),
                 GameManager.gameTextColor)
         } else  {
             pongScoreText2 = GameText((GameManager.screenSizeX*0.95-(textSize*0.75)).toInt(),(GameManager.screenSizeY*0.25).toInt(),
