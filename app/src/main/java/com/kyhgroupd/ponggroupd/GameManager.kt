@@ -169,11 +169,7 @@ object GameManager {
                 addBrickColors()
                 addBricks()
             }
-            "pong" -> {
-
-            }
             "golf" -> {
-                lives = 0
                 addBricksGolf()
             }
         }
@@ -326,18 +322,17 @@ object GameManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun addScore(){
         //Score
-        if(gameMode == "breakout"){
-            //Add scored based on level
-            score += scorePerBrick + ((level -1) * bonusScorePerLevel)
-            //Add score based on combo
-            if(currentCombo > 0){
-                val comboValue = currentCombo * comboBonusScore
-                score += comboValue
-                val comboText = ComboText(screenSizeX /2, screenSizeY /2, gameTextColor, comboValue)
-                UIManager.comboText = comboText
-                SoundManager.playComboSFX()
-            }
-            currentCombo++
+
+        //Add scored based on level
+        score += scorePerBrick + ((level - 1) * bonusScorePerLevel)
+        //Add score based on combo
+        if (currentCombo > 0) {
+            val comboValue = currentCombo * comboBonusScore
+            score += comboValue
+            val comboText = ComboText(screenSizeX / 2, screenSizeY / 2, gameTextColor, comboValue)
+            UIManager.comboText = comboText
+            SoundManager.playComboSFX()
         }
+        currentCombo++
     }
 }
