@@ -162,10 +162,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                 canvas.drawColor(Color.BLACK)
             }
 
-            if(GameManager.gameMode == "pong") {
+            if (GameManager.gameMode == "pong") {
                 canvas.drawColor(Color.BLACK) //Draws a black background
 
-                if(GameManager.pongPlayerMode == 2) {
+                if (GameManager.pongPlayerMode == 2) {
                     canvas.save()
                     canvas.rotate(270F,(GameManager.screenSizeX/2).toFloat(),(GameManager.screenSizeY/2).toFloat())
                     for (uiObject in UIManager.uiObjects) {
@@ -173,7 +173,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
                     }
                     canvas.restore()
                     canvas.save()
-                } else if(GameManager.pongPlayerMode == 1) {
+                } else if (GameManager.pongPlayerMode == 1) {
                     for (uiObject in UIManager.uiObjects) {
                         uiObject.draw(canvas)
                     }
