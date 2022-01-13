@@ -15,7 +15,6 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
     //Power Up info
     var collidedWithPaddle = false
     var powerUpType = "POWER_BALL" //default power up type
-    val labelPaint = Paint()
 
     init {
         radius = GameManager.referenceBrick!!.height
@@ -35,18 +34,13 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
     }
 
     override fun draw(canvas: Canvas?) {
-        this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
-            (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
         if (powerUpType != "POWER_BALL") {
             canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
                 this.radius.toFloat(), this.paint)
         } else {
-            canvas?.drawRect((this.posX.toFloat()), (this.posY.toFloat()),
-                (this.posX + this.width.toFloat()), (this.posY + this.height.toFloat()), this.paint)
+            drawRhombus(canvas, this.paint, this.posX, this.posY, this.width)
         }
 
-        //Label draw
-        canvas?.drawText(powerUpType.first().toString(), ((posX+(this.radius*0.4)).toFloat()), ((posY+(this.radius*1.4)).toFloat()), this.labelPaint)
     }
 
     override fun update() {
@@ -58,6 +52,15 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
             }
         }
     }
-
-
+    fun drawRhombus(canvas: Canvas?, paint: Paint?, x: Int, y: Int, width: Int) {
+        val halfWidth = width / 2
+        val path = Path()
+        path.moveTo(x.toFloat(), (y + halfWidth).toFloat()) // Top
+        path.lineTo((x - halfWidth).toFloat(), y.toFloat()) // Left
+        path.lineTo(x.toFloat(), (y - halfWidth).toFloat()) // Bottom
+        path.lineTo((x + halfWidth).toFloat(), y.toFloat()) // Right
+        path.lineTo(x.toFloat(), (y + halfWidth).toFloat()) // Back to Top
+        path.close()
+        canvas?.drawPath(path, paint!!)
+    }
 }
