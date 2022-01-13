@@ -9,7 +9,7 @@
     <string name="play_breakout">Play breakout</string>
     <string name="play_golf">Play Golf</string>
     <string name="high_score_button">High Score</string>
-    <string name="continue_label">Continue</string>
+    <string name="continue_label">Continue play</string>
 
     <!-- High Score activity -->
     <string name="breakout">Breakout</string>
