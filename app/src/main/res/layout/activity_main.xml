@@ -28,12 +28,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/first_game_btn_top_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        android:layout_marginLeft="@dimen/main_activity_buttons_margin"
+        android:layout_marginRight="@dimen/main_activity_buttons_margin"
         android:background="@color/black_transparent"
         android:padding="@dimen/main_activity_buttons_padding"
-        android:layout_marginLeft="@dimen/main_activity_buttons_margin"
-        android:layout_marginRight="@dimen/main_activity_buttons_margin">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
         <Button
             android:id="@+id/btnPlayBreakout"
@@ -44,7 +46,7 @@
             app:layout_constraintBottom_toTopOf="@id/btnPlayPong"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnPlayPong"
@@ -72,14 +74,14 @@
 
         <Button
             android:id="@+id/btnContinue"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
+            android:backgroundTint="@color/continue_button"
             android:fontFamily="@font/aldrich"
             android:text="@string/continue_label"
-            android:backgroundTint="@color/continue_button"
             android:textColor="@color/black"
-            style="@style/Widget.MaterialComponents.Button.Icon"
             app:icon="@android:drawable/ic_media_play"
             app:layout_constraintBottom_toTopOf="@id/btnSettings"
             app:layout_constraintEnd_toEndOf="parent"
