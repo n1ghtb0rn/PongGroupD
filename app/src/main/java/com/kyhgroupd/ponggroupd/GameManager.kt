@@ -336,4 +336,27 @@ object GameManager {
         }
         currentCombo++
     }
+
+    fun scorePointPong(player: Int){
+        currentCombo = 0
+        UIManager.comboText = null
+
+        //Increment score
+        when(player) {
+            1 -> score++
+            2 -> player2Score++
+        }
+        if(score >= 11) {
+            if(pongPlayerMode == 1) {
+                gamesWon++
+            }
+            SoundManager.playGameOverSFX()
+            context?.gameOver()
+        } else if (player2Score >= 11) {
+            SoundManager.playGameOverSFX()
+            context?.gameOver()
+        } else {
+            SoundManager.playLoseLifeSFX()
+        }
+    }
 }
