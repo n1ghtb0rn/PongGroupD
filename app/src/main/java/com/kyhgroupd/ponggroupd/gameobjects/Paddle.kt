@@ -1,7 +1,6 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
@@ -77,14 +76,13 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         }
     }
 
-    fun moveTwoPlayerPaddles() {
+    private fun moveTwoPlayerPaddles() {
         //Get all touch points and check if any of them is within range
         val pointerCount = GameManager.event!!.pointerCount
 
         for (i in 0 until pointerCount) {
             val touchX = GameManager.event!!.getX(i).toInt()
             val touchY = GameManager.event!!.getY(i).toInt()
-            val offsetY = GameManager.paddleTouchOffsetY
 
             if (this == GameManager.paddle && touchY > GameManager.screenSizeY/2) {
                 this.posX = touchX - (width/2)
@@ -94,7 +92,7 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         }
     }
 
-    fun moveSinglePlayerPaddles() {
+    private fun moveSinglePlayerPaddles() {
         var touchX = 0
         var touchY = 0
 
@@ -102,22 +100,21 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
             touchX = GameManager.event!!.x.toInt()
             touchY = GameManager.event!!.y.toInt()
         }
-        val offsetY = GameManager.paddleTouchOffsetY
 
         if (this == GameManager.paddle && touchY > GameManager.screenSizeY/2) {
             this.posX = touchX - (width/2)
         }
 
-        var AiPaddleSpeed = when (GameManager.pongDifficultyLevel) {
+        val aiPaddleSpeed = when (GameManager.pongDifficultyLevel) {
             "easy" -> (GameManager.ballSpeed*0.22).toInt()
             "medium" -> (GameManager.ballSpeed*0.45).toInt()
             "hard" -> (GameManager.ballSpeed*0.6).toInt()
             else -> GameManager.ballSpeed
         }
         if (GameManager.ball!!.posX > GameManager.paddle2!!.posX + width/2) {
-            GameManager.paddle2!!.posX += (AiPaddleSpeed)
+            GameManager.paddle2!!.posX += (aiPaddleSpeed)
         } else if (GameManager.ball!!.posX < GameManager.paddle2!!.posX + width/2) {
-            GameManager.paddle2!!.posX -= (AiPaddleSpeed)
+            GameManager.paddle2!!.posX -= (aiPaddleSpeed)
         }
     }
 }

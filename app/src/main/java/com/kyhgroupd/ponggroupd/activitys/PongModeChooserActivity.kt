@@ -3,8 +3,6 @@ package com.kyhgroupd.ponggroupd.activitys
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.databinding.ActivityPongModeChooserBinding
@@ -54,7 +52,7 @@ class PongModeChooserActivity : AppCompatActivity() {
         }
     }
 
-    fun buttonColorChange() {
+    private fun buttonColorChange() {
         val pressedColor = Color.LTGRAY
         val unpressedColor = Color.WHITE
         when (GameManager.pongPlayerMode) {

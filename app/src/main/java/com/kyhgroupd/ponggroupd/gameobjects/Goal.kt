@@ -5,7 +5,7 @@ import com.kyhgroupd.ponggroupd.GameManager
 
 class Goal(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
-    val borderPaint = Paint()
+    private val borderPaint = Paint()
 
     init {
         width = GameManager.screenSizeX / GameManager.bricksPerRow

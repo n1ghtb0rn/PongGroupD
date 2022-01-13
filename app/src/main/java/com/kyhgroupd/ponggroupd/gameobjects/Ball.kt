@@ -5,10 +5,11 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.contains
 import com.kyhgroupd.ponggroupd.*
+import kotlin.math.abs
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
-    var radius : Int = 0
+    private var radius : Int = 0
     var speedX: Int = 0
     var speedY: Int = 0
 
@@ -116,34 +117,34 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     @RequiresApi(Build.VERSION_CODES.O)
     private fun brickCollision(brick: Brick) {
 
-        var pointLeft = Point(posX, posY + radius)
-        var pointTop= Point(posX + radius, posY)
-        var pointRight = Point(posX + width, posY + radius)
-        var pointBottom = Point(posX + radius, posY + height)
+        val pointLeft = Point(posX, posY + radius)
+        val pointTop= Point(posX + radius, posY)
+        val pointRight = Point(posX + width, posY + radius)
+        val pointBottom = Point(posX + radius, posY + height)
 
-        var brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
+        val brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
 
         //Store previous speed
         val oldSpeedY = speedY
         val oldSpeedX = speedX
 
         if (brickRect.contains(pointBottom)){
-            speedY = kotlin.math.abs(speedY) * -1
+            speedY = abs(speedY) * -1
             destroyBrick(brick)
             GameManager.addScore()
         }
         if (brickRect.contains(pointTop)){
-            speedY = kotlin.math.abs(speedY)
+            speedY = abs(speedY)
             destroyBrick(brick)
             GameManager.addScore()
         }
         if (brickRect.contains(pointRight)){
-            speedX = kotlin.math.abs(speedX) * -1
+            speedX = abs(speedX) * -1
             destroyBrick(brick)
             GameManager.addScore()
         }
         if(brickRect.contains(pointLeft)){
-            speedX = kotlin.math.abs(speedX)
+            speedX = abs(speedX)
             destroyBrick(brick)
             GameManager.addScore()
         }
@@ -255,7 +256,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
         } else {
             if (this.posY < UIManager.uiHeight) {
-                this.speedY = Math.abs(this.speedY)
+                this.speedY = abs(this.speedY)
                 //SFX
                 SoundManager.playBallBounceSFX()
             }
@@ -269,12 +270,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
         }
         if(this.posX < 0){
-            this.speedX = Math.abs(this.speedX)
+            this.speedX = abs(this.speedX)
             //SFX
             SoundManager.playBallBounceSFX()
         }
         if(this.posX+this.width > GameManager.screenSizeX){
-            this.speedX = -Math.abs(this.speedX)
+            this.speedX = -abs(this.speedX)
             //SFX
             SoundManager.playBallBounceSFX()
         }
@@ -302,7 +303,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         this.speedY = -GameManager.ballSpeed
     }
 
-    fun resetPosPong(player: Int) {
+    private fun resetPosPong(player: Int) {
         this.posX = GameManager.ballStartX
         this.posY = GameManager.ballStartY
         this.speedX = GameManager.ballSpeed

@@ -1,20 +1,17 @@
 package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PowerUpManager
-import com.kyhgroupd.ponggroupd.R
-import com.kyhgroupd.ponggroupd.UIManager
 
 class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
-    var radius : Int = 0
+    private var radius : Int = 0
 
     //Power Up info
     var collidedWithPaddle = false
-    var powerUpType = "POWER_BALL" //default power up type
+
+    private var powerUpType = "POWER_BALL" //default power up type
 
     init {
         radius = GameManager.referenceBrick!!.height
