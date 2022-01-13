@@ -10,7 +10,7 @@
     <dimen name="first_game_btn_top_margin">80dp</dimen>
     <dimen name="list_item_padding">8dp</dimen>
     <dimen name="main_activity_buttons_padding">50dp</dimen>
-    <dimen name="main_activity_buttons_margin">50dp</dimen>
+    <dimen name="main_activity_buttons_margin">40dp</dimen>
 
     <!-- sp -->
     <dimen name="default_header_text_size">40sp</dimen>
