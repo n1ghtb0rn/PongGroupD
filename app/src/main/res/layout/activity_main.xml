@@ -8,6 +8,7 @@
     android:background="@drawable/background1b"
     tools:context=".activitys.MainActivity" >
 
+    <!-- Header/Title -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
@@ -21,76 +22,91 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btnPlayBreakout"
-        android:layout_width="wrap_content"
+    <!-- Buttons container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/first_game_btn_top_margin"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/play_breakout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:layout_constraintBottom_toTopOf="@id/btnPlayPong"/>
+        android:background="@color/black_transparent"
+        android:padding="@dimen/main_activity_buttons_padding"
+        android:layout_marginLeft="@dimen/main_activity_buttons_margin"
+        android:layout_marginRight="@dimen/main_activity_buttons_margin">
 
-    <Button
-        android:id="@+id/btnPlayPong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/play_pong"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnPlayBreakout"
-        app:layout_constraintBottom_toTopOf="@id/btnPlayGolf"/>
+        <Button
+            android:id="@+id/btnPlayBreakout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aldrich"
+            android:text="@string/play_breakout"
+            app:layout_constraintBottom_toTopOf="@id/btnPlayPong"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <Button
-        android:id="@+id/btnPlayGolf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/play_golf"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayPong"
-        app:layout_constraintBottom_toTopOf="@id/btnContinue"/>
+        <Button
+            android:id="@+id/btnPlayPong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/aldrich"
+            android:text="@string/play_pong"
+            app:layout_constraintBottom_toTopOf="@id/btnPlayGolf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnPlayBreakout" />
 
-    <Button
-        android:id="@+id/btnContinue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/continue_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayGolf"
-        app:layout_constraintBottom_toTopOf="@id/btnSettings"/>
+        <Button
+            android:id="@+id/btnPlayGolf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/aldrich"
+            android:text="@string/play_golf"
+            app:layout_constraintBottom_toTopOf="@id/btnContinue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPlayPong" />
 
-    <Button
-        android:id="@+id/btnSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/first_game_btn_top_margin"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnContinue"
-        app:layout_constraintBottom_toTopOf="@id/btnHighScore"/>
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/aldrich"
+            android:text="@string/continue_label"
+            app:layout_constraintBottom_toTopOf="@id/btnSettings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPlayGolf" />
 
-    <Button
-        android:id="@+id/btnHighScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/high_score_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSettings"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/first_game_btn_top_margin"
+            android:fontFamily="@font/aldrich"
+            android:text="@string/settings"
+            app:layout_constraintBottom_toTopOf="@id/btnHighScore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnContinue" />
+
+        <Button
+            android:id="@+id/btnHighScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/aldrich"
+            android:text="@string/high_score_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
