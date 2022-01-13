@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="black_transparent">#80000000</color>
+    <color name="continue_button">#92C4EC</color>
 </resources>
