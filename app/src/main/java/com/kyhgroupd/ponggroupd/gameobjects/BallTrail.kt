@@ -8,6 +8,8 @@ import com.kyhgroupd.ponggroupd.GameManager
 class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     var radius : Int = 0
+    val radiusDecrease = 2
+    val colorAlpha = 150
 
     init {
         radius = GameManager.referenceBrick!!.height/2
@@ -17,7 +19,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
         if(!GameManager.useColors){
             this.paint.color = GameManager.ball!!.grayPaint.color
         }
-        this.paint.alpha = 150
+        this.paint.alpha = this.colorAlpha
     }
 
     override fun draw(canvas: Canvas?) {
@@ -28,7 +30,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
     }
 
     override fun update() {
-        this.radius -= 2
+        this.radius -= this.radiusDecrease
     }
 
 }

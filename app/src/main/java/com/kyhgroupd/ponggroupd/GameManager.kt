@@ -100,6 +100,7 @@ object GameManager {
     var bonusScorePerLevel = 25
     val comboBonusScore = 25
     var currentCombo = 0
+    val pongMaxLives = 11
 
     //Player Settings
     val numberOfSettings = 3    //Change this when adding new settings
@@ -218,7 +219,7 @@ object GameManager {
         val level = golfLevels[level-1]
         val rows = level.split(',')
         for(row in rows){
-            if(row.length > 11){
+            if(row.length > bricksPerRow){
                 //return if a brick-row count is more than 11
                 return
             }
@@ -345,13 +346,13 @@ object GameManager {
             1 -> score++
             2 -> player2Score++
         }
-        if(score >= 11) {
+        if(score >= pongMaxLives) {
             if(pongPlayerMode == 1) {
                 gamesWon++
             }
             SoundManager.playGameOverSFX()
             context?.gameOver()
-        } else if (player2Score >= 11) {
+        } else if (player2Score >= pongMaxLives) {
             SoundManager.playGameOverSFX()
             context?.gameOver()
         } else {

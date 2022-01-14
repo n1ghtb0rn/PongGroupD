@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText(startX, startY, color) {
 
     var lifetime: Int = 20
+    val textSizeIncrease = 2
 
     init{
         this.textString = "COMBO! +$comboValue"
@@ -20,8 +21,8 @@ class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText
     }
 
     override fun update(){
-        this.paint.textSize += 2
-        this.grayPaint.textSize += 2
+        this.paint.textSize += textSizeIncrease
+        this.grayPaint.textSize += textSizeIncrease
 
         this.lifetime--
     }
