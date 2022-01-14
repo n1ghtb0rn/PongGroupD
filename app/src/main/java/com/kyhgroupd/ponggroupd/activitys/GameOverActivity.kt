@@ -20,9 +20,10 @@ class GameOverActivity : AppCompatActivity() {
         binding = ActivityGameOverBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set UI text
         when(GameManager.gameMode){
             "golf" -> {
-                if(GameManager.win){
+                if(GameManager.win){ // If user has finished all levels
                     binding.tvGameOver.text = getString(R.string.win)
                 } else {
                     binding.tvGameOver.text = getString(R.string.game_over)
@@ -43,11 +44,11 @@ class GameOverActivity : AppCompatActivity() {
                 binding.tvScorePlayer2.text = getString(R.string.player2_score, GameManager.player2Score)
                 binding.tvScorePlayer2.visibility = View.VISIBLE
 
-                if(GameManager.pongPlayerMode == 2){
+                if(GameManager.pongPlayerMode == 2){ // If pong 2 player mode, user can't save score
                     binding.saveGroup.visibility = View.INVISIBLE
                 } else {
                     binding.tvGamesWon.text = getString(R.string.games_won,GameManager.gamesWon)
-                    binding.tvGamesWon.visibility = View.VISIBLE
+                    binding.tvGamesWon.visibility = View.VISIBLE // If pong single player mode, show matches won
                 }
             }
         }
@@ -62,6 +63,7 @@ class GameOverActivity : AppCompatActivity() {
                     PlayerScore(playerName, GameManager.score)
                 }
                 DataManager.saveScore(playerScore, GameManager.gameMode)
+                // Disable EditText & save button
                 binding.btnSave.isEnabled = false
                 binding.etUsername.isEnabled = false
                 binding.tvScoreSaved.isVisible = true
@@ -83,7 +85,7 @@ class GameOverActivity : AppCompatActivity() {
         super.onResume()
         binding.btnSave.isEnabled = true
         binding.tvScoreSaved.isVisible = false
-        binding.etUsername.setText(GameManager.playerName)
+        binding.etUsername.setText(GameManager.playerName) // Username is saved from previous input
         GameManager.context = null
     }
 

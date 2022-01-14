@@ -24,7 +24,6 @@ class HighScoreActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setUpTabBar() {
         val adapter = TabPageAdapter(this, binder.tabLayout.tabCount)
         binder.viewPager.adapter = adapter
@@ -47,7 +46,6 @@ class HighScoreActivity : AppCompatActivity() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
-
         })
     }
 }
