@@ -5,16 +5,20 @@ import java.io.IOException
 import java.io.PrintWriter
 import java.util.*
 
+/**
+ * Singleton class.
+ * Save and load high score and setting from text files.
+ */
 object DataManager {
 
-    var path: String? = null
-    var fullPath: String? = null
+    private var path: String? = null
+    private var fullPath: String? = null
 
-    const val subDirName = "data"
-    var scoreFileName = "score_"
-    const val settingsFileName = "settings"
-    const val fileExt = ".txt"
-    const val separator = "###"
+    private const val subDirName = "data"
+    private var scoreFileName = "score_"
+    private const val settingsFileName = "settings"
+    private const val fileExt = ".txt"
+    private const val separator = "###"
 
     fun initiate(path: String){
         this.path = path
@@ -22,6 +26,12 @@ object DataManager {
         this.createSubDir()
     }
 
+    /**
+     * Return largest score for game mode
+     *
+     * @param gameMode Game mode string
+     * @return High score
+     */
     fun loadHighScore(gameMode: String): Int {
         val scoreList = this.loadScoreList(gameMode)
         if(scoreList.size > 0){
@@ -30,12 +40,20 @@ object DataManager {
         return 0
     }
 
+    /**
+     * Returns a list of the ten highest scores for game mode.
+     * Reads from local text file.
+     *
+     * @param gameMode Game mode String
+     * @return MutableList of high score
+     */
     fun loadScoreList(gameMode: String): MutableList<PlayerScore> {
         this.createSubDir()
 
         var scoreList = mutableListOf<PlayerScore>()
 
         try{
+            // Read from text file
             val file = File(this.fullPath, this.scoreFileName + gameMode + this.fileExt)
             val scanner = Scanner(file)
             while(scanner.hasNext()){
@@ -57,6 +75,12 @@ object DataManager {
         return scoreList
     }
 
+    /**
+     * Save high score and player name to text file.
+     *
+     * @param newPlayerScore PlayerScore Object
+     * @param gameMode Game mode String
+     */
     fun saveScore(newPlayerScore: PlayerScore, gameMode: String){
         this.createSubDir()
 
@@ -66,6 +90,7 @@ object DataManager {
         scoreList.reverse()
 
         try{
+            // Write to text file
             val file = File(this.fullPath, this.scoreFileName + gameMode + this.fileExt)
             val writer = PrintWriter(file)
             for(playerScore in scoreList){
@@ -78,6 +103,9 @@ object DataManager {
         }
     }
 
+    /**
+     * Save setting chosen by the user to a text file.
+     */
     fun saveSettings(){
         try{
             val file = File(this.fullPath, this.settingsFileName+this.fileExt)
@@ -92,11 +120,15 @@ object DataManager {
         }
     }
 
+    /**
+     * Load settings previously chosen by the user.
+     */
     fun loadSettings(): MutableList<Boolean>{
         this.createSubDir()
 
         val settingsList = mutableListOf<Boolean>()
 
+        // Read from text file
         try{
             val file = File(this.fullPath, this.settingsFileName+this.fileExt)
             val scanner = Scanner(file)
@@ -110,6 +142,9 @@ object DataManager {
         return settingsList
     }
 
+    /**
+     * Create directory for text files
+     */
     private fun createSubDir(){
         try{
             val subDir = File(this.path, this.subDirName)
