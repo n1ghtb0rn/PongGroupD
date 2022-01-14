@@ -76,8 +76,7 @@ object DataManager {
     }
 
     /**
-     * Loads and sorts list of PlayerScore objects.
-     * Writes player name and score to text file.
+     * Save high score and player name to text file.
      *
      * @param newPlayerScore PlayerScore Object
      * @param gameMode Game mode String
@@ -129,6 +128,7 @@ object DataManager {
 
         val settingsList = mutableListOf<Boolean>()
 
+        // Read from text file
         try{
             val file = File(this.fullPath, this.settingsFileName+this.fileExt)
             val scanner = Scanner(file)
