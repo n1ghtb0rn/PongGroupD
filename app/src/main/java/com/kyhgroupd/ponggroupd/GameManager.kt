@@ -13,6 +13,9 @@ import androidx.core.graphics.scale
 import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
+/**
+ * A class for handling game-data and setting up the game.
+ */
 object GameManager {
 
     //Game mode
@@ -108,6 +111,10 @@ object GameManager {
     var useMusic: Boolean = true
     var useColors: Boolean = true
 
+    /**
+     * A method for resetting the game. This includes the balls position/speed, the bricks,
+     * player score and number of lives.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
         //Score reset
@@ -183,18 +190,24 @@ object GameManager {
         SoundManager.playMusic()
     }
 
+    /**
+     * A method for creating all brick-objects in Breakout game mode.
+     */
     private fun addBricks(){
+        //"Reference brick" is never used in-game, only acts as a tool for creating other bricks.
         if(referenceBrick == null){
             return
         }
 
         var colorIndex: Int = 0
+        //Determine the starting/ending positions of all bricks positions
         val brickRowStart = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + referenceBrick!!.height).toInt()
         val brickRowEnd = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + (referenceBrick!!.height*brickRows)).toInt()
         val brickColumnStart = 0
         val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
         for (y in brickRowStart..brickRowEnd step referenceBrick!!.height) {
             for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
+                //Create a new brick-object at given position and add it to game objects list.
                 val brick = Brick(x, y, brickColors[colorIndex])
                 gameObjects.add(brick)
             }
@@ -206,6 +219,10 @@ object GameManager {
         }
     }
 
+    /**
+     * A method for generating bricks in Golf game mode. The blueprint for each level
+     * is stored in strings (in GolfLevels-class). Every char represents a different game object.
+     */
     private fun addBricksGolf(){
         if(referenceBrick == null){
             return
