@@ -8,7 +8,9 @@ import com.kyhgroupd.ponggroupd.*
 import kotlin.math.abs
 
 /**
- *
+ * A ball class to represent a visual and moving ball in the game.
+ * This class also handles collision algorithms.
+ * When calculating collisions, this class is treated as a square/rect shape.
  *
  * @param startX X position
  * @param startY Y position
@@ -20,8 +22,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     var speedX: Int = 0
     var speedY: Int = 0
 
-    var mainBall = true
-    var shouldDeleteThis = false
+    var mainBall = true //Is this the main ball?
+    var shouldDeleteThis = false //Is this ball about to be removed?
 
     init {
         radius = GameManager.referenceBrick!!.height / 2
@@ -29,10 +31,19 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         height = radius * 2
         speedX = GameManager.ballSpeed
         speedY = -GameManager.ballSpeed
-
+        //The grayscale color (when colors are off in settings)
         this.grayPaint.color = Color.LTGRAY
     }
 
+    /**
+     * A method for drawing this object on the canvas every frame.
+     * "shader"/LinearGradient creates a retro "3D"-feeling by combining the main color
+     * with the color white. It creates a little "triangle" in the top left corner of the object.
+     *
+     * The circle drawing position needs to be adjusted to fit the hitbox.
+     *
+     * @param canvas Canvas object
+     */
     override fun draw(canvas: Canvas?) {
         if (GameManager.useColors || GameManager.gameMode == "pong") {
             this.paint.shader = LinearGradient(
@@ -66,8 +77,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     }
 
+    /**
+     * Update-method for updating position (etc) of this object every frame.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     override fun update() {
+        //Create a ball trail effect (except for pong game mode)
         if (GameManager.gameMode != "pong") {
             if (this.mainBall) {
                 if (GameManager.useColors) {
@@ -90,6 +105,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
         }
 
+        //Update the position of this object based on its speed
         posX += speedX
         posY += speedY
 
@@ -107,6 +123,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
     }
 
+    /**
+     * Check if this object has collidied with the goal-object.
+     */
     private fun goalCollision() {
         GameManager.score += 100 + (GameManager.level - 1) * GameManager.bonusScorePerLevel
         val golfLevels = GolfLevels().levels
@@ -117,6 +136,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         GameManager.nextLevel()
     }
 
+    /**
+     * Check if this object has collided with the paddle.
+     */
     private fun paddleCollision(paddle: Paddle) {
 
         val speedXY = this.getSpeedXY(paddle)
@@ -152,8 +174,13 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         SoundManager.playBallBounceSFX()
     }
 
+    /**
+     * Check of this object has collided with a brick-object.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun brickCollision(brick: Brick) {
+
+        //Split this object into 4 points for more detailed collision detection
 
         val pointLeft = Point(posX, posY + radius)
         val pointTop = Point(posX + radius, posY)
@@ -167,6 +194,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         val oldSpeedY = speedY
         val oldSpeedX = speedX
 
+        //Check which of the four points collided with the brick, and set direction.
         if (brickRect.contains(pointBottom)) {
             speedY = abs(speedY) * -1
             destroyBrick(brick)
@@ -188,12 +216,19 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             GameManager.addScore()
         }
 
+        //Don't bounce if "power ball" is active (it will just smash through the bricks)
         if (PowerUpManager.powerBallActive && this.mainBall) {
             speedY = oldSpeedY
             speedX = oldSpeedX
         }
     }
 
+    /**
+     * A method for destroying bricks that this object has collided with.
+     * It also handles the power up spawn algorithm.
+     *
+     * @param brick Brick. The Brick-object to be destroyed.
+     */
     private fun destroyBrick(brick: Brick) {
         //Unbreakable brick?
         if (brick.unbreakable) {
@@ -219,10 +254,13 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         if (GameManager.gameMode == "breakout") {
             val random = (1..100).random()
             var powerUpChance = PowerUpManager.powerUpChance
+            //Lower the chance of a new power up if "power balL" is active
             if (PowerUpManager.powerBallActive) {
                 powerUpChance += PowerUpManager.powerBallPowerUpChanceModifier
             }
+            //Eg: 25% chance = 100 - 25 = 75. The RNG must be above 75 for power up to spawn.
             if (random > (100 - powerUpChance)) {
+                //Creates a new power up object and adds it to the list
                 GameManager.powerUpObjects.add(
                     PowerUp(
                         brick.posX,
@@ -241,6 +279,16 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         SoundManager.playDestroyBrickSFX()
     }
 
+    /**
+     * A method for getting the new ball-angle after colliding with the paddle.
+     * The paddle is split into 6 zones, each with its different angel.
+     * 1-6 (from left to right)
+     *
+     * Paddle = ______
+     * Zone nr= 123456
+     *
+     * @param paddle Paddle. The paddle-object that this object collided with.
+     */
     private fun getSpeedXY(paddle: Paddle): Point {
         //100% of ball speed to be shared by a percentage over y/x-axis
         val totalBallSpeed = GameManager.ballSpeed * 2
@@ -286,6 +334,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         return Point(speedX, speedY)
     }
 
+    /**
+     * A method for checking the collision with the border (edges of the playfield).
+     */
     private fun checkBorderCollision() {
         if (GameManager.gameMode == "pong") {
             var player = 0
@@ -326,20 +377,29 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         }
     }
 
-    //Function to check if ball is colliding with another game object
+    /**
+     * Function to check if ball is colliding with another game object.
+     *
+     * @return GameObject Returns the game object that the ball collided with.
+     *                    (Returns null if no collision)
+     */
     private fun collidingWith(): GameObject? {
         for (gameObject in GameManager.gameObjects) {
+            //Algorithm to check if this object has collided with another object.
             if (this.posX < gameObject.posX + gameObject.width && this.posX + this.width > gameObject.posX) {
                 if (this.posY < gameObject.posY + gameObject.height && this.posY + this.height > gameObject.posY) {
-                    //Return the other game object if colliding
+                    //Return the other game object if collision was detected
                     return gameObject
                 }
             }
         }
-        //Return null if no colliding
+        //Return null if no collision
         return null
     }
 
+    /**
+     * A function to reset this objects position/speed to original value.
+     */
     fun resetPos() {
         //Reset ball position and speed
         this.posX = GameManager.ballStartX
@@ -348,6 +408,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         this.speedY = -GameManager.ballSpeed
     }
 
+    /**
+     * A function to reset this objects position/speed to original value in pong game mode.
+     */
     private fun resetPosPong(player: Int) {
         this.posX = GameManager.ballStartX
         this.posY = GameManager.ballStartY
