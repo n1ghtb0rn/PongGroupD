@@ -4,7 +4,7 @@ import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
 /**
- *
+ * Inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
@@ -18,7 +18,7 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
 
     init {
         width = ((GameManager.screenSizeX / GameManager.bricksPerRow)/ GameManager.pieceWidthFactor).toInt()
-        height = (width/ GameManager.brickHeightRatio)
+        height = (width / GameManager.brickHeightRatio)
     }
 
     override fun draw(canvas: Canvas?){
