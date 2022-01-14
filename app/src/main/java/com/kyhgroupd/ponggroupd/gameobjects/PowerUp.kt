@@ -5,7 +5,7 @@ import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PowerUpManager
 
 /**
- *
+ * Inherits from GameObject
  *
  * @param startX X position
  * @param startY Y position
@@ -26,13 +26,14 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
         height = radius*2
 
         this.powerUpType = PowerUpManager.generatePowerUpType()
-        if (GameManager.useColors) {
+
+        if (GameManager.useColors) { // Color
             if (this.powerUpType != "POWER_BALL") {
                 this.paint.color = Color.BLUE
             } else {
                 this.paint.color = Color.RED
             }
-        } else {
+        } else { // Greyscale
             this.paint.color = Color.LTGRAY
         }
     }
@@ -49,6 +50,7 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
 
     override fun update() {
         this.posY += PowerUpManager.powerUpFallSpeed
+        // Check collision with paddle
         if(this.posX < (GameManager.paddle!!.posX+GameManager.paddle!!.width) && (this.posX+this.width > GameManager.paddle!!.posX)){
             if(this.posY < (GameManager.paddle!!.posY+GameManager.paddle!!.height) && (this.posY+this.height > GameManager.paddle!!.posY)){
                 this.collidedWithPaddle = true
@@ -56,7 +58,11 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
             }
         }
     }
-    fun drawRhombus(canvas: Canvas?, paint: Paint?, x: Int, y: Int, width: Int) {
+
+    /**
+     * Draws a rhombus/diamond on canvas
+     */
+    private fun drawRhombus(canvas: Canvas?, paint: Paint?, x: Int, y: Int, width: Int) {
         val halfWidth = width / 2
         val path = Path()
         path.moveTo(x.toFloat(), (y + halfWidth).toFloat()) // Top

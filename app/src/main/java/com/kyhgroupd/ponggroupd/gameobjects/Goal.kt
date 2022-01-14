@@ -4,7 +4,7 @@ import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
 /**
- *
+ * Inherits from GameObject
  *
  * @param startX X position
  * @param startY Y position
