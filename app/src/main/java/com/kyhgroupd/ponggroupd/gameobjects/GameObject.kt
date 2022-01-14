@@ -2,6 +2,13 @@ package com.kyhgroupd.ponggroupd.gameobjects
 
 import android.graphics.*
 
+/**
+ * Abstract class, all in-game objects inherit from this class
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
 
     var posX: Int = 0

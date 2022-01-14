@@ -6,6 +6,13 @@ import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PowerUpManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     var radius : Int = 0

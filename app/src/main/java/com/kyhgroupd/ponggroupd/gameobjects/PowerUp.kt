@@ -4,6 +4,13 @@ import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PowerUpManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     private var radius : Int = 0

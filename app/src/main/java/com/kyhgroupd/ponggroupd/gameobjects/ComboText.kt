@@ -5,6 +5,13 @@ import android.graphics.Paint
 import android.os.Build
 import androidx.annotation.RequiresApi
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText(startX, startY, color) {
 
