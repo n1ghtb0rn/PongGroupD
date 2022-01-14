@@ -8,6 +8,9 @@ import com.kyhgroupd.ponggroupd.gameobjects.ComboText
 import com.kyhgroupd.ponggroupd.gameobjects.GameObject
 import com.kyhgroupd.ponggroupd.gameobjects.GameText
 
+/**
+ * Singleton class to manage UI objects drawn on the screen (score text, lives text, etc.)
+ */
 object UIManager {
 
     var uiHeight: Int = 0
@@ -31,12 +34,17 @@ object UIManager {
     var textSize: Float = 0f
     val textSizeFactor: Int = 25
 
+    /**
+     * Resets UI text when new game is started
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetUI(){
 
         //UI
-        uiHeight = GameManager.screenSizeY /uiHeightFactor
-        textSize = when(GameManager.gameMode){"pong" -> (GameManager.screenSizeX / textSizeFactor * 2).toFloat() else -> (GameManager.screenSizeX / textSizeFactor).toFloat()}
+        uiHeight = GameManager.screenSizeY / uiHeightFactor
+        textSize = when(GameManager.gameMode)
+        { "pong" -> (GameManager.screenSizeX / textSizeFactor * 2).toFloat()
+            else -> (GameManager.screenSizeX / textSizeFactor).toFloat() }
         uiPaint.style = Paint.Style.STROKE
         uiPaint.color = Color.WHITE
         uiPaint.strokeWidth = uiBorderWidth
@@ -47,7 +55,7 @@ object UIManager {
         //UI objects
         if (GameManager.gameMode != "pong") {
             this.addUiText()
-        } else  {
+        } else {
          addPongUiText()
         }
 
@@ -63,6 +71,10 @@ object UIManager {
 
     }
 
+    /**
+     * Creates GameText objects to display user score, high score, number of lives
+     * and current level in breakout and golf game modes.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun addUiText(){
         val scoreText = GameText(
@@ -91,16 +103,24 @@ object UIManager {
         uiObjects.add(levelText)
     }
 
+    /**
+     * Creates GameText objects to display score of players in pong game mode.
+     * In pong single player mode user player's score and AI player's score are shown
+     * facing the user, the AI player's score toward the top right of the screen and
+     * the user player's score toward to bottom left of the screen. In pong two-player mode
+     * both players' scores are shown side-on at the left edge of the screen.
+     *
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun addPongUiText(){
-        var pongScoreText: GameObject
+        var pongScoreText: GameText
         var pongScoreText2: GameText
         if (GameManager.pongPlayerMode == 2) {
             pongScoreText2 = GameText((GameManager.screenSizeX*0.75).toInt(),(GameManager.screenSizeX*0.65).toInt(),
                 GameManager.gameTextColor)
             pongScoreText = GameText((GameManager.screenSizeX*0.25).toInt(),(GameManager.screenSizeX*0.65).toInt(),
                 GameManager.gameTextColor)
-        } else  {
+        } else {
             pongScoreText2 = GameText((GameManager.screenSizeX*0.95-(textSize*0.75)).toInt(),(GameManager.screenSizeY*0.25).toInt(),
                 GameManager.gameTextColor)
             pongScoreText = GameText((GameManager.screenSizeX*0.05).toInt(),(GameManager.screenSizeY*0.75).toInt(),

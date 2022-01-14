@@ -21,6 +21,11 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
         height = (width / GameManager.brickHeightRatio)
     }
 
+    /**
+     * A method for drawing this object on the canvas every frame.
+     *
+     * @param canvas Canvas object
+     */
     override fun draw(canvas: Canvas?){
         if(GameManager.useColors){
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
@@ -30,6 +35,9 @@ open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX,
         }
     }
 
+    /**
+     * Update-method for updating position (etc) of this object every frame.
+     */
     override fun update(){
         this.posX += this.speedX
         this.posY += this.speedY

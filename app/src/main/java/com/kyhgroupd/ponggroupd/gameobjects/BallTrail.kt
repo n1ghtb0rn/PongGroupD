@@ -26,6 +26,12 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
         this.paint.alpha = this.colorAlpha
     }
 
+    /**
+     * A method for drawing this object on the canvas every frame.
+     * The circle drawing position needs to be adjusted to fit the hitbox.
+     *
+     * @param canvas Canvas object
+     */
     override fun draw(canvas: Canvas?) {
         // Shader/LinearGradient creates a retro 3D feeling by combining the main color with the color white.
         // It creates a little triangle in the top left corner of the object.
@@ -35,6 +41,9 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
             this.radius.toFloat(), this.paint)
     }
 
+    /**
+     * Update-method for updating position (etc) of this object every frame.
+     */
     override fun update() {
         this.radius -= this.radiusDecrease // Decrease radius every frame
     }
