@@ -4,62 +4,67 @@ import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
 /**
- *
+ * Inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
  * @param color Color of object
+ * @param health Number of hits required to destroy brick
+ * @param unbreakable Brick that cannot be destroyed
  */
 open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable: Boolean ): GameObject(startX, startY, color) {
 
-    //Breakout brick
+    // Breakout brick
     constructor(startX: Int, startY: Int, color: Int) : this(startX, startY, color, 1, false)
 
-    //Golf-brick
+    // Golf-brick
     constructor(startX: Int, startY: Int, color: Int, health: Int) : this(startX, startY, color, health, false)
 
-    //Unbreakable-brick
+    // Unbreakable brick
     constructor(startX: Int, startY: Int, color: Int, unbreakable: Boolean) : this(startX, startY, color, 1, unbreakable)
 
-    val borderPaint = Paint()
-    var health: Int = 1 //Default brick value
-    var unbreakable = false //Default brick value
+    val borderPaint = Paint() // Border around each brick
+    var health: Int = 1 // Default brick value
+    var unbreakable = false // Default brick value
 
-    //Base
+    // Base
     init {
         width = GameManager.screenSizeX / GameManager.bricksPerRow
-        height = width/ GameManager.brickHeightRatio
+        height = width / GameManager.brickHeightRatio
     }
 
-    //Colors
+    // Colors
     init {
+        // Shader/LinearGradient creates a retro 3D feeling by combining the main color with the color white.
+        // It creates a little triangle in the top left corner of the object.
         paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
             GameManager.gradientColor, paint.color, Shader.TileMode.CLAMP)
 
+        // Grayscale mode
         grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(height/2)).toFloat(), (posY+(height/2)).toFloat(),
             GameManager.gradientColor, grayPaint.color, Shader.TileMode.CLAMP)
 
         borderPaint.color = Color.BLACK
         borderPaint.style = Paint.Style.STROKE
-        borderPaint.strokeWidth = (height/ GameManager.borderStrokeWidthFactor).toFloat()
+        borderPaint.strokeWidth = (height / GameManager.borderStrokeWidthFactor).toFloat()
     }
 
-    //Extra
+    // Extra
     init {
         this.health = health
         this.unbreakable = unbreakable
     }
 
     override fun draw(canvas: Canvas?){
-        //Base
+        // Base
         if(GameManager.useColors || this.unbreakable){
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.paint)
         }
-        else{
+        else{ // Grayscale mode
             canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), this.grayPaint)
         }
 
-        //Border
+        // Border
         canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), borderPaint)
     }
 
@@ -67,7 +72,10 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
 
     }
 
-    //Shatter this brick into small pieces when destroyed
+    /**
+     * Shatters this brick into small pieces when destroyed.
+     * Creates 8 small pieces that move in different directions.
+     */
     fun destroy(){
         val piece1 = BrickPiece(this.posX+(this.width/2), this.posY+(this.height/2), this.paint.color)
         piece1.speedX = 0
@@ -99,6 +107,10 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
         GameManager.pieceObjects.add(piece8)
     }
 
+    /**
+     * Changes color of bricks according to health (number of hits remaining to destroy brick).
+     * Used only in golf game mode.
+     */
     fun changeColor(){
         when {
             this.unbreakable -> {

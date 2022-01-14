@@ -6,17 +6,18 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 
 /**
- *
+ * Inherits from GameText class which inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
  * @param color Color of object
+ * @param comboValue Number of extra points for combo type
  */
 @RequiresApi(Build.VERSION_CODES.O)
 class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText(startX, startY, color) {
 
-    var lifetime: Int = 20
-    val textSizeIncrease = 2
+    var lifetime: Int = 20 //
+    val textSizeIncrease = 2 // Combo text becomes increasingly bigger
 
     init{
         this.textString = "COMBO! +$comboValue"

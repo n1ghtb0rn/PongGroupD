@@ -13,6 +13,9 @@ import com.kyhgroupd.ponggroupd.CustomAdapter
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.R
 
+/**
+ * Fragment to display high scores for breakout game mode
+ */
 class BreakoutFragment : Fragment() {
 
     override fun onCreateView(

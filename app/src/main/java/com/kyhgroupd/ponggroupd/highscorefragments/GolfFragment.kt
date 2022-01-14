@@ -13,6 +13,9 @@ import com.kyhgroupd.ponggroupd.CustomAdapter
 import com.kyhgroupd.ponggroupd.DataManager
 import com.kyhgroupd.ponggroupd.R
 
+/**
+ * Fragment to display high scores for golf game mode
+ */
 class GolfFragment : Fragment() {
 
     override fun onCreateView(
