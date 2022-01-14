@@ -13,6 +13,7 @@
         android:gravity="end"
         android:orientation="vertical">
 
+        <!-- Header -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/default_header_text_size" />
 
+        <!-- High score list -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvScoreListBreakout"
             android:layout_width="match_parent"

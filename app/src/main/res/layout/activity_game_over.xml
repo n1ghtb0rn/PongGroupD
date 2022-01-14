@@ -7,6 +7,7 @@
     tools:context=".activitys.GameOverActivity"
     android:background="@color/black">
 
+    <!-- Header -->
     <TextView
         android:id="@+id/tvGameOver"
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
         app:layout_constraintBottom_toTopOf="@id/tvScore"
         android:layout_marginTop="@dimen/first_game_btn_top_margin"/>
 
+    <!-- Score text -->
     <TextView
         android:id="@+id/tvScore"
         android:layout_width="wrap_content"
@@ -35,6 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/default_margin"/>
 
+    <!-- Player 2 score text (visible only in pong 2 player mode) -->
     <TextView
         android:id="@+id/tvScorePlayer2"
         android:layout_width="wrap_content"
@@ -48,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Games won text (visible only in pong single player mode) -->
     <TextView
         android:id="@+id/tvGamesWon"
         android:layout_width="wrap_content"
@@ -62,6 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/small_margin"/>
 
+    <!-- Text 'save score' -->
     <TextView
         android:id="@+id/tvSavePrompt"
         android:layout_width="wrap_content"
@@ -76,6 +81,7 @@
         android:layout_marginTop="@dimen/first_game_btn_top_margin"
         />
 
+    <!-- EditText for username input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUsername"
         android:layout_width="match_parent"
@@ -102,6 +108,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Save button -->
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
@@ -112,6 +119,7 @@
         app:layout_constraintEnd_toEndOf="@id/tilUsername"
         android:layout_marginTop="@dimen/default_margin" />
 
+    <!-- Group of views for saving score, removed in pong 2 player mode -->
     <androidx.constraintlayout.widget.Group
         android:id="@+id/save_group"
         android:layout_width="wrap_content"
@@ -119,6 +127,7 @@
         android:visibility="visible"
         app:constraint_referenced_ids="tvSavePrompt, tilUsername, btnSave" />
 
+    <!-- 'Score saved' text, appears when user saves their score -->
     <TextView
         android:id="@+id/tvScoreSaved"
         android:layout_width="wrap_content"
@@ -132,6 +141,7 @@
         app:layout_constraintEnd_toEndOf="@id/btnSave"
         />
 
+    <!-- Bottom buttons -->
     <Button
         android:id="@+id/btnPlayAgain"
         android:layout_width="wrap_content"

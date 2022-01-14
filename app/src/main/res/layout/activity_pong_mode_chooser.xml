@@ -7,6 +7,7 @@
     tools:context=".activitys.PongModeChooserActivity"
     android:background="@color/black">
 
+    <!-- Header -->
     <TextView
         android:id="@+id/tvPongModeTitle"
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/first_game_btn_top_margin" />
 
+    <!-- Player mode toggle group -->
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/tgPlayerMode"
         android:layout_width="wrap_content"
@@ -55,6 +57,7 @@
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <!-- Difficulty level toggle group -->
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/tgDifficultyLevel"
         android:layout_width="wrap_content"
@@ -99,6 +102,7 @@
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <!-- Start button -->
     <Button
         android:id="@+id/btnStartGame"
         android:layout_width="wrap_content"
