@@ -9,7 +9,7 @@ import kotlin.math.abs
 
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
-    private var radius : Int = 0
+    private var radius: Int = 0
     var speedX: Int = 0
     var speedY: Int = 0
 
@@ -17,9 +17,9 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     var shouldDeleteThis = false
 
     init {
-        radius = GameManager.referenceBrick!!.height/2
-        width = radius*2
-        height = radius*2
+        radius = GameManager.referenceBrick!!.height / 2
+        width = radius * 2
+        height = radius * 2
         speedX = GameManager.ballSpeed
         speedY = -GameManager.ballSpeed
 
@@ -27,34 +27,61 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     override fun draw(canvas: Canvas?) {
-        if(GameManager.useColors || GameManager.gameMode == "pong"){
-            this.paint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
-                (posY+(radius)).toFloat(), GameManager.gradientColor, this.paint.color, Shader.TileMode.CLAMP)
-            canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
-                this.radius.toFloat(), this.paint)
-        }
-        else{
-            this.grayPaint.shader = LinearGradient(posX.toFloat(), posY.toFloat(), (posX+(radius)).toFloat(),
-                (posY+(radius)).toFloat(), GameManager.gradientColor, this.grayPaint.color, Shader.TileMode.CLAMP)
-            canvas?.drawCircle((this.posX.toFloat()+this.radius), (this.posY.toFloat()+this.radius),
-                this.radius.toFloat(), this.grayPaint)
+        if (GameManager.useColors || GameManager.gameMode == "pong") {
+            this.paint.shader = LinearGradient(
+                posX.toFloat(),
+                posY.toFloat(),
+                (posX + (radius)).toFloat(),
+                (posY + (radius)).toFloat(),
+                GameManager.gradientColor,
+                this.paint.color,
+                Shader.TileMode.CLAMP
+            )
+            canvas?.drawCircle(
+                (this.posX.toFloat() + this.radius), (this.posY.toFloat() + this.radius),
+                this.radius.toFloat(), this.paint
+            )
+        } else {
+            this.grayPaint.shader = LinearGradient(
+                posX.toFloat(),
+                posY.toFloat(),
+                (posX + (radius)).toFloat(),
+                (posY + (radius)).toFloat(),
+                GameManager.gradientColor,
+                this.grayPaint.color,
+                Shader.TileMode.CLAMP
+            )
+            canvas?.drawCircle(
+                (this.posX.toFloat() + this.radius), (this.posY.toFloat() + this.radius),
+                this.radius.toFloat(), this.grayPaint
+            )
         }
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun update(){
-    if (GameManager.gameMode != "pong") {
-        if (PowerUpManager.powerBallActive && this.mainBall) {
-            if (!GameManager.useColors) {
-                GameManager.trailObjects.add(BallTrail(this.posX, this.posY, PowerUpManager.powerBallTrailGrayColor))
+    override fun update() {
+        if (GameManager.gameMode != "pong") {
+            if (this.mainBall) {
+                if (GameManager.useColors) {
+                    if (PowerUpManager.powerBallActive) {
+                        GameManager.trailObjects.add(BallTrail(this.posX, this.posY,
+                                PowerUpManager.powerBallTrailColor))
+                    } else {
+                        GameManager.trailObjects.add(BallTrail(this.posX, this.posY, this.paint.color))
+                    }
+                } else {
+                    if (PowerUpManager.powerBallActive) {
+                        GameManager.trailObjects.add(BallTrail(this.posX, this.posY,
+                                PowerUpManager.powerBallTrailGrayColor))
+                    } else {
+                        GameManager.trailObjects.add(BallTrail(this.posX, this.posY, this.paint.color))
+                    }
+                }
             } else {
-                GameManager.trailObjects.add(BallTrail(this.posX, this.posY, PowerUpManager.powerBallTrailColor))
+                GameManager.trailObjects.add(BallTrail(this.posX, this.posY, this.grayPaint.color))
             }
-        } else {
-            GameManager.trailObjects.add(BallTrail(this.posX, this.posY, this.paint.color))
         }
-    }
 
         posX += speedX
         posY += speedY
@@ -66,17 +93,17 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         val gameObject: GameObject = this.collidingWith() ?: return
 
         //Brick collision
-        when(gameObject){
+        when (gameObject) {
             is Brick -> brickCollision(gameObject)
             is Paddle -> paddleCollision(gameObject)
             is Goal -> goalCollision()
         }
     }
 
-    private fun goalCollision(){
-        GameManager.score += 100 + (GameManager.level -1) * GameManager.bonusScorePerLevel
+    private fun goalCollision() {
+        GameManager.score += 100 + (GameManager.level - 1) * GameManager.bonusScorePerLevel
         val golfLevels = GolfLevels().levels
-        if(golfLevels.size <= GameManager.level) {
+        if (golfLevels.size <= GameManager.level) {
             GameManager.win = true
             GameManager.context?.gameOver()
         }
@@ -88,8 +115,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         val speedXY = this.getSpeedXY(paddle)
 
         //Player 1
-        if(paddle.player == 1){
-            if(this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + (paddle.height/0.25)){
+        if (paddle.player == 1) {
+            if (this.posY + this.height > paddle.posY && this.posY + this.height < paddle.posY + (paddle.height / 0.25)) {
 
                 this.speedY = speedXY.y
                 this.speedX = speedXY.x
@@ -99,8 +126,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             }
         }
         //Player 2
-        else{
-            if(this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + (paddle.height/4)){
+        else {
+            if (this.posY < paddle.posY + paddle.height && this.posY > paddle.posY + (paddle.height / 4)) {
 
                 this.speedY = -speedXY.y
                 this.speedX = speedXY.x
@@ -122,46 +149,47 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     private fun brickCollision(brick: Brick) {
 
         val pointLeft = Point(posX, posY + radius)
-        val pointTop= Point(posX + radius, posY)
+        val pointTop = Point(posX + radius, posY)
         val pointRight = Point(posX + width, posY + radius)
         val pointBottom = Point(posX + radius, posY + height)
 
-        val brickRect = Rect(brick.posX, brick.posY, brick.posX+brick.width, brick.posY + brick.height)
+        val brickRect =
+            Rect(brick.posX, brick.posY, brick.posX + brick.width, brick.posY + brick.height)
 
         //Store previous speed
         val oldSpeedY = speedY
         val oldSpeedX = speedX
 
-        if (brickRect.contains(pointBottom)){
+        if (brickRect.contains(pointBottom)) {
             speedY = abs(speedY) * -1
             destroyBrick(brick)
             GameManager.addScore()
         }
-        if (brickRect.contains(pointTop)){
+        if (brickRect.contains(pointTop)) {
             speedY = abs(speedY)
             destroyBrick(brick)
             GameManager.addScore()
         }
-        if (brickRect.contains(pointRight)){
+        if (brickRect.contains(pointRight)) {
             speedX = abs(speedX) * -1
             destroyBrick(brick)
             GameManager.addScore()
         }
-        if(brickRect.contains(pointLeft)){
+        if (brickRect.contains(pointLeft)) {
             speedX = abs(speedX)
             destroyBrick(brick)
             GameManager.addScore()
         }
 
-        if(PowerUpManager.powerBallActive && this.mainBall){
+        if (PowerUpManager.powerBallActive && this.mainBall) {
             speedY = oldSpeedY
             speedX = oldSpeedX
         }
     }
 
-    private fun destroyBrick(brick: Brick){
+    private fun destroyBrick(brick: Brick) {
         //Unbreakable brick?
-        if(brick.unbreakable){
+        if (brick.unbreakable) {
             //SFX
             SoundManager.playBallBounceSFX()
             return
@@ -169,26 +197,32 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
         //Non-unbreakable brick?
         brick.health--
-        if(GameManager.gameMode == "golf"){
+        if (GameManager.gameMode == "golf") {
             brick.changeColor()
         }
 
         //Check brick health
-        if(brick.health > 0){
+        if (brick.health > 0) {
             //SFX
             SoundManager.playBallBounceSFX()
             return
         }
 
         //Spawn Power Up?
-        if(GameManager.gameMode == "breakout"){
+        if (GameManager.gameMode == "breakout") {
             val random = (1..100).random()
             var powerUpChance = PowerUpManager.powerUpChance
-            if(PowerUpManager.powerBallActive){
+            if (PowerUpManager.powerBallActive) {
                 powerUpChance += PowerUpManager.powerBallPowerUpChanceModifier
             }
-            if(random > (100-powerUpChance)){
-                GameManager.powerUpObjects.add(PowerUp(brick.posX, brick.posY, PowerUpManager.powerUpColor))
+            if (random > (100 - powerUpChance)) {
+                GameManager.powerUpObjects.add(
+                    PowerUp(
+                        brick.posX,
+                        brick.posY,
+                        PowerUpManager.powerUpColor
+                    )
+                )
             }
         }
 
@@ -202,59 +236,59 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
 
     private fun getSpeedXY(paddle: Paddle): Point {
         //100% of ball speed to be shared by a percentage over y/x-axis
-        val totalBallSpeed = GameManager.ballSpeed *2
+        val totalBallSpeed = GameManager.ballSpeed * 2
 
         //Change ball angle depending on paddle collision zone
         val paddleZones = 6
-        val widthPerZone = paddle.width/paddleZones
+        val widthPerZone = paddle.width / paddleZones
 
         var speedY: Int = 0
         var speedX: Int = 0
 
         //Zone 1 (far left side)
-        if(this.posX < paddle.posX+widthPerZone && this.posX+this.width > paddle.posX){
-            speedY = -(totalBallSpeed*0.3).toInt()
-            speedX = -(totalBallSpeed*0.7).toInt()
+        if (this.posX < paddle.posX + widthPerZone && this.posX + this.width > paddle.posX) {
+            speedY = -(totalBallSpeed * 0.3).toInt()
+            speedX = -(totalBallSpeed * 0.7).toInt()
         }
         //Zone 2
-        else if(this.posX < paddle.posX+(widthPerZone*2) && this.posX+this.width > paddle.posX+widthPerZone){
-            speedY = -(totalBallSpeed*0.5).toInt()
-            speedX = -(totalBallSpeed*0.5).toInt()
+        else if (this.posX < paddle.posX + (widthPerZone * 2) && this.posX + this.width > paddle.posX + widthPerZone) {
+            speedY = -(totalBallSpeed * 0.5).toInt()
+            speedX = -(totalBallSpeed * 0.5).toInt()
         }
         //Zone 3
-        else if(this.posX < paddle.posX+(widthPerZone*3) && this.posX+this.width > paddle.posX+(widthPerZone*2)){
-            speedY = -(totalBallSpeed*0.7).toInt()
-            speedX = -(totalBallSpeed*0.3).toInt()
+        else if (this.posX < paddle.posX + (widthPerZone * 3) && this.posX + this.width > paddle.posX + (widthPerZone * 2)) {
+            speedY = -(totalBallSpeed * 0.7).toInt()
+            speedX = -(totalBallSpeed * 0.3).toInt()
         }
         //Zone 4
-        else if(this.posX < paddle.posX+(widthPerZone*4) && this.posX+this.width > paddle.posX+(widthPerZone*3)){
-            speedY = -(totalBallSpeed*0.7).toInt()
-            speedX = (totalBallSpeed*0.3).toInt()
+        else if (this.posX < paddle.posX + (widthPerZone * 4) && this.posX + this.width > paddle.posX + (widthPerZone * 3)) {
+            speedY = -(totalBallSpeed * 0.7).toInt()
+            speedX = (totalBallSpeed * 0.3).toInt()
         }
         //Zone 5
-        else if(this.posX < paddle.posX+(widthPerZone*5) && this.posX+this.width > paddle.posX+(widthPerZone*4)){
-            speedY = -(totalBallSpeed*0.5).toInt()
-            speedX = (totalBallSpeed*0.5).toInt()
+        else if (this.posX < paddle.posX + (widthPerZone * 5) && this.posX + this.width > paddle.posX + (widthPerZone * 4)) {
+            speedY = -(totalBallSpeed * 0.5).toInt()
+            speedX = (totalBallSpeed * 0.5).toInt()
         }
         //Zone 6 (far right side)
         else {
-            speedY = -(totalBallSpeed*0.3).toInt()
-            speedX = (totalBallSpeed*0.7).toInt()
+            speedY = -(totalBallSpeed * 0.3).toInt()
+            speedX = (totalBallSpeed * 0.7).toInt()
         }
 
         return Point(speedX, speedY)
     }
 
     private fun checkBorderCollision() {
-        if(GameManager.gameMode == "pong") {
+        if (GameManager.gameMode == "pong") {
             var player = 0
-            if (this.posY < -GameManager.screenSizeY /6) {
+            if (this.posY < -GameManager.screenSizeY / 6) {
                 player = 1
             }
-            if (this.posY+this.height > GameManager.screenSizeY +(GameManager.screenSizeY /6)){
+            if (this.posY + this.height > GameManager.screenSizeY + (GameManager.screenSizeY / 6)) {
                 player = 2
             }
-            if(player != 0) {
+            if (player != 0) {
                 GameManager.scorePointPong(player)
                 resetPosPong(player)
             }
@@ -273,12 +307,12 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
                 }
             }
         }
-        if(this.posX < 0){
+        if (this.posX < 0) {
             this.speedX = abs(this.speedX)
             //SFX
             SoundManager.playBallBounceSFX()
         }
-        if(this.posX+this.width > GameManager.screenSizeX){
+        if (this.posX + this.width > GameManager.screenSizeX) {
             this.speedX = -abs(this.speedX)
             //SFX
             SoundManager.playBallBounceSFX()
@@ -288,8 +322,8 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     //Function to check if ball is colliding with another game object
     private fun collidingWith(): GameObject? {
         for (gameObject in GameManager.gameObjects) {
-            if (this.posX < gameObject.posX+gameObject.width && this.posX+this.width > gameObject.posX) {
-                if (this.posY < gameObject.posY+gameObject.height && this.posY+this.height > gameObject.posY) {
+            if (this.posX < gameObject.posX + gameObject.width && this.posX + this.width > gameObject.posX) {
+                if (this.posY < gameObject.posY + gameObject.height && this.posY + this.height > gameObject.posY) {
                     //Return the other game object if colliding
                     return gameObject
                 }
