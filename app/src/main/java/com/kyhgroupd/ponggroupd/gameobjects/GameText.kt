@@ -10,6 +10,13 @@ import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.R
 import com.kyhgroupd.ponggroupd.UIManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 open class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
     var textString: String = ""

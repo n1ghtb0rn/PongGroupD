@@ -3,6 +3,13 @@ package com.kyhgroupd.ponggroupd.gameobjects
 import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 class Goal(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
     private val borderPaint = Paint()

@@ -3,6 +3,13 @@ package com.kyhgroupd.ponggroupd.gameobjects
 import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable: Boolean ): GameObject(startX, startY, color) {
 
     //Breakout brick

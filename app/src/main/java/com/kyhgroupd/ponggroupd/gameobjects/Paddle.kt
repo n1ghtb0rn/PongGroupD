@@ -5,6 +5,13 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject(startX, startY, color) {
 
     init {

@@ -3,6 +3,13 @@ package com.kyhgroupd.ponggroupd.gameobjects
 import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 open class BrickPiece(startX: Int, startY: Int, color: Int ): GameObject(startX, startY, color) {
 
     var speedX: Int = GameManager.pieceSpeed

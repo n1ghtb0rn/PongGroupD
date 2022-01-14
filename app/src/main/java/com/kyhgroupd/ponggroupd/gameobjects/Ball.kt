@@ -7,6 +7,13 @@ import androidx.core.graphics.contains
 import com.kyhgroupd.ponggroupd.*
 import kotlin.math.abs
 
+/**
+ *
+ *
+ * @param startX X position
+ * @param startY Y position
+ * @param color Color of object
+ */
 class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
     private var radius: Int = 0
