@@ -16,7 +16,7 @@ object PowerUpManager {
     val powerBallDuration = 300 //60 = 1 second
     var powerBallTimer = 0
     val powerBallTrailColor = Color.RED
-    val powerBallTrailGrayColor = Color.WHITE
+    val powerBallTrailGrayColor = Color.DKGRAY
     val powerBallPowerUpChanceModifier = -15
 
     //"Multi Ball" (creates two extra balls)

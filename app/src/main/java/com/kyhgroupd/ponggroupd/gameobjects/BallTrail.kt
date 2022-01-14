@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
+import com.kyhgroupd.ponggroupd.PowerUpManager
 
 class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, color) {
 
@@ -16,9 +17,6 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
         width = radius*2
         height = radius*2
 
-        if(!GameManager.useColors){
-            this.paint.color = GameManager.ball!!.grayPaint.color
-        }
         this.paint.alpha = this.colorAlpha
     }
 
