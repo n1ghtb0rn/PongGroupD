@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         binder = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binder.root)
 
+        // Play breakout
         binder.btnPlayBreakout.setOnClickListener {
             GameManager.gameMode = "breakout"
             val intent = Intent(this, GameActivity::class.java)
@@ -23,12 +24,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Play pong
         binder.btnPlayPong.setOnClickListener{
             GameManager.gameMode = "pong"
             val intent = Intent(this, PongModeChooserActivity::class.java)
             startActivity(intent)
         }
 
+        // Play golf
         binder.btnPlayGolf.setOnClickListener{
             GameManager.gameMode = "golf"
             val intent = Intent(this, GameActivity::class.java)
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Continue game, not usable when no game is active
         binder.btnContinue.setOnClickListener{
             if(GameManager.context != null){
                 val intent = Intent(this, GameActivity::class.java)
@@ -44,11 +48,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Settings
         binder.btnSettings.setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
 
+        // Highscore
         binder.btnHighScore.setOnClickListener{
             val intent = Intent(this, HighScoreActivity::class.java)
             startActivity(intent)
@@ -63,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         this.loadSettings()
 
+        // Disable continue button if no game is active
         if(GameManager.context == null){
             binder.btnContinue.alpha = 0.5f
             binder.btnContinue.isClickable = false
