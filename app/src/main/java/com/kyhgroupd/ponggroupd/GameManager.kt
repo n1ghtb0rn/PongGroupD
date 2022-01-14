@@ -13,6 +13,9 @@ import androidx.core.graphics.scale
 import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
+/**
+ * A class for handling game-data and setting up the game.
+ */
 object GameManager {
 
     //Game mode
@@ -108,6 +111,10 @@ object GameManager {
     var useMusic: Boolean = true
     var useColors: Boolean = true
 
+    /**
+     * A method for resetting the game. This includes the balls position/speed, the bricks,
+     * player score and number of lives.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun resetGame(){
         //Score reset
@@ -183,18 +190,24 @@ object GameManager {
         SoundManager.playMusic()
     }
 
+    /**
+     * A method for creating all brick-objects in Breakout game mode.
+     */
     private fun addBricks(){
+        //"Reference brick" is never used in-game, only acts as a tool for creating other bricks.
         if(referenceBrick == null){
             return
         }
 
         var colorIndex: Int = 0
+        //Determine the starting/ending positions of all bricks positions
         val brickRowStart = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + referenceBrick!!.height).toInt()
         val brickRowEnd = ((UIManager.uiHeight + (UIManager.uiBorderWidth*2)) + (referenceBrick!!.height*brickRows)).toInt()
         val brickColumnStart = 0
         val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
         for (y in brickRowStart..brickRowEnd step referenceBrick!!.height) {
             for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
+                //Create a new brick-object at given position and add it to game objects list.
                 val brick = Brick(x, y, brickColors[colorIndex])
                 gameObjects.add(brick)
             }
@@ -206,6 +219,10 @@ object GameManager {
         }
     }
 
+    /**
+     * A method for generating bricks in Golf game mode. The blueprint for each level
+     * is stored in strings (in GolfLevels-class). Every char represents a different game object.
+     */
     private fun addBricksGolf(){
         if(referenceBrick == null){
             return
@@ -216,7 +233,9 @@ object GameManager {
             //return if level doesn't exist
             return
         }
+        //Load the current level (as a char-sequence/string)
         val level = golfLevels[level-1]
+        //Split the string into multiple rows
         val rows = level.split(',')
         for(row in rows){
             if(row.length > bricksPerRow){
@@ -225,9 +244,7 @@ object GameManager {
             }
         }
 
-        Log.d("Danne", "Rows = " + rows.size) // = 5
-        Log.d("Danne", "Columns = " + rows[0].length) // = 11
-
+        //Loop through every char and create a co-responding game object at the given position.
         for(y in 0..rows.size-1){
             for(x in 0..rows[0].length-1){
                 val objectType: Char = rows[y][x]
@@ -253,14 +270,21 @@ object GameManager {
 
                 if(gameObject != null){
                     if(gameObject is Brick){
+                        //Set the color of the brick
                         gameObject.changeColor()
                     }
+                    //Adds the game object to the game objects list.
                     gameObjects.add(gameObject)
                 }
             }
         }
     }
 
+    /**
+     * A method for checking if all bricks has been cleared by the player.
+     *
+     * @return Boolean Returns true if all bricks are cleared.
+     */
     fun bricksCleared(): Boolean{
         for (obj in gameObjects){
             if(obj is Brick){
@@ -270,10 +294,14 @@ object GameManager {
         return true
     }
 
+    /**
+     * A method for advancing the current level in Breakout/Golf.
+     */
     fun nextLevel(){
         //Increment current level
         level++
 
+        //Breakout: Reset the level and make the paddle shorter
         if(gameMode == "breakout"){
             PowerUpManager.clearActivePowerUps()
             powerUpObjects.clear()
@@ -286,8 +314,9 @@ object GameManager {
                 paddle!!.width = newPaddleWidth
             }
 
-
-        } else if(gameMode == "golf"){
+        }
+        //Golf: Remove remaining bricks and call the method to generate new ones.
+        else if(gameMode == "golf"){
             val iterator = gameObjects.iterator()
             for (obj in iterator){
                 if(obj is Brick){
@@ -304,10 +333,14 @@ object GameManager {
             }
         }
 
-        //Finally
+        //Finally reset the balls position
         ball?.resetPos()
     }
 
+    /**
+     * A method for adding different colors to brick colors list.
+     * These colors are used in Breakout game mode.
+     */
     fun addBrickColors(){
         brickColors.clear()
         brickColors.add(Color.rgb(150, 0, 0))   //red
@@ -320,10 +353,11 @@ object GameManager {
         brickColors.add(Color.rgb(150, 75, 0))  //orange
     }
 
+    /**
+     * A method for adding score when the player breaks a brick.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun addScore(){
-        //Score
-
         //Add scored based on level
         score += scorePerBrick + ((level - 1) * bonusScorePerLevel)
         //Add score based on combo
@@ -337,6 +371,11 @@ object GameManager {
         currentCombo++
     }
 
+    /**
+     * A method for adding score in Pong game mode.
+     *
+     * @params player Int The player that the score will be added to.
+     */
     fun scorePointPong(player: Int){
         currentCombo = 0
         UIManager.comboText = null
@@ -360,6 +399,9 @@ object GameManager {
         }
     }
 
+    /**
+     * A method for losing a life if the ball goes outside the screen.
+     */
     fun loseLife(){
         currentCombo = 0
         UIManager.comboText = null
@@ -367,11 +409,13 @@ object GameManager {
         //Decrement number of lives
         lives--
 
+        //Clear all power ups in Breakout
         if(gameMode == "breakout"){
             PowerUpManager.clearActivePowerUps()
             powerUpObjects.clear()
         }
 
+        //Check if game over
         if(lives <= 0 || player2Lives <= 0){
             SoundManager.playGameOverSFX()
             context?.gameOver()
