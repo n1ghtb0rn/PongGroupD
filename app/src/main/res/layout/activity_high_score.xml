@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <!-- Holds tabs and fragments -->
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -15,12 +16,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" >
 
+        <!-- Holds fragments -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tabLayout" />
 
+        <!-- Tabs -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -52,6 +55,7 @@
 
     </RelativeLayout>
 
+    <!-- Back button -->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"

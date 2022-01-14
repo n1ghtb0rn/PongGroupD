@@ -5,6 +5,7 @@
     android:padding="@dimen/list_item_padding"
     android:background="#80000000">
 
+    <!-- Name text -->
     <TextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/default_text_size" />
 
+    <!-- Score text -->
     <TextView
         android:id="@+id/tvScore"
         android:layout_width="match_parent"
