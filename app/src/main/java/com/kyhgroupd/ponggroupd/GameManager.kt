@@ -275,6 +275,7 @@ object GameManager {
 
         if(gameMode == "breakout"){
             PowerUpManager.clearActivePowerUps()
+            powerUpObjects.clear()
             addBricks()
             if(paddle != null){
                 var newPaddleWidth: Int = (paddle!!.width * paddleWidthPctPerLevel).toInt()
@@ -364,7 +365,11 @@ object GameManager {
 
         //Decrement number of lives
         lives--
-        PowerUpManager.clearActivePowerUps()
+
+        if(gameMode == "breakout"){
+            PowerUpManager.clearActivePowerUps()
+            powerUpObjects.clear()
+        }
 
         if(lives <= 0 || player2Lives <= 0){
             SoundManager.playGameOverSFX()
