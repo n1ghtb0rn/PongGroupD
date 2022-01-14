@@ -15,6 +15,7 @@ import com.kyhgroupd.ponggroupd.GameManager
  */
 class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject(startX, startY, color) {
 
+    // Base
     init {
         width = GameManager.screenSizeX / GameManager.paddleWidthFactor
         height = width / GameManager.paddleHeightFactor
@@ -22,7 +23,7 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
     }
 
     override fun draw(canvas: Canvas?) {
-        // Color
+        // Colors
         if(GameManager.useColors || GameManager.gameMode == "pong"){
             this.paint.shader = LinearGradient(
                 posX.toFloat(),
@@ -42,7 +43,7 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
                 this.paint
             )
         }
-        // Black and White
+        // Grayscale
         else{
             this.grayPaint.shader = LinearGradient(
                 posX.toFloat(),
@@ -66,7 +67,7 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
 
     override fun update() {
         if (GameManager.pongPlayerMode == 1) {
-            moveSinglePlayerPongPaddles()
+            movePaddlesSinglePlayerPong()
         }
 
         if (GameManager.gameMode == "breakout" || GameManager.gameMode == "golf"
@@ -105,9 +106,9 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
 
 
     /**
-     * Move user paddle and AI paddle in single player pong
+     * Move user paddle and AI paddle in single player pong.
      */
-    private fun moveSinglePlayerPongPaddles() {
+    private fun movePaddlesSinglePlayerPong() {
         var touchX = 0
         var touchY = 0
 
@@ -116,7 +117,7 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
             touchY = GameManager.event!!.y.toInt()
         }
 
-        // Mover user paddle
+        // Move user paddle
         if (this == GameManager.paddle && touchY > GameManager.screenSizeY/2) {
             this.posX = touchX - (width/2)
         }
