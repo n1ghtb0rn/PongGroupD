@@ -28,6 +28,9 @@ class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText
         this.grayPaint.textAlign = Paint.Align.CENTER
     }
 
+    /**
+     * Update-method for updating position (etc) of this object every frame.
+     */
     override fun update(){
         this.paint.textSize += textSizeIncrease
         this.grayPaint.textSize += textSizeIncrease

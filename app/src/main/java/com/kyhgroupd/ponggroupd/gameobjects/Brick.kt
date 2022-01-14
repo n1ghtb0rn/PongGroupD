@@ -55,6 +55,11 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
         this.unbreakable = unbreakable
     }
 
+    /**
+     * A method for drawing this object on the canvas every frame.
+     *
+     * @param canvas Canvas object
+     */
     override fun draw(canvas: Canvas?){
         // Base
         if(GameManager.useColors || this.unbreakable){
@@ -68,6 +73,9 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
         canvas?.drawRect(this.posX.toFloat(), this.posY.toFloat(), posX + this.width.toFloat(), posY + this.height.toFloat(), borderPaint)
     }
 
+    /**
+     * Update-method for updating position (etc) of this object every frame.
+     */
     override fun update(){
 
     }
