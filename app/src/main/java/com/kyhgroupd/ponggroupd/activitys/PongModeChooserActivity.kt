@@ -20,6 +20,8 @@ class PongModeChooserActivity : AppCompatActivity() {
         GameManager.pongDifficultyLevel = "medium"
         buttonColorChange()
 
+        //Activates buttons for setting multiplayer or difficulty for pong game mode.
+
         binder.btnSinglePlayer.setOnClickListener {
             GameManager.pongPlayerMode = 1
             buttonColorChange()
@@ -52,6 +54,10 @@ class PongModeChooserActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * A method for changing the background color of "toggle" buttons.
+     * This makes it easier to see which button is the active one.
+     */
     private fun buttonColorChange() {
         val pressedColor = Color.LTGRAY
         val unpressedColor = Color.WHITE
