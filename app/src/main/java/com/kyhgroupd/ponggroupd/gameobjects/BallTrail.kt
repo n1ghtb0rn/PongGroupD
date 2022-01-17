@@ -6,7 +6,7 @@ import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
 
 /**
- * Inherits from GameObject class
+ * BallTrail class inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
@@ -28,7 +28,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
 
     /**
      * A method for drawing this object on the canvas every frame.
-     * The circle drawing position needs to be adjusted to fit the hitbox.
+     * The circle drawing position is adjusted to fit the hitbox.
      *
      * @param canvas Canvas object
      */
@@ -42,7 +42,7 @@ class BallTrail(startX: Int, startY: Int, color: Int) : GameObject(startX, start
     }
 
     /**
-     * Update-method for updating position (etc) of this object every frame.
+     * Update method for updating position (etc) of this object every frame.
      */
     override fun update() {
         this.radius -= this.radiusDecrease // Decrease radius every frame

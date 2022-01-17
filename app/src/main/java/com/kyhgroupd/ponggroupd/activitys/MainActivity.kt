@@ -79,6 +79,9 @@ class MainActivity : AppCompatActivity() {
         binder.btnContinue.isClickable = true
     }
 
+    /**
+     * Loads settings selected by the user.
+     */
     private fun loadSettings(){
         val settingsList = DataManager.loadSettings()
         if(settingsList.size < GameManager.numberOfSettings){

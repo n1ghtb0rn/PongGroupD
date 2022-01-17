@@ -1,7 +1,8 @@
 package com.kyhgroupd.ponggroupd
 
 /**
- * Contains an Array with Breakout levels.
+ * GolfLevel class contains an Array with breakout levels.
+ * Each character represents a GameObject on screen.
  */
 class GolfLevels {
 

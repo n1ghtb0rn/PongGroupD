@@ -14,7 +14,7 @@ import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.*
 
 /**
- * A class for handling game-data and setting up the game.
+ * Singleton class for handling game data and setting up the game.
  */
 object GameManager {
 
@@ -60,7 +60,6 @@ object GameManager {
     var ball: Ball? = null
     var ballStartX: Int = 0 //Is set in resetGame() method
     var ballStartY: Int = 0 //Is set in resetGame() method
-    var ballRadiusFactor: Int = 50
     var ballSpeed: Int = 0  //Is set in resetGame() method
     val ballSpeedFactor = 0.012
 
@@ -68,8 +67,6 @@ object GameManager {
     var paddle: Paddle? = null
     var paddle2: Paddle? = null
     var event: MotionEvent? = null
-    var topBarHeight: Int = 170
-    val paddleTouchOffsetY: Int = 300
     var paddleWidthFactor: Int = 5
     var paddleHeightFactor: Int = 5
     val paddleWidthPctPerLevel = 0.8
@@ -92,7 +89,6 @@ object GameManager {
     var highScore: Int = 0
     var lives: Int = 3
     var level = 1
-    var player2Name: String = ""
     var player2Score: Int = 0
     var player2Lives: Int = 3
     var gamesWon: Int = 0
@@ -112,7 +108,7 @@ object GameManager {
     var useColors: Boolean = true
 
     /**
-     * A method for resetting the game. This includes the balls position/speed, the bricks,
+     * A method for resetting the game. This includes the ball's position/speed, bricks,
      * player score and number of lives.
      */
     @RequiresApi(Build.VERSION_CODES.O)
@@ -125,7 +121,7 @@ object GameManager {
         background1 = BitmapFactory.decodeResource(context?.resources, R.drawable.background1b).scale(
             Resources.getSystem().displayMetrics.widthPixels, Resources.getSystem().displayMetrics.heightPixels, true)
 
-        //Clear GameObject-lists
+        //Clear GameObject lists
         gameObjects.clear()
 
         //Reference brick
@@ -181,7 +177,7 @@ object GameManager {
             }
         }
 
-        //Clear all active powerups
+        //Clear all active power ups
         powerUpObjects.clear()
         multiBallObjects.clear()
         PowerUpManager.clearActivePowerUps()
@@ -207,7 +203,7 @@ object GameManager {
         val brickColumnEnd = screenSizeX-(referenceBrick!!.width/2)
         for (y in brickRowStart..brickRowEnd step referenceBrick!!.height) {
             for (x in brickColumnStart..brickColumnEnd step referenceBrick!!.width) {
-                //Create a new brick-object at given position and add it to game objects list.
+                //Create a new brick object at given position and add it to game objects list.
                 val brick = Brick(x, y, brickColors[colorIndex])
                 gameObjects.add(brick)
             }
@@ -220,8 +216,8 @@ object GameManager {
     }
 
     /**
-     * A method for generating bricks in Golf game mode. The blueprint for each level
-     * is stored in strings (in GolfLevels-class). Every char represents a different game object.
+     * A method for generating bricks in golf game mode. The blueprint for each level
+     * is stored in strings (in GolfLevels class). Every char represents a different game object.
      */
     private fun addBricksGolf(){
         if(referenceBrick == null){
@@ -233,18 +229,18 @@ object GameManager {
             //return if level doesn't exist
             return
         }
-        //Load the current level (as a char-sequence/string)
+        //Load the current level (as a char sequence/string)
         val level = golfLevels[level-1]
         //Split the string into multiple rows
         val rows = level.split(',')
         for(row in rows){
             if(row.length > bricksPerRow){
-                //return if a brick-row count is more than 11
+                //return if a brick row count is more than 11
                 return
             }
         }
 
-        //Loop through every char and create a co-responding game object at the given position.
+        //Loop through every char and create a corresponding game object at the given position.
         for(y in 0..rows.size-1){
             for(x in 0..rows[0].length-1){
                 val objectType: Char = rows[y][x]
@@ -273,7 +269,7 @@ object GameManager {
                         //Set the color of the brick
                         gameObject.changeColor()
                     }
-                    //Adds the game object to the game objects list.
+                    //Add the game object to the game objects list.
                     gameObjects.add(gameObject)
                 }
             }
@@ -281,7 +277,7 @@ object GameManager {
     }
 
     /**
-     * A method for checking if all bricks has been cleared by the player.
+     * A method for checking if all bricks have been cleared by the player.
      *
      * @return Boolean Returns true if all bricks are cleared.
      */
@@ -295,7 +291,7 @@ object GameManager {
     }
 
     /**
-     * A method for advancing the current level in Breakout/Golf.
+     * A method for advancing the current level in breakout/golf.
      */
     fun nextLevel(){
         //Increment current level
@@ -333,13 +329,13 @@ object GameManager {
             }
         }
 
-        //Finally reset the balls position
+        //Finally reset the ball's position
         ball?.resetPos()
     }
 
     /**
      * A method for adding different colors to brick colors list.
-     * These colors are used in Breakout game mode.
+     * These colors are used in breakout game mode.
      */
     fun addBrickColors(){
         brickColors.clear()
@@ -358,7 +354,7 @@ object GameManager {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     fun addScore(){
-        //Add scored based on level
+        //Add score based on level
         score += scorePerBrick + ((level - 1) * bonusScorePerLevel)
         //Add score based on combo
         if (currentCombo > 0) {
@@ -372,7 +368,7 @@ object GameManager {
     }
 
     /**
-     * A method for adding score in Pong game mode.
+     * A method for adding score in pong game mode.
      *
      * @params player Int The player that the score will be added to.
      */
@@ -409,7 +405,7 @@ object GameManager {
         //Decrement number of lives
         lives--
 
-        //Clear all power ups in Breakout
+        //Clear all power ups in breakout
         if(gameMode == "breakout"){
             PowerUpManager.clearActivePowerUps()
             powerUpObjects.clear()

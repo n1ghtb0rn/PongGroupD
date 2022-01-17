@@ -11,7 +11,7 @@ import com.kyhgroupd.ponggroupd.R
 import com.kyhgroupd.ponggroupd.UIManager
 
 /**
- * Inherits from GameObject. Used for writing text on canvas.
+ * Inherits from GameObject class. Used for writing text on canvas.
  *
  * @param startX X position
  * @param startY Y position
@@ -38,7 +38,7 @@ open class GameText(startX: Int, startY: Int, color: Int) : GameObject(startX, s
         if(GameManager.useColors){
             canvas?.drawText(textString, startX.toFloat(), startY.toFloat(), this.paint)
         }
-        // Greyscale
+        // Grayscale
         else{
             canvas?.drawText(textString, startX.toFloat(), startY.toFloat(), this.grayPaint)
         }

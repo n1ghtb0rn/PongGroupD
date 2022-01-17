@@ -4,7 +4,7 @@ import android.graphics.*
 import com.kyhgroupd.ponggroupd.GameManager
 
 /**
- * Inherits from GameObject class
+ * Brick class inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
@@ -74,7 +74,7 @@ open class Brick(startX: Int, startY: Int, color: Int, health: Int, unbreakable:
     }
 
     /**
-     * Update-method for updating position (etc) of this object every frame.
+     * Update method for updating position (etc) of this object every frame.
      */
     override fun update(){
 

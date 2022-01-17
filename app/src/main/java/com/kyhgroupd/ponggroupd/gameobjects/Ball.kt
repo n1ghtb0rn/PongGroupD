@@ -8,7 +8,8 @@ import com.kyhgroupd.ponggroupd.*
 import kotlin.math.abs
 
 /**
- * A ball class to represent a visual and moving ball in the game.
+ * Ball class to represent a visual and moving ball in the game.
+ * Inherits from GameObject class.
  * This class also handles collision algorithms.
  * When calculating collisions, this class is treated as a square/rect shape.
  *
@@ -124,7 +125,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     /**
-     * Check if this object has collidied with the goal-object.
+     * Check if this object has collided with the goal object.
      */
     private fun goalCollision() {
         GameManager.score += 100 + (GameManager.level - 1) * GameManager.bonusScorePerLevel
@@ -175,7 +176,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     /**
-     * Check of this object has collided with a brick-object.
+     * Check of this object has collided with a brick object.
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun brickCollision(brick: Brick) {
@@ -194,7 +195,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
         val oldSpeedY = speedY
         val oldSpeedX = speedX
 
-        //Check which of the four points collided with the brick, and set direction.
+        //Check which of the four points collided with the brick, and set direction of ball.
         if (brickRect.contains(pointBottom)) {
             speedY = abs(speedY) * -1
             destroyBrick(brick)
@@ -216,7 +217,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
             GameManager.addScore()
         }
 
-        //Don't bounce if "power ball" is active (it will just smash through the bricks)
+        //Don't bounce if "power ball" is active (ball just smashes through the bricks)
         if (PowerUpManager.powerBallActive && this.mainBall) {
             speedY = oldSpeedY
             speedX = oldSpeedX
@@ -280,14 +281,14 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     /**
-     * A method for getting the new ball-angle after colliding with the paddle.
-     * The paddle is split into 6 zones, each with its different angel.
+     * A method for getting the ball's new angle after colliding with the paddle.
+     * The paddle is split into 6 zones, each with its different angle.
      * 1-6 (from left to right)
      *
      * Paddle = ______
      * Zone nr= 123456
      *
-     * @param paddle Paddle. The paddle-object that this object collided with.
+     * @param paddle Paddle. The paddle object that this object collided with.
      */
     private fun getSpeedXY(paddle: Paddle): Point {
         //100% of ball speed to be shared by a percentage over y/x-axis
@@ -398,7 +399,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     /**
-     * A function to reset this objects position/speed to original value.
+     * A function to reset this object's position/speed to original value.
      */
     fun resetPos() {
         //Reset ball position and speed
@@ -409,7 +410,7 @@ class Ball(startX: Int, startY: Int, color: Int) : GameObject(startX, startY, co
     }
 
     /**
-     * A function to reset this objects position/speed to original value in pong game mode.
+     * A function to reset this object's position/speed to original value in pong game mode.
      */
     private fun resetPosPong(player: Int) {
         this.posX = GameManager.ballStartX

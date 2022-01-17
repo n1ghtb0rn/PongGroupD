@@ -16,9 +16,9 @@ import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.ComboText
 
 /**
- * GameView-class that extends SurfaceView and implements SurfaceHolder.Callback and Runnable.
- * This class is the foundation of the game-engine that is responsible for updating the graphics
- * and running the game-loop. It loops through all Game Objects and calls their respective
+ * GameView class extends SurfaceView and implements SurfaceHolder. Callback and Runnable.
+ * This class is the foundation of the game engine that is responsible for updating the graphics
+ * and running the game loop. It loops through all Game Objects and calls their respective
  * update() and draw() methods.
  */
 @RequiresApi(Build.VERSION_CODES.O)
@@ -26,7 +26,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     private var thread: Thread? = null  //Game thread
     private var running = false
-    lateinit var canvas: Canvas     //The Canvas-object where the game is drawn
+    lateinit var canvas: Canvas     //The Canvas object where the game is drawn
     var mHolder: SurfaceHolder? = holder
 
     var frames: Int = 0
@@ -57,7 +57,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     /**
-     * The start()-method override to start the game-thread.
+     * The start() method override to start the game-thread.
      */
     fun start() {
         running = true
@@ -66,7 +66,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     /**
-     * The stop()-method override to stop the game-thread
+     * The stop() method override to stop the game-thread
      */
     fun stop() {
         running = false
@@ -78,8 +78,8 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     /**
-     * The main update-method that is the base for updating the game (eg: moving objects).
-     * It calls all active Game Objects update() methods every game frame.
+     * The main update method that is the base for updating the game (eg. moving objects).
+     * It calls all active Game Objects' update() methods every game frame.
      */
     fun update(){
         //Bricks and paddle
@@ -157,10 +157,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
         UIManager.comboText?.update()
 
-        //Reset the touch event at the end of every game-loop
+        //Reset the touch event at the end of every game loop
         GameManager.event = null
 
-        //Check level clear in breakout-mode
+        //Check level clear in breakout mode
         when(GameManager.gameMode){
             "breakout" -> if (GameManager.bricksCleared()) {
                 GameManager.nextLevel()
@@ -169,7 +169,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
     }
 
     /**
-     * The main draw() method that calls all Game Objects draw()-methods.
+     * The main draw() method that calls all Game Objects' draw() methods.
      */
     private fun draw(){
         //A try-catch to prevent the game from crashing if the user exits the app.
@@ -238,7 +238,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     /**
      * The surfaceCreated() override method. Called when the GameView (SurfaceView) is created,
-     * and starts the game-thread.
+     * and starts the game thread.
      */
     override fun surfaceCreated(p0: SurfaceHolder) {
         start() //Start the game thread
@@ -253,14 +253,14 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 
     /**
      * The surfaceDestroyed() override method. Called when the GameView (SurfaceView) is destroyed,
-     * and stops the game-thread.
+     * and stops the game thread.
      */
     override fun surfaceDestroyed(p0: SurfaceHolder) {
         stop()  //Stop the game thread
     }
 
     /**
-     * The run() override method. This method runs the base game-loop that keeps the game updated.
+     * The run() override method. This method runs the base game loop that keeps the game updated.
      * The game loops in a given interval and calls the update() and draw() methods.
      */
     override fun run() {
@@ -272,27 +272,19 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
             if(System.currentTimeMillis() >= timeToUpdate) {
                 timeToUpdate += 1000/GameManager.targetFPS
 
-                //FPSCounter
-//                frames++
-//                if (System.currentTimeMillis() > lastFpsCheck + 1000) {
-//                    lastFpsCheck = System.currentTimeMillis()
-//                    println(frames)
-//                    frames = 0
-//                }
-
-                //Calls the update-method
+                //Calls the update method
                 update()
 
-                //Calls the draw-method
+                //Calls the draw method
                 draw()
             }
         }
     }
 
     /**
-     * The onTouchEvent() override method. Is called when the user touches the screen.
-     * It stores the touch event in as a property in GameManager-class.
-     * (The paddle-class later checks if this property if null or not to update its position)
+     * The onTouchEvent() override method. Called when the user touches the screen.
+     * It stores the touch event as a property in GameManager class.
+     * (The paddle class later checks if this property is null or not to update its position)
      */
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
