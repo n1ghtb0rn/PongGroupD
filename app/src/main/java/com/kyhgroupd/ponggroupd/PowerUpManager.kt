@@ -1,9 +1,12 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Color
-import android.util.Log
 import com.kyhgroupd.ponggroupd.gameobjects.Ball
 
+/**
+ * Singleton class.
+ * Generates and activates power ups.
+ */
 object PowerUpManager {
 
     //Power Up Data
@@ -28,6 +31,10 @@ object PowerUpManager {
 
     /* Power Up methods */
 
+    /**
+     * Generates a random power up.
+     * @return String of random PowerUp type.
+     */
     fun generatePowerUpType(): String{
         //Get a random index position from power up types array
         val index: Int = (powerUpTypes.indices).random()
@@ -35,6 +42,10 @@ object PowerUpManager {
         return this.powerUpTypes[index]
     }
 
+    /**
+     * Activates Power Up.
+     * @param powerUpType String of Power Up type to activate.
+     */
     fun activatePowerUp(powerUpType: String){
         if(powerUpType == "POWER_BALL"){
             this.activatePowerBall()
@@ -42,11 +53,13 @@ object PowerUpManager {
         else if(powerUpType == "MULTI_BALL"){
             this.activateMultiBall()
         }
-
         //SFX
         SoundManager.playPowerUpSFX(powerUpType)
     }
 
+    /**
+     * Run each in-game "tick". Updates Power Ups.
+     */
     fun updatePowerUps(){
         //Power Ball
         if(this.powerBallActive){
@@ -59,13 +72,15 @@ object PowerUpManager {
         //Power up nr 3 etc...
     }
 
+    /**
+     * Removes all active Power Ups.
+     */
     fun clearActivePowerUps(){
         this.powerBallActive = false
         GameManager.multiBallObjects.clear()
     }
 
     /* "Power Ball" methods*/
-
     fun activatePowerBall(){
         this.powerBallActive = true
         this.powerBallTimer = this.powerBallDuration
@@ -79,7 +94,9 @@ object PowerUpManager {
     }
 
     /* "Multi Ball" methods */
-
+    /**
+     * Creates two more Balls at position of main Ball.
+     */
     fun activateMultiBall(){
 
         val multiBall1 = Ball(GameManager.ball!!.posX, GameManager.ball!!.posY, multiBallColor)
@@ -92,14 +109,15 @@ object PowerUpManager {
         multiBall2.mainBall = false
         setMultiBallSpeed(multiBall2)
 
-        //while(multiBall1.speedX == multiBall2.speedX && multiBall1.speedY == multiBall2.speedY){
-        //    setMultiBallSpeed(multiBall2)
-        //}
-
         GameManager.multiBallObjects.add(multiBall1)
         GameManager.multiBallObjects.add(multiBall2)
     }
 
+    /**
+     * Sets a speed and random angle of MultiBall.
+     *
+     * @param multiBall Ball object to set speed of.
+     */
     fun setMultiBallSpeed(multiBall: Ball){
 
         val totalBallSpeed = kotlin.math.abs(GameManager.ball!!.speedX) + kotlin.math.abs(GameManager.ball!!.speedY)
@@ -136,7 +154,5 @@ object PowerUpManager {
                 multiBall.speedY *= -1
             }
         }
-
     }
-
 }
