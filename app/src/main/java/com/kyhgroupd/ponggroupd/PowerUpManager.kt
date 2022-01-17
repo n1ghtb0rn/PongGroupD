@@ -10,24 +10,24 @@ import com.kyhgroupd.ponggroupd.gameobjects.Ball
 object PowerUpManager {
 
     //Power Up Data
-    val powerUpFallSpeed = 17
-    val powerUpChance = 25 //1-100
-    val powerUpColor = Color.DKGRAY
+    const val powerUpFallSpeed = 17
+    const val powerUpChance = 25 //1-100
+    const val powerUpColor = Color.DKGRAY
 
     //"Power Ball" (ball does not bounce on bricks)
     var powerBallActive = false
-    val powerBallDuration = 300 //60 = 1 second
-    var powerBallTimer = 0
-    val powerBallTrailColor = Color.RED
-    val powerBallTrailGrayColor = Color.DKGRAY
-    val powerBallPowerUpChanceModifier = -15
+    private const val powerBallDuration = 300 //60 = 1 second
+    private var powerBallTimer = 0
+    const val powerBallTrailColor = Color.RED
+    const val powerBallTrailGrayColor = Color.DKGRAY
+    const val powerBallPowerUpChanceModifier = -15
 
     //"Multi Ball" (creates two extra balls)
-    val multiBallColor = Color.rgb(137,209,254)
-    val multiBallGrayColor = Color.DKGRAY
+    private val multiBallColor = Color.rgb(137,209,254)
+    private const val multiBallGrayColor = Color.DKGRAY
 
     //Power up types
-    val powerUpTypes = arrayOf("POWER_BALL", "MULTI_BALL")
+    private val powerUpTypes = arrayOf("POWER_BALL", "MULTI_BALL")
 
     /* Power Up methods */
 
@@ -81,12 +81,12 @@ object PowerUpManager {
     }
 
     /* "Power Ball" methods*/
-    fun activatePowerBall(){
+    private fun activatePowerBall(){
         this.powerBallActive = true
         this.powerBallTimer = this.powerBallDuration
     }
 
-    fun updatePowerBall(){
+    private fun updatePowerBall(){
         this.powerBallTimer -= 1
         if(this.powerBallTimer <= 0){
             this.powerBallActive = false
@@ -94,10 +94,11 @@ object PowerUpManager {
     }
 
     /* "Multi Ball" methods */
+
     /**
      * Creates two more Balls at position of main Ball.
      */
-    fun activateMultiBall(){
+    private fun activateMultiBall(){
 
         val multiBall1 = Ball(GameManager.ball!!.posX, GameManager.ball!!.posY, multiBallColor)
         multiBall1.grayPaint.color = multiBallGrayColor
@@ -118,7 +119,7 @@ object PowerUpManager {
      *
      * @param multiBall Ball object to set speed of.
      */
-    fun setMultiBallSpeed(multiBall: Ball){
+    private fun setMultiBallSpeed(multiBall: Ball){
 
         val totalBallSpeed = kotlin.math.abs(GameManager.ball!!.speedX) + kotlin.math.abs(GameManager.ball!!.speedY)
         while(multiBall.speedY != GameManager.ball!!.speedY && multiBall.speedX != GameManager.ball!!.speedX){
