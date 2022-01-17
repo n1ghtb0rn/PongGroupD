@@ -1,33 +1,40 @@
 package com.kyhgroupd.ponggroupd
 
 import android.graphics.Color
-import android.util.Log
 import com.kyhgroupd.ponggroupd.gameobjects.Ball
 
+/**
+ * Singleton class.
+ * Generates and activates power ups.
+ */
 object PowerUpManager {
 
     //Power Up Data
-    val powerUpFallSpeed = 17
-    val powerUpChance = 25 //1-100
-    val powerUpColor = Color.DKGRAY
+    const val powerUpFallSpeed = 17
+    const val powerUpChance = 25 //1-100
+    const val powerUpColor = Color.DKGRAY
 
     //"Power Ball" (ball does not bounce on bricks)
     var powerBallActive = false
-    val powerBallDuration = 300 //60 = 1 second
-    var powerBallTimer = 0
-    val powerBallTrailColor = Color.RED
-    val powerBallTrailGrayColor = Color.DKGRAY
-    val powerBallPowerUpChanceModifier = -15
+    private const val powerBallDuration = 300 //60 = 1 second
+    private var powerBallTimer = 0
+    const val powerBallTrailColor = Color.RED
+    const val powerBallTrailGrayColor = Color.DKGRAY
+    const val powerBallPowerUpChanceModifier = -15
 
     //"Multi Ball" (creates two extra balls)
-    val multiBallColor = Color.rgb(137,209,254)
-    val multiBallGrayColor = Color.DKGRAY
+    private val multiBallColor = Color.rgb(137,209,254)
+    private const val multiBallGrayColor = Color.DKGRAY
 
     //Power up types
-    val powerUpTypes = arrayOf("POWER_BALL", "MULTI_BALL")
+    private val powerUpTypes = arrayOf("POWER_BALL", "MULTI_BALL")
 
     /* Power Up methods */
 
+    /**
+     * Generates a random power up.
+     * @return String of random PowerUp type.
+     */
     fun generatePowerUpType(): String{
         //Get a random index position from power up types array
         val index: Int = (powerUpTypes.indices).random()
@@ -35,6 +42,10 @@ object PowerUpManager {
         return this.powerUpTypes[index]
     }
 
+    /**
+     * Activates Power Up.
+     * @param powerUpType String of Power Up type to activate.
+     */
     fun activatePowerUp(powerUpType: String){
         if(powerUpType == "POWER_BALL"){
             this.activatePowerBall()
@@ -42,11 +53,13 @@ object PowerUpManager {
         else if(powerUpType == "MULTI_BALL"){
             this.activateMultiBall()
         }
-
         //SFX
         SoundManager.playPowerUpSFX(powerUpType)
     }
 
+    /**
+     * Run each in-game "tick". Updates Power Ups.
+     */
     fun updatePowerUps(){
         //Power Ball
         if(this.powerBallActive){
@@ -59,19 +72,21 @@ object PowerUpManager {
         //Power up nr 3 etc...
     }
 
+    /**
+     * Removes all active Power Ups.
+     */
     fun clearActivePowerUps(){
         this.powerBallActive = false
         GameManager.multiBallObjects.clear()
     }
 
     /* "Power Ball" methods*/
-
-    fun activatePowerBall(){
+    private fun activatePowerBall(){
         this.powerBallActive = true
         this.powerBallTimer = this.powerBallDuration
     }
 
-    fun updatePowerBall(){
+    private fun updatePowerBall(){
         this.powerBallTimer -= 1
         if(this.powerBallTimer <= 0){
             this.powerBallActive = false
@@ -80,7 +95,10 @@ object PowerUpManager {
 
     /* "Multi Ball" methods */
 
-    fun activateMultiBall(){
+    /**
+     * Creates two more Balls at position of main Ball.
+     */
+    private fun activateMultiBall(){
 
         val multiBall1 = Ball(GameManager.ball!!.posX, GameManager.ball!!.posY, multiBallColor)
         multiBall1.grayPaint.color = multiBallGrayColor
@@ -92,15 +110,16 @@ object PowerUpManager {
         multiBall2.mainBall = false
         setMultiBallSpeed(multiBall2)
 
-        //while(multiBall1.speedX == multiBall2.speedX && multiBall1.speedY == multiBall2.speedY){
-        //    setMultiBallSpeed(multiBall2)
-        //}
-
         GameManager.multiBallObjects.add(multiBall1)
         GameManager.multiBallObjects.add(multiBall2)
     }
 
-    fun setMultiBallSpeed(multiBall: Ball){
+    /**
+     * Sets a speed and random angle of MultiBall.
+     *
+     * @param multiBall Ball object to set speed of.
+     */
+    private fun setMultiBallSpeed(multiBall: Ball){
 
         val totalBallSpeed = kotlin.math.abs(GameManager.ball!!.speedX) + kotlin.math.abs(GameManager.ball!!.speedY)
         while(multiBall.speedY != GameManager.ball!!.speedY && multiBall.speedX != GameManager.ball!!.speedX){
@@ -136,7 +155,5 @@ object PowerUpManager {
                 multiBall.speedY *= -1
             }
         }
-
     }
-
 }
