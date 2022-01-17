@@ -6,7 +6,7 @@ import android.graphics.Shader
 import com.kyhgroupd.ponggroupd.GameManager
 
 /**
- * Inherits from GameObject
+ * Paddle class inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
@@ -65,6 +65,9 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         }
     }
 
+    /**
+     * Update method for updating position (etc) of this object every frame.
+     */
     override fun update() {
         if (GameManager.pongPlayerMode == 1) {
             movePaddlesSinglePlayerPong()
@@ -87,6 +90,9 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
         }
     }
 
+    /**
+     * Move user paddle in golf mode and breakout mode. Move both user paddles in two player pong.
+     */
     private fun movePaddle() {
         val pointerCount = GameManager.event!!.pointerCount
 

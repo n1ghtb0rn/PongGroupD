@@ -3,6 +3,9 @@ package com.kyhgroupd.ponggroupd
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 
+/**
+ * Singleton class to manage sound effects and music.
+ */
 object SoundManager {
 
     var context: AppCompatActivity? = null
@@ -39,21 +42,21 @@ object SoundManager {
     }
 
     /**
-     * Plays 'destroy brick' sound effect by calling playSFX function
+     * Plays 'destroy brick' sound effect via playSFX function
      */
     fun playDestroyBrickSFX(){
         this.playSFX("DESTROY_BRICK")
     }
 
     /**
-     * Plays 'combo' sound effect by calling playSFX function
+     * Plays 'combo' sound effect via playSFX function
      */
     fun playComboSFX(){
         this.playSFX("COMBO")
     }
 
     /**
-     * Plays 'ball bounce' sound effect by calling playSFX function
+     * Plays 'ball bounce' sound effect via playSFX function
      */
     fun playBallBounceSFX(){
         this.playSFX("BALL_BOUNCE")
@@ -61,14 +64,14 @@ object SoundManager {
 
     /**
      *
-     * Plays 'lose life' sound effect by calling playSFX function
+     * Plays 'lose life' sound effect via playSFX function
      */
     fun playLoseLifeSFX(){
         this.playSFX("LOSE_LIFE")
     }
 
     /**
-     * Plays 'game over' sound effect by calling playSFX function
+     * Plays 'game over' sound effect via playSFX function
      */
     fun playGameOverSFX(){
         this.playSFX("GAME_OVER")

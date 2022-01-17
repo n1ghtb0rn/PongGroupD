@@ -6,8 +6,7 @@ import java.io.PrintWriter
 import java.util.*
 
 /**
- * Singleton class.
- * Save and load high score and setting from text files.
+ * Singleton class for saving and loading high score and settings from text files.
  */
 object DataManager {
 
@@ -27,7 +26,7 @@ object DataManager {
     }
 
     /**
-     * Return largest score for game mode
+     * Returns largest score for each game mode
      *
      * @param gameMode Game mode string
      * @return High score
@@ -41,7 +40,7 @@ object DataManager {
     }
 
     /**
-     * Returns a list of the ten highest scores for game mode.
+     * Returns a list of the ten highest scores for each game mode.
      * Reads from local text file.
      *
      * @param gameMode Game mode String
@@ -76,7 +75,7 @@ object DataManager {
     }
 
     /**
-     * Save high score and player name to text file.
+     * Saves high score and player name to text file.
      *
      * @param newPlayerScore PlayerScore Object
      * @param gameMode Game mode String
@@ -104,7 +103,7 @@ object DataManager {
     }
 
     /**
-     * Save setting chosen by the user to a text file.
+     * Saves settings chosen by the user to a text file.
      */
     fun saveSettings(){
         try{
@@ -121,7 +120,7 @@ object DataManager {
     }
 
     /**
-     * Load settings previously chosen by the user.
+     * Loads settings previously selected by the user.
      */
     fun loadSettings(): MutableList<Boolean>{
         this.createSubDir()
@@ -143,7 +142,7 @@ object DataManager {
     }
 
     /**
-     * Create directory for text files
+     * Creates directory for text files
      */
     private fun createSubDir(){
         try{

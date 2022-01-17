@@ -24,7 +24,7 @@ abstract class GameObject(var startX: Int, var startY: Int, color: Int ) {
 
         //Default color
         this.paint.color = color
-        //Grayscale color (if colors is turned off in settings)
+        //Grayscale color (if colors setting is turned off by the user)
         this.grayPaint.color = Color.GRAY
     }
 

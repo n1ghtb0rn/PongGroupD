@@ -4,8 +4,7 @@ import android.graphics.Color
 import com.kyhgroupd.ponggroupd.gameobjects.Ball
 
 /**
- * Singleton class.
- * Generates and activates power ups.
+ * Singleton class to generate and activate power ups.
  */
 object PowerUpManager {
 
@@ -44,7 +43,7 @@ object PowerUpManager {
 
     /**
      * Activates Power Up.
-     * @param powerUpType String of Power Up type to activate.
+     * @param powerUpType String specifying which Power Up type to activate.
      */
     fun activatePowerUp(powerUpType: String){
         if(powerUpType == "POWER_BALL"){
@@ -58,7 +57,7 @@ object PowerUpManager {
     }
 
     /**
-     * Run each in-game "tick". Updates Power Ups.
+     * Runs each in-game "tick". Updates Power Ups.
      */
     fun updatePowerUps(){
         //Power Ball
@@ -67,7 +66,7 @@ object PowerUpManager {
         }
 
         //Multi Ball
-        //This power up does not need an update-method
+        //This power up does not need an update method
 
         //Power up nr 3 etc...
     }
@@ -80,7 +79,7 @@ object PowerUpManager {
         GameManager.multiBallObjects.clear()
     }
 
-    /* "Power Ball" methods*/
+    /* "Power Ball" methods */
     /**
      * Activates "Power Ball" power up.
      */
@@ -90,7 +89,7 @@ object PowerUpManager {
     }
 
     /**
-     * Run each in-game "tick". Decrease "Power Ball" timer.
+     * Runs each in-game "tick". Decrease "Power Ball" timer.
      */
     private fun updatePowerBall(){
         this.powerBallTimer -= 1

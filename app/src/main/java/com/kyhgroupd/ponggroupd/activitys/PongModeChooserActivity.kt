@@ -20,7 +20,7 @@ class PongModeChooserActivity : AppCompatActivity() {
         GameManager.pongDifficultyLevel = "medium"
         buttonColorChange()
 
-        //Activates buttons for setting multiplayer or difficulty for pong game mode.
+        // Activates buttons for setting multiplayer & difficulty for pong game mode.
 
         binder.btnSinglePlayer.setOnClickListener {
             GameManager.pongPlayerMode = 1

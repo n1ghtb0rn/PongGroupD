@@ -5,7 +5,7 @@ import com.kyhgroupd.ponggroupd.GameManager
 import com.kyhgroupd.ponggroupd.PowerUpManager
 
 /**
- * Inherits from GameObject
+ * PowerUp class inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
@@ -33,7 +33,7 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
             } else {
                 this.paint.color = Color.RED
             }
-        } else { // Greyscale
+        } else { // Grayscale
             this.paint.color = Color.LTGRAY
         }
     }
@@ -48,6 +48,9 @@ class PowerUp(startX: Int, startY: Int, color: Int) : GameObject(startX, startY,
 
     }
 
+    /**
+     * Update method for updating position (etc) of this object every frame.
+     */
     override fun update() {
         this.posY += PowerUpManager.powerUpFallSpeed
         // Check collision with paddle

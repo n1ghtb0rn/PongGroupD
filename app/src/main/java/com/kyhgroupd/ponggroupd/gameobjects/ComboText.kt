@@ -6,7 +6,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 
 /**
- * Inherits from GameText class which inherits from GameObject class
+ * ComboText class inherits from GameText class which inherits from GameObject class
  *
  * @param startX X position
  * @param startY Y position
@@ -16,7 +16,7 @@ import androidx.annotation.RequiresApi
 @RequiresApi(Build.VERSION_CODES.O)
 class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText(startX, startY, color) {
 
-    var lifetime: Int = 20 //
+    var lifetime: Int = 20 // Combo text should remain on screen for 20 frames
     val textSizeIncrease = 2 // Combo text becomes increasingly bigger
 
     init{
@@ -29,7 +29,7 @@ class ComboText(startX: Int, startY: Int, color: Int, comboValue: Int): GameText
     }
 
     /**
-     * Update-method for updating position (etc) of this object every frame.
+     * Update method for updating position (etc) of this object every frame.
      */
     override fun update(){
         this.paint.textSize += textSizeIncrease

@@ -24,6 +24,9 @@ class SettingsActivity : AppCompatActivity() {
         this.activateSwitches()
     }
 
+    /**
+     * Activates switches and saves the settings selected by the user.
+     */
     private fun activateSwitches(){
         binder.switchSFX.isChecked = GameManager.useSFX
         binder.switchSFX.setOnCheckedChangeListener { _, b ->
