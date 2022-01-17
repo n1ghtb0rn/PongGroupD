@@ -15,16 +15,22 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kyhgroupd.ponggroupd.activitys.GameActivity
 import com.kyhgroupd.ponggroupd.gameobjects.ComboText
 
+/**
+ * GameView-class that extends SurfaceView and implements SurfaceHolder.Callback and Runnable.
+ * This class is the foundation of the game-engine that is responsible for updating the graphics
+ * and running the game-loop. It loops through all Game Objects and calls their respective
+ * update() and draw() methods.
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, Runnable {
 
-    private var thread: Thread? = null
+    private var thread: Thread? = null  //Game thread
     private var running = false
-    lateinit var canvas: Canvas
+    lateinit var canvas: Canvas     //The Canvas-object where the game is drawn
     var mHolder: SurfaceHolder? = holder
 
     var frames: Int = 0
-    var lastFpsCheck: Long = 0
+    //var lastFpsCheck: Long = 0
     var timeToUpdate  = System.currentTimeMillis()
 
     init {
@@ -38,6 +44,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         //Reset game
         GameManager.context = context as GameActivity
 
+        //Get the height and width of the display
         val displayMetrics: DisplayMetrics = activity.resources.displayMetrics
         GameManager.screenSizeX = displayMetrics.widthPixels
         GameManager.screenSizeY = displayMetrics.heightPixels
@@ -49,12 +56,18 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
     }
 
+    /**
+     * The start()-method override to start the game-thread.
+     */
     fun start() {
         running = true
         thread = Thread(this)
         thread?.start()
     }
 
+    /**
+     * The stop()-method override to stop the game-thread
+     */
     fun stop() {
         running = false
         try {
@@ -64,6 +77,10 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
     }
 
+    /**
+     * The main update-method that is the base for updating the game (eg: moving objects).
+     * It calls all active Game Objects update() methods every game frame.
+     */
     fun update(){
         //Bricks and paddle
         for (gameObject in GameManager.gameObjects) {
@@ -140,7 +157,7 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         UIManager.levelText?.textString = "LEVEL: "+GameManager.level.toString()
         UIManager.comboText?.update()
 
-        // Touch events
+        //Reset the touch event at the end of every game-loop
         GameManager.event = null
 
         //Check level clear in breakout-mode
@@ -151,7 +168,11 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
     }
 
+    /**
+     * The main draw() method that calls all Game Objects draw()-methods.
+     */
     private fun draw(){
+        //A try-catch to prevent the game from crashing if the user exits the app.
         try{
             canvas = mHolder!!.lockCanvas()
 
@@ -215,17 +236,33 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
         }
     }
 
+    /**
+     * The surfaceCreated() override method. Called when the GameView (SurfaceView) is created,
+     * and starts the game-thread.
+     */
     override fun surfaceCreated(p0: SurfaceHolder) {
-        start()
+        start() //Start the game thread
     }
 
+    /**
+     * The surfaceChanged() override method. Currently unused.
+     */
     override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+        //Unused
     }
 
+    /**
+     * The surfaceDestroyed() override method. Called when the GameView (SurfaceView) is destroyed,
+     * and stops the game-thread.
+     */
     override fun surfaceDestroyed(p0: SurfaceHolder) {
-        stop()
+        stop()  //Stop the game thread
     }
 
+    /**
+     * The run() override method. This method runs the base game-loop that keeps the game updated.
+     * The game loops in a given interval and calls the update() and draw() methods.
+     */
     override fun run() {
         while (running){
             if(GameManager.isPaused){
@@ -243,12 +280,20 @@ class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback, 
 //                    frames = 0
 //                }
 
+                //Calls the update-method
                 update()
+
+                //Calls the draw-method
                 draw()
             }
         }
     }
 
+    /**
+     * The onTouchEvent() override method. Is called when the user touches the screen.
+     * It stores the touch event in as a property in GameManager-class.
+     * (The paddle-class later checks if this property if null or not to update its position)
+     */
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event != null){
