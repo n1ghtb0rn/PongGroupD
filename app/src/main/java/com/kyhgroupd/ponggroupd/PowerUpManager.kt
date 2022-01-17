@@ -81,11 +81,17 @@ object PowerUpManager {
     }
 
     /* "Power Ball" methods*/
+    /**
+     * Activates "Power Ball" power up.
+     */
     private fun activatePowerBall(){
         this.powerBallActive = true
         this.powerBallTimer = this.powerBallDuration
     }
 
+    /**
+     * Run each in-game "tick". Decrease "Power Ball" timer.
+     */
     private fun updatePowerBall(){
         this.powerBallTimer -= 1
         if(this.powerBallTimer <= 0){
