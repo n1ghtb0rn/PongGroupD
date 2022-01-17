@@ -1,5 +1,8 @@
 package com.kyhgroupd.ponggroupd
 
+/**
+ * Contains an Array with Breakout levels.
+ */
 class GolfLevels {
 
     /*
