@@ -123,6 +123,11 @@ object GameManager {
 
         //Clear GameObject lists
         gameObjects.clear()
+        pieceObjects.clear()
+        trailObjects.clear()
+        powerUpObjects.clear()
+        multiBallObjects.clear()
+        PowerUpManager.clearActivePowerUps()
 
         //Reference brick
         referenceBrick = Brick(200, 2500, Color.WHITE)
@@ -176,11 +181,6 @@ object GameManager {
                 addBricksGolf()
             }
         }
-
-        //Clear all active power ups
-        powerUpObjects.clear()
-        multiBallObjects.clear()
-        PowerUpManager.clearActivePowerUps()
 
         //Music
         SoundManager.playMusic()
