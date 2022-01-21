@@ -153,13 +153,13 @@ object GameManager {
 
         ballSpeed = (screenSizeX * ballSpeedFactor).toInt()
 
-        ballSpeed = when (pongDifficultyLevel) {
-            "medium" -> (ballSpeed*1.2).toInt()
-            "hard" -> (ballSpeed*1.5).toInt()
-            else -> ballSpeed
-        }
         if (gameMode == "pong") {
             ball = Ball(0, 0, Color.WHITE)
+            ballSpeed = when (pongDifficultyLevel) {
+                "medium" -> (ballSpeed*1.2).toInt()
+                "hard" -> (ballSpeed*1.5).toInt()
+                else -> ballSpeed
+            }
         } else {
             ball = Ball(0, 0, ballColor)
         }

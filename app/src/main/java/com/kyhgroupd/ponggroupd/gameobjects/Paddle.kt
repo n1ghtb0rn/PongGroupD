@@ -69,7 +69,8 @@ class Paddle(startX: Int, startY: Int, color: Int, var player: Int) : GameObject
      * Update method for updating position (etc) of this object every frame.
      */
     override fun update() {
-        if (GameManager.pongPlayerMode == 1) {
+
+        if (GameManager.gameMode == "pong" && GameManager.pongPlayerMode == 1) {
             movePaddlesSinglePlayerPong()
         }
 
